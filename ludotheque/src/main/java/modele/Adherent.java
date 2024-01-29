@@ -25,6 +25,10 @@ public class Adherent {
 		return idPersonne;
 	}
 
+	public void setIdPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
+	}
+
 	public boolean isActif() {
 		return actif;
 	}
