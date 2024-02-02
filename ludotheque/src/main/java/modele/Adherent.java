@@ -5,21 +5,20 @@ import java.time.LocalDateTime;
 public class Adherent {
 
 	private int idPersonne;
-	private boolean actif; // TODO c'est en nvarchar dans la base, changer en bool et renomer estActif
+	private boolean estActif; // TODO c'est en nvarchar dans la base, changer en bit (equivalent bool) et renomer estActif
 	private String remarques;
 	private String numCIN; // TODO c'est un int dans la bd, changer en str 
 	private LocalDateTime dateInscription;
 
 
-	public Adherent(int idPersonne, boolean actif, String remarques, String numCIN, LocalDateTime dateInscription) {
+	public Adherent(int idPersonne, boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
 		super();
 		this.idPersonne = idPersonne;
-		this.actif = actif;
+		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
 	}
-
 
 	public int getIdPersonne() {
 		return idPersonne;
@@ -30,11 +29,11 @@ public class Adherent {
 	}
 
 	public boolean isActif() {
-		return actif;
+		return estActif;
 	}
 
 	public void setActif(boolean actif) {
-		this.actif = actif;
+		this.estActif = actif;
 	}
 
 	public String getRemarques() {
@@ -57,6 +56,7 @@ public class Adherent {
 		return dateInscription;
 	}
 
+	// ?? peut être que la date d'inscription ne devrait pas être modifiable ?
 	public void setDateInscription(LocalDateTime dateInscription) {
 		this.dateInscription = dateInscription;
 	}
@@ -65,6 +65,6 @@ public class Adherent {
 	
 	@Override
 	public String toString() {
-		return "Adherent [numero=" + idPersonne + ", est actif=" + actif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
+		return "Adherent [numero=" + idPersonne + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
 	}
 }
