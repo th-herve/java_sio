@@ -7,7 +7,9 @@ public class LudoTest {
 		// test2
 		// test3
 		//test4 moatasm
-		// test 5 charles
+		// test 5 charless
+		// test 99 
+		
 		// TODO Auto-generated constructor stub
 	}	
 }
