@@ -9,20 +9,18 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-
+import modele.dao.*;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 public class Connexion {
 
 	private static Connection connect = null;
 
-	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS03";
+	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS04";
 	private static final String BASE_DE_DONNEES = "bd_Ludotheque";
 	private static final String ID = "admin";
 	private static final String MDP = "sio";
-	//private static final String ID = "asus\\Alain";
-	//private static final String MDP = "";
-
+	
 	private static final int COLONNE_TEXTE = 10;
 	private static final int COLONNE_ENTIER = 6;
 	private static final int COLONNE_DATE = 11;
@@ -255,39 +253,56 @@ public class Connexion {
 		
 	}
 	public static void main(String[] args) {
-		Connexion.getInstance();
 		
-		 try {
-		        // Get the database metadata
-		        DatabaseMetaData metaData = connect.getMetaData();
+		/** décommenter pour afficher la table adherent 
+		 */
+//		Connexion.getInstance();
+//		AdherentDAO adherentDAO = AdherentDAO.getInstance();
+//		adherentDAO.afficheSelectEtoileAdherent();
+		
+        /**
+         pour afficher les tables Personne et Personnel 
+         */
+		PersonneDAO personneDAO = PersonneDAO.getIntstance();
+		personneDAO.afficheSelectEtoilePersonne();
+		PersonnelDAO personnelDAO = PersonnelDAO.getInstance();
+		personnelDAO.afficheSelectEtoilePersonnel();
 
-		        // Get the list of table names
-		        ResultSet tables = metaData.getTables(null, null, "%", new String[]{"TABLE"});
-
-		        // Display the table names
-		        while (tables.next()) {
-		            String tableName = tables.getString("TABLE_NAME");
-		            System.out.println("Table: " + tableName);
-		        }
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    } finally {
-		        // Don't forget to close the connection when you're done
-		    	String tableName = "admin";
-//				
-//				    // Optional WHERE clause, set to null if not needed
-//				   // String whereClause = "your_condition_column = 'your_condition_value'";
-//				    
-//				    // Display data from the table
-				    afficheSelectEtoile(tableName,null);
-		        fermer();
-		    }
+	}
+//	public static void main(String[] args) {
+//		Connexion.getInstance();
+//		
+//		 try {
+//		        // Get the database metadata
+//		        DatabaseMetaData metaData = connect.getMetaData();
+//
+//		        // Get the list of table names
+//		        ResultSet tables = metaData.getTables(null, null, "%", new String[]{"TABLE"});
+//
+//		        // Display the table names
+//		        while (tables.next()) {
+//		            String tableName = tables.getString("TABLE_NAME");
+//		            System.out.println("Table: " + tableName);
+//		        }
+//		    } catch (SQLException e) {
+//		        e.printStackTrace();
+//		    } finally {
+//		        // Don't forget to close the connection when you're done
+//		    	String tableName = "admin";
+////				
+////				    // Optional WHERE clause, set to null if not needed
+////				   // String whereClause = "your_condition_column = 'your_condition_value'";
+////				    
+////				    // Display data from the table
+//				    afficheSelectEtoile(tableName,null);
+//		        fermer();
+//		    }
 		
 		  
 //		    
 //		    // Don't forget to close the connection when you're done
 //		    fermer();
-	}
+//	}
 
 	
 }
