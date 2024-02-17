@@ -12,9 +12,9 @@ public class Jeu {
 	private int nbr_joueurs_mini;
 	private int nbr_joueurs_maxi;
 	private int ageMini;
-	private LocalDateTime duree_mini;
-	private LocalDateTime duree_maxi;
-	private String complexite;
+	private int duree_mini;
+	private int duree_maxi;
+	private int complexite;
 	private int note_bgg;
 
 	
@@ -25,7 +25,7 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, LocalDateTime duree_mini, LocalDateTime duree_maxi, String complexite, int note_bgg)
+	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, int complexite, int note_bgg)
 	{
 		super();
 		this.id = id;
@@ -112,27 +112,27 @@ public class Jeu {
 		this.ageMini = ageMini;
 	}
 
-	public LocalDateTime getDuree_mini() {
+	public int getDuree_mini() {
 		return duree_mini;
 	}
 
-	public void setDuree_mini(LocalDateTime duree_mini) {
+	public void setDuree_mini(int duree_mini) {
 		this.duree_mini = duree_mini;
 	}
 
-	public LocalDateTime getDuree_maxi() {
+	public int getDuree_maxi() {
 		return duree_maxi;
 	}
 
-	public void setDuree_maxi(LocalDateTime duree_maxi) {
+	public void setDuree_maxi(int duree_maxi) {
 		this.duree_maxi = duree_maxi;
 	}
 
-	public String getComplexite() {
+	public int getComplexite() {
 		return complexite;
 	}
 
-	public void setComplexite(String complexite) {
+	public void setComplexite(int complexite) {
 		this.complexite = complexite;
 	}
 
