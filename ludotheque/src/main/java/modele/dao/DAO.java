@@ -32,6 +32,7 @@ public abstract class DAO<T> {
 	 * @return boolean
 	 */
 	public abstract boolean update(T obj);
+	public abstract boolean update(T obj, String teest);
 
 	/**
 	 * M�thode de recherche des informations qui retourne un objet T

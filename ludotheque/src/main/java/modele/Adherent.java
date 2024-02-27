@@ -10,6 +10,13 @@ public class Adherent {
 	private String numCIN; // TODO c'est un int dans la bd, changer en str 
 	private LocalDateTime dateInscription;
 
+	public Adherent(boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
+		super();
+		this.estActif = estActif;
+		this.remarques = remarques;
+		this.numCIN = numCIN;
+		this.dateInscription = dateInscription;
+	}
 
 	public Adherent(int idPersonne, boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
 		super();
