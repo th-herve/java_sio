@@ -36,19 +36,15 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		boolean succes=true;
 		try {
 
-			String requete = "INSERT INTO "+TABLE+" ("+NOM+") VALUES (?)";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
+			String requete = "INSERT INTO "+TABLE+" ("+IDPERSONNE + NOM+") VALUES (?, ?)";
+			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			pst.setString(1, proche.getNom());
+			pst.setInt(1, proche.getIdPersonne());
+			pst.setString(2, proche.getNom());
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
 
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				proche.setIdPersonne(rs.getInt(1));
-			}
-			donnees.put(proche.getIdPersonne(), proche);
+			donnees.put(getClef(proche), proche);
 
 		} catch (SQLException e) {
 			succes=false;
@@ -66,13 +62,14 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 			int idPersonne 	= proche.getIdPersonne();
 			String nom 		= proche.getNom();
 
-			String requete = "DELETE FROM "+TABLE+" WHERE "+IDPERSONNE+" = ? AND " +NOM+ " = ?";
+			String requete = "DELETE FROM "+TABLE+" WHERE " + IDPERSONNE+" = ? AND " +NOM+ " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, idPersonne);
 			pst.setString(2, nom);
 
 			pst.executeUpdate();
-			donnees.remove(idPersonne);
+			donnees.remove(getClef(proche));
+
 		} catch (SQLException e) {
 			succes=false;
 			e.printStackTrace();
@@ -81,13 +78,13 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 	}
 
 	@Override
-	public boolean update(ProcheAdherent proche, String ancientNom) {
+	public boolean update(ProcheAdherent proche, String ancientNom) { // TODO trouver un moyen d'avoir deux update dans DAO (sans avoir a implementer les deux)
 		boolean succes=true;
 
-		String nom =proche.getNom();
+		String nom = proche.getNom();
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ? WHERE "+IDPERSONNE+" = ?";
+			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ? WHERE "+IDPERSONNE+" = ? AND " + NOM + " = " + ancientNom ;
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
@@ -95,7 +92,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 
 			pst.executeUpdate();
 
-			donnees.put(proche.getIdPersonne(), proche);
+			donnees.put(getClef(proche), proche);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -106,7 +103,9 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 
 	@Override
 	public ProcheAdherent read(int idAdherent) {
+
 		ProcheAdherent proche = null;
+
 		if (donnees.containsKey(idAdherent)) {
 			System.out.println("r�cup�r�");
 			proche = donnees.get(idAdherent);
@@ -115,24 +114,30 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 			System.out.println("recherch� dans la BD");
 			try {
 
-				String requete = "SELECT * FROM "+TABLE+" WHERE "+IDPERSONNE+" = "+idAdherent;
+				String requete = "SELECT * FROM "+TABLE+" WHERE " + IDPERSONNE+" = ? AND " +NOM+ " = ?";
 				ResultSet rs = Connexion.executeQuery(requete);
 				rs.next();
 
-				Boolean estActif = rs.getBoolean(EST_ACTIF);
-				String remarque = rs.getString(REMARQUES);
-				String numCIN = rs.getString(NUM_CIN);
-				LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
+				String nom = rs.getString(NOM);
 
-				adherent = new Adherent (idAdherent, estActif, remarque, numCIN, dateInscription);
+				proche = new ProcheAdherent (idAdherent, nom);
 
-				donnees.put(idAdherent, adherent);
+				donnees.put(getClef(proche), proche);
 
 			} catch (SQLException e) {
 				//e.printStackTrace();
 			}
 		}
-		return adherent;
+		return proche;
+	}
+	
+	
+	// la clef de la table proche étant idPersonne+nom, on ne peut pas utiliser juste idPersonne pour la hashmap.
+	// il faut donc générer un nombre à partir de ces deux valeurs pour obetnir une clef unique
+	// comme nom est un String, il faut générer un int avec la fonction hashCode()
+	public Integer getClef(ProcheAdherent proche) {
+
+		return proche.getIdPersonne() + proche.getNom().hashCode();
 	}
 
 	public void afficheSelectEtoileAdherent() {
@@ -145,5 +150,6 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 	}
+
 
 }

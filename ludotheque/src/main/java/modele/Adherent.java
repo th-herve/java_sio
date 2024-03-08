@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 public class Adherent {
 
 	private int idPersonne;
-	private boolean estActif; // TODO c'est en nvarchar dans la base, changer en bit (equivalent bool) et renomer estActif
+	private boolean estActif;
 	private String remarques;
-	private String numCIN; // TODO c'est un int dans la bd, changer en str 
+	private String numCIN;
 	private LocalDateTime dateInscription;
 
 	public Adherent(boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
