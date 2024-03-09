@@ -1,10 +1,10 @@
-package ludotheque;
+package modele;
 
 import java.time.LocalDateTime;
 
 public class Jeu {
 	
-	private int id;
+	private String id;
 	private String nom;
 	private String type;
 	private String descriptif;
@@ -14,8 +14,8 @@ public class Jeu {
 	private int ageMini;
 	private int duree_mini;
 	private int duree_maxi;
-	private int complexite;
-	private int note_bgg;
+	private String complexite;
+	private float note_bgg;
 
 	
 	/**
@@ -25,7 +25,7 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, int complexite, int note_bgg)
+	public Jeu(String id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, String complexite, float note_bgg)
 	{
 		super();
 		this.id = id;
@@ -48,11 +48,11 @@ public class Jeu {
 	 */
 	
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -128,19 +128,19 @@ public class Jeu {
 		this.duree_maxi = duree_maxi;
 	}
 
-	public int getComplexite() {
+	public String getComplexite() {
 		return complexite;
 	}
 
-	public void setComplexite(int complexite) {
+	public void setComplexite(String complexite) {
 		this.complexite = complexite;
 	}
 
-	public int getNote_bgg() {
+	public float getNote_bgg() {
 		return note_bgg;
 	}
 
-	public void setNote_bgg(int note_bgg) {
+	public void setNote_bgg(float note_bgg) {
 		this.note_bgg = note_bgg;
 	}
 	
