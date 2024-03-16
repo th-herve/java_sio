@@ -9,7 +9,10 @@ import java.sql.Date;
 
 import modele.Adherent;
 
-public class AdherentDAO extends DAO<Adherent> {
+public class EmpruntDAO extends DAO<Emprunt> {
+	
+	// IMPORTANT : clé composée de idAdherent + idJeuPhysique + dateEmprunt 
+	// à faire 
 
 	private static final String TABLE = "Emprunt";
 	private static final String ID_ADHERENT = "idAdherent";
@@ -45,7 +48,7 @@ public class AdherentDAO extends DAO<Adherent> {
 			// j'ai éjà les infos sur les tables JeuPhysique et Adherent, 
 			// donc je les mets juste en brut, attention, c'est des clés étrangères,
 			// classe à finir !!! 
-			String requete = "INSERT INTO "+TABLE+" ("+ID _JEUPHYSIQUE+", "+ID_ADHERENT+", "+DATE_RETOUR+", "+DATE_EMPRUNT+") VALUES (?, ?, ?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+ID_JEUPHYSIQUE+", "+ID_ADHERENT+", "+DATE_RETOUR+", "+DATE_EMPRUNT+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
 			pst.setDate(4, dateEmprunt);
@@ -53,6 +56,10 @@ public class AdherentDAO extends DAO<Adherent> {
 			pst.executeUpdate();
 			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
 			pst.setDate(4, dateEmprunt);
+			pst.setDate(3, dateRetour);
+			pst.setInt(1, idJeuPhysique);
+			pst.setInt(2, idAdherent);
+			
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
 
@@ -82,10 +89,10 @@ public class AdherentDAO extends DAO<Adherent> {
 // important de modifier pour que ça colle à mon code à moi, je boss sur es clés étrangères,
 // Thibault a bossé sur une clé primaire, donc bien différent
 	@Override
-	public boolean delete(Adherent adherent) {
+	public boolean delete(Emprunt emprunt) {
 		boolean succes = true;
 		try {
-			int id = adherent.getIdPersonne();
+			int id = emprunt.getIdJeuPhysiquePersonne();
 			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
@@ -99,28 +106,30 @@ public class AdherentDAO extends DAO<Adherent> {
 	}
 
 	@Override
-	public boolean update(Adherent adherent) {
+	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
 
-		byte actif = (byte) (adherent.isActif() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
+		byte actif = (byte) (emprunt.isAdherent() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
 
-		String remarque =adherent.getRemarques();
-		String numCIN = adherent.getNumCIN();
-		Date dateInscription = Date.valueOf(adherent.getDateInscription().toLocalDate());
+		String dateEmprunt =emprunt.getdateEmprunt();
+		String dateRetour = emprunt.getdateRetour();
+		Date dateInscription = Date.valueOf(emprunt.getDateInscription().toLocalDate());
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+EST_ACTIF+" = ?, "+REMARQUES+" = ?, "
-						+NUM_CIN+" = ? "+ DATE_INSCRIPTION +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+			String requete = "UPDATE "+TABLE+" SET "+ID_JEUPHYSIQUE+" = ?, "+ID_ADHERENT+" = ?, "
+						+DATE_EMPRUNT+" = ? "+ DATE_RETOUR +" = ? WHERE " + ID_ADHERENT + 
+						" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			pst.setByte(1, actif); 
-			pst.setString(2, remarque); 
-			pst.setString(3, numCIN);
-			pst.setDate(4, dateInscription);
+			// fonction différente donc refaire les pst
+			pst.setInt(1, idJeuPhysique); 
+			pst.setInt(2, idAdherent); 
+			pst.setDate(3, dateEmprunt);
+			pst.setDate(4, dateRetour);
 
 			pst.executeUpdate();
 
-			donnees.put(adherent.getIdPersonne(), adherent);
+			donnees.put(emprunt.getIdAherent(), emprunt);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -144,12 +153,12 @@ public class AdherentDAO extends DAO<Adherent> {
 				ResultSet rs = Connexion.executeQuery(requete);
 				rs.next();
 
-				Boolean estActif = rs.getBoolean(EST_ACTIF);
-				String remarque = rs.getString(REMARQUES);
-				String numCIN = rs.getString(NUM_CIN);
-				LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
+				Boolean idJeuPhysique = rs.getBoolean(ID_JEUPHYSIQUE);
+				String idAdherent = rs.getString(ID_ADHERENT);
+				String dateEmprunt = rs.getString(DATE_EMPRUNT);
+				LocalDateTime dateRetour = rs.getTimestamp(DATE_RETOUR).toLocalDateTime();
 
-				adherent = new Adherent (idAdherent, estActif, remarque, numCIN, dateInscription);
+				emprunt = new emprunt (idAdherent, idJeuPhysique, idAdherent, dateEmprunt, dateRetour);
 
 				donnees.put(idAdherent, adherent);
 
