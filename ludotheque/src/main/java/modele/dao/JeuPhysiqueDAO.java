@@ -44,7 +44,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			
 			String requete = "INSERT INTO "+TABLE+" ("+ID+", "+ETAT+", "+DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
+			Date dateEmprunt = Date.valueOf(jeuphysique.getDateEmprunt().toLocalDate());
 			pst.setDate(4, dateEmprunt);
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
