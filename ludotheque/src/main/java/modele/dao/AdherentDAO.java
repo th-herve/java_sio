@@ -11,12 +11,12 @@ import modele.Adherent;
 
 public class AdherentDAO extends DAO<Adherent> {
 
-	private static final String TABLE = "Adherent";
-	private static final String CLE_PRIMAIRE = "idPersonne";
+	private static final String TABLE 			= "Adherent";
+	private static final String CLE_PRIMAIRE 	= "idPersonne";
 
-	private static final String EST_ACTIF = "estActif"; 
-	private static final String REMARQUES = "remarques"; 
-	private static final String NUM_CIN = "numCIN"; 
+	private static final String EST_ACTIF 		= "estActif"; 
+	private static final String REMARQUES 		= "remarques"; 
+	private static final String NUM_CIN 		= "numCIN"; 
 	private static final String DATE_INSCRIPTION = "dateInscription"; 
 	
 	/** Patron de conception Singleton
@@ -36,7 +36,6 @@ public class AdherentDAO extends DAO<Adherent> {
 	}
 
 
-	// TODO adapter 
 	@Override
 	public boolean create(Adherent adherent) {
 		boolean succes=true;
@@ -91,7 +90,6 @@ public class AdherentDAO extends DAO<Adherent> {
 		boolean succes=true;
 
 		byte actif = (byte) (adherent.isActif() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
-
 		String remarque =adherent.getRemarques();
 		String numCIN = adherent.getNumCIN();
 		Date dateInscription = Date.valueOf(adherent.getDateInscription().toLocalDate());
@@ -158,8 +156,5 @@ public class AdherentDAO extends DAO<Adherent> {
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 	}
-
-
-
 
 }
