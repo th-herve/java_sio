@@ -44,7 +44,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
 
-			donnees.put(getClef(proche), proche);
+			donnees.put(this.getClef(proche), proche);
 
 		} catch (SQLException e) {
 			succes=false;
@@ -77,18 +77,19 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		return succes;
 	}
 
-	@Override
-	public boolean update(ProcheAdherent proche, String ancientNom) { // TODO trouver un moyen d'avoir deux update dans DAO (sans avoir a implementer les deux)
+	public boolean update(ProcheAdherent proche, ProcheAdherent ancientProche) { // TODO trouver un moyen d'avoir deux update dans DAO (sans avoir a implementer les deux)
 		boolean succes=true;
 
-		String nom = proche.getNom();
+		int idPersonne = ancientProche.getIdPersonne();
+		String nom = ancientProche.getNom();
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ? WHERE "+IDPERSONNE+" = ? AND " + NOM + " = " + ancientNom ;
+			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ? WHERE "+IDPERSONNE+" = ? AND " + NOM + " = ?";
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			pst.setString(1, nom); 
+			pst.setString(1, idPersonne); 
+			pst.setString(2, nom); 
 
 			pst.executeUpdate();
 
@@ -139,6 +140,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 
 		return proche.getIdPersonne() + proche.getNom().hashCode();
 	}
+
 
 	public void afficheSelectEtoileAdherent() {
 		System.out.println("--- "+ TABLE +" non utilis� ---");
