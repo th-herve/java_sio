@@ -1,20 +1,22 @@
 package controleur;
 
-import java.time.LocalDateTime;
+import java.sql.Connection;
 
-import modele.Adherent;
-import modele.dao.AdherentDAO;
+import modele.dao.Connexion;
 
 public class Main {
 	public static void main(String[] args) {
 		
-		LocalDateTime insc = LocalDateTime.now();
-		Adherent ad = new Adherent(true, "ok", "123", insc);
+		Connection co = Connexion.getInstance();
 		
-		AdherentDAO adao = AdherentDAO.getInstance();
-		
-		adao.create(ad);
-		System.out.println("boo");
+//		LocalDateTime insc = LocalDateTime.now();
+//		Adherent ad = new Adherent(true, "ok", "123", insc);
+//		
+//		AdherentDAO adao = AdherentDAO.getInstance();
+//		
+//		boolean t = adao.create(ad);
+//		System.out.println(t);
+//		System.out.println("boo");
 
 	}
 }
