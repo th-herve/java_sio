@@ -269,6 +269,7 @@ public class Connexion {
 		personnelDAO.afficheSelectEtoilePersonnel();
 
 	}
+
 //	public static void main(String[] args) {
 //		Connexion.getInstance();
 //		
