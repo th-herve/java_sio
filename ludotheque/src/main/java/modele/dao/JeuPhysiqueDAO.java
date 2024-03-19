@@ -67,7 +67,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			}
 			donnees.put(jeuPhysique.getIdJeuPhysique(), jeuPhysique);
 
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			succes=false;
 			e.printStackTrace(); 
 		}
