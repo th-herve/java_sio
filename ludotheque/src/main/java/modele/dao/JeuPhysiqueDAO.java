@@ -69,7 +69,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 		} catch (SQLException e) {
 			succes=false;
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 
 		return succes;
