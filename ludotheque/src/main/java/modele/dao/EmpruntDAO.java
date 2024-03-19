@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.sql.Date;
 
 import modele.Adherent;
+import modele.Emprunt;
 
 public class EmpruntDAO extends DAO<Emprunt> {
 	
@@ -51,29 +52,19 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			// classe à finir !!! 
 			String requete = "INSERT INTO "+TABLE+" ("+ID_JEUPHYSIQUE+", "+ID_ADHERENT+", "+DATE_RETOUR+", "+DATE_EMPRUNT+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(4, dateEmprunt);
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
+			pst.setInt(1, emprunt.getIdJeuPhysique());
+			pst.setInt(2, emprunt.getIdJeuPhysique());
 			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(4, dateEmprunt);
-			pst.setDate(3, dateRetour);
-			pst.setInt(1, idJeuPhysique);
-			pst.setInt(2, idAdherent);
+			pst.setDate(3, DateEmprunt());
+			Date dateRetour = Date.valueOf(emprunt.getDateRetour().toLocalDate());
+			pst.setDate(4, DateRetour());
 			
-			// on ex�cute la mise � jour
-			pst.executeUpdate();
-
 			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				emprunt.setAdherent(rs.getInt(1));
-			}
-			donnees.put(emprunt.getIdJeuPhysique(), emprunt);
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				emprunt.setJeuPhysique(rs.getInt(1));
+				emprunt.setIdJeuPhysique(rs.getInt(1));
 			}
 			donnees.put(emprunt.getIdJeuPhysique(), emprunt);
 
@@ -85,7 +76,17 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		return succes;
 	}
 
-// commentaires de Charles : 
+private Date DateRetour() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+private Date DateEmprunt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// commentaires de Charles : 
 // en dessous c'est la partie que j'ai copié du code de Thibault, 
 // important de modifier pour que ça colle à mon code à moi, je boss sur es clés étrangères,
 // Thibault a bossé sur une clé primaire, donc bien différent
@@ -93,8 +94,9 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	public boolean delete(Emprunt emprunt) {
 		boolean succes = true;
 		try {
-			int id = emprunt.getIdJeuPhysiquePersonne();
-			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
+			int id = emprunt.getIdJeuPhysique();
+			String requete = "DELETE FROM "+TABLE+" WHERE "+"WHERE " + ID_ADHERENT + 
+					" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
 			pst.executeUpdate();
@@ -110,11 +112,11 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
 
-		byte actif = (byte) (emprunt.isAdherent() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
+		byte actif = (byte) (emprunt.isIdAdherent() ? 1 : 0); 
+		// pas de boolean en sql serveur, donc il faut convertire en bit
 
-		String dateEmprunt =emprunt.getdateEmprunt();
-		String dateRetour = emprunt.getdateRetour();
-		Date dateInscription = Date.valueOf(emprunt.getDateInscription().toLocalDate());
+		LocalDateTime dateEmprunt =emprunt.getDateEmprunt();
+		LocalDateTime dateRetour = emprunt.getDateRetour();
 
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+ID_JEUPHYSIQUE+" = ?, "+ID_ADHERENT+" = ?, "
@@ -123,10 +125,8 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			// fonction différente donc refaire les pst
-			pst.setInt(1, idJeuPhysique); 
-			pst.setInt(2, idAdherent); 
-			pst.setDate(3, dateEmprunt);
-			pst.setDate(4, dateRetour);
+			pst.setInt(1, emprunt.getIdJeuPhysique()); 
+			pst.setInt(2, emprunt.isIdAdherent()); 
 
 			pst.executeUpdate();
 
@@ -140,8 +140,8 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	}
 
 	@Override
-	public Adherent read(int idAdherent) {
-		Adherent adherent = null;
+	public Emprunt read(int idAdherent) {
+		Emprunt adherent = null;
 		if (donnees.containsKey(idAdherent)) {
 			System.out.println("r�cup�r�");
 			adherent = donnees.get(idAdherent);
@@ -150,193 +150,19 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			System.out.println("recherch� dans la BD");
 			try {
 
-				String requete = "SELECT * FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = "+idAdherent;
+				String requete = "SELECT * FROM "+TABLE+" WHERE "+ ID_ADHERENT + 
+				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?";
 				ResultSet rs = Connexion.executeQuery(requete);
 				rs.next();
 
-				Boolean idJeuPhysique = rs.getBoolean(ID_JEUPHYSIQUE);
-				String idAdherent = rs.getString(ID_ADHERENT);
-				String dateEmprunt = rs.getString(DATE_EMPRUNT);
+				Boolean IdAdherent = rs.getBoolean(ID_ADHERENT);
+				String  idJeuPhysique= rs.getString(ID_JEUPHYSIQUE);
+				LocalDateTime dateEmprunt = rs.getTimestamp(DATE_EMPRUNT).toLocalDateTime();
 				LocalDateTime dateRetour = rs.getTimestamp(DATE_RETOUR).toLocalDateTime();
 
-				emprunt = new emprunt (idAdherent, idJeuPhysique, idAdherent, dateEmprunt, dateRetour);
+				Emprunt emprunt = new Emprunt (IdAdherent, idJeuPhysique, IdAdherent, dateEmprunt, dateRetour);
 
-				donnees.put(idAdherent, adherent);
-
-			} catch (SQLException e) {
-				//e.printStackTrace();
-			}
-		}
-		return adherent;
-	}
-
-	public void afficheSelectEtoileAdherent() {
-		System.out.println("--- "+ TABLE +" non utilis� ---");
-		String clauseWhere = CLE_PRIMAIRE+" NOT IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
-		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
-
-		System.out.println("--- "+ TABLE +" contraint par adherent --- ");
-		clauseWhere = CLE_PRIMAIRE+" IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
-		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
-
-	}
-
-}
-=======
-package modele.dao;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.sql.Date;
-
-import modele.Adherent;
-
-public class AdherentDAO extends DAO<Adherent> {
-
-	private static final String TABLE = "Emprunt";
-	private static final String ID_ADHERENT = "idAdherent";
-	private static final String ID_JEUPHYSIQUE = "idJeuPhysique";
-
-	private static final String DATE_EMPRUNT = "dateEmprunt"; 
-	private static final String DATE_RETOUR = "dateRetour";  
-	
-	/** Patron de conception Singleton
-	 * 
-	 */
-	private static EmpruntDAO instance=null;
-
-	public static EmpruntDAO getInstance(){
-		if (instance==null){
-			instance = new EmpruntDAO();
-		}
-		return instance;
-	}
-
-	private EmpruntDAO() {
-		super();
-	}
-
-
-	// TODO adapter 
-	@Override
-	public boolean create(Emprunt emprunt) {
-		boolean succes=true;
-		try {
-			
-			// commentaires de Charles :
-			// j'ai éjà les infos sur les tables JeuPhysique et Adherent, 
-			// donc je les mets juste en brut, attention, c'est des clés étrangères,
-			// classe à finir !!! 
-			String requete = "INSERT INTO "+TABLE+" ("+ID _JEUPHYSIQUE+", "+ID_ADHERENT+", "+DATE_RETOUR+", "+DATE_EMPRUNT+") VALUES (?, ?, ?, ?)";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(4, dateEmprunt);
-			// on ex�cute la mise � jour
-			pst.executeUpdate();
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(4, dateEmprunt);
-			// on ex�cute la mise � jour
-			pst.executeUpdate();
-
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				emprunt.setAdherent(rs.getInt(1));
-			}
-			donnees.put(emprunt.getIdJeuPhysique(), emprunt);
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				emprunt.setJeuPhysique(rs.getInt(1));
-			}
-			donnees.put(emprunt.getIdJeuPhysique(), emprunt);
-
-		} catch (SQLException e) {
-			succes=false;
-			e.printStackTrace();
-		}
-
-		return succes;
-	}
-
-// commentaires de Charles : 
-// en dessous c'est la partie que j'ai copié du code de Thibault, 
-// important de modifier pour que ça colle à mon code à moi, je boss sur es clés étrangères,
-// Thibault a bossé sur une clé primaire, donc bien différent
-	@Override
-	public boolean delete(Adherent adherent) {
-		boolean succes = true;
-		try {
-			int id = adherent.getIdPersonne();
-			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-			pst.setInt(1, id);
-			pst.executeUpdate();
-			donnees.remove(id);
-		} catch (SQLException e) {
-			succes=false;
-			e.printStackTrace();
-		}
-		return succes;
-	}
-
-	@Override
-	public boolean update(Adherent adherent) {
-		boolean succes=true;
-
-		byte actif = (byte) (adherent.isActif() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
-
-		String remarque =adherent.getRemarques();
-		String numCIN = adherent.getNumCIN();
-		Date dateInscription = Date.valueOf(adherent.getDateInscription().toLocalDate());
-
-		try {
-			String requete = "UPDATE "+TABLE+" SET "+EST_ACTIF+" = ?, "+REMARQUES+" = ?, "
-						+NUM_CIN+" = ? "+ DATE_INSCRIPTION +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-
-			pst.setByte(1, actif); 
-			pst.setString(2, remarque); 
-			pst.setString(3, numCIN);
-			pst.setDate(4, dateInscription);
-
-			pst.executeUpdate();
-
-			donnees.put(adherent.getIdPersonne(), adherent);
-
-		} catch (SQLException e) {
-			succes = false;
-			e.printStackTrace();
-		} 
-		return succes;	
-	}
-
-	@Override
-	public Adherent read(int idAdherent) {
-		Adherent adherent = null;
-		if (donnees.containsKey(idAdherent)) {
-			System.out.println("r�cup�r�");
-			adherent = donnees.get(idAdherent);
-		}
-		else {
-			System.out.println("recherch� dans la BD");
-			try {
-
-				String requete = "SELECT * FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = "+idAdherent;
-				ResultSet rs = Connexion.executeQuery(requete);
-				rs.next();
-
-				Boolean estActif = rs.getBoolean(EST_ACTIF);
-				String remarque = rs.getString(REMARQUES);
-				String numCIN = rs.getString(NUM_CIN);
-				LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
-
-				adherent = new Adherent (idAdherent, estActif, remarque, numCIN, dateInscription);
-
-				donnees.put(idAdherent, adherent);
+				
 
 			} catch (SQLException e) {
 				//e.printStackTrace();
@@ -347,12 +173,16 @@ public class AdherentDAO extends DAO<Adherent> {
 
 	public void afficheSelectEtoileAdherent() {
 		System.out.println("--- "+ TABLE +" non utilis� ---");
-		String clauseWhere = CLE_PRIMAIRE+" NOT IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
+		String clauseWhere = " WHERE "+ ID_ADHERENT + 
+				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" NOT IN (SELECT "+" WHERE "+ ID_ADHERENT + 
+				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 		System.out.println("--- "+ TABLE +" contraint par adherent --- ");
-		clauseWhere = CLE_PRIMAIRE+" IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
-		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
+		String clauseWhere1 = "WHERE " + ID_ADHERENT + 
+				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" IN (SELECT "+"WHERE " + ID_ADHERENT + 
+				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" From "+ TABLE +")";
+		Connexion.afficheSelectEtoile(TABLE, clauseWhere1);
 
 	}
 
