@@ -63,7 +63,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			//R�cup�rer la cle qui a ete genere et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				jeuPhysique.setJeuPhysique(rs.getInt(1));
+				jeuPhysique.setJeuPhysique(rs.getInt(1)); 
 			}
 			donnees.put(jeuPhysique.getIdJeuPhysique(), jeuPhysique);
 
