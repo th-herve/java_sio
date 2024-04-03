@@ -39,14 +39,14 @@ public class PersonneDAO extends DAO<Personne> {
 		boolean succes = true;
 		try {
 
-			String requete = "INSERT INTO PERSONNE" + TABLE + "(" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
+			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
 					+ "," + TEL + ")VALUES(?,?,?,?,?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, Pe.getNom());
 			pst.setString(2, Pe.getPrenom());
 			pst.setString(3, Pe.getEmail());
 			pst.setString(4, Pe.getAdresse());
-			pst.setInt(5, Pe.getTel());
+			pst.setString(5, Pe.getTel());
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -91,7 +91,7 @@ public class PersonneDAO extends DAO<Personne> {
 		String prenom = obj.getPrenom();
 		String email = obj.getEmail();
 		String adresse = obj.getAdresse();
-		int tel = obj.getTel();
+		String tel = obj.getTel();
 		int id = obj.getId();
 
 		try {
@@ -101,7 +101,7 @@ public class PersonneDAO extends DAO<Personne> {
 			pst.setString(2, prenom);
 			pst.setString(3, email);
 			pst.setString(4, adresse);
-			pst.setInt(5, tel);
+			pst.setString(5, tel);
 			pst.setInt(6, id);
 			pst.executeUpdate();
 			donnees.put(id, obj);
@@ -128,7 +128,7 @@ public class PersonneDAO extends DAO<Personne> {
 				String prenom = rs.getString(PRENOM);
 				String email = rs.getString(EMAIL);
 				String adresse = rs.getString(ADRESSE);
-				int tel = rs.getInt(TEL);
+				String tel = rs.getString(TEL);
 				Personne = new Personne(nom, prenom, email, adresse, tel);
 				Personne.setId(id);
 				donnees.put(id, Personne);
@@ -151,7 +151,7 @@ public class PersonneDAO extends DAO<Personne> {
 			String prenom = rs.getString(PRENOM);
 			String email = rs.getString(EMAIL);
 			String adresse = rs.getString(ADRESSE);
-			int tel = rs.getInt(TEL);
+			String tel = rs.getString(TEL);
 			Personne = new Personne(nom, prenom, email, adresse, tel);
 			Personne.setId(id);
 			donnees.put(id, Personne);

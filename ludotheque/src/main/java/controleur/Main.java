@@ -8,27 +8,101 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import modele.Personne;
 import modele.dao.Connexion;
+import modele.dao.PersonneDAO;
 
-public class Main extends Application {	
+public class Main {	
 		
 
-	Connection co = Connexion.getInstance();
 		
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    	Parent root = FXMLLoader.load(getClass().getResource( "../vue/inscriptionAdherent.fxml"));
-
-//    	Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
-//        primaryStage.getIcons().add(icon);
-        
-        primaryStage.setScene(new Scene(root, 400, 400));        
-        primaryStage.setTitle("Betton Ludothèque");
-        primaryStage.show();
-    }
-
     public static void main(String[] args) {
-        launch(args);
+//    	Connection co = Connexion.getInstance();
+    	
+    	// ==========================   Personne =========================================================
+    	PersonneDAO pDAO = PersonneDAO.getIntstance();
+    	Personne addPersonne = new Personne("bob", "Marley", "bob@mail.com", "2 rue des chouettes", "0428183928");
+    	
+
+    	/**
+    	 * @PERSONNE
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	
+    	// create
+    	pDAO.create(addPersonne); // OK
+    	// update 
+    	// delete
+
+    	// ==========================   emprunt =========================================================
+    	
+    	/**
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	// create
+    	// read
+    	// update
+    	// delete
+    	
+    	// ==========================   Jeu =========================================================
+
+    	/**
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	// create
+    	// read
+    	// update
+    	// delete
+    	
+    	// ==========================   JeuPhysique =========================================================
+    	
+    	/**
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	// create
+    	// read
+    	// update
+    	// delete
+    	
+    	
+    	// ==========================   Personnel =========================================================
+    	
+    	/**
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	// create
+    	// read
+    	// update
+    	// delete
+    	
+    	// ==========================   Proche =========================================================
+
+    	/**
+    	 * @CREATE
+    	 * @READ
+    	 * @UPDATE
+    	 * @DELETE
+    	 */
+    	// create
+    	// read
+    	// update
+    	// delete
+    	
     }
 
 
