@@ -112,7 +112,7 @@ private Date DateEmprunt() {
 	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
 
-		byte actif = (byte) (emprunt.isIdAdherent() ? 1 : 0); 
+		byte idAdherent = (byte) (emprunt.isIdAdherent() ? 1 : 0); 
 		// pas de boolean en sql serveur, donc il faut convertire en bit
 
 		LocalDateTime dateEmprunt =emprunt.getDateEmprunt();
@@ -126,7 +126,7 @@ private Date DateEmprunt() {
 
 			// fonction différente donc refaire les pst
 			pst.setInt(1, emprunt.getIdJeuPhysique()); 
-			pst.setInt(2, emprunt.isIdAdherent()); 
+			pst.setBoolean(2, emprunt.isIdAdherent()); 
 
 			pst.executeUpdate();
 

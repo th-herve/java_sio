@@ -43,7 +43,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		boolean succes=true;
 		try {
 			
-			String requete = "INSERT INTO "+TABLE+" ("+ID+", "+ETAT+", "+DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+CLE_PRIMAIRE+", "+ETAT+", "+DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(2, jeuPhysique.getEtat());
 			// on ex�cute la mise � jour
@@ -57,15 +57,14 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				jeuPhysique.setJeuPhysique(rs.getInt(1));
+				jeuPhysique.setId(rs.getInt(1));
 			}
 			donnees.put(jeuPhysique.getId(), jeuPhysique);
 			//R�cup�rer la cle qui a ete genere et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				jeuPhysique.setJeuPhysique(rs.getInt(1)); 
+				jeuPhysique.setId(rs.getInt(1)); 
 			}
-			donnees.put(jeuPhysique.getIdJeuPhysique(), jeuPhysique);
+			donnees.put(jeuPhysique.getId(), jeuPhysique);
 
 		} catch (SQLException e) { 
 			succes=false;
@@ -83,7 +82,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	public boolean delete(JeuPhysique jeuPhysique) {
 		boolean succes = true;
 		try {
-			int id = jeuPhysique.getIdJeuPhysique();
+			int id = jeuPhysique.getId();
 			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
@@ -100,26 +99,26 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	public boolean update(JeuPhysique jeuPhysique) {
 		boolean succes=true;
 
-		byte actif = (byte) (jeuPhysique.isJeuPhysique() ? 1 : 0); 
+		byte actif = (byte) (jeuPhysique.isId() ? 1 : 0); 
 		// pas de boolean en sql serveur, donc il faut convertire en bit
 
-		String id =jeuPhysique.getId();
-		String dateRetour = jeuPhysique.dateRetour();
+		int id =jeuPhysique.getId();
+		String etat = jeuPhysique.getEtat();
 		Date dateInscription = Date.valueOf(jeuPhysique().toLocalDate());
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+ID+" = ?, "+ETAT+" = ?, "
+			String requete = "UPDATE "+TABLE+" SET "+CLE_PRIMAIRE+" = ?, "+ETAT+" = ?, "
 						+DISPONIBLE+" = ? "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			pst.setInt(1, ID); 
+			pst.setInt(1, CLE_PRIMAIRE); 
 			pst.setString(2, ETAT); 
 			pst.setString(3, DISPONIBLE);
 			pst.setInt(4, ID_JEU);
 
 			pst.executeUpdate();
 
-			donnees.put(jeuPhysique.getIdJeuPhysique(), jeuPhysique);
+			donnees.put(jeuPhysique.getId(), jeuPhysique);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -130,7 +129,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 	@Override
 	public JeuPhysique read(int id) {
-		idJeuPhysique idJeuPhysqiue = null;
+		JeuPhysique idJeuPhysique = null;
 		if (donnees.containsKey(id)) {
 			System.out.println("r�cup�r�");
 			idJeuPhysique = donnees.get(id);
