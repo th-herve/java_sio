@@ -32,7 +32,7 @@ public class Emprunt {
 		return idJeuPhysique;
 	}
 
-	public void setIdJeuPhysique(int idJeuPysique) {
+	public void setIdJeuPhysique(int idJeuPhysique) {
 		this.idJeuPhysique = idJeuPhysique;
 	}
 
