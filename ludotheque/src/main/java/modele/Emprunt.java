@@ -30,7 +30,7 @@ public class Emprunt {
 		this.idJeuPhysique = idJeuPhysique;
 	}
 
-	public int isIdAdherent() {
+	public int getIdAdherent() {
 		return idAdherent;
 	}
 

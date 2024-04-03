@@ -1,20 +1,23 @@
 
 package modele.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import modele.Adherent;
 import modele.Emprunt;
 
+/**
+ * @clef_composé idAdherent + idJeuPhysique + dateEmprunt 
+ */
 public class EmpruntDAO extends DAO<Emprunt> {
 	
-	// IMPORTANT : clé composée de idAdherent + idJeuPhysique + dateEmprunt 
-	// à faire 
 
 	private static final String TABLE = "Emprunt";
 	private static final String ID_ADHERENT = "idAdherent";
@@ -22,6 +25,8 @@ public class EmpruntDAO extends DAO<Emprunt> {
 
 	private static final String DATE_EMPRUNT = "dateEmprunt"; 
 	private static final String DATE_RETOUR = "dateRetour";  
+	
+	private static final String WHERE_CLEF_PRIMAIRE = " WHERE " + ID_ADHERENT + " = ?, " + ID_JEUPHYSIQUE + " = ?, " + DATE_EMPRUNT + " = ?";
 	
 	/** Patron de conception Singleton
 	 * 
@@ -55,18 +60,18 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
 			pst.setInt(1, emprunt.getIdJeuPhysique());
-			pst.setInt(2, emprunt.getIdJeuPhysique());
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(3, DateEmprunt());
+			pst.setInt(2, emprunt.getIdAdherent());
 			Date dateRetour = Date.valueOf(emprunt.getDateRetour().toLocalDate());
-			pst.setDate(4, DateRetour());
+			pst.setDate(3, dateRetour);
+			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
+			pst.setDate(4, dateEmprunt);
 			
 			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
 				emprunt.setIdJeuPhysique(rs.getInt(1));
 			}
-			donnees.put(emprunt.getIdJeuPhysique(), emprunt);
+			donnees.put(this.getClefDonne(emprunt), emprunt);
 
 		} catch (SQLException e) {
 			succes=false;
@@ -74,16 +79,6 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		}
 
 		return succes;
-	}
-
-private Date DateRetour() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-private Date DateEmprunt() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	// commentaires de Charles : 
@@ -94,13 +89,17 @@ private Date DateEmprunt() {
 	public boolean delete(Emprunt emprunt) {
 		boolean succes = true;
 		try {
-			int id = emprunt.getIdJeuPhysique();
-			String requete = "DELETE FROM "+TABLE+" WHERE "+"WHERE " + ID_ADHERENT + 
-					" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" = ?";
+			int idAdherent = emprunt.getIdAdherent();
+			int idJeu = emprunt.getIdJeuPhysique();
+			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
+			String requete = "DELETE FROM "+TABLE+ WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-			pst.setInt(1, id);
+			pst.setInt(1, idAdherent);
+			pst.setInt(2, idJeu);
+			pst.setDate(3, dateEmprunt);
+
 			pst.executeUpdate();
-			donnees.remove(id);
+			donnees.remove(this.getClefDonne(emprunt));
 		} catch (SQLException e) {
 			succes=false;
 			e.printStackTrace();
@@ -112,25 +111,20 @@ private Date DateEmprunt() {
 	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
 
-		byte idAdherent = (byte) (emprunt.isIdAdherent() ? 1 : 0); 
-		// pas de boolean en sql serveur, donc il faut convertire en bit
-
+		int idAdherent = emprunt.getIdAdherent(); 
 		LocalDateTime dateEmprunt =emprunt.getDateEmprunt();
 		LocalDateTime dateRetour = emprunt.getDateRetour();
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+ID_JEUPHYSIQUE+" = ?, "+ID_ADHERENT+" = ?, "
-						+DATE_EMPRUNT+" = ? "+ DATE_RETOUR +" = ? WHERE " + ID_ADHERENT + 
-						" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?";
+			String requete = "UPDATE "+TABLE+" SET "+ DATE_RETOUR +" = ? " + WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			// fonction différente donc refaire les pst
 			pst.setInt(1, emprunt.getIdJeuPhysique()); 
-			pst.setBoolean(2, emprunt.isIdAdherent()); 
 
 			pst.executeUpdate();
 
-			donnees.put(emprunt.getIdAherent(), emprunt);
+			donnees.put(this.getClefDonne(emprunt), emprunt);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -139,36 +133,54 @@ private Date DateEmprunt() {
 		return succes;	
 	}
 
+	/**
+	 * @NE_PAS_UTILISER_CETTE_FONCTION utiliser readByAdherent à la place
+	 */
 	@Override
-	public Emprunt read(int idAdherent) {
-		Emprunt adherent = null;
-		if (donnees.containsKey(idAdherent)) {
-			System.out.println("r�cup�r�");
-			adherent = donnees.get(idAdherent);
-		}
-		else {
-			System.out.println("recherch� dans la BD");
-			try {
+	public Emprunt read(int idEmprunt) {
 
-				String requete = "SELECT * FROM "+TABLE+" WHERE "+ ID_ADHERENT + 
-				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?";
-				ResultSet rs = Connexion.executeQuery(requete);
-				rs.next();
+		throw new UnsupportedOperationException("Cette méthode n'est pas utilisable dans la classe fille, utiliser readByAdherent à la place");	
+	}
+	
+	// retourne la liste des emprunts associés à un adhérent
+	public List<Emprunt> readByAdherent(int idAdherent) {
+		
+		List<Emprunt> listeEmprunts = new ArrayList<Emprunt>();
+		System.out.println("recherch� dans la BD");
+		try {
 
-				Boolean IdAdherent = rs.getBoolean(ID_ADHERENT);
-				String  idJeuPhysique= rs.getString(ID_JEUPHYSIQUE);
+			String requete = "SELECT * FROM "+TABLE+" WHERE " + ID_ADHERENT + " = ?";
+
+			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
+			pst.setInt(1, idAdherent);
+
+			ResultSet rs = pst.executeQuery();
+
+			while(rs.next()) {
+				int idJeu = rs.getInt(ID_JEUPHYSIQUE);
 				LocalDateTime dateEmprunt = rs.getTimestamp(DATE_EMPRUNT).toLocalDateTime();
 				LocalDateTime dateRetour = rs.getTimestamp(DATE_RETOUR).toLocalDateTime();
-
-				Emprunt emprunt = new Emprunt (IdAdherent, idJeuPhysique, IdAdherent, dateEmprunt, dateRetour);
-
+					
+				Emprunt emprunt = new Emprunt(idAdherent, idJeu, dateEmprunt, dateRetour);
 				
-
-			} catch (SQLException e) {
-				//e.printStackTrace();
+				listeEmprunts.add(emprunt);
+				
+				int clefHash = this.getClefDonne(emprunt);
+				if (!donnees.containsKey(clefHash)) {
+					donnees.put(clefHash, emprunt);
+				}
 			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return adherent;
+		return listeEmprunts;
+	}
+
+
+	public Integer getClefDonne(Emprunt emprunt) {
+
+		return (emprunt.getIdAdherent() + emprunt.getIdJeuPhysique() +"" + emprunt.getDateEmprunt()).hashCode();
 	}
 
 	public void afficheSelectEtoileAdherent() {
