@@ -17,7 +17,6 @@ public class JeuPhysique {
 		this.idJeu = idJeu;
 	}
 
-
 	public int getId() {
 		return id;
 	}

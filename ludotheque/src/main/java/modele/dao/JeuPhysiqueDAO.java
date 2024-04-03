@@ -109,7 +109,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			e.printStackTrace();
 		} 
 		return succes;	
-	} 
+	}  
   
 	@Override
 	public JeuPhysique read(int id) {

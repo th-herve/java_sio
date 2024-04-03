@@ -191,11 +191,10 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 		System.out.println("--- "+ TABLE +" contraint par adherent --- ");
-		String clauseWhere1 = "WHERE " + ID_ADHERENT + 
+		String clauseWhere1 = "WHERE " + ID_ADHERENT +  
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" IN (SELECT "+"WHERE " + ID_ADHERENT + 
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" From "+ TABLE +")";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere1);
-
 	}
 
 }
