@@ -103,6 +103,7 @@ public class AdherentDAO extends DAO<Adherent> {
 			pst.setString(2, remarque); 
 			pst.setString(3, numCIN);
 			pst.setDate(4, dateInscription);
+			pst.setInt(5, adherent.getIdPersonne());
 
 			pst.executeUpdate();
 
