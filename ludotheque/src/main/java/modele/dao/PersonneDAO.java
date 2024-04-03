@@ -28,7 +28,8 @@ public class PersonneDAO extends DAO<Personne> {
 		return intstance;
 
 	}
-
+   
+   
 	private PersonneDAO() {
 		super();
 	}

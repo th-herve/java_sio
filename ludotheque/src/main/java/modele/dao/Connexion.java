@@ -16,10 +16,10 @@ public class Connexion {
 
 	private static Connection connect = null;
 	
-//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\SQLEXPRESS01"; // Charles
-//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\SQLEXPRESS04"; // Moatasm
-//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\SQLEXPRESS03"; // Jeanne
-	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS"; // Thibault
+//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS01"; // Charles
+	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS04"; // Moatasm
+//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS03"; // Jeanne
+//	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS"; // Thibault
 
 	private static final String BASE_DE_DONNEES = "bd_Ludotheque";
 	private static final String ID = "admin";
@@ -28,7 +28,7 @@ public class Connexion {
 	private static final int COLONNE_TEXTE = 10;
 	private static final int COLONNE_ENTIER = 6;
 	private static final int COLONNE_DATE = 11;
-
+    
 	/**
 	 * Patron de conception Singleton
 	 * @return l'instance unique de connexion
