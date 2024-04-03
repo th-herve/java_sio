@@ -126,7 +126,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		} 
 		return succes;	
 	} 
- 
+  
 	@Override
 	public JeuPhysique read(int id) {
 		JeuPhysique idJeuPhysique = null;
