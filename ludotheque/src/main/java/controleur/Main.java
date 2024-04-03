@@ -2,13 +2,33 @@ package controleur;
 
 import java.sql.Connection;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import modele.dao.Connexion;
 
-public class Main {
-	public static void main(String[] args) {
+public class Main extends Application {	
 		
-		Connection co = Connexion.getInstance();
+	Connection co = Connexion.getInstance();
 		
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+    	Parent root = FXMLLoader.load(getClass().getResource( "../vue/inscriptionAdherent.fxml"));
+
+    	Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
+        primaryStage.getIcons().add(icon);
+        
+        primaryStage.setScene(new Scene(root, 400, 400));        
+        primaryStage.setTitle("Betton Ludothèque");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 //		LocalDateTime insc = LocalDateTime.now();
 //		Adherent ad = new Adherent(true, "ok", "123", insc);
 //		
@@ -18,5 +38,5 @@ public class Main {
 //		System.out.println(t);
 //		System.out.println("boo");
 
-	}
-}
+
+}  
