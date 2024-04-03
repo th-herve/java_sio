@@ -1,7 +1,5 @@
 package modele;
 
-import java.time.LocalDateTime;
-
 public class Jeu {
 	
 	private int id;
