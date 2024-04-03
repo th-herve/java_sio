@@ -3,10 +3,10 @@ package modele;
 import java.time.LocalDateTime;
 
 public class JeuPhysique {
-	private int idJeu;
+	private int id;
 	private String etat;
 	private String disponible;
-	private int id;
+	private int idJeu;
 
 
 	public JeuPhysique(int id, String etat, String disponible, int idJeu) {
@@ -16,16 +16,17 @@ public class JeuPhysique {
 		this.etat = etat;
 		this.idJeu = idJeu;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
-	public int getIdJeu() {
-		return idJeu;
-	}
-
-
-	public void setIdJeu(int idJeu) {
-		this.idJeu = idJeu;
-	}
-
 
 	public String getEtat() {
 		return etat;
@@ -46,18 +47,19 @@ public class JeuPhysique {
 		this.disponible = disponible;
 	}
 
-
-	public int getId() {
-		return id;
+	public int getIdJeu() {
+		return idJeu;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdJeu(int idJeu) {
+		this.idJeu = idJeu;
 	}
 
-	public boolean isId() {
-		// TODO Auto-generated method stub
-		return false;
+
+	@Override
+	public String toString() {
+		return "jeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + disponible + ", id jeu ="+ idJeu + "]";
 	}
+
 }
