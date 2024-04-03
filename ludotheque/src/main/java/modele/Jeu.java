@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Jeu {
 	
-	private String id;
+	private int id;
 	private String nom;
 	private String type;
 	private String descriptif;
@@ -25,7 +25,7 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu(String id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, String complexite, float note_bgg)
+	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, String complexite, float note_bgg)
 	{
 		super();
 		this.id = id;
@@ -48,11 +48,11 @@ public class Jeu {
 	 */
 	
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

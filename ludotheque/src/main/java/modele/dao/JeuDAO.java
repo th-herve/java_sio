@@ -1,16 +1,14 @@
 package modele.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
 
 import modele.Jeu;
 
 public class JeuDAO extends DAO<Jeu> {
-	
+
 	private static final String TABLE = "Jeu";
 	private static final String CLE_PRIMAIRE = "id";
 
@@ -26,9 +24,6 @@ public class JeuDAO extends DAO<Jeu> {
 	private static final String COMPLEXITE = "complexite";
 	private static final String NOTE_BGG = "note_bgg";
 
-	/** Patron de conception Singleton
-	 * 
-	 */
 	private static JeuDAO instance=null;
 
 	public static JeuDAO getInstance(){
@@ -50,8 +45,7 @@ public class JeuDAO extends DAO<Jeu> {
 			String requete = "INSERT INTO "+TABLE+" ("+NOM+","+TYPE+" , "+DESCRIPTIF+","+QUANTITE+","+NBR_JOUEURS_MINI +","+NBR_JOUEURS_MAXI+","+AGE_MINI +","+DUREE_MINI+","+DUREE_MAXI+","+COMPLEXITE+","+NOTE_BGG+") VALUES (?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
-			// on pose un String en param�tre 1 -1er '?'- et ce String est le nom de l'avion
-			pst.setString(1, jeu.getId());
+			pst.setInt(1, jeu.getId());
 			pst.setString(2, jeu.getNom());
 			pst.setString(3, jeu.getType());
 			pst.setString(1, jeu.getDescriptif());
@@ -70,9 +64,9 @@ public class JeuDAO extends DAO<Jeu> {
 			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				jeu.setId(rs.getString(1));
+				jeu.setId(rs.getInt(1));
 			}
-			donnees.put(getClef(jeu), jeu); 
+			donnees.get(jeu.getId()); 
 
 		} catch (SQLException e) {
 			succes=false;
@@ -85,10 +79,10 @@ public class JeuDAO extends DAO<Jeu> {
 	public boolean delete(Jeu jeu) {
 		boolean succes = true;
 		try {
-			String id = jeu.getId();
+			int id = jeu.getId();
 			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-			pst.setString(1, id);
+			pst.setInt(1, id);
 			pst.executeUpdate();
 			donnees.remove(id);
 		} catch (SQLException e) {
@@ -101,7 +95,7 @@ public class JeuDAO extends DAO<Jeu> {
 	public boolean update (Jeu obj) {
 		boolean succes=true;
 
-		String id =obj.getId();
+		int id =obj.getId();
 		String nom =obj.getNom();
 		String type =obj.getType();
 		String descriptif =obj.getDescriptif();
@@ -128,8 +122,8 @@ public class JeuDAO extends DAO<Jeu> {
 			pst.setTimestamp(dureeMaxi, null);
 			pst.setString(3, complexite);
 			pst.setFloat(3, note_bgg);
-			pst.executeUpdate() ; //si l'objet a été chargé autrement
-			donnees.put(id, obj); //TODO 			donnees.put(getClef(jeu), jeu); 
+			pst.executeUpdate();
+			donnees.put(id, obj);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -138,7 +132,7 @@ public class JeuDAO extends DAO<Jeu> {
 		return succes;	
 	}
 
-	public Jeu read(String id) {
+	public Jeu read(int id) {
 		Jeu jeu = null;
 		if (donnees.containsKey(id)) {
 			System.out.println("r�cup�r�");
@@ -160,12 +154,12 @@ public class JeuDAO extends DAO<Jeu> {
 				int ageMini = rs.getInt(AGE_MINI);
 				int dureeMini = rs.getInt(DUREE_MINI);
 				int dureeMaxi = rs.getInt(DUREE_MAXI);
-				int complexite = rs.getInt(COMPLEXITE);
+				String complexite = rs.getString(COMPLEXITE);
 				int noteBgg = rs.getInt(NOTE_BGG);
-				
-				jeu = new Jeu (id, nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg); //veut pas du String pour int
-						
-				donnees.put(id, jeu);//TODO
+
+				jeu = new Jeu (id, nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg);
+
+				donnees.put(id, jeu);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -174,24 +168,12 @@ public class JeuDAO extends DAO<Jeu> {
 	}
 
 	public void afficheSelectEtoileJeu() {
-//		System.out.println("--- Vol pas en cours ---");
-//		String clauseWhere = CLE_PRIMAIRE+" NOT IN (SELECT "+CLE_PRIMAIRE+" From Vol)";
-//		Connexion.afficheSelectEtoile("Vol", clauseWhere);
-//
-//		System.out.println("--- Vol en cours --- ");
-//		clauseWhere = CLE_PRIMAIRE+" IN (SELECT "+CLE_PRIMAIRE+" From Vol)";
-//		Connexion.afficheSelectEtoile("Vol", clauseWhere);
+		System.out.println("--- Jeu non-disponible ---");
+		String clauseWhere = CLE_PRIMAIRE+" NOT IN (SELECT "+CLE_PRIMAIRE+" From Jeu)";
+		Connexion.afficheSelectEtoile("Jeu", clauseWhere);
 
+		System.out.println("--- Jeu disponible --- ");
+		clauseWhere = CLE_PRIMAIRE+" IN (SELECT "+CLE_PRIMAIRE+" From Jeu)";
+		Connexion.afficheSelectEtoile("Jeu", clauseWhere);
 	}
-	
-	public Integer getClef(Jeu jeu) {
-		return jeu.getId().hashCode();
-		
-		//hashCode() créé numl unique depuis String //TODO à mettre pour tous les put //TODO fonction pour retourner valeur au lieu du hashCode() ex: getKey
-
 }
-
-	
-
-}
-

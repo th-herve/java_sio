@@ -16,7 +16,7 @@ public class Connexion {
 
 	private static Connection connect = null;
 
-	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS04";
+	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS03";
 	private static final String BASE_DE_DONNEES = "bd_Ludotheque";
 	private static final String ID = "admin";
 	private static final String MDP = "sio";
