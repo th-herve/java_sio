@@ -111,10 +111,6 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
 
-		int idAdherent = emprunt.getIdAdherent(); 
-		LocalDateTime dateEmprunt =emprunt.getDateEmprunt();
-		LocalDateTime dateRetour = emprunt.getDateRetour();
-
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+ DATE_RETOUR +" = ? " + WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
@@ -191,10 +187,11 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 		System.out.println("--- "+ TABLE +" contraint par adherent --- ");
-		String clauseWhere1 = "WHERE " + ID_ADHERENT +  
+		String clauseWhere1 = "WHERE " + ID_ADHERENT + 
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" IN (SELECT "+"WHERE " + ID_ADHERENT + 
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" From "+ TABLE +")";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere1);
+
 	}
 
 }
