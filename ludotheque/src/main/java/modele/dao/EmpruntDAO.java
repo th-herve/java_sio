@@ -183,7 +183,6 @@ private Date DateEmprunt() {
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" IN (SELECT "+"WHERE " + ID_ADHERENT + 
 				" = ? AND " +ID_JEUPHYSIQUE+ " = ? AND " + DATE_EMPRUNT + "= ?"+" From "+ TABLE +")";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere1);
-
 	}
 
 }
