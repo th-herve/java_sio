@@ -16,7 +16,7 @@ public class JeuPhysique {
 		this.etat = etat;
 		this.idJeu = idJeu;
 	}
-	
+	 
 	public int getIdJeu() {
 		return idJeu;
 	}
@@ -54,5 +54,10 @@ public class JeuPhysique {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isId() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

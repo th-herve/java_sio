@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 public class Emprunt {
 
 	private int idJeuPhysique;
-	private int idAdherent; // TODO c'est en nvarchar dans la base, changer en bool et renomer estActif
+	private boolean idAdherent; // TODO c'est en nvarchar dans la base, changer en bool et renomer estActif
 	private LocalDateTime dateEmprunt;
 	private LocalDateTime dateRetour; // TODO c'est un int dans la bd, changer en str 
 	//private LocalDateTime dateInscription;
 
 
-	public Emprunt(int idJeuPhysique, int idAdherent, LocalDateTime dateEmprunt, LocalDateTime dateRetour) {
+	public Emprunt(int idJeuPhysique, boolean idAdherent, LocalDateTime dateEmprunt, LocalDateTime dateRetour) {
 		super();
 		this.idJeuPhysique = idJeuPhysique;
 		this.idAdherent = idAdherent;
@@ -36,11 +36,11 @@ public class Emprunt {
 		this.idJeuPhysique = idJeuPhysique;
 	}
 
-	public int isIdAdherent() {
+	public boolean isIdAdherent() {
 		return idAdherent;
 	}
 
-	public void setIdAdherent(int idAdherent) {
+	public void setIdAdherent(boolean idAdherent) {
 		this.idAdherent = idAdherent;
 	}
 
