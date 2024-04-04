@@ -26,29 +26,37 @@ public class Main {
 
     	/**
     	 * @PERSONNE
-    	 * @CREATE_OK
-    	 * @READ_OK
-    	 * @UPDATE
-    	 * @DELETE
-    	 * @SELECT_PAS_OK
+    	 * @create_ok
+    	 * @read_ok
+    	 * @update_ok
+    	 * @delete_ok
+    	 * @select_pas_ok
     	 */
     	
     	// create
 //    	System.out.println(pDAO.create(addPersonne));
+
     	// read 
     	System.out.println(pDAO.read(1));
-    	// update 
-    	Personne pers1 = pDAO.read(1);
-    	pers1.setNom("Dupond");
-    	System.out.println( pDAO.update(pers1));
     	System.out.println(pDAO.read(1));
+
+    	// update 
+//    	Personne pers1 = pDAO.read(1);
+//    	pers1.setNom("Dupond");
+//    	System.out.println( pDAO.update(pers1));
+//    	System.out.println(pDAO.read(1));
+
     	// delete
+//    	Personne pers2 = pDAO.read(72);
+//    	System.out.println(pDAO.delete(pers2));
+
     	// select *
 //    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
 
     	// ==========================   emprunt =========================================================
     	
     	/**
+    	 * @EMPRUNT
     	 * @CREATE
     	 * @READ
     	 * @UPDATE

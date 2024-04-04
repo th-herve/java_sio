@@ -112,36 +112,13 @@ public class PersonneDAO extends DAO<Personne> {
 		return succes;
 	}
 
-	public Personne read0(int id) {
-		Personne Personne = null;
-		if (donnees.containsKey(id)) {
-			// System.out.println("récupéré");
-			Personne = donnees.get(id);
-		} else {
-			// System.out.println("recherché dans la BD");
-			try {
-
-				String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
-				ResultSet rs = Connexion.executeQuery(requete);
-				rs.next();
-				String nom = rs.getString(NOM);
-				String prenom = rs.getString(PRENOM);
-				String email = rs.getString(EMAIL);
-				String adresse = rs.getString(ADRESSE);
-				String tel = rs.getString(TEL);
-				Personne = new Personne(nom, prenom, email, adresse, tel);
-				Personne.setId(id);
-				donnees.put(id, Personne);
-			} catch (SQLException e) {
-				// e.printStackTrace();
-			}
-		}
-		return Personne;
-	}
-
 	@Override
 	public Personne read(int id) {
-		Personne Personne = null;
+		Personne personne = null;
+		if (donnees.containsKey(id)) {
+			System.out.println("r�cup�r�");
+			personne = donnees.get(id);
+		}
 		try {
 
 			String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
@@ -152,13 +129,13 @@ public class PersonneDAO extends DAO<Personne> {
 			String email = rs.getString(EMAIL);
 			String adresse = rs.getString(ADRESSE);
 			String tel = rs.getString(TEL);
-			Personne = new Personne(nom, prenom, email, adresse, tel);
-			Personne.setId(id);
-			donnees.put(id, Personne);
+			personne = new Personne(nom, prenom, email, adresse, tel);
+			personne.setId(id);
+			donnees.put(id, personne);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return Personne;
+		return personne;
 	}
 
 	public void afficheSelectEtoilePersonne() {
