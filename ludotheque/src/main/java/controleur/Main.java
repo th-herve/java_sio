@@ -1,16 +1,14 @@
 package controleur;
 
-import java.sql.Connection;
+import java.time.LocalDateTime;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import modele.Adherent;
+import modele.Jeu;
+import modele.JeuPhysique;
 import modele.Personne;
-import modele.dao.Connexion;
-import modele.dao.PersonneDAO;
+import modele.dao.AdherentDAO;
+import modele.dao.JeuDAO;
+import modele.dao.JeuPhysiqueDAO;
 
 public class Main {	
 		
@@ -20,9 +18,6 @@ public class Main {
 //    	Connection co = Connexion.getInstance();
     	
     	// ==========================   Personne =========================================================
-    	PersonneDAO pDAO = PersonneDAO.getIntstance();
-    	Personne addPersonne = new Personne("bob", "Marley", "bob@mail.com", "2 rue des chouettes", "0428183928");
-    	
 
     	/**
     	 * @PERSONNE
@@ -32,13 +27,15 @@ public class Main {
     	 * @delete_ok
     	 * @select_pas_ok
     	 */
+//    	PersonneDAO pDAO = PersonneDAO.getIntstance();
+//    	Personne addPersonne = new Personne("bob", "Marley", "bob@mail.com", "2 rue des chouettes", "0428183928");
     	
     	// create
 //    	System.out.println(pDAO.create(addPersonne));
 
     	// read 
-    	System.out.println(pDAO.read(1));
-    	System.out.println(pDAO.read(1));
+//    	System.out.println(pDAO.read(1));
+//    	System.out.println(pDAO.read(1));
 
     	// update 
 //    	Personne pers1 = pDAO.read(1);
@@ -57,15 +54,11 @@ public class Main {
     	
     	/**
     	 * @EMPRUNT
-    	 * @CREATE
-    	 * @READ
-    	 * @UPDATE
-    	 * @DELETE
+    	 * @create
+    	 * @read
+    	 * @update
+    	 * @delete
     	 */
-    	// create
-    	// read
-    	// update
-    	// delete
     	
     	// ==========================   Jeu =========================================================
 
@@ -75,10 +68,29 @@ public class Main {
     	 * @UPDATE
     	 * @DELETE
     	 */
+
+    	JeuDAO jDAO = JeuDAO.getInstance();
+    	
     	// create
-    	// read
-    	// update
+    	Jeu addJeu = new Jeu(0, "monopoli", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, "2", 8);
+    	System.out.println(jDAO.create(addJeu));
+
+    	// read 
+//    	System.out.println(pDAO.read(1));
+//    	System.out.println(pDAO.read(1));
+
+    	// update 
+//    	Personne pers1 = pDAO.read(1);
+//    	pers1.setNom("Dupond");
+//    	System.out.println( pDAO.update(pers1));
+//    	System.out.println(pDAO.read(1));
+
     	// delete
+//    	Personne pers2 = pDAO.read(72);
+//    	System.out.println(pDAO.delete(pers2));
+
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
     	
     	// ==========================   JeuPhysique =========================================================
     	
@@ -88,10 +100,29 @@ public class Main {
     	 * @UPDATE
     	 * @DELETE
     	 */
+
+//    	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
+    	
     	// create
-    	// read
-    	// update
+//    	JeuPhysique addJeuP = new JeuPhysique(1, "Bien", "oui", 0)
+//    	System.out.println(pDAO.create(addPersonne));
+
+    	// read 
+//    	System.out.println(pDAO.read(1));
+//    	System.out.println(pDAO.read(1));
+
+    	// update 
+//    	Personne pers1 = pDAO.read(1);
+//    	pers1.setNom("Dupond");
+//    	System.out.println( pDAO.update(pers1));
+//    	System.out.println(pDAO.read(1));
+
     	// delete
+//    	Personne pers2 = pDAO.read(72);
+//    	System.out.println(pDAO.delete(pers2));
+
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
     	
     	
     	// ==========================   Personnel =========================================================
@@ -107,6 +138,39 @@ public class Main {
     	// update
     	// delete
     	
+    	// ==========================   Adherent =========================================================
+
+    	/**
+    	 * @ADHERENT
+    	 * @create
+    	 * @read
+    	 * @update
+    	 * @delete
+    	 */
+
+//    	AdherentDAO aDAO = AdherentDAO.getInstance();
+    	
+    	// create
+//    	Adherent addAdherent = new Adherent(true, "est con", "123", LocalDateTime.now());
+//    	System.out.println(aDAO.create(addAdherent));
+
+    	// read 
+//    	System.out.println(pDAO.read(1));
+//    	System.out.println(pDAO.read(1));
+
+    	// update 
+//    	Personne pers1 = pDAO.read(1);
+//    	pers1.setNom("Dupond");
+//    	System.out.println( pDAO.update(pers1));
+//    	System.out.println(pDAO.read(1));
+
+    	// delete
+//    	Personne pers2 = pDAO.read(72);
+//    	System.out.println(pDAO.delete(pers2));
+
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
+
     	// ==========================   Proche =========================================================
 
     	/**
