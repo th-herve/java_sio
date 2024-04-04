@@ -26,16 +26,25 @@ public class Main {
 
     	/**
     	 * @PERSONNE
-    	 * @CREATE
-    	 * @READ
+    	 * @CREATE_OK
+    	 * @READ_OK
     	 * @UPDATE
     	 * @DELETE
+    	 * @SELECT_PAS_OK
     	 */
     	
     	// create
-    	pDAO.create(addPersonne); // OK
+//    	System.out.println(pDAO.create(addPersonne));
+    	// read 
+    	System.out.println(pDAO.read(1));
     	// update 
+    	Personne pers1 = pDAO.read(1);
+    	pers1.setNom("Dupond");
+    	System.out.println( pDAO.update(pers1));
+    	System.out.println(pDAO.read(1));
     	// delete
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
 
     	// ==========================   emprunt =========================================================
     	

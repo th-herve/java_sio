@@ -95,7 +95,7 @@ public class PersonneDAO extends DAO<Personne> {
 		int id = obj.getId();
 
 		try {
-			String requete = "UPDATE " + TABLE + " SET nomPe = ?, loc = ?, capacite = ? WHERE " + CLE_PRIMAIRE + " = ?";
+			String requete = "UPDATE " + TABLE + " SET "+NOM+ " =?, " +PRENOM+ " =?," +EMAIL+ " =?, " +ADRESSE+ " =?, " +TEL+ " =? WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setString(1, nom);
 			pst.setString(2, prenom);
@@ -163,11 +163,11 @@ public class PersonneDAO extends DAO<Personne> {
 
 	public void afficheSelectEtoilePersonne() {
 		System.out.println("--- Personne non utilisé ---");
-		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From Personne)";
+		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From "+ TABLE + ")";
 		Connexion.afficheSelectEtoile("Personne", clauseWhere);
 
 		System.out.println("--- Personne contraint par id --- ");
-		clauseWhere = CLE_PRIMAIRE + " IN (SELECT " + CLE_PRIMAIRE + " From Personne)";
+		clauseWhere = CLE_PRIMAIRE + " IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";
 		Connexion.afficheSelectEtoile("Personne", clauseWhere);
 
 	}
