@@ -35,18 +35,18 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean create(Personne Pe) {
+	public boolean create(Personne personne) {
 		boolean succes = true;
 		try {
 
 			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
 					+ "," + TEL + ")VALUES(?,?,?,?,?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, Pe.getNom());
-			pst.setString(2, Pe.getPrenom());
-			pst.setString(3, Pe.getEmail());
-			pst.setString(4, Pe.getAdresse());
-			pst.setString(5, Pe.getTel());
+			pst.setString(1, personne.getNom());
+			pst.setString(2, personne.getPrenom());
+			pst.setString(3, personne.getEmail());
+			pst.setString(4, personne.getAdresse());
+			pst.setString(5, personne.getTel());
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -54,9 +54,9 @@ public class PersonneDAO extends DAO<Personne> {
 			// Récupérer la clé qui a été générée et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				Pe.setId(rs.getInt(1));
+				personne.setId(rs.getInt(1));
 			}
-			donnees.put(Pe.getId(), Pe);
+			donnees.put(personne.getId(), personne);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -67,10 +67,10 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean delete(Personne Pe) {
+	public boolean delete(Personne personne) {
 		boolean succes = true;
 		try {
-			int id = Pe.getId();
+			int id = personne.getId();
 			String requete = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
@@ -84,15 +84,15 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean update(Personne obj) {
+	public boolean update(Personne personne) {
 		boolean succes = true;
 
-		String nom = obj.getNom();
-		String prenom = obj.getPrenom();
-		String email = obj.getEmail();
-		String adresse = obj.getAdresse();
-		String tel = obj.getTel();
-		int id = obj.getId();
+		String nom = personne.getNom();
+		String prenom = personne.getPrenom();
+		String email = personne.getEmail();
+		String adresse = personne.getAdresse();
+		String tel = personne.getTel();
+		int id = personne.getId();
 
 		try {
 			String requete = "UPDATE " + TABLE + " SET "+NOM+ " =?, " +PRENOM+ " =?," +EMAIL+ " =?, " +ADRESSE+ " =?, " +TEL+ " =? WHERE " + CLE_PRIMAIRE + " = ?";
@@ -104,7 +104,7 @@ public class PersonneDAO extends DAO<Personne> {
 			pst.setString(5, tel);
 			pst.setInt(6, id);
 			pst.executeUpdate();
-			donnees.put(id, obj);
+			donnees.put(id, personne);
 		} catch (SQLException e) {
 			succes = false;
 			e.printStackTrace();

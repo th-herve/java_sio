@@ -1,15 +1,18 @@
 package modele.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.sql.Date;
 
 import modele.Adherent;
+import modele.Personne;
 
 public class AdherentDAO extends DAO<Adherent> {
+
+	private static PersonneDAO personneDao;
 
 	private static final String TABLE 			= "Adherent";
 	private static final String CLE_PRIMAIRE 	= "idPersonne";
@@ -33,6 +36,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 	private AdherentDAO() {
 		super();
+		personneDao = PersonneDAO.getIntstance();
 	}
 
 
@@ -41,23 +45,29 @@ public class AdherentDAO extends DAO<Adherent> {
 		boolean succes=true;
 		try {
 
-			String requete = "INSERT INTO "+TABLE+" ("+EST_ACTIF+","+REMARQUES+" , "+NUM_CIN+", "+ DATE_INSCRIPTION+") VALUES (?, ?, ?, ?)";
+			int idAd = adherent.getIdPersonne();
+			
+			if (idAd == 0) {
+				personneDao.create(adherent.getPersonne());
+				// on récupère le nouvel id
+				idAd = adherent.getIdPersonne();
+			}
+
+			String requete = "INSERT INTO "+TABLE+" (" +CLE_PRIMAIRE+ ", "+EST_ACTIF+", "+REMARQUES+", "
+								+NUM_CIN+", "+ DATE_INSCRIPTION+") VALUES (?, ?, ?, ?, ?)";
+
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			// on pose un String en param�tre 1 -1er '?'- et ce String est le nom de l'avion
-			pst.setBoolean(1, adherent.isActif());
-			pst.setString(2, adherent.getRemarques());
-			pst.setString(3, adherent.getNumCIN());
+
+			pst.setBoolean(1, idAd);
+			pst.setBoolean(2, adherent.isActif());
+			pst.setString(3, adherent.getRemarques());
+			pst.setString(4, adherent.getNumCIN());
 			Date dateInscription = Date.valueOf(adherent.getDateInscription().toLocalDate());
-			pst.setDate(4, dateInscription);
-			// on ex�cute la mise � jour
+			pst.setDate(5, dateInscription);
+
 			pst.executeUpdate();
 
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				adherent.setIdPersonne(rs.getInt(1));
-			}
-			donnees.put(adherent.getIdPersonne(), adherent);
+			donnees.put(idAd, adherent);
 
 		} catch (SQLException e) {
 			succes=false;
@@ -72,12 +82,19 @@ public class AdherentDAO extends DAO<Adherent> {
 	public boolean delete(Adherent adherent) {
 		boolean succes = true;
 		try {
+			Personne personne = adherent.getPersonne();
 			int id = adherent.getIdPersonne();
+
 			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
 			pst.executeUpdate();
+
 			donnees.remove(id);
+			
+			// on suprimme également la personne associée
+			personneDao.delete(personne);
+
 		} catch (SQLException e) {
 			succes=false;
 			e.printStackTrace();
@@ -90,7 +107,7 @@ public class AdherentDAO extends DAO<Adherent> {
 		boolean succes=true;
 
 		byte actif = (byte) (adherent.isActif() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
-		String remarque =adherent.getRemarques();
+		String remarque = adherent.getRemarques();
 		String numCIN = adherent.getNumCIN();
 		Date dateInscription = Date.valueOf(adherent.getDateInscription().toLocalDate());
 
@@ -108,6 +125,9 @@ public class AdherentDAO extends DAO<Adherent> {
 			pst.executeUpdate();
 
 			donnees.put(adherent.getIdPersonne(), adherent);
+			
+			// update la personne associée
+			personneDao.update(adherent.getPersonne());
 
 		} catch (SQLException e) {
 			succes = false;
@@ -118,7 +138,10 @@ public class AdherentDAO extends DAO<Adherent> {
 
 	@Override
 	public Adherent read(int idAdherent) {
+
 		Adherent adherent = null;
+		Personne personne = null;
+
 		if (donnees.containsKey(idAdherent)) {
 			System.out.println("r�cup�r�");
 			adherent = donnees.get(idAdherent);
@@ -136,12 +159,14 @@ public class AdherentDAO extends DAO<Adherent> {
 				String numCIN = rs.getString(NUM_CIN);
 				LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
 
-				adherent = new Adherent (idAdherent, estActif, remarque, numCIN, dateInscription);
+
+				personne = personneDao.read(idAdherent);
+				adherent = new Adherent (personne, estActif, remarque, numCIN, dateInscription);
 
 				donnees.put(idAdherent, adherent);
 
 			} catch (SQLException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		return adherent;
