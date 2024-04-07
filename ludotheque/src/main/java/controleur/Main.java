@@ -73,11 +73,7 @@ public class Main {
 //    	JeuDAO jDAO = JeuDAO.getInstance();
     	
     	// create
-<<<<<<< Upstream, based on origin/add-personne-inheritance
 //    	Jeu addJeu = new Jeu(0, "monopoli", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, "2", 8);
-=======
-//    	Jeu addJeu = new Jeu(0, "molki", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, 2.3f, 8);
->>>>>>> 95fdcf4 Change main
 //    	System.out.println(jDAO.create(addJeu));
 
     	// read 
