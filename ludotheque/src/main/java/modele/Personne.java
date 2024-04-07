@@ -14,6 +14,18 @@ public class Personne {
 	public Personne(String nom, String prenom, String email, String adresse, String tel) {
 		super();
 	
+		this.id = 0;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.tel = tel;
+	}
+
+	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
+		super();
+	
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;

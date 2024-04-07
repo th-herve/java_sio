@@ -15,8 +15,7 @@ public class Adherent {
 	public Adherent(int idPersonne, String nom, String prenom, String email, 
 					String adresse, String tel, boolean estActif, 
 					String remarques, String numCIN, LocalDateTime dateInscription) {
-		personne = new Personne(nom, prenom, email, adresse, tel);
-		personne.setId(idPersonne);
+		personne = new Personne(idPersonne, nom, prenom, email, adresse, tel);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
@@ -28,7 +27,6 @@ public class Adherent {
 					String adresse, String tel, boolean estActif, 
 					String remarques, String numCIN, LocalDateTime dateInscription) {
 		personne = new Personne(nom, prenom, email, adresse, tel);
-//		personne.setId(0);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;

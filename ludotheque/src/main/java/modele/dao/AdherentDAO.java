@@ -47,6 +47,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 			int idAd = adherent.getIdPersonne();
 			
+			// si l'id personne est 0, il faut également créer une nouvelle personne
 			if (idAd == 0) {
 				personneDao.create(adherent.getPersonne());
 				// on récupère le nouvel id
