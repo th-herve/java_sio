@@ -1,6 +1,10 @@
 package modele;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+import modele.dao.ProcheAdherentDAO;
 
 public class Adherent {
 
@@ -11,6 +15,9 @@ public class Adherent {
 	private String remarques;
 	private String numCIN;
 	private LocalDateTime dateInscription;
+	
+	// liste des noms des proches pouvant utiliser la carte
+	private Set<String> proches;
 
 	public Adherent(int idPersonne, String nom, String prenom, String email, 
 					String adresse, String tel, boolean estActif, 
@@ -20,6 +27,8 @@ public class Adherent {
 		this.remarques = remarques;
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
+		
+		this.proches = new HashSet<String>();
 	}
 
 	// constructeur sans spécifié d'idPersonne (set à 0), un id sera attribué lors de l'ajout dans la bd
@@ -31,6 +40,8 @@ public class Adherent {
 		this.remarques = remarques;
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
+
+		this.proches = new HashSet<String>();
 	}
 
 	public Adherent(Personne personne, boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
@@ -40,6 +51,8 @@ public class Adherent {
 		this.remarques = remarques;
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
+
+		this.proches = new HashSet<String>();
 	}
 
 	public Personne getPersonne() {
@@ -131,6 +144,23 @@ public class Adherent {
 		personne.setTel(tel);
 	}
 
+	public boolean addProche(String nom) {
+		return proches.add(nom);
+	}
+
+	public boolean delProche(String nom) {
+		return proches.remove(nom);
+	}
+	
+	public Set<String> getProches() {
+		return this.proches;
+	}
+	
+	// récupère les proches lié à l'adhérent depuis la bd
+	public void fetchProche() {
+		ProcheAdherentDAO procheDao = ProcheAdherentDAO.getInstance();
+		this.proches = procheDao.readByAdherent(this.getIdPersonne());
+	}
 	
 	
 	@Override

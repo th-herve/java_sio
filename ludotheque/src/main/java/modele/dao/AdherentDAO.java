@@ -13,6 +13,7 @@ import modele.Personne;
 public class AdherentDAO extends DAO<Adherent> {
 
 	private static PersonneDAO personneDao;
+	private static ProcheAdherentDAO procheDAO;
 
 	private static final String TABLE 			= "Adherent";
 	private static final String CLE_PRIMAIRE 	= "idPersonne";
