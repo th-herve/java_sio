@@ -63,31 +63,36 @@ public class Main {
     	// ==========================   Jeu =========================================================
 
     	/**
-    	 * @CREATE
-    	 * @READ
-    	 * @UPDATE
-    	 * @DELETE
+    	 * @JEU
+    	 * @create_ok
+    	 * @read_ok
+    	 * @update_ok
+    	 * @delete_ok
     	 */
 
 //    	JeuDAO jDAO = JeuDAO.getInstance();
     	
     	// create
+<<<<<<< Upstream, based on origin/add-personne-inheritance
 //    	Jeu addJeu = new Jeu(0, "monopoli", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, "2", 8);
+=======
+//    	Jeu addJeu = new Jeu(0, "molki", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, 2.3f, 8);
+>>>>>>> 95fdcf4 Change main
 //    	System.out.println(jDAO.create(addJeu));
 
     	// read 
-//    	System.out.println(pDAO.read(1));
-//    	System.out.println(pDAO.read(1));
+//    	System.out.println(jDAO.read(557));
+//    	System.out.println(jDAO.read(557));
 
     	// update 
-//    	Personne pers1 = pDAO.read(1);
-//    	pers1.setNom("Dupond");
-//    	System.out.println( pDAO.update(pers1));
-//    	System.out.println(pDAO.read(1));
+//    	Jeu upJeu = jDAO.read(557);
+//    	upJeu.setNom("Molki");
+//    	System.out.println( jDAO.update(upJeu));
+//    	System.out.println(jDAO.read(557));
 
     	// delete
-//    	Personne pers2 = pDAO.read(72);
-//    	System.out.println(pDAO.delete(pers2));
+//    	Jeu upJeu = jDAO.read(557);
+//    	System.out.println(jDAO.delete(upJeu));
 
     	// select *
 //    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
