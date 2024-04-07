@@ -15,7 +15,8 @@ public class Adherent {
 	public Adherent(int idPersonne, String nom, String prenom, String email, 
 					String adresse, String tel, boolean estActif, 
 					String remarques, String numCIN, LocalDateTime dateInscription) {
-		personne = new Personne(idPersonne, nom, prenom, email, adresse, tel);
+		personne = new Personne(nom, prenom, email, adresse, tel);
+		personne.setId(idPersonne);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
@@ -26,7 +27,8 @@ public class Adherent {
 	public Adherent(String nom, String prenom, String email, 
 					String adresse, String tel, boolean estActif, 
 					String remarques, String numCIN, LocalDateTime dateInscription) {
-		personne = new Personne(0, nom, prenom, email, adresse, tel);
+		personne = new Personne(nom, prenom, email, adresse, tel);
+//		personne.setId(0);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
@@ -135,6 +137,6 @@ public class Adherent {
 	
 	@Override
 	public String toString() {
-		return personne.toString() + "\nAdherent [numero=" + idPersonne + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
+		return personne.toString() + "\nAdherent [numero=" + this.personne.getId() + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
 	}
 }

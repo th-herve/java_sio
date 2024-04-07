@@ -58,7 +58,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
-			pst.setBoolean(1, idAd);
+			pst.setInt(1, idAd);
 			pst.setBoolean(2, adherent.isActif());
 			pst.setString(3, adherent.getRemarques());
 			pst.setString(4, adherent.getNumCIN());
@@ -113,7 +113,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+EST_ACTIF+" = ?, "+REMARQUES+" = ?, "
-						+NUM_CIN+" = ? "+ DATE_INSCRIPTION +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+						+NUM_CIN+" = ?, "+ DATE_INSCRIPTION +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setByte(1, actif); 
