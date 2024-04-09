@@ -19,8 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
     	Parent root = FXMLLoader.load(getClass().getResource( "../vue/gererJeu.fxml"));
 
-    	//Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
-        //primaryStage.getIcons().add(icon);
+
         
         primaryStage.setScene(new Scene(root, 1280, 800));        
         primaryStage.setTitle("Betton Ludothèque");
