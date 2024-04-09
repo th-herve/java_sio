@@ -11,7 +11,7 @@
       <Button layoutX="397.0" layoutY="661.0" mnemonicParsing="false" text="Vérifier jeu" />
       <Button layoutX="596.0" layoutY="661.0" mnemonicParsing="false" text="Ajouter jeu" />
       <Button layoutX="809.0" layoutY="661.0" mnemonicParsing="false" text="Archiver" />
-      <ImageView fitHeight="151.0" fitWidth="239.0" layoutX="56.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="151.0" fitWidth="239.0" layoutX="56.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" x="1.0">
          <image>
             <Image url="@../../../../images/logo_bettonludotheque.png" />
          </image>
