@@ -1,12 +1,10 @@
 package controleur;
 
-import java.awt.TextField;
-
-import javax.management.loading.PrivateClassLoader;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class inscription_Personnel_Controleur {
 	
