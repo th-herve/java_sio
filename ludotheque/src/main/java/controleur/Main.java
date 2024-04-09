@@ -17,17 +17,30 @@ public class Main extends Application {
 		
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	Parent root = FXMLLoader.load(getClass().getResource( "../vue/inscriptionAdherent.fxml"));
+    	Parent root = FXMLLoader.load(getClass().getResource( "../vue/gererJeu.fxml"));
 
-    	Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
-        primaryStage.getIcons().add(icon);
+    	//Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
+        //primaryStage.getIcons().add(icon);
         
-        primaryStage.setScene(new Scene(root, 400, 400));        
+        primaryStage.setScene(new Scene(root, 1280, 800));        
         primaryStage.setTitle("Betton Ludothèque");
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+   
+    
+    public void gererJeuPage(Stage primaryStage) throws Exception {
+    	Parent root = FXMLLoader.load(getClass().getResource( "../vue/gererJeu.fxml"));
+
+    	//Image icon = new Image(getClass().getResourceAsStream("./../../../images/logo_bettonludotheque.png"));
+        //primaryStage.getIcons().add(icon);
+        
+        primaryStage.setScene(new Scene(root, 1280, 800));        
+        primaryStage.setTitle("Betton Ludothèque");
+        primaryStage.show();
+    }
+
+     public static void main(String[] args) {
         launch(args);
     }
 
