@@ -92,7 +92,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+ ETAT+" = ?, "
-						+DISPONIBLE+" = ? "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+						+DISPONIBLE+" = ?, "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setString(1, jeuPhysique.getEtat()); 

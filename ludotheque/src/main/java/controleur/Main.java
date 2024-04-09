@@ -1,10 +1,14 @@
 package controleur;
 
+import java.time.LocalDateTime;
+
 import modele.Jeu;
 import modele.JeuPhysique;
+import modele.Personnel;
 import modele.dao.AdherentDAO;
 import modele.dao.JeuDAO;
 import modele.dao.JeuPhysiqueDAO;
+import modele.dao.PersonnelDAO;
 
 public class Main {	
 		
@@ -94,31 +98,29 @@ public class Main {
     	/**
     	 * @JEU_PHYSIQUE
     	 * @create_OK
-    	 * @read
-    	 * @update
-    	 * @delete
+    	 * @read_OK
+    	 * @update_OK
+    	 * @delete_OK
     	 */
 
     	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
     	
-    	// create
-    	Jeu jeu = jDAO.read(1);
-    	JeuPhysique jeuP = new JeuPhysique(jeu, "good", "Oui");
-    	System.out.println(jpDAO.create(jeuP));
-
-    	// read 
-//    	System.out.println(pDAO.read(1));
-//    	System.out.println(pDAO.read(1));
-
-    	// update 
-//    	Personne pers1 = pDAO.read(1);
-//    	pers1.setNom("Dupond");
-//    	System.out.println( pDAO.update(pers1));
-//    	System.out.println(pDAO.read(1));
-
-    	// delete
-//    	Personne pers2 = pDAO.read(72);
-//    	System.out.println(pDAO.delete(pers2));
+//    	// create
+//    	Jeu jeu = jDAO.read(1);
+//    	JeuPhysique jeuP = new JeuPhysique(jeu, "good", "Oui");
+//    	System.out.println(jpDAO.create(jeuP));
+//
+//    	// read 
+//    	System.out.println(jDAO.read(jeuP.getId()));
+//    	System.out.println(jDAO.read(jeuP.getId()));
+//
+//    	// update 
+//    	jeuP.setEtat("Passable");
+//    	System.out.println(jpDAO.update(jeuP));
+//    	System.out.println(jpDAO.read(jeuP.getId()).getEtat() == "Passable");
+//
+//    	// delete
+//    	System.out.println(jpDAO.delete(jeuP));
 
     	// select *
 //    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
@@ -128,15 +130,44 @@ public class Main {
     	
     	/**
     	 * @Personnel
-    	 * @create
-    	 * @read
-    	 * @update
-    	 * @delete
+    	 * @create_OK
+    	 * @read_OK
+    	 * @update_OK
+    	 * @delete_OK
     	 */
+
+    	PersonnelDAO pDAO = PersonnelDAO.getInstance();
+    	
     	// create
-    	// read
-    	// update
+//    	Personnel personnel= new Personnel("sam", "lesbriz", "sam@mail.com", "rue", "08", "dirlo", LocalDateTime.now(), null);
+//    	System.out.println(pDAO.create(personnel));
+//    	System.out.println(pDAO.read(personnel.getId()));
+
+    	// read 
+//    	System.out.println(pDAO.read(1076));
+//    	System.out.println(pDAO.read(1076));
+
+    	// update 
+//    	Personnel pUP = pDAO.read(1076);
+//    	pUP.setNom("sam");
+//    	pUP.setDateSortie(LocalDateTime.now());
+//    	System.out.println(pDAO.update(pUP));
+//    	System.out.println(pDAO.read(pUP.getId()));
+
     	// delete
+//    	Personnel pUP = pDAO.read(1076);
+//    	System.out.println(pDAO.delete(pUP));
+
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
+    	
+    	// Test update des adhérents
+//    	Adherent ad = aDAO.read(1);
+//    	ad.addProche("Jean");
+//    	ad.delProche("Bobe");
+//    	aDAO.upateLesProches(ad);
+//    	System.out.println(ad.toString());
+
     	
     	// ==========================   Adherent =========================================================
 
