@@ -23,11 +23,10 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
+	public Jeu( String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
 				int duree_maxi, float complexite, float note_bgg)
 	{
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.type= type;
 		this.descriptif = descriptif;

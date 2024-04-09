@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
 
+import modele.Jeu;
 import modele.JeuPhysique;
 
 public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
@@ -131,7 +131,10 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 				String disponible = rs.getString(DISPONIBLE);
 				int idJeu = rs.getInt(ID_JEU);
 
-				jeuPhysique = new JeuPhysique (idNew, etat, disponible, idJeu);
+				JeuDAO jDao = JeuDAO.getInstance();
+				Jeu jeu = jDao.read(idJeu);
+				jeuPhysique = new JeuPhysique (jeu, etat, disponible);
+				jeuPhysique.setId(idNew);
 
 				donnees.put(idNew, jeuPhysique);
 

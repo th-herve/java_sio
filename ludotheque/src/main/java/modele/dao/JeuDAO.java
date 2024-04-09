@@ -149,7 +149,8 @@ public class JeuDAO extends DAO<Jeu> {
 				float complexite = rs.getFloat(COMPLEXITE);
 				float noteBgg = rs.getFloat(NOTE_BGG);
 
-				jeu = new Jeu (id, nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg);
+				jeu = new Jeu (nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg);
+				jeu.setId(id);
 
 				donnees.put(id, jeu);
 			} catch (SQLException e) {

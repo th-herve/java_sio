@@ -1,8 +1,10 @@
 package controleur;
 
-import modele.Adherent;
+import modele.Jeu;
+import modele.JeuPhysique;
 import modele.dao.AdherentDAO;
-import modele.dao.ProcheAdherentDAO;
+import modele.dao.JeuDAO;
+import modele.dao.JeuPhysiqueDAO;
 
 public class Main {	
 		
@@ -64,7 +66,7 @@ public class Main {
     	 * @delete_ok
     	 */
 
-//    	JeuDAO jDAO = JeuDAO.getInstance();
+    	JeuDAO jDAO = JeuDAO.getInstance();
     	
     	// create
 //    	Jeu addJeu = new Jeu(0, "monopoli", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, "2", 8);
@@ -90,17 +92,19 @@ public class Main {
     	// ==========================   JeuPhysique =========================================================
     	
     	/**
-    	 * @CREATE
-    	 * @READ
-    	 * @UPDATE
-    	 * @DELETE
+    	 * @JEU_PHYSIQUE
+    	 * @create_OK
+    	 * @read
+    	 * @update
+    	 * @delete
     	 */
 
-//    	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
+    	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
     	
     	// create
-//    	JeuPhysique addJeuP = new JeuPhysique(1, "Bien", "oui", 0)
-//    	System.out.println(pDAO.create(addPersonne));
+    	Jeu jeu = jDAO.read(1);
+    	JeuPhysique jeuP = new JeuPhysique(jeu, "good", "Oui");
+    	System.out.println(jpDAO.create(jeuP));
 
     	// read 
 //    	System.out.println(pDAO.read(1));
@@ -181,11 +185,14 @@ public class Main {
     	// ==========================   Proche =========================================================
 
     	/**
-    	 * @CREATE
-    	 * @READ
-    	 * @UPDATE
-    	 * @DELETE
+    	 * @PROCHE
+    	 * Tester depuis la classe adherent
+    	 * @create_OK
+    	 * @read_OK
+    	 * @update_OK
+    	 * @delete_OK
     	 */
+
     	// create
     	// read
     	// update

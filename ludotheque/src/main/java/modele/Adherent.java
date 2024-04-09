@@ -30,20 +30,6 @@ public class Adherent extends Personne {
 		this.fetchProches();
 	}
 
-	public Adherent(int idPersonne, String nom, String prenom, String email, 
-					String adresse, String tel, boolean estActif, 
-					String remarques, String numCIN, LocalDateTime dateInscription) {
-		super(idPersonne, nom, prenom, email, adresse, tel);
-		this.estActif = estActif;
-		this.remarques = remarques;
-		this.numCIN = numCIN;
-		this.dateInscription = dateInscription;
-		
-		// rempli la liste des proches
-		this.fetchProches();
-	}
-
-
 	public boolean isActif() {
 		return estActif;
 	}
