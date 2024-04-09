@@ -17,7 +17,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 
 	// clef primaire = idPersone + Nom
 	private static final String TABLE 		= "ProcheAdherent";
-	private static final String ID_PERSONNE = "idPersonne";
+	private static final String ID_PERSONNE = "idAdherent";
 	private static final String NOM 		= "nom"; 
 	
 	private static final String WHERE_CLEF_PRIMAIRE = " WHERE " + ID_PERSONNE + " = ?, " + NOM + " = ?";
@@ -44,7 +44,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		boolean succes=true;
 		try {
 
-			String requete = "INSERT INTO "+TABLE+" ("+ID_PERSONNE + NOM+") VALUES (?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+ID_PERSONNE + ", " + NOM+") VALUES (?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setInt(1, proche.getIdPersonne());
@@ -87,20 +87,20 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 	
 	
 	// Supprime tous les proches d'un adhérent
-	public boolean deleteByIdPersonne(int idPersonne) {
+	public boolean deleteByIdAdherent(int idAdherent) {
 		boolean succes = true;
 		try {
-			List<String> lesNoms = this.readByAdherent(idPersonne);
+			Set<String> lesNoms = this.readByAdherent(idAdherent);
 			
 				
-			String requete = "DELETE FROM "+TABLE+ " WHERE " + idPersonne + " = ?";
+			String requete = "DELETE FROM "+TABLE+ " WHERE " + idAdherent + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-			pst.setInt(1, idPersonne);
+			pst.setInt(1, idAdherent);
 
 			pst.executeUpdate();
 
 			for (String nom : lesNoms) {
-				donnees.remove(this.getClefDonnee(idPersonne, nom));
+				donnees.remove(this.getClefDonnee(idAdherent, nom));
 			}
 
 		} catch (SQLException e) {
@@ -116,7 +116,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 	 */
 	@Override
 	public boolean update(ProcheAdherent proche) {
-		throw new UnsupportedOperationException("Cette méthode n'est pas utilisable dans la classe fille");	
+		throw new UnsupportedOperationException("Cette méthode n'est pas utilisable dans la classe fille");
 	}
 
 	/**

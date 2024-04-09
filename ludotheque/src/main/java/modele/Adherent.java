@@ -16,19 +16,6 @@ public class Adherent extends Personne {
 	private String numCIN;
 	private LocalDateTime dateInscription;
 	
-
-	public Adherent(int idPersonne, String nom, String prenom, String email, 
-					String adresse, String tel, boolean estActif, 
-					String remarques, String numCIN, LocalDateTime dateInscription) {
-		super(idPersonne, nom, prenom, email, adresse, tel);
-		this.estActif = estActif;
-		this.remarques = remarques;
-		this.numCIN = numCIN;
-		this.dateInscription = dateInscription;
-		
-		this.proches = new HashSet<String>();
-	}
-
 	// constructeur sans spécifié d'idPersonne (set à 0), un id sera attribué lors de l'ajout dans la bd
 	public Adherent(String nom, String prenom, String email, 
 					String adresse, String tel, boolean estActif, 
@@ -39,7 +26,21 @@ public class Adherent extends Personne {
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
 
-		this.proches = new HashSet<String>();
+		// rempli la liste des proches
+		this.fetchProches();
+	}
+
+	public Adherent(int idPersonne, String nom, String prenom, String email, 
+					String adresse, String tel, boolean estActif, 
+					String remarques, String numCIN, LocalDateTime dateInscription) {
+		super(idPersonne, nom, prenom, email, adresse, tel);
+		this.estActif = estActif;
+		this.remarques = remarques;
+		this.numCIN = numCIN;
+		this.dateInscription = dateInscription;
+		
+		// rempli la liste des proches
+		this.fetchProches();
 	}
 
 
@@ -90,7 +91,7 @@ public class Adherent extends Personne {
 	}
 	
 	// récupère les proches lié à l'adhérent depuis la bd
-	public void fetchProche() {
+	public void fetchProches() {
 		ProcheAdherentDAO procheDao = ProcheAdherentDAO.getInstance();
 		this.proches = procheDao.readByAdherent(this.getId());
 	}
@@ -98,6 +99,7 @@ public class Adherent extends Personne {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "\nAdherent [numero=" + this.getId() + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
+		return super.toString() + "\nAdherent [numero=" + this.getId() + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]"
+				+ "\nProches" + this.proches.toString();
 	}
 }

@@ -1,14 +1,8 @@
 package controleur;
 
-import java.time.LocalDateTime;
-
 import modele.Adherent;
-import modele.Jeu;
-import modele.JeuPhysique;
-import modele.Personne;
 import modele.dao.AdherentDAO;
-import modele.dao.JeuDAO;
-import modele.dao.JeuPhysiqueDAO;
+import modele.dao.ProcheAdherentDAO;
 
 public class Main {	
 		
@@ -174,6 +168,15 @@ public class Main {
 
     	// select *
 //    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
+    	
+    	// Test update des adhérents
+//    	Adherent ad = aDAO.read(1);
+//    	ad.addProche("Jean");
+//    	ad.delProche("Bobe");
+//    	aDAO.upateLesProches(ad);
+//    	System.out.println(ad.toString());
+
+
 
     	// ==========================   Proche =========================================================
 

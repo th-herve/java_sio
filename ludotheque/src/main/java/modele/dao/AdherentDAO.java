@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import modele.Adherent;
 import modele.Personne;
+import modele.ProcheAdherent;
 
 public class AdherentDAO extends DAO<Adherent> {
 
@@ -38,6 +40,7 @@ public class AdherentDAO extends DAO<Adherent> {
 	private AdherentDAO() {
 		super();
 		personneDao = PersonneDAO.getIntstance();
+		procheDAO = ProcheAdherentDAO.getInstance();
 	}
 
 
@@ -171,6 +174,20 @@ public class AdherentDAO extends DAO<Adherent> {
 			}
 		}
 		return adherent;
+	}
+	
+	// met à jour les proches adhérents dans la base en supprimant tout et réajoutant les proches de la liste de l'objet adhérent
+	public boolean upateLesProches(Adherent adherent) {
+		
+		boolean reussi = true;
+		procheDAO.deleteByIdAdherent(adherent.getId());
+
+		Set<String> listeProches = adherent.getProches();
+		for (String proche : listeProches) {
+			procheDAO.create(new ProcheAdherent(adherent.getId(), proche));
+		}
+		
+		return reussi;
 	}
 
 	public void afficheSelectEtoileAdherent() {
