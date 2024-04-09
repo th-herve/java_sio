@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="397.0" layoutY="661.0" mnemonicParsing="false" text="Vérifier jeu" />
+      <Button layoutX="596.0" layoutY="661.0" mnemonicParsing="false" text="Ajouter jeu" />
+      <Button layoutX="809.0" layoutY="661.0" mnemonicParsing="false" text="Archiver" />
+      <ImageView fitHeight="151.0" fitWidth="239.0" layoutX="56.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" x="1.0">
+         <image>
+            <Image url="@../../../../images/logo_bettonludotheque.png" />
+         </image>
+      </ImageView>
+      <ScrollBar layoutX="872.0" layoutY="77.0" orientation="VERTICAL" prefHeight="475.0" prefWidth="14.0" />
+      <ListView layoutX="382.0" layoutY="81.0" prefHeight="475.0" prefWidth="487.0" />
+   </children>
+</AnchorPane>

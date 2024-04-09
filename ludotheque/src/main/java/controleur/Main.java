@@ -16,6 +16,7 @@ public class Main extends Application {
 		
     @Override
     public void start(Stage primaryStage) throws Exception {
+
     	
     	
     	inscription_Personnel_Controleur controller = new inscription_Personnel_Controleur(); 
@@ -29,11 +30,12 @@ public class Main extends Application {
 //        primaryStage.getIcons().add(icon);
         
         primaryStage.setScene(new Scene(root, 1280, 600));        
-        primaryStage.setTitle("Betton Ludothèque");
-        primaryStage.show();
+
+
+
     }
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         launch(args);
     }
 
