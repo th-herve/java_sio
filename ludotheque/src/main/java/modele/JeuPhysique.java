@@ -2,7 +2,8 @@ package modele;
 
 import java.time.LocalDateTime;
 
-public class JeuPhysique {
+public class JeuPhysique { // monopoly 12
+
 	private int id;
 	private String etat;
 	private String disponible;
@@ -20,7 +21,7 @@ public class JeuPhysique {
 	public int getId() {
 		return id;
 	}
-
+	
 
 	public void setId(int id) {
 		this.id = id;

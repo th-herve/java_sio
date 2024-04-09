@@ -150,25 +150,26 @@ public class Main {
     	 * @delete_OK
     	 */
 
-//    	AdherentDAO aDAO = AdherentDAO.getInstance();
+    	AdherentDAO aDAO = AdherentDAO.getInstance();
     	
     	// create
 //    	Adherent addAdherent = new Adherent("bob", "morane", "bob@mail.com", "rue", "08", true, "non", "2", LocalDateTime.now());
 //    	System.out.println(aDAO.create(addAdherent));
+//    	System.out.println(aDAO.read(addAdherent.getId()));
 
     	// read 
 //    	System.out.println(aDAO.read(1));
 //    	System.out.println(aDAO.read(1));
 
     	// update 
-//    	Adherent adUP = aDAO.read(1071);
+//    	Adherent adUP = aDAO.read(1072);
 //    	adUP.setNom("Vendredi");
 //    	adUP.setRemarques("s'apelle pas vraiment vendredi");
 //    	System.out.println( aDAO.update(adUP));
-//    	System.out.println(aDAO.read(1071));
+//    	System.out.println(aDAO.read(adUP.getId()));
 
     	// delete
-//    	Adherent pers2 = aDAO.read(1071);
+//    	Adherent pers2 = aDAO.read(1072);
 //    	System.out.println(aDAO.delete(pers2));
 
     	// select *

@@ -46,13 +46,11 @@ public class AdherentDAO extends DAO<Adherent> {
 		boolean succes=true;
 		try {
 
-			int idAd = adherent.getIdPersonne();
+			int idPers = adherent.getId();
 			
-			// si l'id personne est 0, il faut également créer une nouvelle personne
-			if (idAd == 0) {
-				personneDao.create(adherent.getPersonne());
-				// on récupère le nouvel id
-				idAd = adherent.getIdPersonne();
+			// si l'id est 0, il faut également créer une nouvelle personne (si != 0 ca veut dire que la personne assciée à l'adherent existe déjà)
+			if (idPers == 0) {
+				personneDao.create((Personne)adherent);
 			}
 
 			String requete = "INSERT INTO "+TABLE+" (" +CLE_PRIMAIRE+ ", "+EST_ACTIF+", "+REMARQUES+", "
@@ -60,7 +58,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
-			pst.setInt(1, idAd);
+			pst.setInt(1, adherent.getId());
 			pst.setBoolean(2, adherent.isActif());
 			pst.setString(3, adherent.getRemarques());
 			pst.setString(4, adherent.getNumCIN());
@@ -69,7 +67,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 			pst.executeUpdate();
 
-			donnees.put(idAd, adherent);
+			donnees.put(idPers, adherent);
 
 		} catch (SQLException e) {
 			succes=false;
@@ -84,8 +82,8 @@ public class AdherentDAO extends DAO<Adherent> {
 	public boolean delete(Adherent adherent) {
 		boolean succes = true;
 		try {
-			Personne personne = adherent.getPersonne();
-			int id = adherent.getIdPersonne();
+			Personne personne = (Personne)adherent;
+			int id = adherent.getId();
 
 			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
@@ -108,6 +106,7 @@ public class AdherentDAO extends DAO<Adherent> {
 	public boolean update(Adherent adherent) {
 		boolean succes=true;
 
+		// TODO enlever binary operator
 		byte actif = (byte) (adherent.isActif() ? 1 : 0); // pas de boolean en sql serveur, donc il faut convertire en bit
 		String remarque = adherent.getRemarques();
 		String numCIN = adherent.getNumCIN();
@@ -122,14 +121,14 @@ public class AdherentDAO extends DAO<Adherent> {
 			pst.setString(2, remarque); 
 			pst.setString(3, numCIN);
 			pst.setDate(4, dateInscription);
-			pst.setInt(5, adherent.getIdPersonne());
+			pst.setInt(5, adherent.getId());
 
 			pst.executeUpdate();
 
-			donnees.put(adherent.getIdPersonne(), adherent);
+			donnees.put(adherent.getId(), adherent);
 			
 			// update la personne associée
-			personneDao.update(adherent.getPersonne());
+			personneDao.update((Personne) adherent);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -163,7 +162,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 
 				personne = personneDao.read(idAdherent);
-				adherent = new Adherent (personne, estActif, remarque, numCIN, dateInscription);
+				adherent = new Adherent(personne.getId(), personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), estActif, remarque, numCIN, dateInscription);
 
 				donnees.put(idAdherent, adherent);
 

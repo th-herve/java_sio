@@ -2,6 +2,7 @@ package modele;
 
 
 
+// éviter d'instancier cette classe, utiliser Adherent ou Personnel à la place
 public class Personne {
 
 	private int id;
