@@ -14,8 +14,11 @@ import modele.Personnel;
 public class PersonnelDAO extends DAO<Personnel> {
 
 	private static final String TABLE = "Personnel";
-	private static final String CLE_PRIMAIRE = "id_Personne";
-
+    private static final String CLE_PRIMAIRE = "idPersonne";
+    
+    //est ce que je dois changer le nom de CLE_PRIMAIRE pour CLE_FORIGNE ???
+    
+//	private static final String CLE_FORIGNE = "idPersonne";
 	private static final String ROLE = "role";
 	private static final String DATE_ENTREE = "dateEntree";
 	private static final String DATE_SORTIE = "dateSortie";
@@ -53,10 +56,10 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				personnel.setId_Personne(rs.getInt(1));
+				personnel.setidPersonne(rs.getInt(1));
 			}
 
-			donnees.put(personnel.getId_Personne(), personnel);
+			donnees.put(personnel.getidPersonne(), personnel);
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -68,7 +71,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 	public boolean delete(Personnel personnel) {
 		boolean success = true;
 		try {
-			int id = personnel.getId_Personne();
+			int id = personnel.getidPersonne();
 			String query = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
 			pst.setInt(1, id);
@@ -94,11 +97,11 @@ public class PersonnelDAO extends DAO<Personnel> {
 			pst.setDate(2, dateEntree);
 			Date dateSortie = Date.valueOf(personnel.getDateSortie().toLocalDate());
 			pst.setDate(3, dateSortie);
-			pst.setInt(4, personnel.getId_Personne());
+			pst.setInt(4, personnel.getidPersonne());
 
 			pst.executeUpdate();
 
-			donnees.put(personnel.getId_Personne(), personnel);
+			donnees.put(personnel.getidPersonne(), personnel);
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -107,13 +110,13 @@ public class PersonnelDAO extends DAO<Personnel> {
 	}
 
 	@Override
-	public Personnel read(int id_Personne) {
+	public Personnel read(int idPersonne) {
 		Personnel personnel = null;
-		if (donnees.containsKey(id_Personne)) {
-			personnel = donnees.get(id_Personne);
+		if (donnees.containsKey(idPersonne)) {
+			personnel = donnees.get(idPersonne);
 		} else {
 			try {
-				String query = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id_Personne;
+				String query = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + idPersonne;
 				ResultSet rs = Connexion.executeQuery(query);
 				rs.next();
 
@@ -121,8 +124,8 @@ public class PersonnelDAO extends DAO<Personnel> {
 				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
 				LocalDateTime dateSortie = rs.getTimestamp(DATE_SORTIE).toLocalDateTime();
 
-				personnel = new Personnel(id_Personne, role, dateEntree, dateSortie);
-				donnees.put(id_Personne, personnel);
+				personnel = new Personnel(idPersonne, role, dateEntree, dateSortie);
+				donnees.put(idPersonne, personnel);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

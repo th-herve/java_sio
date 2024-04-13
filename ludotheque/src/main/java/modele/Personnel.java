@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 
 public class Personnel {
 
-	private int id_Personne;
+	private int idPersonne;
 	private String role;
 	private LocalDateTime dateEntree;
 	private LocalDateTime dateSortie;
 
-	public Personnel(int id_Personne, String role, LocalDateTime dateEntree, LocalDateTime dateSortie) {
+	public Personnel(int idPersonne, String role, LocalDateTime dateEntree, LocalDateTime dateSortie) {
 		super();
-		this.id_Personne = id_Personne;
+		this.idPersonne = idPersonne;
 		this.role = role;
 		this.dateEntree = dateEntree;
 		this.dateSortie = dateSortie;
 	}
 
-	public int getId_Personne() {
-		return id_Personne;
+	public int getidPersonne() {
+		return idPersonne;
 	}
 
-	public void setId_Personne(int id_Personne) {
-		this.id_Personne = id_Personne;
+	public void setidPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
 	}
 
 	public String getRole() {
@@ -51,7 +51,7 @@ public class Personnel {
 
 	@Override
 	public String toString() {
-		return "Personnel [id_Personne=" + id_Personne + ", role=" + role + ", dateEntree=" + dateEntree
+		return "Personnel [idPersonne=" + idPersonne + ", role=" + role + ", dateEntree=" + dateEntree
 				+ ", dateSortie=" + dateSortie + "]";
 	}
 }
