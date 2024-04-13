@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.Adherent;
 import modele.Emprunt;
 
 /**
@@ -26,7 +26,7 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	private static final String DATE_EMPRUNT = "dateEmprunt"; 
 	private static final String DATE_RETOUR = "dateRetour";  
 	
-	private static final String WHERE_CLEF_PRIMAIRE = " WHERE " + ID_ADHERENT + " = ?, " + ID_JEUPHYSIQUE + " = ?, " + DATE_EMPRUNT + " = ?";
+	private static final String WHERE_CLEF_PRIMAIRE = " WHERE " + ID_ADHERENT + " = ? AND " + ID_JEUPHYSIQUE + " = ? AND " + DATE_EMPRUNT + " = ?";
 	
 	/** Patron de conception Singleton
 	 * 
@@ -55,16 +55,17 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			// j'ai éjà les infos sur les tables JeuPhysique et Adherent, 
 			// donc je les mets juste en brut, attention, c'est des clés étrangères,
 			// classe à finir !!! 
-			String requete = "INSERT INTO "+TABLE+" ("+ID_JEUPHYSIQUE+", "+ID_ADHERENT+", "+DATE_RETOUR+", "+DATE_EMPRUNT+") VALUES (?, ?, ?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+ID_ADHERENT+", "+ID_JEUPHYSIQUE+", "+DATE_EMPRUNT+", "+DATE_RETOUR+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			// on ex�cute la mise � jour
+			pst.setInt(1, emprunt.getIdAdherent());
+			pst.setInt(2, emprunt.getIdJeuPhysique());
+//			Date dateRetour = Date.valueOf(emprunt.getDateRetour().toLocalDate());
+//			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
+			pst.setObject(3, emprunt.getDateEmprunt());
+			pst.setObject(4, emprunt.getDateRetour());
+			System.out.println(requete);
 			pst.executeUpdate();
-			pst.setInt(1, emprunt.getIdJeuPhysique());
-			pst.setInt(2, emprunt.getIdAdherent());
-			Date dateRetour = Date.valueOf(emprunt.getDateRetour().toLocalDate());
-			pst.setDate(3, dateRetour);
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setDate(4, dateEmprunt);
 			
 			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
@@ -92,7 +93,7 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			int idAdherent = emprunt.getIdAdherent();
 			int idJeu = emprunt.getIdJeuPhysique();
 			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			String requete = "DELETE FROM "+TABLE+ WHERE_CLEF_PRIMAIRE;
+			String requete = "DELETE FROM "+TABLE+ " " + WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, idAdherent);
 			pst.setInt(2, idJeu);
@@ -116,7 +117,11 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			// fonction différente donc refaire les pst
-			pst.setInt(1, emprunt.getIdJeuPhysique()); 
+			pst.setObject(1, emprunt.getDateRetour()); 
+
+			pst.setObject(2, emprunt.getIdAdherent()); 
+			pst.setObject(3, emprunt.getIdJeuPhysique()); 
+			pst.setObject(4, emprunt.getDateEmprunt()); 
 
 			pst.executeUpdate();
 
@@ -155,7 +160,13 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			while(rs.next()) {
 				int idJeu = rs.getInt(ID_JEUPHYSIQUE);
 				LocalDateTime dateEmprunt = rs.getTimestamp(DATE_EMPRUNT).toLocalDateTime();
-				LocalDateTime dateRetour = rs.getTimestamp(DATE_RETOUR).toLocalDateTime();
+
+				// pour la date de retour, comme elle peut etre null dans la bd, il faut controler
+				Timestamp timestamp = rs.getTimestamp(DATE_RETOUR);
+				LocalDateTime dateRetour = null;
+				if (timestamp != null) {
+					dateRetour = timestamp.toLocalDateTime();
+				}
 					
 				Emprunt emprunt = new Emprunt(idAdherent, idJeu, dateEmprunt, dateRetour);
 				

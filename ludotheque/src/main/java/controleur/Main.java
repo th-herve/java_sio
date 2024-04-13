@@ -2,10 +2,12 @@ package controleur;
 
 import java.time.LocalDateTime;
 
+import modele.Emprunt;
 import modele.Jeu;
 import modele.JeuPhysique;
 import modele.Personnel;
 import modele.dao.AdherentDAO;
+import modele.dao.EmpruntDAO;
 import modele.dao.JeuDAO;
 import modele.dao.JeuPhysiqueDAO;
 import modele.dao.PersonnelDAO;
@@ -60,6 +62,26 @@ public class Main {
     	 * @delete
     	 */
     	
+    	EmpruntDAO eDAO = EmpruntDAO.getInstance();
+    	Emprunt emp = new Emprunt(1, 2, LocalDateTime.now(), null);
+    	
+    	// create
+    	System.out.println(eDAO.create(emp));
+
+    	// read 
+    	System.out.println(eDAO.readByAdherent(1).get(1));
+    	System.out.println(eDAO.readByAdherent(1).get(1));
+
+    	// update 
+    	emp.setDateRetour(LocalDateTime.now());
+    	System.out.println(eDAO.update(emp));
+    	System.out.println(eDAO.readByAdherent(1));
+
+    	// delete
+    	System.out.println(eDAO.delete(emp));
+
+    	// select *
+//    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien
     	// ==========================   Jeu =========================================================
 
     	/**
