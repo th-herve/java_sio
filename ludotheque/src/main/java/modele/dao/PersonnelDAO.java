@@ -17,7 +17,14 @@ public class PersonnelDAO extends DAO<Personnel> {
 	private static PersonneDAO personneDao;
 
 	private static final String TABLE = "Personnel";
+
 	private static final String CLE_PRIMAIRE = "idPersonne";
+
+
+    
+    //est ce que je dois changer le nom de CLE_PRIMAIRE pour CLE_FORIGNE ???
+    
+//	private static final String CLE_FORIGNE = "idPersonne";
 
 	private static final String ROLE = "role";
 	private static final String DATE_ENTREE = "dateEntree";
@@ -66,10 +73,13 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
+
 				personnel.setId(rs.getInt(1));
 			}
 
-			donnees.put(personnel.getId(), personnel);
+
+			donnees.put(personnel.getidPersonne(), personnel);
+
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -81,6 +91,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 	public boolean delete(Personnel personnel) {
 		boolean success = true;
 		try {
+
 			Personne personne = (Personne)personnel;
 			int id = personnel.getId();
 
@@ -114,6 +125,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 			pst.setDate(2, dateEntree);
 			Date dateSortie = Date.valueOf(personnel.getDateSortie().toLocalDate());
 			pst.setDate(3, dateSortie);
+
 			pst.setInt(4, personnel.getId());
 
 			pst.executeUpdate();
@@ -134,6 +146,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 	@Override
 	public Personnel read(int idPersonne) {
 
+
 		Personnel personnel = null;
 		Personne personne = null;
 
@@ -148,6 +161,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 				String role = rs.getString(ROLE);
 				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
 
+
 				// pour la date de sortie, comme elle peut etre null dans la bd, il faut controler
 				Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
 				LocalDateTime dateSortie = null;
@@ -156,7 +170,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 				}
 
 				personne = personneDao.read(idPersonne);
-				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie);
+				personnel = new Personnel(idPersonne, personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie);
 				personnel.setId(personne.getId());
 
 

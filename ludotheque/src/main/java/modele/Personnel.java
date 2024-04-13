@@ -4,18 +4,32 @@ import java.time.LocalDateTime;
 
 public class Personnel extends Personne {
 
+
+	private int idPersonne;
 	private String role;
 	private LocalDateTime dateEntree;
 	private LocalDateTime dateSortie;
 
-	public Personnel(String nom, String prenom, String email, 
+
+	public Personnel(int idPersonne,String nom, String prenom, String email, 
 					String adresse, String tel, String role, 
 					LocalDateTime dateEntree, LocalDateTime dateSortie) {
+	
 		super(nom, prenom, email, adresse, tel);
+		this.idPersonne = idPersonne;
 		this.role = role;
 		this.dateEntree = dateEntree;
 		this.dateSortie = dateSortie;
 	}
+
+	public int getidPersonne() {
+		return idPersonne;
+	}
+
+	public void setidPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
+	}
+
 
 	public String getRole() {
 		return role;
@@ -43,8 +57,9 @@ public class Personnel extends Personne {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nPersonnel [id_Personne=" + this.getId() + ", role=" + role 
-				+ ", dateEntree=" + dateEntree
-				+ ", dateSortie=" + dateSortie + "]";
+
+		return super.toString() + "\nPersonnel [idPersonne=" + this.getId() + ", role=" + role 
+				+ ", dateEntree=" + dateEntree + ", dateSortie=" + dateSortie + "]" ; 
+
 	}
 }
