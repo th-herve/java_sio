@@ -56,13 +56,14 @@ public class Main {
     	
     	/**
     	 * @EMPRUNT
-    	 * @create
-    	 * @read
-    	 * @update
-    	 * @delete
+    	 * @create_Ok
+    	 * @read_Ok
+    	 * @update_NON
+    	 * @delete_OK
     	 */
     	
     	EmpruntDAO eDAO = EmpruntDAO.getInstance();
+    	eDAO.deleteByAdherent(1);
     	Emprunt emp = new Emprunt(1, 2, LocalDateTime.now(), null);
     	
     	// create
@@ -78,7 +79,7 @@ public class Main {
     	System.out.println(eDAO.readByAdherent(1));
 
     	// delete
-    	System.out.println(eDAO.delete(emp));
+//    	System.out.println(eDAO.delete(emp));
 
     	// select *
 //    	pDAO.afficheSelectEtoilePersonne(); // marche pas bien

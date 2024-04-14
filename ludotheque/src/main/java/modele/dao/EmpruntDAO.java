@@ -108,6 +108,27 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		return succes;
 	}
 
+	public boolean deleteByAdherent(int idAdherent) {
+		boolean succes = true;
+		try {
+			
+			List<Emprunt> lesEmprunts = this.readByAdherent(idAdherent);
+
+			String requete = "DELETE FROM "+TABLE+ " WHERE " + ID_ADHERENT + " = ?";
+			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
+			pst.setInt(1, idAdherent);
+
+			pst.executeUpdate();
+			for (Emprunt emprunt : lesEmprunts) {
+				donnees.remove(this.getClefDonne(emprunt));
+			}
+		} catch (SQLException e) {
+			succes=false;
+			e.printStackTrace();
+		}
+		return succes;
+	}
+
 	@Override
 	public boolean update(Emprunt emprunt) {
 		boolean succes=true;
