@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -9,51 +14,68 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="370.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Valider" />
-      <Button layoutX="501.0" layoutY="391.0" mnemonicParsing="false" text="Retour à la page d'accueil" />
-      <Button layoutX="221.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
+      <!-- Logo -->
       <ImageView fitHeight="93.0" fitWidth="178.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/logo_bettonèludothèque.png" />
+            <Image url="@../../../images/logo_bettonludotheque.png" />
          </image>
       </ImageView>
-      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <Label layoutX="222.0" layoutY="235.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="235.0" />
-      <Label layoutX="226.0" layoutY="204.0" prefHeight="26.0" prefWidth="50.0" text="E-mail" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="204.0" />
-      <TextField layoutX="277.0" layoutY="169.0" />
-      <Label layoutX="222.0" layoutY="169.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="135.0" />
-      <Label layoutX="236.0" layoutY="135.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="268.0" />
-      <Label layoutX="123.0" layoutY="268.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+      
+      <!-- Titre -->
       <Label layoutX="291.0" layoutY="69.0" text="Personnel">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
+      
+      <!-- Champ Nom -->
+      <Label layoutX="236.0" layoutY="135.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nom" layoutX="277.0" layoutY="135.0" />
+      
+      <!-- Champ Prénom -->
+      <Label layoutX="222.0" layoutY="169.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prenom" layoutX="277.0" layoutY="169.0" />
+      
+      <!-- Champ Adresse Email -->
+      <Label layoutX="226.0" layoutY="204.0" prefHeight="26.0" prefWidth="50.0" text="E-mail" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="277.0" layoutY="204.0" />
+      
+      <!-- Champ Adresse -->
+      <Label layoutX="222.0" layoutY="235.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="adresse" layoutX="277.0" layoutY="235.0" />
+      
+      <!-- Champ Numéro de téléphone -->
+      <Label fx:id="N_tel" layoutX="123.0" layoutY="268.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="N_tel" layoutX="277.0" layoutY="268.0" />
+      
+      <!-- Boutons -->
+      <Button layoutX="221.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
+      <Button fx:id="validerButton" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="113.0" text="Valider" />
+      <Button fx:id="retour" layoutX="501.0" layoutY="391.0" mnemonicParsing="false" text="Retour à la page d'accueil" />
+      
+      <!-- Zone de texte supplémentaire (si nécessaire) -->
+      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
