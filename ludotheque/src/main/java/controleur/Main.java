@@ -86,21 +86,21 @@ public class Main {
     	 * @delete_OK
     	 */
     	
-    	EmpruntDAO eDAO = EmpruntDAO.getInstance();
-    	eDAO.deleteByAdherent(1);
-    	Emprunt emp = new Emprunt(1, 2, LocalDateTime.now(), null);
-    	
-    	// create
-    	System.out.println(eDAO.create(emp));
-
-    	// read 
-    	System.out.println(eDAO.readByAdherent(1).get(1));
-    	System.out.println(eDAO.readByAdherent(1).get(1));
-
-    	// update 
-    	emp.setDateRetour(LocalDateTime.now());
-    	System.out.println(eDAO.update(emp));
-    	System.out.println(eDAO.readByAdherent(1));
+//    	EmpruntDAO eDAO = EmpruntDAO.getInstance();
+//    	eDAO.deleteByAdherent(1);
+//    	Emprunt emp = new Emprunt(1, 2, LocalDateTime.now(), null);
+//    	
+//    	// create
+//    	System.out.println(eDAO.create(emp));
+//
+//    	// read 
+//    	System.out.println(eDAO.readByAdherent(1).get(1));
+//    	System.out.println(eDAO.readByAdherent(1).get(1));
+//
+//    	// update 
+//    	emp.setDateRetour(LocalDateTime.now());
+//    	System.out.println(eDAO.update(emp));
+//    	System.out.println(eDAO.readByAdherent(1));
 
     	// delete
 //    	System.out.println(eDAO.delete(emp));
@@ -117,7 +117,7 @@ public class Main {
     	 * @delete_ok
     	 */
 
-    	JeuDAO jDAO = JeuDAO.getInstance();
+//    	JeuDAO jDAO = JeuDAO.getInstance();
     	
     	// create
 //    	Jeu addJeu = new Jeu(0, "monopoli", "fun", "jeu fun", 3, 4, 8, 4, 40, 1, "2", 8);
@@ -150,7 +150,7 @@ public class Main {
     	 * @delete_OK
     	 */
 
-    	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
+//    	JeuPhysiqueDAO jpDAO = JeuPhysiqueDAO.getInstance();
     	
 //    	// create
 //    	Jeu jeu = jDAO.read(1);
@@ -183,7 +183,7 @@ public class Main {
     	 * @delete_OK
     	 */
 
-    	PersonnelDAO pDAO = PersonnelDAO.getInstance();
+//    	PersonnelDAO pDAO = PersonnelDAO.getInstance();
     	
     	// create
 //    	Personnel personnel= new Personnel("sam", "lesbriz", "sam@mail.com", "rue", "08", "dirlo", LocalDateTime.now(), null);
@@ -226,7 +226,7 @@ public class Main {
     	 * @delete_OK
     	 */
 
-    	AdherentDAO aDAO = AdherentDAO.getInstance();
+//    	AdherentDAO aDAO = AdherentDAO.getInstance();
     	
     	// create
 //    	Adherent addAdherent = new Adherent("bob", "morane", "bob@mail.com", "rue", "08", true, "non", "2", LocalDateTime.now());
