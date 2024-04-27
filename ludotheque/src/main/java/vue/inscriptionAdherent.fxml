@@ -14,50 +14,73 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
    <children>
-      <Button layoutX="370.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Valider" />
-      <Button layoutX="501.0" layoutY="391.0" mnemonicParsing="false" text="Retour à la page d'accueil" />
-      <Button layoutX="221.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
-      <ImageView fitHeight="93.0" fitWidth="178.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="1016.0" layoutY="724.0" mnemonicParsing="false" text="Retour à la page d'accueil">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <ImageView fitHeight="151.0" fitWidth="239.0" layoutX="56.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-			<Image url="@../../../images/logo_bettonludotheque.png" />
+			<Image url="@../../resources/logo_bettonludotheque.png" />
          </image>
       </ImageView>
       <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <Label layoutX="222.0" layoutY="235.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+      <AnchorPane layoutX="361.0" layoutY="223.0" prefHeight="406.0" prefWidth="559.0">
+         <children>
+            <TextField layoutX="182.0" layoutY="264.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="93.0" layoutY="268.0" prefHeight="30.0" prefWidth="89.0" text="E-mail" textFill="#141414">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField layoutX="182.0" layoutY="204.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="93.0" layoutY="151.0" prefHeight="30.0" prefWidth="89.0" text="Prénom" textFill="#141414">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField layoutX="182.0" layoutY="147.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="93.0" layoutY="89.0" prefHeight="34.0" prefWidth="89.0" text="Nom" textFill="#141414">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField layoutX="182.0" layoutY="87.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="-18.0" layoutY="208.0" prefHeight="30.0" prefWidth="200.0" text="Numéro de téléphone" textFill="#141414">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="156.0" layoutY="347.0" prefHeight="31.0" prefWidth="243.0">
+               <children>
+                  <Button fx:id="valider" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Valider" />
+                  <Button layoutX="130.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="548.0" layoutY="137.0" text="Adhérent">
          <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="235.0" />
-      <Label layoutX="226.0" layoutY="204.0" prefHeight="26.0" prefWidth="50.0" text="E-mail" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="204.0" />
-      <TextField layoutX="277.0" layoutY="169.0" />
-      <Label layoutX="222.0" layoutY="169.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="135.0" />
-      <Label layoutX="236.0" layoutY="135.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="277.0" layoutY="268.0" />
-      <Label layoutX="123.0" layoutY="268.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="294.0" layoutY="69.0" text="Adhérent">
-         <font>
-            <Font size="28.0" />
+            <Font size="45.0" />
          </font>
       </Label>
    </children>

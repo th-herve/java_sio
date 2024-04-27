@@ -1,27 +1,26 @@
 package modele;
 
+import java.time.LocalDateTime;
 
-public class JeuPhysique { // monopoly 12
-
-	private Jeu jeu;
-
+public class JeuPhysique {
 	private int id;
 	private String etat;
 	private String disponible;
-//	private int idJeu;
+	private int idJeu;
 
 
-	public JeuPhysique(Jeu jeu, String etat, String disponible) {
+	public JeuPhysique(int id, String etat, String disponible, int idJeu) {
 		super();
-		this.jeu = jeu;
+		this.id = id;
 		this.disponible = disponible;
 		this.etat = etat;
+		this.idJeu = idJeu;
 	}
 
 	public int getId() {
 		return id;
 	}
-	
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -48,22 +47,18 @@ public class JeuPhysique { // monopoly 12
 	}
 
 	public int getIdJeu() {
-		return this.jeu.getId();
+		return idJeu;
 	}
 
 
-	public Jeu getJeu() {
-		return this.jeu;
-	}
-
-	public void setJeu(Jeu jeu) {
-		this.jeu = jeu;
+	public void setIdJeu(int idJeu) {
+		this.idJeu = idJeu;
 	}
 
 
 	@Override
 	public String toString() {
-		return super.toString() + "\njeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + disponible + ", id jeu ="+ this.getIdJeu() + "]";
+		return "jeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + disponible + ", id jeu ="+ idJeu + "]";
 	}
 
 }

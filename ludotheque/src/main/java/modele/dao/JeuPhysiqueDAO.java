@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
-import modele.Jeu;
 import modele.JeuPhysique;
 
 public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
@@ -92,7 +92,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+ ETAT+" = ?, "
-						+DISPONIBLE+" = ?, "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+						+DISPONIBLE+" = ? "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setString(1, jeuPhysique.getEtat()); 
@@ -131,10 +131,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 				String disponible = rs.getString(DISPONIBLE);
 				int idJeu = rs.getInt(ID_JEU);
 
-				JeuDAO jDao = JeuDAO.getInstance();
-				Jeu jeu = jDao.read(idJeu);
-				jeuPhysique = new JeuPhysique (jeu, etat, disponible);
-				jeuPhysique.setId(idNew);
+				jeuPhysique = new JeuPhysique (idNew, etat, disponible, idJeu);
 
 				donnees.put(idNew, jeuPhysique);
 

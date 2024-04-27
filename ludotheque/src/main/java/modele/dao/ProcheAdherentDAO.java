@@ -3,11 +3,11 @@ package modele.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import modele.Emprunt;
 import modele.ProcheAdherent;
 
 /***
@@ -17,7 +17,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 
 	// clef primaire = idPersone + Nom
 	private static final String TABLE 		= "ProcheAdherent";
-	private static final String ID_PERSONNE = "idAdherent";
+	private static final String ID_PERSONNE = "idPersonne";
 	private static final String NOM 		= "nom"; 
 	
 	private static final String WHERE_CLEF_PRIMAIRE = " WHERE " + ID_PERSONNE + " = ?, " + NOM + " = ?";
@@ -44,7 +44,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		boolean succes=true;
 		try {
 
-			String requete = "INSERT INTO "+TABLE+" ("+ID_PERSONNE + ", " + NOM+") VALUES (?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+ID_PERSONNE + NOM+") VALUES (?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setInt(1, proche.getIdPersonne());
@@ -84,39 +84,13 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 		}
 		return succes;
 	}
-	
-	
-	// Supprime tous les proches d'un adhérent
-	public boolean deleteByIdAdherent(int idAdherent) {
-		boolean succes = true;
-		try {
-			Set<String> lesNoms = this.readByAdherent(idAdherent);
-			
-				
-			String requete = "DELETE FROM "+TABLE+ " WHERE " + idAdherent + " = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-			pst.setInt(1, idAdherent);
-
-			pst.executeUpdate();
-
-			for (String nom : lesNoms) {
-				donnees.remove(this.getClefDonnee(idAdherent, nom));
-			}
-
-		} catch (SQLException e) {
-			succes=false;
-			e.printStackTrace();
-		}
-		return succes;
-	}
-	
 
 	/**
 	 * @NE_PAS_UTILISER_CETTE_FONCTION si besoin d'update le nom d'un proche, d'abord le supprimer puis en creer un autre
 	 */
 	@Override
 	public boolean update(ProcheAdherent proche) {
-		throw new UnsupportedOperationException("Cette méthode n'est pas utilisable dans la classe fille");
+		throw new UnsupportedOperationException("Cette méthode n'est pas utilisable dans la classe fille");	
 	}
 
 	/**
@@ -130,13 +104,13 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 	
 	
 	// retourne la liste des emprunts associés à un adhérent
-	public Set<String> readByAdherent(int idAdherent) {
+	public List<ProcheAdherent> readByAdherent(int idAdherent) {
 		
-		Set<String> listeProches = new HashSet<String>();
+		List<ProcheAdherent> listeProches = new ArrayList<ProcheAdherent>();
 		System.out.println("recherch� dans la BD");
 		try {
 
-			String requete = "SELECT " +NOM+" FROM "+TABLE+" WHERE " + ID_PERSONNE + " = ?";
+			String requete = "SELECT * FROM "+TABLE+" WHERE " + ID_PERSONNE + " = ?";
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, idAdherent);
@@ -148,7 +122,7 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 					
 				ProcheAdherent proche = new ProcheAdherent(idAdherent, nom);
 				
-				listeProches.add(nom);
+				listeProches.add(proche);
 				
 				int clefHash = this.getClefDonnee(proche);
 				if (!donnees.containsKey(clefHash)) {
@@ -169,11 +143,6 @@ public class ProcheAdherentDAO extends DAO<ProcheAdherent> {
 	public Integer getClefDonnee (ProcheAdherent proche) {
 
 		return (proche.getIdPersonne() + proche.getNom()).hashCode();
-	}
-
-	public Integer getClefDonnee (int idPersonne, String nom) {
-
-		return (idPersonne + nom).hashCode();
 	}
 
 

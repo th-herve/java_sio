@@ -35,18 +35,18 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean create(Personne personne) {
+	public boolean create(Personne Pe) {
 		boolean succes = true;
 		try {
 
-			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
+			String requete = "INSERT INTO PERSONNE" + TABLE + "(" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
 					+ "," + TEL + ")VALUES(?,?,?,?,?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, personne.getNom());
-			pst.setString(2, personne.getPrenom());
-			pst.setString(3, personne.getEmail());
-			pst.setString(4, personne.getAdresse());
-			pst.setString(5, personne.getTel());
+			pst.setString(1, Pe.getNom());
+			pst.setString(2, Pe.getPrenom());
+			pst.setString(3, Pe.getEmail());
+			pst.setString(4, Pe.getAdresse());
+			pst.setInt(5, Pe.getTel());
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -54,9 +54,9 @@ public class PersonneDAO extends DAO<Personne> {
 			// Récupérer la clé qui a été générée et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-				personne.setId(rs.getInt(1));
+				Pe.setId(rs.getInt(1));
 			}
-			donnees.put(personne.getId(), personne);
+			donnees.put(Pe.getId(), Pe);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -67,10 +67,10 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean delete(Personne personne) {
+	public boolean delete(Personne Pe) {
 		boolean succes = true;
 		try {
-			int id = personne.getId();
+			int id = Pe.getId();
 			String requete = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
@@ -84,27 +84,27 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 	@Override
-	public boolean update(Personne personne) {
+	public boolean update(Personne obj) {
 		boolean succes = true;
 
-		String nom = personne.getNom();
-		String prenom = personne.getPrenom();
-		String email = personne.getEmail();
-		String adresse = personne.getAdresse();
-		String tel = personne.getTel();
-		int id = personne.getId();
+		String nom = obj.getNom();
+		String prenom = obj.getPrenom();
+		String email = obj.getEmail();
+		String adresse = obj.getAdresse();
+		int tel = obj.getTel();
+		int id = obj.getId();
 
 		try {
-			String requete = "UPDATE " + TABLE + " SET "+NOM+ " =?, " +PRENOM+ " =?," +EMAIL+ " =?, " +ADRESSE+ " =?, " +TEL+ " =? WHERE " + CLE_PRIMAIRE + " = ?";
+			String requete = "UPDATE " + TABLE + " SET nomPe = ?, loc = ?, capacite = ? WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setString(1, nom);
 			pst.setString(2, prenom);
 			pst.setString(3, email);
 			pst.setString(4, adresse);
-			pst.setString(5, tel);
+			pst.setInt(5, tel);
 			pst.setInt(6, id);
 			pst.executeUpdate();
-			donnees.put(id, personne);
+			donnees.put(id, obj);
 		} catch (SQLException e) {
 			succes = false;
 			e.printStackTrace();
@@ -112,13 +112,36 @@ public class PersonneDAO extends DAO<Personne> {
 		return succes;
 	}
 
+	public Personne read0(int id) {
+		Personne Personne = null;
+		if (donnees.containsKey(id)) {
+			// System.out.println("récupéré");
+			Personne = donnees.get(id);
+		} else {
+			// System.out.println("recherché dans la BD");
+			try {
+
+				String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
+				ResultSet rs = Connexion.executeQuery(requete);
+				rs.next();
+				String nom = rs.getString(NOM);
+				String prenom = rs.getString(PRENOM);
+				String email = rs.getString(EMAIL);
+				String adresse = rs.getString(ADRESSE);
+				int tel = rs.getInt(TEL);
+				Personne = new Personne(nom, prenom, email, adresse, tel);
+				Personne.setId(id);
+				donnees.put(id, Personne);
+			} catch (SQLException e) {
+				// e.printStackTrace();
+			}
+		}
+		return Personne;
+	}
+
 	@Override
 	public Personne read(int id) {
-		Personne personne = null;
-		if (donnees.containsKey(id)) {
-			System.out.println("r�cup�r�");
-			personne = donnees.get(id);
-		}
+		Personne Personne = null;
 		try {
 
 			String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
@@ -128,23 +151,23 @@ public class PersonneDAO extends DAO<Personne> {
 			String prenom = rs.getString(PRENOM);
 			String email = rs.getString(EMAIL);
 			String adresse = rs.getString(ADRESSE);
-			String tel = rs.getString(TEL);
-			personne = new Personne(nom, prenom, email, adresse, tel);
-			personne.setId(id);
-			donnees.put(id, personne);
+			int tel = rs.getInt(TEL);
+			Personne = new Personne(nom, prenom, email, adresse, tel);
+			Personne.setId(id);
+			donnees.put(id, Personne);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return personne;
+		return Personne;
 	}
 
 	public void afficheSelectEtoilePersonne() {
 		System.out.println("--- Personne non utilisé ---");
-		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From "+ TABLE + ")";
+		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From Personne)";
 		Connexion.afficheSelectEtoile("Personne", clauseWhere);
 
 		System.out.println("--- Personne contraint par id --- ");
-		clauseWhere = CLE_PRIMAIRE + " IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";
+		clauseWhere = CLE_PRIMAIRE + " IN (SELECT " + CLE_PRIMAIRE + " From Personne)";
 		Connexion.afficheSelectEtoile("Personne", clauseWhere);
 
 	}
