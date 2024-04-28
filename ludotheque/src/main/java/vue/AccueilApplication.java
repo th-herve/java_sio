@@ -16,9 +16,10 @@ public class AccueilApplication extends Application {
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/vue/fxml/accueil.fxml"));
 
-		Scene scene = new Scene(root, 600, 600);
+		Scene scene = new Scene(root);
 
 		stage.setTitle("FXML Welcome");
+		stage.setMaximized(true);
 		stage.setScene(scene);
 		stage.show();
 	}

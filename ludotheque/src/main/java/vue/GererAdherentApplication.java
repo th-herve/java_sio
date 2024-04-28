@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class GererJeuApplication extends Application {
+public class GererAdherentApplication extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
@@ -14,13 +14,14 @@ public class GererJeuApplication extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/vue/fxml/gererJeu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/vue/fxml/gererAdherent.fxml"));
 
 		Scene scene = new Scene(root);
 
-		stage.setTitle("Gerer les jeux");
+		stage.setTitle("Gerer les adherents");
 		stage.setMaximized(true);
 		stage.setScene(scene);
 		stage.show();
 	}
+
 }

@@ -29,12 +29,12 @@ public class Adherent extends Personne {
 		// rempli la liste des proches
 		this.fetchProches();
 	}
-
-	public boolean isActif() {
+	
+	public boolean getEstActif() {
 		return estActif;
 	}
 
-	public void setActif(boolean actif) {
+	public void setEstActif(boolean actif) {
 		this.estActif = actif;
 	}
 

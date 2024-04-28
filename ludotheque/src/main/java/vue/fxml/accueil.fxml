@@ -19,7 +19,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button layoutX="231.0" layoutY="200.0" mnemonicParsing="false" text="Gérer comptes">
+      <Button fx:id="btnGererAdherent" layoutX="231.0" layoutY="200.0" mnemonicParsing="false" text="Gérer comptes">
          <font>
             <Font size="18.0" />
          </font>
