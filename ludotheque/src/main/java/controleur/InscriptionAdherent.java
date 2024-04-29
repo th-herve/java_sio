@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 public class InscriptionAdherent extends Main{
 
 	
-	public void initialiser() {
+	public void initialize() {
 		try {
 			Parent loader = FXMLLoader.load(getClass().getResource("../vue/inscriptionAdherent.fxml"));
 				    	

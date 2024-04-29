@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import modele.Jeu;
 
@@ -162,6 +164,37 @@ public class JeuDAO extends DAO<Jeu> {
 			}
 		}
 		return jeu;
+	}
+	
+	public List<Jeu> readAll(){
+		
+		List<Jeu> jeuList = new ArrayList<Jeu>();
+		
+		try {
+			String requete = "SELECT " + CLE_PRIMAIRE + " FROM " + TABLE;
+			ResultSet res = Connexion.executeQuery(requete); //execution de la requête
+			
+			while(res.next()) { //tant qu'on a des résultats
+				
+				Jeu jeu;
+				//on déclare une variable pour l'idJeu et on récupère la donne en récupérant la clé primaire
+				int idJeu = res.getInt(CLE_PRIMAIRE);
+				//on vérifie si l'id existe dans les données
+				if(donnees.containsKey(idJeu)) {
+					System.out.println("récupéré");
+					jeu = donnees.get(idJeu);
+				} else {
+					//sinon on lis
+					jeu = this.read(idJeu);
+				}
+				jeuList.add(jeu);
+				//on ajoute le jeu à la liste
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jeuList;	
 	}
 
 	public void afficheSelectEtoileJeu() {

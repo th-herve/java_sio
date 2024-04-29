@@ -12,7 +12,7 @@ public class GererCompte extends Main {
 //	private Main accueil;
 
 	
-	public void initialiser() {
+	public void initialize() {
 		try {
 			Parent loader = FXMLLoader.load(getClass().getResource("../vue/gererCompte.fxml"));
 			
@@ -23,12 +23,12 @@ public class GererCompte extends Main {
 
 			Button addAdherent = (Button) loader.lookup("#inscrAdherent");
 			addAdherent.setOnAction(event -> {
-			adherent.initialiser();
+			adherent.initialize();
 			});
 			
 			Button addPersonnel = (Button) loader.lookup("#inscrPersonnel");
 			addPersonnel.setOnAction(event -> {
-			personnel.initialiser();
+			personnel.initialize();
 			});
 //			
 //			Button retourAccueil = (Button) loader.lookup("#rAccueil");

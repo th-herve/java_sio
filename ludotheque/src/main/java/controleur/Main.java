@@ -1,15 +1,17 @@
 package controleur;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import modele.Jeu;
 import modele.dao.Connexion;
+import modele.dao.JeuDAO;
 
 public class Main extends Application {	
 		
@@ -18,7 +20,7 @@ public class Main extends Application {
 
 	public static Stage stage;
 	private GererCompte compte;
-	private GererJeu jeu;
+	private GererJeuControleur jeu;
 
     @Override
 
@@ -27,7 +29,7 @@ public class Main extends Application {
     	Parent root = FXMLLoader.load(getClass().getResource( "../vue/accueil.fxml"));
     	
     	compte = new GererCompte();
-    	jeu = new GererJeu();
+    	jeu = new GererJeuControleur();
 
 //    	Image image = new Image(getClass().getResourceAsStream("/logo_bettonludotheque.png"));
 //    	if (image.isError()) {
@@ -39,13 +41,13 @@ public class Main extends Application {
     	//aller sur la page Gérer Compte depuis le bouton Gérer Compte
     	Button compteBouton = (Button) root.lookup("#compte");
     	compteBouton.setOnAction(event -> {
-    	compte.initialiser();
+    	compte.initialize();
     	});
     	
     	//aller sur la page Gérer Emprunts depuis le bouton Gérer Compte
     	Button empruntsBouton= (Button) root.lookup("#emprunt");
     	empruntsBouton.setOnAction(event -> {
-    	compte.initialiser();
+    	compte.initialize();
     	});
     	
     	//aller sur la page Gérer Jeux depuis le bouton Gérer Compte
@@ -63,7 +65,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        
     }
 }
 
