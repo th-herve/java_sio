@@ -19,7 +19,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="btnGererAdherent" layoutX="231.0" layoutY="200.0" mnemonicParsing="false" text="Gérer comptes">
+      <Button layoutX="231.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToGererAdherent" text="Gérer comptes">
          <font>
             <Font size="18.0" />
          </font>
@@ -29,7 +29,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-    <Button fx:id="btnGererJeu" layoutX="249.0" layoutY="306.0" mnemonicParsing="false" text="Gérer jeux">
+    <Button layoutX="249.0" layoutY="306.0" mnemonicParsing="false" text="Gérer jeux">
          <font>
             <Font size="18.0" />
          </font>

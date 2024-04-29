@@ -3,8 +3,6 @@ package controleur;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import vue.GererAdherentApplication;
-import vue.GererJeuApplication;
 
 public class AccueilControleur extends SceneControleur {
 
@@ -21,9 +19,12 @@ public class AccueilControleur extends SceneControleur {
 
 		labelPrincipale.setText("Hello");
 
-		btnGererJeu.setOnAction(this.switchScene(new GererJeuApplication()));
-		btnGererAdherent.setOnAction(this.switchScene(new GererAdherentApplication()));
+//		btnGererJeu.setOnAction(this.switchScene(new GererJeuApplication()));
+//		btnGererAdherent.setOnAction(this.switchScene(new GererAdherentApplication()));
 	}
 	
+	public void switchToGererAdherent() {
+		super.app.switchToGererAdherent();
+	}
 
 }
