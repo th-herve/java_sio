@@ -19,7 +19,7 @@
       </ImageView>
       
       <!-- Titre -->
-      <Label layoutX="291.0" layoutY="69.0" text="Personne">
+      <Label layoutX="291.0" layoutY="69.0" text="Adherent">
          <font>
             <Font size="28.0" />
          </font>
