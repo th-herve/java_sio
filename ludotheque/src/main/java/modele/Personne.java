@@ -2,7 +2,6 @@ package modele;
 
 
 
-// éviter d'instancier cette classe, utiliser Adherent ou Personnel à la place
 public class Personne {
 
 	private int id;
@@ -10,23 +9,11 @@ public class Personne {
 	private String prenom;
 	private String email;
 	private String adresse;
-	private String tel;
+	private int tel;
 
-	public Personne(String nom, String prenom, String email, String adresse, String tel) {
+	public Personne(String nom, String prenom, String email, String adresse, int tel) {
 		super();
 	
-		this.id = 0;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.adresse = adresse;
-		this.tel = tel;
-	}
-
-	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
-		super();
-	
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -74,11 +61,11 @@ public class Personne {
 		this.adresse = adresse;
 	}
 
-	public String getTel() {
+	public int getTel() {
 		return tel;
 	}
 
-	public void setTel(String tel) {
+	public void setTel(int tel) {
 		this.tel = tel;
 	}
 
