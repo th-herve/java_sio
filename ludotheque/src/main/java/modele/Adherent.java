@@ -34,12 +34,12 @@ public class Adherent {
 	public void setIdPersonne(int idPersonne) {
 		this.idPersonne = idPersonne;
 	}
-
-	public boolean isActif() {
+	
+	public boolean getEstActif() {
 		return estActif;
 	}
 
-	public void setActif(boolean actif) {
+	public void setEstActif(boolean actif) {
 		this.estActif = actif;
 	}
 

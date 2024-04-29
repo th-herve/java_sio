@@ -1,20 +1,9 @@
 package controleur;
 
-import java.sql.Connection;
-import java.util.List;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import modele.Jeu;
-import modele.dao.Connexion;
-import modele.dao.JeuDAO;
 
-public class Main extends Application {	
-		
+public class Main {
+	
 	Connection co = Connexion.getInstance();
 
 
@@ -22,8 +11,7 @@ public class Main extends Application {
 	private GererCompte compte;
 	private GererJeuControleur jeu;
 
-    @Override
-
+	
     public void start(Stage racine) throws Exception {
     	Main.stage = racine;
     	Parent root = FXMLLoader.load(getClass().getResource( "../vue/accueil.fxml"));
@@ -62,9 +50,8 @@ public class Main extends Application {
     	racine.show();
 
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
+	public static void main(String[] args) {
+		Application.launch(App.class, args);
+	}
 }
-

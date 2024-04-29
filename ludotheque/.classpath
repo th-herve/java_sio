@@ -26,6 +26,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx.base.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx.controls.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx.fxml.jar"/>
@@ -34,6 +35,8 @@
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Moi/Documents/Cours/Dev/POO - Java/Javafx/javafx-sdk-21.0.1/lib/javafx-swt.jar"/>
+=======
+>>>>>>> test-javafx
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
