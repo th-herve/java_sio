@@ -23,22 +23,22 @@ public class VerifierJeu extends Main {
 		return jeu.getNom();
 	}
 	
-	public void initialiser() {
-		try {
-			Parent loader = FXMLLoader.load(getClass().getResource("../vue/verifierJeu.fxml"));
-				    	
-			Scene scene = new Scene(loader, 1280, 800);
-			
-			VerifierJeu verification = new VerifierJeu(new Jeu(14, "Wokabi et ses amis", null, null, 0, 0, 0, 0, 0, 0, null, 0));
-	        String nomJeu = verification.afficherNomJeu();
-	        TextField nom = (TextField) loader.lookup("#nomJeu");
-	        nom.setText(nomJeu);
-
-	        Main.stage.setScene(scene);
-	        Main.stage.show();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void initialiser() {
+//		try {
+//			Parent loader = FXMLLoader.load(getClass().getResource("../vue/verifierJeu.fxml"));
+//				    	
+//			Scene scene = new Scene(loader, 1280, 800);
+//			
+//			VerifierJeu verification = new VerifierJeu(new Jeu("Wokabi et ses amis", null, null, 0, 0, 0, 0, 0, 0, null, 0));
+//	        String nomJeu = verification.afficherNomJeu();
+//	        TextField nom = (TextField) loader.lookup("#nomJeu");
+//	        nom.setText(nomJeu);
+//
+//	        Main.stage.setScene(scene);
+//	        Main.stage.show();
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

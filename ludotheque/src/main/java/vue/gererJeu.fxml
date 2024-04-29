@@ -31,11 +31,11 @@
             <TableColumn fx:id="type" prefWidth="86.0" text="Type" />
             <TableColumn fx:id="descriptif" prefWidth="228.0" text="Descriptif" />
             <TableColumn fx:id="quantite" prefWidth="71.0" text="Quantité" />
-            <TableColumn fx:id="jMini" prefWidth="89.0" text="Joueurs mini" />
-            <TableColumn fx:id="jMaxi" prefWidth="87.0" text="Joueurs maxi" />
+            <TableColumn fx:id="nbrJoueursMini" prefWidth="89.0" text="Joueurs mini" />
+            <TableColumn fx:id="nbrJoueursMaxi" prefWidth="87.0" text="Joueurs maxi" />
             <TableColumn fx:id="ageMini" prefWidth="67.0" text="Age mini" />
-            <TableColumn fx:id="dMini" prefWidth="71.0" text="Durée mini" />
-            <TableColumn fx:id="dMaxi" prefWidth="74.0" text="Durée maxi" />
+            <TableColumn fx:id="dureeMini" prefWidth="71.0" text="Durée mini" />
+            <TableColumn fx:id="dureeMaxi" prefWidth="74.0" text="Durée maxi" />
             <TableColumn fx:id="annee" prefWidth="50.0" text="Année" />
             <TableColumn fx:id="complexite" prefWidth="77.0" text="Complexité" />
             <TableColumn fx:id="noteBgg" prefWidth="72.0" text="Note BGG" />

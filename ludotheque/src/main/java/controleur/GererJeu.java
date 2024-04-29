@@ -13,7 +13,7 @@ import modele.dao.JeuDAO;
 
 public class GererJeu extends Main{
 
-	private AjouterJeu ajouterJeu;
+//	private AjouterJeu ajouterJeu;
 	//		private VerifierJeu verifierJeu;
 
 	@FXML
@@ -36,52 +36,26 @@ public class GererJeu extends Main{
 
 	public GererJeu() {
 		super();
-		this.id = new TableColumn<Jeu, String>("ID");
-		this.nom = new TableColumn<Jeu, String>("NOM");
-		this.type = new TableColumn<Jeu, String>("TYPE");
-		this.descriptif = new TableColumn<Jeu, String>("DESCRIPTIF");
-		this.quantite = new TableColumn<Jeu, String>("QUANTITE");
-		this.jMini = new TableColumn<Jeu, String>("JMINI");
-		this.jMaxi = new TableColumn<Jeu, String>("JMAXI");
-		this.ageMini = new TableColumn<Jeu, String>("AGEMINI");
-		this.dMini = new TableColumn<Jeu, String>("DMINI");
-		this.dMaxi = new TableColumn<Jeu, String>("DMAXI");
-		this.annee = new TableColumn<Jeu, String>("ANNEE");
-		this.complexite = new TableColumn<Jeu, String>("COMPLEXITE");
-		this.noteBgg = new TableColumn<Jeu, String>("NOTEBGG");
+//		createTables();
+		initialiserTable();
+		initialize();		
 	}
-
-	public void initialiser() {
-
-		try {
-			Parent loader = FXMLLoader.load(getClass().getResource("../vue/gererJeu.fxml"));
-
-			initialiserTable();
-
-			//						verifierJeu = new VerifierJeu();
-			ajouterJeu = new AjouterJeu();
-
-
-			//						Button verifJeu = (Button) loader.lookup("#verifier");
-			//						verifJeu.setOnAction(event -> {
-			//						verifierJeu.initialiser();
-			//						});
-
-			Button ajJeu = (Button) loader.lookup("#ajouter");
-			ajJeu.setOnAction(event -> {
-				ajouterJeu.initialiser();
-			});
-
-			Scene scene = new Scene(loader, 1280, 800);
-			Main.stage.setScene(scene);
-			Main.stage.show();
-
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+//	public void createTables() {
+//		this.id = new TableColumn<Jeu, String>("ID");
+//		this.nom = new TableColumn<Jeu, String>("NOM");
+//		this.type = new TableColumn<Jeu, String>("TYPE");
+//		this.descriptif = new TableColumn<Jeu, String>("DESCRIPTIF");
+//		this.quantite = new TableColumn<Jeu, String>("QUANTITE");
+//		this.jMini = new TableColumn<Jeu, String>("JMINI");
+//		this.jMaxi = new TableColumn<Jeu, String>("JMAXI");
+//		this.ageMini = new TableColumn<Jeu, String>("AGEMINI");
+//		this.dMini = new TableColumn<Jeu, String>("DMINI");
+//		this.dMaxi = new TableColumn<Jeu, String>("DMAXI");
+//		this.annee = new TableColumn<Jeu, String>("ANNEE");
+//		this.complexite = new TableColumn<Jeu, String>("COMPLEXITE");
+//		this.noteBgg = new TableColumn<Jeu, String>("NOTEBGG");
+//	}
 
 	public void initialiserTable() {
 
@@ -103,6 +77,38 @@ public class GererJeu extends Main{
 		Jeu jeux = jeuDAO.read(2);
 		tableJeu.getItems().addAll(jeux);
 
+	}
+	
+	public void initialize() {
+
+		try {
+			Parent loader = FXMLLoader.load(getClass().getResource("../vue/gererJeu.fxml"));
+
+			initialiserTable();
+
+//						verifierJeu = new VerifierJeu();
+//			ajouterJeu = new AjouterJeu();
+
+
+//						Button verifJeu = (Button) loader.lookup("#verifier");
+//						verifJeu.setOnAction(event -> {
+//						verifierJeu.initialiser();
+//						});
+
+//			Button ajJeu = (Button) loader.lookup("#ajouter");
+//			ajJeu.setOnAction(event -> {
+//				ajouterJeu.initialiser();
+//			});
+
+			Scene scene = new Scene(loader, 1280, 800);
+			Main.stage.setScene(scene);
+			Main.stage.show();
+
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
