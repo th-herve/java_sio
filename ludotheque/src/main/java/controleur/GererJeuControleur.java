@@ -3,19 +3,15 @@ package controleur;
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 import modele.Jeu;
 import modele.dao.JeuDAO;
 
 public class GererJeuControleur extends SceneControleur{
-
-	//	private AjouterJeu ajouterJeu;
-	//	private VerifierJeu verifierJeu;
 
 	@FXML
 	public TableView<Jeu> tableJeu;
@@ -28,19 +24,19 @@ public class GererJeuControleur extends SceneControleur{
 	@FXML
 	public TableColumn<Jeu, String> descriptif;
 	@FXML
-	public TableColumn<Jeu, String> quantite;
+	public TableColumn<Jeu, Integer> quantite;
 	@FXML
-	public TableColumn<Jeu, String> nbrJoueursMini;
+	public TableColumn<Jeu, Integer> nbrJoueursMini;
 	@FXML
-	public TableColumn<Jeu, String> nbrJoueursMaxi;
+	public TableColumn<Jeu, Integer> nbrJoueursMaxi;
 	@FXML
-	public TableColumn<Jeu, String> ageMini;
+	public TableColumn<Jeu, Integer> ageMini;
 	@FXML
-	public TableColumn<Jeu, String> dureeMini;
+	public TableColumn<Jeu, Integer> dureeMini;
 	@FXML
-	public TableColumn<Jeu, String> dureeMaxi;
+	public TableColumn<Jeu, Integer> dureeMaxi;
 	@FXML
-	public TableColumn<Jeu, String> annee;
+	public TableColumn<Jeu, Integer> annee;
 	@FXML
 	public TableColumn<Jeu, String> complexite;
 	@FXML
@@ -58,23 +54,58 @@ public class GererJeuControleur extends SceneControleur{
 			tableJeu.getItems().addAll(jeux);
 		}
 		tableJeu.setEditable(true);
+		
 	}
 
+//	private void handleKeyEvent(CellEditEvent<Jeu, String> event) {
+//	  if (event.getEventType() == KeyEvent.KEY_TYPED && event.getCode() == KeyCode.ENTER) {
+//	        System.out.println("test");
+//	    }
+//	}
+
+	
 	public void initializeColumn() {
 
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
-		nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-		type.setCellValueFactory(new PropertyValueFactory<>("type"));
-		descriptif.setCellValueFactory(new PropertyValueFactory<>("descriptif"));
-		quantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-		nbrJoueursMini.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_mini"));
-		nbrJoueursMaxi.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_maxi"));
-		ageMini.setCellValueFactory(new PropertyValueFactory<>("ageMini"));
-		dureeMini.setCellValueFactory(new PropertyValueFactory<>("duree_mini"));
-		dureeMaxi.setCellValueFactory(new PropertyValueFactory<>("duree_maxi"));
-		annee.setCellValueFactory(new PropertyValueFactory<>("annee"));
-		complexite.setCellValueFactory(new PropertyValueFactory<>("complexite"));
-		noteBgg.setCellValueFactory(new PropertyValueFactory<>("note_bgg"));
+	id.setCellValueFactory(new PropertyValueFactory<>("id"));
+	id.addEventHandler(null, null);
+	
+	nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+	nom.setCellFactory(TextFieldTableCell.forTableColumn());
+//	nom.setOnEditCommit(event -> handleKeyEvent(event));
+	
+	
+	type.setCellValueFactory(new PropertyValueFactory<>("type"));
+	type.setCellFactory(TextFieldTableCell.forTableColumn());
+	//key listener qui appelle la fonction updatye
+	
+	descriptif.setCellValueFactory(new PropertyValueFactory<>("descriptif"));
+	descriptif.setCellFactory(TextFieldTableCell.forTableColumn());
+	
+	quantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+	quantite.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	nbrJoueursMini.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_mini"));
+	nbrJoueursMini.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	nbrJoueursMaxi.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_maxi"));
+	nbrJoueursMaxi.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	ageMini.setCellValueFactory(new PropertyValueFactory<>("ageMini"));
+	ageMini.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	dureeMini.setCellValueFactory(new PropertyValueFactory<>("duree_mini"));
+	dureeMini.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	dureeMaxi.setCellValueFactory(new PropertyValueFactory<>("duree_maxi"));
+	dureeMaxi.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	annee.setCellValueFactory(new PropertyValueFactory<>("annee"));
+	annee.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	
+	complexite.setCellValueFactory(new PropertyValueFactory<>("complexite"));
+//		complexite.setCellFactory(TextFieldTableCell.forTableColumn());
+	
+	noteBgg.setCellValueFactory(new PropertyValueFactory<>("note_bgg"));
 
 	}
 }
