@@ -46,7 +46,7 @@ public class App extends Application {
         gererJeuLoader = new FXMLLoader(getClass().getResource(this.fxmlLocaltion + "gererJeu.fxml"));
         gererJeuVue = gererJeuLoader.load();
         gererJeuControleur  = gererJeuLoader.getController();
-        //gererJeuControleur.setApp(this);
+        gererJeuControleur.setApp(this);
     }
     
     private void showAccueilVue() {
