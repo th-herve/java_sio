@@ -1,15 +1,20 @@
 package controleur;
 
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
-import modele.Personne;
-import modele.dao.PersonneDAO;
+import modele.Adherent;
+import modele.dao.AdherentDAO;
 
-public class inscription_Personne_Controleur {
+
+public class InscriptionPersonneControleur {
 
     @FXML
     private TextField nom;
@@ -19,10 +24,25 @@ public class inscription_Personne_Controleur {
 
     @FXML
     private TextField email;
-
+    
+    @FXML
+    private TextField numCIN;
+    
+    @FXML
+    private TextField remarques;
+    
     @FXML
     private TextField adresse;
-
+    
+    @FXML
+    private CheckBox estactive;
+    
+    @FXML
+    private CheckBox desactive;
+    
+    @FXML
+    private DatePicker dateInscription ;
+    
     @FXML
     private TextField N_tel;
 
@@ -31,11 +51,13 @@ public class inscription_Personne_Controleur {
 
     @FXML
     private Button retour;
+    
+    private AdherentDAO adherentDAO;
 
-    private PersonneDAO personneDAO;
 // ici la création de inctance de class PersonneDAO
-    public inscription_Personne_Controleur() {
-        this.personneDAO = PersonneDAO.getIntstance();
+    public InscriptionPersonneControleur() {
+//        
+    	this.adherentDAO = AdherentDAO.getInstance();
     }
 // création d'un event qui permet  button de faire certain choses comme aleret et create dans la base de donner 
     @FXML
@@ -43,26 +65,42 @@ public class inscription_Personne_Controleur {
         Window owner = validerButton.getScene().getWindow();
 
         if (nom.getText().isEmpty() || prenom.getText().isEmpty() || email.getText().isEmpty() ||
-                adresse.getText().isEmpty() || N_tel.getText().isEmpty()) {
+                adresse.getText().isEmpty() || N_tel.getText().isEmpty() || remarques.getText().isEmpty() || numCIN.getText().isEmpty() ) {
             showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please fill in all fields");
             return;
         }
 
         // Creation d'un Personne object avec values depuis l'interface components
       //j'ai utilisé Interger.parsINT(N_tel.getText) , car  les value de Textfild est toujour string 
-        Personne personne = new Personne(nom.getText(), prenom.getText(), email.getText(), adresse.getText(),Integer.parseInt(N_tel.getText()));
-
+        Adherent adherent = new Adherent(
+                nom.getText(),
+                prenom.getText(),
+                email.getText(),
+                adresse.getText(),
+                N_tel.getText(),
+                estactive.isSelected(),
+                remarques.getText(),
+                numCIN.getText(),
+                dateInscription.getValue() != null ? dateInscription.getValue().atStartOfDay() : null
+            );
         // appelle  create method de PersonneDAO pour insert  Personne object dans la base de donner 
-        if (personneDAO.create(personne)) {
-            showAlert(Alert.AlertType.CONFIRMATION, owner, "Inscription réussie!", "Personne insérée avec succès");
+        if (adherentDAO.create(adherent)) {
+            showAlert(Alert.AlertType.CONFIRMATION, owner, "Inscription réussie!", "Adherent insérée avec succès");
         } else {
-            showAlert(Alert.AlertType.ERROR, owner, "Database Error!", "Échec de l'insertion de Personne");
+            showAlert(Alert.AlertType.ERROR, owner, "Database Error!", "Échec de l'insertion de Adherent");
         }
     }
 
     @FXML
     public void retour(ActionEvent event) {
         // Handle return button action here
+    }
+    
+    @FXML
+    
+    public void annuler(ActionEvent event) {
+    	
+    	// retour a la page accueil
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {

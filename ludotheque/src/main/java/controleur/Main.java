@@ -18,8 +18,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
     	
     	
-    	inscription_Personne_Controleur controller = new inscription_Personne_Controleur(); 
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../vue/inscriptionPersonne.fxml"));
+    	InscriptionPersonneControleur controller = new InscriptionPersonneControleur(); 
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../vue/inscriptionAdherent.fxml"));
     	loader.setController(controller);
     	Parent root = loader.load();
     	

@@ -9,16 +9,16 @@ public class Personne {
 	private String prenom;
 	private String email;
 	private String adresse;
-	private int tel;
+	private String tel;
 
-	public Personne(String nom, String prenom, String email, String adresse, int tel) {
+	public Personne(String nom, String prenom, String email, String adresse, String tel2) {
 		super();
 	
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.adresse = adresse;
-		this.tel = tel;
+		this.tel = tel2;
 	}
 
 	public int getId() {
@@ -61,11 +61,11 @@ public class Personne {
 		this.adresse = adresse;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
