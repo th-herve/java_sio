@@ -14,7 +14,7 @@ import modele.Adherent;
 import modele.dao.AdherentDAO;
 
 
-public class InscriptionPersonneControleur {
+public class InscriptionAdherentControleur {
 
     @FXML
     private TextField nom;
@@ -55,7 +55,7 @@ public class InscriptionPersonneControleur {
     private AdherentDAO adherentDAO;
 
 // ici la création de inctance de class PersonneDAO
-    public InscriptionPersonneControleur() {
+    public InscriptionAdherentControleur() {
 //        
     	this.adherentDAO = AdherentDAO.getInstance();
     }

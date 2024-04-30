@@ -19,7 +19,7 @@ public class Main extends Application {
     	
     	
 
-    	InscriptionPersonneControleur controller = new InscriptionPersonneControleur(); 
+    	InscriptionAdherentControleur controller = new InscriptionAdherentControleur(); 
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("../vue/inscriptionAdherent.fxml"));
 
     	loader.setController(controller);
