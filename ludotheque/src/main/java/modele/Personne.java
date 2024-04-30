@@ -11,14 +11,14 @@ public class Personne {
 	private String adresse;
 	private String tel;
 
-	public Personne(String nom, String prenom, String email, String adresse, String tel2) {
+	public Personne(String nom, String prenom, String email, String adresse, String tel) {
 		super();
 	
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.adresse = adresse;
-		this.tel = tel2;
+		this.tel = tel;
 	}
 
 	public int getId() {

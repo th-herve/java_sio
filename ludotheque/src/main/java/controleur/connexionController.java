@@ -42,6 +42,7 @@ public class connexionController {
 			return;
 		}
 		
+		 
 	}
 	
 	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
