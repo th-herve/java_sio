@@ -16,13 +16,13 @@ public class JeuDAO extends DAO<Jeu> {
 	private static final String TYPE = "type";
 	private static final String DESCRIPTIF = "descriptif";
 	private static final String QUANTITE = "quantite";
-	private static final String NBR_JOUEURS_MINI = "nbr_joueurs_mini";
-	private static final String NBR_JOUEURS_MAXI = "nbr_joueurs_maxi";
+	private static final String NBR_JOUEURS_MINI = "nbrJoueursMini";
+	private static final String NBR_JOUEURS_MAXI = "nbrJoueurMaxi";
 	private static final String AGE_MINI = "ageMini";
-	private static final String DUREE_MINI = "duree_mini";
-	private static final String DUREE_MAXI = "duree_maxi";
+	private static final String DUREE_MINI = "dureeMini";
+	private static final String DUREE_MAXI = "dureeMaxi";
 	private static final String COMPLEXITE = "complexite";
-	private static final String NOTE_BGG = "note_bgg";
+	private static final String NOTE_BGG = "notBGG";
 
 	private static JeuDAO instance=null;
 
@@ -42,21 +42,21 @@ public class JeuDAO extends DAO<Jeu> {
 		boolean succes=true;
 		try {
 
-			String requete = "INSERT INTO "+TABLE+" ("+NOM+","+TYPE+" , "+DESCRIPTIF+","+QUANTITE+","+NBR_JOUEURS_MINI +","+NBR_JOUEURS_MAXI+","+AGE_MINI +","+DUREE_MINI+","+DUREE_MAXI+","+COMPLEXITE+","+NOTE_BGG+") VALUES (?, ?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+NOM+","+TYPE+" , "+DESCRIPTIF+","+QUANTITE+","+NBR_JOUEURS_MINI +","+NBR_JOUEURS_MAXI+","+AGE_MINI +","+DUREE_MINI+","+DUREE_MAXI+","
+							 +COMPLEXITE+","+NOTE_BGG+") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
-			pst.setInt(1, jeu.getId());
-			pst.setString(2, jeu.getNom());
-			pst.setString(3, jeu.getType());
-			pst.setString(1, jeu.getDescriptif());
-			pst.setInt(2, jeu.getQuantite());
-			pst.setInt(3, jeu.getNbr_joueurs_mini());
-			pst.setInt(1, jeu.getNbr_joueurs_maxi());
-			pst.setInt(2, jeu.getAgeMini());
-			pst.setInt(1, jeu.getDuree_mini());
-			pst.setInt(2, jeu.getDuree_maxi());		
-			pst.setString(3, jeu.getComplexite());
-			pst.setFloat(3, jeu.getNote_bgg());
+			pst.setString(1, jeu.getNom());
+			pst.setString(2, jeu.getType());
+			pst.setString(3, jeu.getDescriptif());
+			pst.setInt(4, jeu.getQuantite());
+			pst.setInt(5, jeu.getNbr_joueurs_mini());
+			pst.setInt(6, jeu.getNbr_joueurs_maxi());
+			pst.setInt(7, jeu.getAgeMini());
+			pst.setInt(8, jeu.getDuree_mini());
+			pst.setInt(9, jeu.getDuree_maxi());		
+			pst.setFloat(10, jeu.getComplexite());
+			pst.setFloat(11, jeu.getNote_bgg());
 
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
@@ -66,7 +66,7 @@ public class JeuDAO extends DAO<Jeu> {
 			if (rs.next()) {
 				jeu.setId(rs.getInt(1));
 			}
-			donnees.get(jeu.getId()); 
+			donnees.put(jeu.getId(), jeu); 
 
 		} catch (SQLException e) {
 			succes=false;
@@ -95,35 +95,27 @@ public class JeuDAO extends DAO<Jeu> {
 	public boolean update (Jeu obj) {
 		boolean succes=true;
 
-		int id =obj.getId();
-		String nom =obj.getNom();
-		String type =obj.getType();
-		String descriptif =obj.getDescriptif();
-		int quantite =obj.getQuantite();
-		int nbr_joueurs_mini =obj.getNbr_joueurs_mini();
-		int nbr_joueurs_maxi =obj.getNbr_joueurs_maxi();
-		int ageMini =obj.getAgeMini();
-		int dureeMini =obj.getDuree_mini();
-		int dureeMaxi =obj.getDuree_maxi();
-		String complexite =obj.getComplexite();
-		float note_bgg =obj.getNote_bgg();
-
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ?, "+TYPE+" = ?, "+DESCRIPTIF+" = ?,"+QUANTITE+" = ?,"+NBR_JOUEURS_MINI+" = ?,"+NBR_JOUEURS_MAXI+" = ?,"+AGE_MINI+" = ?,"+DUREE_MINI+" = ?,"+DUREE_MAXI+" = ?,"+COMPLEXITE+" = ?,"+NOTE_BGG+" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+			String requete = "UPDATE "+TABLE+" SET "+NOM+" = ?, "+TYPE+" = ?, "+DESCRIPTIF+" = ?,"
+									+QUANTITE+" = ?,"+NBR_JOUEURS_MINI+" = ?,"+NBR_JOUEURS_MAXI+" = ?,"
+									+AGE_MINI+" = ?,"+DUREE_MINI+" = ?,"+DUREE_MAXI+" = ?,"
+									+COMPLEXITE+" = ?,"+NOTE_BGG+" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete) ;
-			pst.setString(1, nom);
-			pst.setString(2, type);
-			pst.setString(3, descriptif);
-			pst.setInt(1, quantite);
-			pst.setInt(2, nbr_joueurs_mini);
-			pst.setInt(3, nbr_joueurs_maxi);
-			pst.setInt(1, ageMini);
-			pst.setTimestamp(dureeMini, null);
-			pst.setTimestamp(dureeMaxi, null);
-			pst.setString(3, complexite);
-			pst.setFloat(3, note_bgg);
+
+			pst.setString(1, 	obj.getNom());
+			pst.setString(2, 	obj.getType());
+			pst.setString(3, 	obj.getDescriptif());
+			pst.setInt(4, 		obj.getQuantite());
+			pst.setInt(5, 		obj.getNbr_joueurs_mini());
+			pst.setInt(6, 		obj.getNbr_joueurs_maxi());
+			pst.setInt(7, 		obj.getAgeMini());
+			pst.setInt(8, 		obj.getDuree_mini());
+			pst.setInt(9, 		obj.getDuree_maxi());
+			pst.setFloat(10, 	obj.getComplexite());
+			pst.setFloat(11, 	obj.getNote_bgg());
+			pst.setInt(12, 		obj.getId());
 			pst.executeUpdate();
-			donnees.put(id, obj);
+			donnees.put(obj.getId(), obj);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -154,10 +146,11 @@ public class JeuDAO extends DAO<Jeu> {
 				int ageMini = rs.getInt(AGE_MINI);
 				int dureeMini = rs.getInt(DUREE_MINI);
 				int dureeMaxi = rs.getInt(DUREE_MAXI);
-				String complexite = rs.getString(COMPLEXITE);
-				int noteBgg = rs.getInt(NOTE_BGG);
+				float complexite = rs.getFloat(COMPLEXITE);
+				float noteBgg = rs.getFloat(NOTE_BGG);
 
-				jeu = new Jeu (id, nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg);
+				jeu = new Jeu (nom, type, descriptif, quantite, nbrJoueursMini, nbrJoueursMaxi, ageMini, dureeMini, dureeMaxi, complexite, noteBgg);
+				jeu.setId(id);
 
 				donnees.put(id, jeu);
 			} catch (SQLException e) {

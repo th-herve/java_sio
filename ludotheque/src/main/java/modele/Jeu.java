@@ -12,7 +12,7 @@ public class Jeu {
 	private int ageMini;
 	private int duree_mini;
 	private int duree_maxi;
-	private String complexite;
+	private float complexite;
 	private float note_bgg;
 
 	
@@ -23,10 +23,10 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu(int id, String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, int duree_maxi, String complexite, float note_bgg)
+	public Jeu( String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
+				int duree_maxi, float complexite, float note_bgg)
 	{
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.type= type;
 		this.descriptif = descriptif;
@@ -126,11 +126,11 @@ public class Jeu {
 		this.duree_maxi = duree_maxi;
 	}
 
-	public String getComplexite() {
+	public float getComplexite() {
 		return complexite;
 	}
 
-	public void setComplexite(String complexite) {
+	public void setComplexite(float complexite) {
 		this.complexite = complexite;
 	}
 

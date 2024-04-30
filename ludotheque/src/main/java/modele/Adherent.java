@@ -1,45 +1,40 @@
 package modele;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Adherent {
+import modele.dao.ProcheAdherentDAO;
 
-	private int idPersonne;
+public class Adherent extends Personne {
+
+	// liste des noms des proches pouvant utiliser la carte
+	private Set<String> proches;
+
 	private boolean estActif;
 	private String remarques;
 	private String numCIN;
 	private LocalDateTime dateInscription;
-
-	public Adherent(boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
-		super();
+	
+	// constructeur sans spécifié d'idPersonne (set à 0), un id sera attribué lors de l'ajout dans la bd
+	public Adherent(String nom, String prenom, String email, 
+					String adresse, String tel, boolean estActif, 
+					String remarques, String numCIN, LocalDateTime dateInscription) {
+		super(nom, prenom, email, adresse, tel);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
-	}
 
-	public Adherent(int idPersonne, boolean estActif, String remarques, String numCIN, LocalDateTime dateInscription) {
-		super();
-		this.idPersonne = idPersonne;
-		this.estActif = estActif;
-		this.remarques = remarques;
-		this.numCIN = numCIN;
-		this.dateInscription = dateInscription;
+		// rempli la liste des proches
+		this.fetchProches();
 	}
-
-	public int getIdPersonne() {
-		return idPersonne;
-	}
-
-	public void setIdPersonne(int idPersonne) {
-		this.idPersonne = idPersonne;
-	}
-
-	public boolean isActif() {
+	
+	public boolean getEstActif() {
 		return estActif;
 	}
 
-	public void setActif(boolean actif) {
+	public void setEstActif(boolean actif) {
 		this.estActif = actif;
 	}
 
@@ -68,10 +63,29 @@ public class Adherent {
 		this.dateInscription = dateInscription;
 	}
 
+
+	public boolean addProche(String nom) {
+		return proches.add(nom);
+	}
+
+	public boolean delProche(String nom) {
+		return proches.remove(nom);
+	}
+	
+	public Set<String> getProches() {
+		return this.proches;
+	}
+	
+	// récupère les proches lié à l'adhérent depuis la bd
+	public void fetchProches() {
+		ProcheAdherentDAO procheDao = ProcheAdherentDAO.getInstance();
+		this.proches = procheDao.readByAdherent(this.getId());
+	}
 	
 	
 	@Override
 	public String toString() {
-		return "Adherent [numero=" + idPersonne + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]";
+		return super.toString() + "\nAdherent [numero=" + this.getId() + ", est actif=" + estActif + ", remarques=" + remarques + ", Num cin="+ numCIN + ", date inscription="+ dateInscription +"]"
+				+ "\nProches" + this.proches.toString();
 	}
 }

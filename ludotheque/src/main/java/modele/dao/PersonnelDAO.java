@@ -1,24 +1,32 @@
 package modele.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import modele.Personne;
 import modele.Personnel;
 
 
 public class PersonnelDAO extends DAO<Personnel> {
 
+	private static PersonneDAO personneDao;
+
 	private static final String TABLE = "Personnel";
+<<<<<<< HEAD
     private static final String CLE_PRIMAIRE = "idPersonne";
     
     //est ce que je dois changer le nom de CLE_PRIMAIRE pour CLE_FORIGNE ???
     
 //	private static final String CLE_FORIGNE = "idPersonne";
+=======
+	private static final String CLE_PRIMAIRE = "idPersonne";
+
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 	private static final String ROLE = "role";
 	private static final String DATE_ENTREE = "dateEntree";
 	private static final String DATE_SORTIE = "dateSortie";
@@ -34,19 +42,29 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 	private PersonnelDAO() {
 		super();
+		personneDao = PersonneDAO.getIntstance();
 	}
 
 	@Override
 	public boolean create(Personnel personnel) {
 		boolean success = true;
 		try {
-			String requete = "INSERT INTO " + TABLE + " (" + ROLE + ", " + DATE_ENTREE + ", " + DATE_SORTIE
-					+ ") VALUES (?, ?, ?)";
+
+			int idPers = personnel.getId();
+			
+			// si l'id est 0, il faut également créer une nouvelle personne (si != 0 ca veut dire que la personne assciée à l'adherent existe déjà)
+			if (idPers == 0) {
+				personneDao.create((Personne)personnel);
+			}
+
+			String requete = "INSERT INTO " + TABLE + " (" + CLE_PRIMAIRE + ", " + ROLE + ", " + DATE_ENTREE + ", " + DATE_SORTIE
+					+ ") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
-			pst.setString(1, personnel.getRole());
-			pst.setObject(2, personnel.getDateEntree());
-			pst.setObject(3, personnel.getDateSortie());
+			pst.setInt(1, personnel.getId());
+			pst.setString(2, personnel.getRole());
+			pst.setObject(3, personnel.getDateEntree());
+			pst.setObject(4, personnel.getDateSortie());
 //            Date dateEntree = Date.valueOf(personnel.getDateEntree()).toLocalDate());
 //            pst.setDate(2, dateEntree);
 //            Date dateSortie = Date.valueOf(personnel.getDateSortie().toLocalDate());
@@ -56,10 +74,17 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
+<<<<<<< HEAD
 				personnel.setidPersonne(rs.getInt(1));
 			}
 
 			donnees.put(personnel.getidPersonne(), personnel);
+=======
+				personnel.setId(rs.getInt(1));
+			}
+
+			donnees.put(personnel.getId(), personnel);
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -71,12 +96,23 @@ public class PersonnelDAO extends DAO<Personnel> {
 	public boolean delete(Personnel personnel) {
 		boolean success = true;
 		try {
+<<<<<<< HEAD
 			int id = personnel.getidPersonne();
+=======
+			Personne personne = (Personne)personnel;
+			int id = personnel.getId();
+
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 			String query = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
 			pst.setInt(1, id);
 			pst.executeUpdate();
+
 			donnees.remove(id);
+
+			// on suprimme également la personne associée
+			personneDao.delete(personne);
+
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -97,11 +133,24 @@ public class PersonnelDAO extends DAO<Personnel> {
 			pst.setDate(2, dateEntree);
 			Date dateSortie = Date.valueOf(personnel.getDateSortie().toLocalDate());
 			pst.setDate(3, dateSortie);
+<<<<<<< HEAD
 			pst.setInt(4, personnel.getidPersonne());
 
 			pst.executeUpdate();
 
 			donnees.put(personnel.getidPersonne(), personnel);
+=======
+			pst.setInt(4, personnel.getId());
+
+			pst.executeUpdate();
+
+			donnees.put(personnel.getId(), personnel);
+
+			// update la personne associée
+			personneDao.update((Personne) personnel);
+
+
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -111,7 +160,14 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 	@Override
 	public Personnel read(int idPersonne) {
+<<<<<<< HEAD
 		Personnel personnel = null;
+=======
+
+		Personnel personnel = null;
+		Personne personne = null;
+
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		if (donnees.containsKey(idPersonne)) {
 			personnel = donnees.get(idPersonne);
 		} else {
@@ -122,9 +178,23 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 				String role = rs.getString(ROLE);
 				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
-				LocalDateTime dateSortie = rs.getTimestamp(DATE_SORTIE).toLocalDateTime();
 
+<<<<<<< HEAD
 				personnel = new Personnel(idPersonne, role, dateEntree, dateSortie);
+=======
+				// pour la date de sortie, comme elle peut etre null dans la bd, il faut controler
+				Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
+				LocalDateTime dateSortie = null;
+				if (timestamp != null) {
+					dateSortie = timestamp.toLocalDateTime();
+				}
+
+				personne = personneDao.read(idPersonne);
+				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie);
+				personnel.setId(personne.getId());
+
+
+>>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 				donnees.put(idPersonne, personnel);
 			} catch (SQLException e) {
 				e.printStackTrace();
