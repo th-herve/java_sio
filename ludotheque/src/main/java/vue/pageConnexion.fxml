@@ -9,14 +9,14 @@
 
 <AnchorPane accessibleText="status" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="541.0" layoutY="503.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="197.0" text="Connecter" />
+      <Button fx:id="connecter" layoutX="541.0" layoutY="503.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="197.0" text="Connecter" />
       <ImageView fitHeight="165.0" fitWidth="153.0" layoutX="550.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/logo_bettonludotheque.png" />
          </image>
       </ImageView>
-      <TextField layoutX="541.0" layoutY="365.0" prefHeight="41.0" prefWidth="197.0" promptText="identifiant" />
-      <TextField layoutX="541.0" layoutY="436.0" prefHeight="41.0" prefWidth="197.0" promptText="Mot de pass" />
+      <TextField fx:id="identifiant" layoutX="541.0" layoutY="365.0" prefHeight="41.0" prefWidth="197.0" promptText="identifiant" />
+      <TextField fx:id="mdp" layoutX="541.0" layoutY="436.0" prefHeight="41.0" prefWidth="197.0" promptText="Mot de pass" />
       <Label accessibleText="status" layoutX="222.0" layoutY="99.0" prefHeight="58.0" prefWidth="197.0" text="status" />
    </children>
 </AnchorPane>

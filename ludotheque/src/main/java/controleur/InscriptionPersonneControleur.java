@@ -70,8 +70,8 @@ public class InscriptionPersonneControleur {
             return;
         }
 
-        // Creation d'un Personne object avec values depuis l'interface components
-      //j'ai utilisé Interger.parsINT(N_tel.getText) , car  les value de Textfild est toujour string 
+        // Creation d'un Adherent object avec values depuis l'interface components
+      
         Adherent adherent = new Adherent(
                 nom.getText(),
                 prenom.getText(),
@@ -93,7 +93,8 @@ public class InscriptionPersonneControleur {
 
     @FXML
     public void retour(ActionEvent event) {
-        // Handle return button action here
+        
+    	
     }
     
     @FXML

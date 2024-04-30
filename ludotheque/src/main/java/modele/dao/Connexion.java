@@ -53,7 +53,8 @@ public class Connexion {
 		return connect;
 	}
 	
-	private Connexion() {
+	// j'ai changé la fonction de private a public 
+	public Connexion() {
 		super();
 	}
 
