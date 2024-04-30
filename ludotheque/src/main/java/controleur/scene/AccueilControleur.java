@@ -1,4 +1,4 @@
-package controleur;
+package controleur.scene;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,12 +19,6 @@ public class AccueilControleur extends SceneControleur {
 
 		labelPrincipale.setText("Hello");
 
-//		btnGererJeu.setOnAction(this.switchScene(new GererJeuApplication()));
-//		btnGererAdherent.setOnAction(this.switchScene(new GererAdherentApplication()));
 	}
 	
-	public void switchToGererAdherent() {
-		super.app.switchToGererAdherent();
-	}
-
 }

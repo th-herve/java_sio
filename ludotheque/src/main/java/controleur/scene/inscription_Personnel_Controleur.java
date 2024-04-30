@@ -1,4 +1,4 @@
-package controleur;
+package controleur.scene;
 
 
 import javafx.event.ActionEvent;
