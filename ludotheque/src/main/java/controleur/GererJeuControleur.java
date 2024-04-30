@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Jeu;
 import modele.dao.JeuDAO;
 
-public class GererJeuControleur extends Main{
+public class GererJeuControleur extends SceneControleur{
 
 	//	private AjouterJeu ajouterJeu;
 	//	private VerifierJeu verifierJeu;
@@ -20,7 +20,7 @@ public class GererJeuControleur extends Main{
 	@FXML
 	public TableView<Jeu> tableJeu;
 	@FXML
-	public TableColumn<Jeu, String> idCol;
+	public TableColumn<Jeu, String> id;
 	@FXML
 	public TableColumn<Jeu, String> nom;
 	@FXML
@@ -57,34 +57,24 @@ public class GererJeuControleur extends Main{
 		for (Jeu jeux : jeuxList) {
 			tableJeu.getItems().addAll(jeux);
 		}
-
-		try {
-			Parent loader = FXMLLoader.load(getClass().getResource("../vue/gererJeu.fxml"));
-
-			Scene scene = new Scene(loader, 1280, 800);
-			Main.stage.setScene(scene);
-			Main.stage.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		tableJeu.setEditable(true);
 	}
 
 	public void initializeColumn() {
 
-//		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
 		type.setCellValueFactory(new PropertyValueFactory<>("type"));
 		descriptif.setCellValueFactory(new PropertyValueFactory<>("descriptif"));
 		quantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-		nbrJoueursMini.setCellValueFactory(new PropertyValueFactory<>("nbrJoueursMini"));
-		nbrJoueursMaxi.setCellValueFactory(new PropertyValueFactory<>("nbrJoueursMaxi"));
+		nbrJoueursMini.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_mini"));
+		nbrJoueursMaxi.setCellValueFactory(new PropertyValueFactory<>("nbr_joueurs_maxi"));
 		ageMini.setCellValueFactory(new PropertyValueFactory<>("ageMini"));
-		dureeMini.setCellValueFactory(new PropertyValueFactory<>("dureeMini"));
-		dureeMaxi.setCellValueFactory(new PropertyValueFactory<>("dureeMaxi"));
+		dureeMini.setCellValueFactory(new PropertyValueFactory<>("duree_mini"));
+		dureeMaxi.setCellValueFactory(new PropertyValueFactory<>("duree_maxi"));
 		annee.setCellValueFactory(new PropertyValueFactory<>("annee"));
 		complexite.setCellValueFactory(new PropertyValueFactory<>("complexite"));
-		noteBgg.setCellValueFactory(new PropertyValueFactory<>("noteBgg"));
+		noteBgg.setCellValueFactory(new PropertyValueFactory<>("note_bgg"));
 
 	}
 }

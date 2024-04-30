@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.Adherent;
 import modele.Emprunt;
 
 /**

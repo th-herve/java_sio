@@ -29,7 +29,8 @@ public class App extends Application {
 //		primaryStage.setMaximized(true);
 
         loadViews(); // Chargez les vues depuis les fichiers FXML
-        showAccueilVue(); // Affichez la première vue par défaut
+        //showAccueilVue(); // Affichez la première vue par défaut
+        showGererJeuVue();
     }
 
     private void loadViews() throws IOException {
