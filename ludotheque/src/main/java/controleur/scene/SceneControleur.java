@@ -25,6 +25,9 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 	
+	public void switchToAjouterJeu() {
+		app.switchToAjouterJeu();
+	}
 	
 	protected<T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
 		changeColumnBooleanValue(col, "Oui", "Non");
