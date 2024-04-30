@@ -38,7 +38,7 @@
                </columns>
             </TableView>
 
-      <Label layoutX="596.0" layoutY="78.0" prefHeight="66.0" prefWidth="89.0" text="Jeux">
+      <Label layoutX="531.0" layoutY="85.0" prefHeight="66.0" prefWidth="220.0" text="Adherent">
          <font>
             <Font size="45.0" />
          </font>

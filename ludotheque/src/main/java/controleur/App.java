@@ -33,6 +33,7 @@ public class App extends Application {
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
+		
 	}
 
 	// Méthodes pour passer d'une vue à une autre

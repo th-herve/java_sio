@@ -64,24 +64,9 @@ public class GererAdherentControleur extends SceneControleur {
 		remarques.setCellValueFactory(new PropertyValueFactory<>("remarques"));
 		numCIN.setCellValueFactory(new PropertyValueFactory<>("numCIN"));
 		estActif.setCellValueFactory(new PropertyValueFactory<>("estActif"));
-
 		// change l'affiche de estActif de True/False à Oui/Non
-		estActif.setCellFactory(column -> {
-			return new TableCell<Adherent, Boolean>() {
-				@Override
-				protected void updateItem(Boolean item, boolean empty) {
-					super.updateItem(item, empty);
-					// ne change pas les valeurs null
-					if (empty || item == null) {
-						setText(null);
-					// update les true/false
-					} else {
-						// Set text based on the boolean value
-						setText(item ? "Oui" : "Non");
-					}
-				}
-			};
-		});
+		this.changeColumnBooleanValue(estActif);
+
 	}
 
 }

@@ -1,7 +1,9 @@
 package controleur.scene;
 
 import controleur.App;
-import javafx.application.Application;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import modele.Adherent;
 
 public abstract class SceneControleur {
 	
@@ -23,4 +25,30 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 	
+	
+	protected<T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
+		changeColumnBooleanValue(col, "Oui", "Non");
+	}
+
+	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col, String valTrue, String valFalse) {
+		col.setCellFactory(column -> {
+			return new TableCell<T, Boolean>() {
+				@Override
+				protected void updateItem(Boolean item, boolean empty) {
+					super.updateItem(item, empty);
+					// ne change pas les valeurs null
+					if (empty || item == null) {
+						setText(null);
+					// update les true/false
+					} else {
+						// Set text based on the boolean value
+						setText(item ? valTrue : valFalse);
+					}
+				}
+			};
+		});
+	
+	}
+
+
 }
