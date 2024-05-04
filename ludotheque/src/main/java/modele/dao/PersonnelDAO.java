@@ -17,16 +17,8 @@ public class PersonnelDAO extends DAO<Personnel> {
 	private static PersonneDAO personneDao;
 
 	private static final String TABLE = "Personnel";
-<<<<<<< HEAD
-    private static final String CLE_PRIMAIRE = "idPersonne";
-    
-    //est ce que je dois changer le nom de CLE_PRIMAIRE pour CLE_FORIGNE ???
-    
-//	private static final String CLE_FORIGNE = "idPersonne";
-=======
 	private static final String CLE_PRIMAIRE = "idPersonne";
 
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 	private static final String ROLE = "role";
 	private static final String DATE_ENTREE = "dateEntree";
 	private static final String DATE_SORTIE = "dateSortie";
@@ -74,17 +66,10 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
-<<<<<<< HEAD
-				personnel.setidPersonne(rs.getInt(1));
-			}
-
-			donnees.put(personnel.getidPersonne(), personnel);
-=======
 				personnel.setId(rs.getInt(1));
 			}
 
 			donnees.put(personnel.getId(), personnel);
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -96,13 +81,9 @@ public class PersonnelDAO extends DAO<Personnel> {
 	public boolean delete(Personnel personnel) {
 		boolean success = true;
 		try {
-<<<<<<< HEAD
-			int id = personnel.getidPersonne();
-=======
 			Personne personne = (Personne)personnel;
 			int id = personnel.getId();
 
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 			String query = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
 			pst.setInt(1, id);
@@ -133,13 +114,6 @@ public class PersonnelDAO extends DAO<Personnel> {
 			pst.setDate(2, dateEntree);
 			Date dateSortie = Date.valueOf(personnel.getDateSortie().toLocalDate());
 			pst.setDate(3, dateSortie);
-<<<<<<< HEAD
-			pst.setInt(4, personnel.getidPersonne());
-
-			pst.executeUpdate();
-
-			donnees.put(personnel.getidPersonne(), personnel);
-=======
 			pst.setInt(4, personnel.getId());
 
 			pst.executeUpdate();
@@ -150,7 +124,6 @@ public class PersonnelDAO extends DAO<Personnel> {
 			personneDao.update((Personne) personnel);
 
 
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		} catch (SQLException e) {
 			success = false;
 			e.printStackTrace();
@@ -160,14 +133,10 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 	@Override
 	public Personnel read(int idPersonne) {
-<<<<<<< HEAD
-		Personnel personnel = null;
-=======
 
 		Personnel personnel = null;
 		Personne personne = null;
 
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 		if (donnees.containsKey(idPersonne)) {
 			personnel = donnees.get(idPersonne);
 		} else {
@@ -179,9 +148,6 @@ public class PersonnelDAO extends DAO<Personnel> {
 				String role = rs.getString(ROLE);
 				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
 
-<<<<<<< HEAD
-				personnel = new Personnel(idPersonne, role, dateEntree, dateSortie);
-=======
 				// pour la date de sortie, comme elle peut etre null dans la bd, il faut controler
 				Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
 				LocalDateTime dateSortie = null;
@@ -194,7 +160,6 @@ public class PersonnelDAO extends DAO<Personnel> {
 				personnel.setId(personne.getId());
 
 
->>>>>>> 9920c2b7633f3f79237ec02d57402c50e0aff9af
 				donnees.put(idPersonne, personnel);
 			} catch (SQLException e) {
 				e.printStackTrace();

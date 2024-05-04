@@ -13,6 +13,7 @@ public class App extends Application {
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
+	private Page inscriptionAdherentPage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -33,6 +34,8 @@ public class App extends Application {
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
+		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
+		
 		
 	}
 
@@ -49,6 +52,11 @@ public class App extends Application {
 
 	public void switchToGererJeu() {
 		primaryStage.setScene(gererJeuPage.getScene());
+		primaryStage.show();
+	}
+	
+	public void switchToinscriptionAdherent() {
+		primaryStage.setScene(inscriptionAdherentPage.getScene());
 		primaryStage.show();
 	}
 }
