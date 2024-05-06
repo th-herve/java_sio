@@ -64,6 +64,8 @@ public class GererAdherentControleur extends SceneControleur {
 		remarques.setCellValueFactory(new PropertyValueFactory<>("remarques"));
 		numCIN.setCellValueFactory(new PropertyValueFactory<>("numCIN"));
 		estActif.setCellValueFactory(new PropertyValueFactory<>("estActif"));
+		
+		
 		// change l'affiche de estActif de True/False à Oui/Non
 		this.changeColumnBooleanValue(estActif);
 

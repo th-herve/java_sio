@@ -39,6 +39,7 @@ public class PersonneDAO extends DAO<Personne> {
 		boolean succes = true;
 		try {
 
+
 			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
 					+ "," + TEL + ")VALUES(?,?,?,?,?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
