@@ -7,14 +7,14 @@ public class JeuPhysique { // monopoly 12
 
 	private int id;
 	private String etat;
-	private String disponible;
+	private Boolean estDisponible;
 //	private int idJeu;
 
 
-	public JeuPhysique(Jeu jeu, String etat, String disponible) {
+	public JeuPhysique(Jeu jeu, String etat, Boolean disponible) {
 		super();
 		this.jeu = jeu;
-		this.disponible = disponible;
+		this.estDisponible = disponible;
 		this.etat = etat;
 	}
 
@@ -38,13 +38,13 @@ public class JeuPhysique { // monopoly 12
 	}
 
 
-	public String getDisponible() {
-		return disponible;
+	public Boolean getDisponible() {
+		return estDisponible;
 	}
 
 
-	public void setDisponible(String disponible) {
-		this.disponible = disponible;
+	public void setDisponible(Boolean disponible) {
+		this.estDisponible = disponible;
 	}
 
 	public int getIdJeu() {
@@ -63,7 +63,7 @@ public class JeuPhysique { // monopoly 12
 
 	@Override
 	public String toString() {
-		return super.toString() + "\njeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + disponible + ", id jeu ="+ this.getIdJeu() + "]";
+		return super.toString() + "\njeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + estDisponible + ", id jeu ="+ this.getIdJeu() + "]";
 	}
 
 }

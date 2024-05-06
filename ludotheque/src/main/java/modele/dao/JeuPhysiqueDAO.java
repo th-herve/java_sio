@@ -15,7 +15,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	private static final String CLE_PRIMAIRE = "id";
 	private static final String ETAT = "etat";
 
-	private static final String DISPONIBLE = "disponible"; 
+	private static final String EST_DISPONIBLE = "estDisponible"; 
 	private static final String ID_JEU = "idjeu";  
 	
 	/** Patron de conception Singleton
@@ -41,10 +41,10 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		boolean succes=true;
 		try {
 			
-			String requete = "INSERT INTO "+TABLE+" ("+ETAT+", "+DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?)";
+			String requete = "INSERT INTO "+TABLE+" ("+ETAT+", "+EST_DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, jeuPhysique.getEtat());
-			pst.setString(2, jeuPhysique.getDisponible());
+			pst.setBoolean(2, jeuPhysique.getDisponible());
 			pst.setInt(3, jeuPhysique.getIdJeu());
 
 			// on ex�cute la mise � jour
@@ -92,11 +92,11 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 		try {
 			String requete = "UPDATE "+TABLE+" SET "+ ETAT+" = ?, "
-						+DISPONIBLE+" = ?, "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+						+EST_DISPONIBLE+" = ?, "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setString(1, jeuPhysique.getEtat()); 
-			pst.setString(2, jeuPhysique.getDisponible());
+			pst.setBoolean(2, jeuPhysique.getDisponible());
 			pst.setInt(3, jeuPhysique.getIdJeu());
 			pst.setInt(4, jeuPhysique.getId());
 
@@ -128,7 +128,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 				int idNew = rs.getInt(CLE_PRIMAIRE);
 				String etat = rs.getString(ETAT);
-				String disponible = rs.getString(DISPONIBLE);
+				Boolean disponible = rs.getBoolean(EST_DISPONIBLE);
 				int idJeu = rs.getInt(ID_JEU);
 
 				JeuDAO jDao = JeuDAO.getInstance();
