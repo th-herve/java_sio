@@ -17,8 +17,6 @@ public class AccueilControleur extends SceneControleur {
 
 	public void initialize() {
 
-		labelPrincipale.setText("Hello");
-
 	}
 	
 }
