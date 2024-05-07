@@ -11,6 +11,8 @@ import modele.Adherent;
 import modele.dao.AdherentDAO;
 
 public class GererAdherentControleur extends SceneControleur {
+	
+	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
 	@FXML
 	TableView<Adherent> tableAdherent;
@@ -66,7 +68,7 @@ public class GererAdherentControleur extends SceneControleur {
 	}
 
 	/**
-	 * Ajoute dans la table, les jeux physique de la bd pour l'id jeu donné
+	 * Ajoute les adhérents de la bd dans la tableView
 	 */
 	public void refreshTable() {
 		AdherentDAO adherentDAO = AdherentDAO.getInstance();
@@ -74,6 +76,20 @@ public class GererAdherentControleur extends SceneControleur {
 
 		for (Adherent ad : adherentList) {
 			tableAdherent.getItems().add(ad);
+		}
+	}
+
+	/**
+	 * Appelé quand on clique sur le bouton supprimer
+	 */
+	public void deleteAdherent() {
+		int row = tableAdherent.getSelectionModel().getFocusedIndex();
+		if (row >= 0) {
+			Adherent adherent = tableAdherent.getItems().get(row);
+			if (adherentDAO.delete(adherent)) {
+				tableAdherent.getItems().remove(row);
+				tableAdherent.getSelectionModel().clearSelection();
+			}
 		}
 	}
 

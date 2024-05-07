@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -67,11 +68,20 @@
             <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToinscriptionAdherent" prefHeight="39.0" prefWidth="178.0" text="Ajouter adhérent">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="271.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#switchToinscriptionAdherent" prefHeight="39.0" prefWidth="140.0" text="Ajouter">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#deleteAdherent" prefHeight="39.0" prefWidth="151.0" text="Supprimer">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
