@@ -9,9 +9,9 @@ public class Personnel extends Personne {
 	private LocalDateTime dateSortie;
 
 	public Personnel(String nom, String prenom, String email, 
-					String adresse, String tel,String mdp, String role, 
+					String adresse, String tel, String role, 
 					LocalDateTime dateEntree, LocalDateTime dateSortie) {
-		super(nom, prenom, email, adresse, tel ,mdp);
+		super(nom, prenom, email, adresse, tel);
 		this.role = role;
 		this.dateEntree = dateEntree;
 		this.dateSortie = dateSortie;

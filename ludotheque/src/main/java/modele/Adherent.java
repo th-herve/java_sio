@@ -18,9 +18,9 @@ public class Adherent extends Personne {
 	
 	// constructeur sans spécifié d'idPersonne (set à 0), un id sera attribué lors de l'ajout dans la bd
 	public Adherent(String nom, String prenom, String email, 
-					String adresse, String tel,String mdp, boolean estActif, 
+					String adresse, String tel, boolean estActif, 
 					String remarques, String numCIN, LocalDateTime dateInscription) {
-		super(nom, prenom, email, adresse, tel,mdp);
+		super(nom, prenom, email, adresse, tel);
 		this.estActif = estActif;
 		this.remarques = remarques;
 		this.numCIN = numCIN;
