@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import modele.Adherent;
 import modele.dao.AdherentDAO;
 
 public class GererAdherentControleur extends SceneControleur {
-	
+
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
 	@FXML
@@ -60,8 +62,7 @@ public class GererAdherentControleur extends SceneControleur {
 		remarques.setCellValueFactory(new PropertyValueFactory<>("remarques"));
 		numCIN.setCellValueFactory(new PropertyValueFactory<>("numCIN"));
 		estActif.setCellValueFactory(new PropertyValueFactory<>("estActif"));
-		
-		
+
 		// change l'affiche de estActif de True/False à Oui/Non
 		this.changeColumnBooleanValue(estActif);
 
