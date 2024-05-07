@@ -156,7 +156,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 				}
 
 				personne = personneDao.read(idPersonne);
-				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(),personne.getMdp() ,role, dateEntree, dateSortie);
+				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie);
 				personnel.setId(personne.getId());
 
 
