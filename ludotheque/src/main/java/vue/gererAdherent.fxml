@@ -67,12 +67,12 @@
             <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="ajouter" mnemonicParsing="false" prefHeight="39.0" prefWidth="178.0" text="Ajouter adhérent">
+            <Button mnemonicParsing="false" onAction="#switchToinscriptionAdherent" prefHeight="39.0" prefWidth="178.0" text="Ajouter adhérent">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="rAccueil" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
