@@ -29,7 +29,6 @@ public class App extends Application {
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
 		switchToAccueil(); // Affiche la première vue par défaut
-		switchToGererJeuPhysique(1);
 	}
 
 	private void loadViews() throws IOException {
