@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,14 +43,9 @@ public class GererAdherentControleur extends SceneControleur {
 	TableColumn<Adherent, LocalDateTime> dateInscription;
 
 	public void initialize() {
-		initializeColumn();
+		this.initializeColumn();
+		this.refreshTable();
 
-		AdherentDAO adherentDAO = AdherentDAO.getInstance();
-		List<Adherent> adherentList = adherentDAO.readAll();
-
-		for (Adherent ad : adherentList) {
-			tableAdherent.getItems().add(ad);
-		}
 	}
 
 	private void initializeColumn() {
@@ -69,6 +63,18 @@ public class GererAdherentControleur extends SceneControleur {
 		// change l'affiche de estActif de True/False à Oui/Non
 		this.changeColumnBooleanValue(estActif);
 
+	}
+
+	/**
+	 * Ajoute dans la table, les jeux physique de la bd pour l'id jeu donné
+	 */
+	public void refreshTable() {
+		AdherentDAO adherentDAO = AdherentDAO.getInstance();
+		List<Adherent> adherentList = adherentDAO.readAll();
+
+		for (Adherent ad : adherentList) {
+			tableAdherent.getItems().add(ad);
+		}
 	}
 
 }
