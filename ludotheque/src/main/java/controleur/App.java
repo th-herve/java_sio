@@ -15,6 +15,7 @@ public class App extends Application {
 	private Page gererJeuPage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
+//	private Page logoutPage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -26,8 +27,9 @@ public class App extends Application {
 		primaryStage.setMaximized(true);
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
-
-		switchToAccueil(); // Affiche la première vue par défaut
+		
+//		switchToAccueil();
+		switchToconnexionPage(); // Affiche la première vue par défaut
 	}
 
 	private void loadViews() throws IOException {
@@ -36,7 +38,8 @@ public class App extends Application {
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
-//		this.connexionPage= new Page(this,"pageConnexion.fxml");
+		this.connexionPage= new Page(this,"pageConnexion.fxml");
+//		this.logoutPage= new Page(this,"pageConnexion.fxml");
 		
 		
 	}
@@ -62,11 +65,12 @@ public class App extends Application {
 		primaryStage.show();
 	}
 
-//	public void switchToconnexionPage() {
-//		// TODO Auto-generated method stub
-//		primaryStage.setScene(connexionPage.getScene());
-//		primaryStage.show();
-//		
-//	}
+	public void switchToconnexionPage() {
+		
+		primaryStage.setScene(connexionPage.getScene());
+		primaryStage.show();
+		
+	}
+	
 	
 }
