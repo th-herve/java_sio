@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 
+import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,6 +14,7 @@ public class App extends Application {
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
+	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
 
@@ -35,10 +37,9 @@ public class App extends Application {
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
+		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
 //		this.connexionPage= new Page(this,"pageConnexion.fxml");
-		
-		
 	}
 
 	// Méthodes pour passer d'une vue à une autre
@@ -55,6 +56,16 @@ public class App extends Application {
 	public void switchToGererJeu() {
 		primaryStage.setScene(gererJeuPage.getScene());
 		primaryStage.show();
+	}
+
+	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
+	public void switchToGererJeuPhysique(int idJeu) {
+		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
+		ctl.setUp(1);
+		Stage stage = new Stage();
+		stage.setScene(gererJeuPhysiquePage.getScene());
+		stage.setTitle("Gérer Jeux physiques");
+		stage.show();
 	}
 	
 	public void switchToinscriptionAdherent() {
