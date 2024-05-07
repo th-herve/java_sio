@@ -1,19 +1,25 @@
 package modele;
 
+import modele.dao.JeuDAO;
 
-public class JeuPhysique { // monopoly 12
+public class JeuPhysique {
 
 	private Jeu jeu;
 
 	private int id;
 	private String etat;
 	private Boolean estDisponible;
-//	private int idJeu;
 
 
 	public JeuPhysique(Jeu jeu, String etat, Boolean disponible) {
 		super();
 		this.jeu = jeu;
+		this.estDisponible = disponible;
+		this.etat = etat;
+	}
+	public JeuPhysique(int idJeu, String etat, Boolean disponible) {
+		super();
+		this.jeu = JeuDAO.getInstance().read(idJeu);
 		this.estDisponible = disponible;
 		this.etat = etat;
 	}
@@ -38,12 +44,12 @@ public class JeuPhysique { // monopoly 12
 	}
 
 
-	public Boolean getDisponible() {
+	public Boolean getEstDisponible() {
 		return estDisponible;
 	}
 
 
-	public void setDisponible(Boolean disponible) {
+	public void setEstDisponible(Boolean disponible) {
 		this.estDisponible = disponible;
 	}
 

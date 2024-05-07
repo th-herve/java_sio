@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import modele.Jeu;
 import modele.JeuPhysique;
@@ -16,7 +18,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	private static final String ETAT = "etat";
 
 	private static final String EST_DISPONIBLE = "estDisponible"; 
-	private static final String ID_JEU = "idjeu";  
+	private static final String ID_JEU = "idJeu";  
 	
 	/** Patron de conception Singleton
 	 * 
@@ -44,7 +46,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			String requete = "INSERT INTO "+TABLE+" ("+ETAT+", "+EST_DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, jeuPhysique.getEtat());
-			pst.setBoolean(2, jeuPhysique.getDisponible());
+			pst.setBoolean(2, jeuPhysique.getEstDisponible());
 			pst.setInt(3, jeuPhysique.getIdJeu());
 
 			// on ex�cute la mise � jour
@@ -96,7 +98,7 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
 			pst.setString(1, jeuPhysique.getEtat()); 
-			pst.setBoolean(2, jeuPhysique.getDisponible());
+			pst.setBoolean(2, jeuPhysique.getEstDisponible());
 			pst.setInt(3, jeuPhysique.getIdJeu());
 			pst.setInt(4, jeuPhysique.getId());
 
@@ -143,6 +145,42 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			}
 		}
 		return jeuPhysique;
+	}
+	
+	public List<JeuPhysique> readByIdJeu(int idJeu) {
+
+		List<JeuPhysique> jeuList = new ArrayList<JeuPhysique>();
+
+		try {
+
+			String requete = "SELECT " + CLE_PRIMAIRE + " FROM " + TABLE + " WHERE " + ID_JEU + " = ?";
+
+			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
+			pst.setInt(1, idJeu);
+
+			ResultSet rs = pst.executeQuery(); 
+
+			System.out.println(idJeu);
+			while (rs.next()) {
+
+				JeuPhysique jeuPhysique;
+				int idJeuPhysique = rs.getInt(CLE_PRIMAIRE);
+				
+
+				if (donnees.containsKey(idJeuPhysique)) {
+					System.out.println("r�cup�r�");
+					jeuPhysique = donnees.get(idJeuPhysique);
+				} else {
+					jeuPhysique = this.read(idJeuPhysique);
+				}
+
+				jeuList.add(jeuPhysique);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jeuList;
 	}
 
 	public void afficheSelectEtoileAdherent() {
