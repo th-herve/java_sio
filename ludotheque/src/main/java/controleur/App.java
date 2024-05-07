@@ -14,8 +14,9 @@ public class App extends Application {
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
-	private Page ajouterJeuPage;
 	private Page gererJeuPhysiquePage;
+	private Page inscriptionAdherentPage;
+	private Page connexionPage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -33,12 +34,12 @@ public class App extends Application {
 
 	private void loadViews() throws IOException {
 		
-		this.accueilPage 			= new Page(this, "accueil.fxml");
-		this.gererAdherentPage 		= new Page(this, "gererAdherent.fxml");
-		this.gererJeuPage 			= new Page(this, "gererJeu.fxml");
-		this.ajouterJeuPage 		= new Page(this, "ajouterJeu.fxml");
+		this.accueilPage = new Page(this, "accueil.fxml");
+		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
+		this.gererJeuPage = new Page(this, "gererJeu.fxml");
 		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
-		
+		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
+//		this.connexionPage= new Page(this,"pageConnexion.fxml");
 	}
 
 	// Méthodes pour passer d'une vue à une autre
@@ -66,12 +67,17 @@ public class App extends Application {
 		stage.setTitle("Gérer Jeux physiques");
 		stage.show();
 	}
-
-	public void switchToAjouterJeu() {
-		// crée un nouveau 'stage' pour ouvrir dans une nouvelle fenetre
-		Stage stage = new Stage();
-		stage.setScene(ajouterJeuPage.getScene());
-		stage.setTitle("Ajouter un Jeu");
-		stage.show();
+	
+	public void switchToinscriptionAdherent() {
+		primaryStage.setScene(inscriptionAdherentPage.getScene());
+		primaryStage.show();
 	}
+
+//	public void switchToconnexionPage() {
+//		// TODO Auto-generated method stub
+//		primaryStage.setScene(connexionPage.getScene());
+//		primaryStage.show();
+//		
+//	}
+	
 }

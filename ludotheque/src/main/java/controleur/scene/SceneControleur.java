@@ -25,9 +25,14 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 	
-	public void switchToAjouterJeu() {
-		app.switchToAjouterJeu();
+	public void switchToinscriptionAdherent() {
+		app.switchToinscriptionAdherent();
 	}
+	
+//	public void switchToconnexionPage() {
+//		
+//		app.switchToconnexionPage();
+//	}
 	
 	protected<T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
 		changeColumnBooleanValue(col, "Oui", "Non");

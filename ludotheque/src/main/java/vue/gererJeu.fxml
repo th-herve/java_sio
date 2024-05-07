@@ -15,7 +15,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="ajouter" layoutX="710.0" layoutY="666.0" mnemonicParsing="false" onAction="#switchToAjouterJeu" prefHeight="29.0" prefWidth="120.0" text="Ajouter jeu">
+      <Button fx:id="ajouter" layoutX="710.0" layoutY="666.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="Ajouter jeu">
          <font>
             <Font size="18.0" />
          </font></Button>
