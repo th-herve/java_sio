@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 
+import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ public class App extends Application {
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
 	private Page ajouterJeuPage;
+	private Page gererJeuPhysiquePage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -27,14 +29,16 @@ public class App extends Application {
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
 		switchToAccueil(); // Affiche la première vue par défaut
+		switchToGererJeuPhysique(1);
 	}
 
 	private void loadViews() throws IOException {
 		
-		this.accueilPage 		= new Page(this, "accueil.fxml");
-		this.gererAdherentPage 	= new Page(this, "gererAdherent.fxml");
-		this.gererJeuPage 		= new Page(this, "gererJeu.fxml");
-		this.ajouterJeuPage 	= new Page(this, "ajouterJeu.fxml");
+		this.accueilPage 			= new Page(this, "accueil.fxml");
+		this.gererAdherentPage 		= new Page(this, "gererAdherent.fxml");
+		this.gererJeuPage 			= new Page(this, "gererJeu.fxml");
+		this.ajouterJeuPage 		= new Page(this, "ajouterJeu.fxml");
+		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
 		
 	}
 
@@ -54,7 +58,18 @@ public class App extends Application {
 		primaryStage.show();
 	}
 
+	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
+	public void switchToGererJeuPhysique(int idJeu) {
+		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
+		ctl.setUp(1);
+		Stage stage = new Stage();
+		stage.setScene(gererJeuPhysiquePage.getScene());
+		stage.setTitle("Gérer Jeux physiques");
+		stage.show();
+	}
+
 	public void switchToAjouterJeu() {
+		// crée un nouveau 'stage' pour ouvrir dans une nouvelle fenetre
 		Stage stage = new Stage();
 		stage.setScene(ajouterJeuPage.getScene());
 		stage.setTitle("Ajouter un Jeu");
