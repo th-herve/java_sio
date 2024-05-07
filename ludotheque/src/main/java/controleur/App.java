@@ -69,8 +69,10 @@ public class App extends Application {
 	}
 	
 	public void switchToinscriptionAdherent() {
-		primaryStage.setScene(inscriptionAdherentPage.getScene());
-		primaryStage.show();
+		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
+		Stage stage = new Stage();
+		stage.setScene(inscriptionAdherentPage.getScene());
+		stage.show();
 	}
 
 //	public void switchToconnexionPage() {
