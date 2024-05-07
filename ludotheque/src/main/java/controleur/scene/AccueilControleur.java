@@ -1,5 +1,6 @@
 package controleur.scene;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,6 +30,7 @@ public class AccueilControleur extends SceneControleur {
 //		app.switchToconnexionPage();
 	}
     
+
 
 	public void initialize() {
 
