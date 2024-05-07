@@ -1,6 +1,6 @@
 package modele;
 
-import org.bouncycastle.pqc.crypto.DigestingMessageSigner;
+
 
 // éviter d'instancier cette classe, utiliser Adherent ou Personnel à la place
 public class Personne {
@@ -11,9 +11,8 @@ public class Personne {
 	private String email;
 	private String adresse;
 	private String tel;
-	private String mdp; // pour le mot de passe 
 
-	public Personne(String nom, String prenom, String email, String adresse, String tel , String mdp) {
+	public Personne(String nom, String prenom, String email, String adresse, String tel) {
 		super();
 	
 		this.id = 0;
@@ -22,10 +21,9 @@ public class Personne {
 		this.email = email;
 		this.adresse = adresse;
 		this.tel = tel;
-		this.mdp = mdp;
 	}
 
-	public Personne(int id, String nom, String prenom, String email, String adresse, String tel , String mdp) {
+	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
 		super();
 	
 		this.id = id;
@@ -34,7 +32,6 @@ public class Personne {
 		this.email = email;
 		this.adresse = adresse;
 		this.tel = tel;
-		this.mdp = mdp ;
 	}
 
 	public int getId() {
@@ -84,23 +81,11 @@ public class Personne {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
-
-	public String getMdp() {
-		return mdp;
-	}
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
 
 	@Override
 	public String toString() {
 		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", adresse="
-				+ adresse + ", tel=" + tel + ", mdp=" + mdp + "]";
+				+ adresse + ", tel=" + tel + "]";
 	}
-
-	
 
 }

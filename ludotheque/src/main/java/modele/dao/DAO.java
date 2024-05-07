@@ -2,8 +2,6 @@ package modele.dao;
 
 import java.util.HashMap;
 
-import modele.Personne;
-
 /**
  * Patron de conception DAO
  *
@@ -42,11 +40,6 @@ public abstract class DAO<T> {
 	 * @return T
 	 */
 	public abstract T read(int id);
-
-	public Personne readByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 }
