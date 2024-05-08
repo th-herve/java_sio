@@ -28,8 +28,8 @@ public class App extends Application {
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 		
-//		switchToAccueil();
-		switchToconnexionPage(); // Affiche la première vue par défaut
+		switchToAccueil();
+//		switchToconnexionPage(); // Affiche la première vue par défaut
 	}
 
 	private void loadViews() throws IOException {
