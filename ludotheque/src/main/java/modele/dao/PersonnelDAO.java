@@ -34,7 +34,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 
 	private PersonnelDAO() {
 		super();
-		personneDao = PersonneDAO.getIntstance();
+		personneDao = PersonneDAO.getInstance();
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class AdherentDAO extends DAO<Adherent> {
 
 	private AdherentDAO() {
 		super();
-		personneDao = PersonneDAO.getIntstance();
+		personneDao = PersonneDAO.getInstance();
 		procheDAO = ProcheAdherentDAO.getInstance();
 	}
 

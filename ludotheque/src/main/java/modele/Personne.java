@@ -13,6 +13,7 @@ public class Personne {
 	private String tel;
 	private String mdp; // pour le mot de passe 
 
+	private String salt;
 	public Personne(String nom, String prenom, String email, String adresse, String tel , String mdp) {
 		super();
 	
@@ -35,6 +36,7 @@ public class Personne {
 		this.adresse = adresse;
 		this.tel = tel;
 		this.mdp = mdp ;
+		
 	}
 
 	public int getId() {
@@ -94,6 +96,15 @@ public class Personne {
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 
 	@Override
 	public String toString() {

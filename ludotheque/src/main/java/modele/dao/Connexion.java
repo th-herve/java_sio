@@ -1,5 +1,8 @@
 package modele.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -9,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import modele.dao.*;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
@@ -312,16 +316,7 @@ public class Connexion {
 //    }
 	
 	
-//	   private static String hashPassword(String password) {
-//	        try {
-//	            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//	            byte[] hash = digest.digest(password.getBytes());
-//	            return Base64.getEncoder().encodeToString(hash);
-//	        } catch (NoSuchAlgorithmException e) {
-//	            e.printStackTrace();
-//	            return null;
-//	        }
-//	    }
+	 
 	
 
 	public static void main(String[] args) {
@@ -336,7 +331,7 @@ public class Connexion {
 		/**
 		 * pour afficher les tables Personne et Personnel
 		 */
-		PersonneDAO personneDAO = PersonneDAO.getIntstance();
+		PersonneDAO personneDAO = PersonneDAO.getInstance();
 		personneDAO.afficheSelectEtoilePersonne();
 		PersonnelDAO personnelDAO = PersonnelDAO.getInstance();
 		personnelDAO.afficheSelectEtoilePersonnel();

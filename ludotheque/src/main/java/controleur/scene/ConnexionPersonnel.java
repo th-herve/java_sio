@@ -2,6 +2,7 @@ package controleur.scene;
 
 import java.awt.print.Printable;
 import java.net.PasswordAuthentication;
+import java.util.Base64;
 
 import controleur.App;
 import javafx.event.ActionEvent;
@@ -35,33 +36,40 @@ public class ConnexionPersonnel extends SceneControleur {
 	private Button deconnecter;
 
 	
-	
 	@FXML
-	 public void Login(ActionEvent event) {
-        Window owner = connecter.getScene().getWindow();
+	public void Login(ActionEvent event) {
+	    Window owner = connecter.getScene().getWindow();
 
-        // Check if the identification and password fields are not empty
-        if (identification.getText().isEmpty() || mdp.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, owner, "Erreur de formulaire!", "Veuillez remplir tous les champs");
-        } else {
-            String email = identification.getText();
-            String password = mdp.getText();
+	    String email = identification.getText();
+	    String password = mdp.getText();
 
-            // Retrieve the user information based on the email
-            PersonneDAO personneDAO = PersonneDAO.getIntstance();
-            Personne user = personneDAO.readByEmail(email);
+	    if (email.isEmpty() || password.isEmpty()) {
+	        showAlert(Alert.AlertType.ERROR, owner, "Erreur de formulaire!", "Veuillez remplir tous les champs");
+	        return;
+	    }
 
-            if (user != null && password.equals(user.getMdp())) {
-                showAlert(Alert.AlertType.INFORMATION, owner, "Succès", "Connexion réussie");
-//                identification.clear();
-//                mdp.clear();
-                // Switch to Accueil page
-                app.switchToAccueil();
-            } else {
-                showAlert(Alert.AlertType.ERROR, owner, "Identifiant ou mot de passe incorrect", "Veuillez vérifier vos informations de connexion");
-            }
-        }
-    }
+	    PersonneDAO personneDAO = PersonneDAO.getInstance();
+	    Personne user = personneDAO.readByEmail(email);
+
+	    if (user != null) {
+	        String hashedPassword = personneDAO.hashPassword(password); // Hash the provided password
+
+	        if (hashedPassword.equals(user.getMdp())) {
+	            showAlert(Alert.AlertType.INFORMATION, owner, "Succès", "Connexion réussie");
+	            identification.clear();
+	            mdp.clear();
+	            app.switchToAccueil();
+	        } else {
+	            showAlert(Alert.AlertType.ERROR, owner, "Identifiant ou mot de passe incorrect", "Veuillez vérifier vos informations de connexion");
+	        }
+	    } else {
+	        showAlert(Alert.AlertType.ERROR, owner, "Identifiant ou mot de passe incorrect", "Veuillez vérifier vos informations de connexion");
+	    }
+	}
+
+
+
+
 //
 //	@FXML
 //	public void Login(ActionEvent event) {

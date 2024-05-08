@@ -50,51 +50,62 @@
          </font>
       </Label>
       <TextField fx:id="email" layoutX="284.0" layoutY="218.0" />
-      
+      <TextField fx:id="password" layoutX="284.0" layoutY="255.0" />
+      <TextField fx:id="numCIN" layoutX="284.0" layoutY="296.0" />
+      <TextField fx:id="remarques" layoutX="284.0" layoutY="337.0" />
+      <CheckBox fx:id="estactive" layoutX="329.0" layoutY="380.0" mnemonicParsing="false" text="Oui" />
+      <DatePicker fx:id="dateInscription" layoutX="284.0" layoutY="422.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="adresse" layoutX="284.0" layoutY="467.0" />
+       <TextField fx:id="N_tel" layoutX="284.0" layoutY="513.0" />
       <!-- Champ Adresse -->
-      <Label layoutX="218.0" layoutY="426.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+      <Label layoutX="218.0" layoutY="467.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="adresse" layoutX="284.0" layoutY="426.0" />
+      
       
       <!-- Champ Numéro de téléphone -->
-      <Label layoutX="131.0" layoutY="472.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
+      <Label layoutX="131.0" layoutY="513.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="N_tel" layoutX="284.0" layoutY="472.0" />
-      <Button fx:id="validerButton" layoutX="204.0" layoutY="537.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="139.0" text="Valider" />
-      <Button fx:id="retour" layoutX="273.0" layoutY="590.0" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="31.0" prefWidth="153.0" text="Retour à la page d'accueil" />
+     
+      <Button fx:id="validerButton" layoutX="204.0" layoutY="578.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="139.0" text="Valider" />
+      <Button fx:id="retour" layoutX="273.0" layoutY="631.0" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="31.0" prefWidth="153.0" text="Retour à la page d'accueil" />
       
       <!-- Zone de texte supplémentaire (si nécessaire) -->
       <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <TextField fx:id="numCIN" layoutX="284.0" layoutY="255.0" />
-      <TextField fx:id="remarques" layoutX="284.0" layoutY="296.0" />
-      <Label layoutX="218.0" layoutY="255.0" prefHeight="26.0" prefWidth="58.0" text="numCIN" textFill="#141414">
+     
+      <Label layoutX="218.0" layoutY="296.0" prefHeight="26.0" prefWidth="58.0" text="numCIN" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="202.0" layoutY="296.0" prefHeight="26.0" prefWidth="76.0" text="remarques" textFill="#141414">
+      <Label layoutX="202.0" layoutY="337.0" prefHeight="26.0" prefWidth="76.0" text="remarques" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="213.0" layoutY="335.0" prefHeight="26.0" prefWidth="68.0" text="estactive" textFill="#141414">
+      <Label layoutX="213.0" layoutY="376.0" prefHeight="26.0" prefWidth="68.0" text="estactive" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="161.0" layoutY="381.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
+      <Label layoutX="161.0" layoutY="422.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dateInscription" layoutX="284.0" layoutY="381.0" prefHeight="25.0" prefWidth="149.0" />
-      <CheckBox fx:id="estactive" layoutX="329.0" layoutY="339.0" mnemonicParsing="false" text="Oui" />
-      <Button fx:id="Reset" layoutX="364.0" layoutY="537.0" mnemonicParsing="false" onAction="#ResetForm" prefHeight="31.0" prefWidth="139.0" text="Reset" />
+      
+      
+      <Button fx:id="Reset" layoutX="364.0" layoutY="578.0" mnemonicParsing="false" onAction="#ResetForm" prefHeight="31.0" prefWidth="139.0" text="Reset" />
+      
+      <Label layoutX="187.0" layoutY="255.0" prefHeight="26.0" prefWidth="85.0" text="mot de pass" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -30,6 +30,7 @@ public class App extends Application {
 		
 		switchToAccueil();
 //		switchToconnexionPage(); // Affiche la première vue par défaut
+//		switchToGererAdherent();
 	}
 
 	private void loadViews() throws IOException {
