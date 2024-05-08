@@ -14,6 +14,7 @@ public class Jeu {
 	private int duree_maxi;
 	private float complexite;
 	private float note_bgg;
+	private int annee;
 
 	
 	/**
@@ -23,8 +24,8 @@ public class Jeu {
 	 * @param adr
 	 * @param salaire
 	 */
-	public Jeu( String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
-				int duree_maxi, float complexite, float note_bgg)
+	public Jeu(String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
+				int duree_maxi, float complexite, float note_bgg, int annee)
 	{
 		super();
 		this.nom = nom;
@@ -38,6 +39,7 @@ public class Jeu {
 		this.duree_maxi = duree_maxi;
 		this.complexite = complexite;
 		this.note_bgg = note_bgg;
+		this.annee = annee;
 	}
 
 	/**
@@ -141,6 +143,15 @@ public class Jeu {
 	public void setNote_bgg(float note_bgg) {
 		this.note_bgg = note_bgg;
 	}
+
+	public int getAnnee() {
+		return annee;
+	}
+
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	}
+
 	
 	@Override
 	public String toString() {
