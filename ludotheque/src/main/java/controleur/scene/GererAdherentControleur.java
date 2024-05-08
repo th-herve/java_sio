@@ -1,15 +1,16 @@
 package controleur.scene;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 import modele.Adherent;
 import modele.dao.AdherentDAO;
 
@@ -64,13 +65,16 @@ public class GererAdherentControleur extends SceneControleur {
 		email.setCellValueFactory(new PropertyValueFactory<>("email"));
 		adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
 		tel.setCellValueFactory(new PropertyValueFactory<>("tel"));
-		dateInscription.setCellValueFactory(new PropertyValueFactory<>("dateInscription"));
+		estActif.setCellValueFactory(new PropertyValueFactory<>("estActif"));
 		remarques.setCellValueFactory(new PropertyValueFactory<>("remarques"));
 		numCIN.setCellValueFactory(new PropertyValueFactory<>("numCIN"));
-		estActif.setCellValueFactory(new PropertyValueFactory<>("estActif"));
+		dateInscription.setCellValueFactory(new PropertyValueFactory<>("dateInscription"));
 
 		// change l'affiche de estActif de True/False à Oui/Non
 		this.changeColumnBooleanValue(estActif);
+
+		// change le format de la date affichée pour date inscription
+		dateInscription.setCellFactory(this.formatDate(new TableColumn<Adherent, LocalDateTime>())); 
 
 		// ajout des cell editable
 		nom.setCellFactory(TextFieldTableCell.forTableColumn());
