@@ -1,26 +1,33 @@
 package modele;
 
-import java.time.LocalDateTime;
+import modele.dao.JeuDAO;
 
 public class JeuPhysique {
+
+	private Jeu jeu;
+
 	private int id;
 	private String etat;
-	private String disponible;
-	private int idJeu;
+	private Boolean estDisponible;
 
 
-	public JeuPhysique(int id, String etat, String disponible, int idJeu) {
+	public JeuPhysique(Jeu jeu, String etat, Boolean disponible) {
 		super();
-		this.id = id;
-		this.disponible = disponible;
+		this.jeu = jeu;
+		this.estDisponible = disponible;
 		this.etat = etat;
-		this.idJeu = idJeu;
+	}
+	public JeuPhysique(int idJeu, String etat, Boolean disponible) {
+		super();
+		this.jeu = JeuDAO.getInstance().read(idJeu);
+		this.estDisponible = disponible;
+		this.etat = etat;
 	}
 
 	public int getId() {
 		return id;
 	}
-
+	
 
 	public void setId(int id) {
 		this.id = id;
@@ -37,28 +44,32 @@ public class JeuPhysique {
 	}
 
 
-	public String getDisponible() {
-		return disponible;
+	public Boolean getEstDisponible() {
+		return estDisponible;
 	}
 
 
-	public void setDisponible(String disponible) {
-		this.disponible = disponible;
+	public void setEstDisponible(Boolean disponible) {
+		this.estDisponible = disponible;
 	}
 
 	public int getIdJeu() {
-		return idJeu;
+		return this.jeu.getId();
 	}
 
 
-	public void setIdJeu(int idJeu) {
-		this.idJeu = idJeu;
+	public Jeu getJeu() {
+		return this.jeu;
+	}
+
+	public void setJeu(Jeu jeu) {
+		this.jeu = jeu;
 	}
 
 
 	@Override
 	public String toString() {
-		return "jeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + disponible + ", id jeu ="+ idJeu + "]";
+		return super.toString() + "\njeuPhysique [numero=" + id + ", état = " + etat + ", disponible = " + estDisponible + ", id jeu ="+ this.getIdJeu() + "]";
 	}
 
 }

@@ -2,83 +2,90 @@ package controleur;
 
 import java.io.IOException;
 
+import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private Stage primaryStage;
-    private FXMLLoader accueilLoader, gererAdherentLoader, gererJeuLoader; // Vous pouvez avoir un chargeur pour chaque vue
+	// fenêtre principale de l'application
+	private Stage primaryStage;
 
-    private Parent accueilVue, gererAdherentVue, gererJeuVue; // Vue correspondant à la racine de chaque vue
+	private Page accueilPage;
+	private Page gererAdherentPage;
+	private Page gererJeuPage;
+	private Page gererJeuPhysiquePage;
+	private Page inscriptionAdherentPage;
+	private Page connexionPage;
 
-    private AccueilControleur accueilControleur;
-    private GererAdherentControleur gererAdherentControleur; // Contrôleur pour chaque vue
-    private GererJeuControleur gererJeuControleur; // Contrôleur pour chaque vue
+	@Override
+	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
+	// créé automatiquement)
+	public void start(Stage primaryStage) throws Exception {
+		this.primaryStage = primaryStage;
 
-	private String fxmlLocaltion = "/vue/";
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.primaryStage = primaryStage;
-
-//		primaryStage.setTitle("Ludo tech");
+		primaryStage.setMinWidth(700);
+		primaryStage.setMinHeight(500);
+		primaryStage.setTitle("Ludo tech");
 //		primaryStage.setMaximized(true);
 
-        loadViews(); // Chargez les vues depuis les fichiers FXML
-        //showAccueilVue(); // Affichez la première vue par défaut
-        showGererJeuVue();
-    }
+		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
-    private void loadViews() throws IOException {
-        accueilLoader = new FXMLLoader(getClass().getResource(this.fxmlLocaltion + "accueil.fxml"));
-        accueilVue = accueilLoader.load();
-        accueilControleur  = accueilLoader.getController();
-        accueilControleur.setApp(this);
+		switchToAccueil(); // Affiche la première vue par défaut
+	}
 
-        gererAdherentLoader = new FXMLLoader(getClass().getResource(this.fxmlLocaltion + "gererAdherent.fxml"));
-        gererAdherentVue = gererAdherentLoader.load();
-        gererAdherentControleur  = gererAdherentLoader.getController();
-        gererAdherentControleur.setApp(this);
+	private void loadViews() throws IOException {
+		
+		this.accueilPage = new Page(this, "accueil.fxml");
+		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
+		this.gererJeuPage = new Page(this, "gererJeu.fxml");
+		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
+		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
+//		this.connexionPage= new Page(this,"pageConnexion.fxml");
+	}
 
-        gererJeuLoader = new FXMLLoader(getClass().getResource(this.fxmlLocaltion + "gererJeu.fxml"));
-        gererJeuVue = gererJeuLoader.load();
-        gererJeuControleur  = gererJeuLoader.getController();
-        gererJeuControleur.setApp(this);
-    }
-    
-    private void showAccueilVue() {
-        Scene scene = new Scene(accueilVue);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+	// Méthodes pour passer d'une vue à une autre
+	public void switchToAccueil() {
+		primaryStage.setScene(accueilPage.getScene());
+		primaryStage.show();
+	}
 
-    private void showGererAdherentVue() {
-        Scene scene = new Scene(gererAdherentVue);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+	public void switchToGererAdherent() {
+		primaryStage.setScene(gererAdherentPage.getScene());
+		primaryStage.show();
+	}
 
-    private void showGererJeuVue() {
-        Scene scene = new Scene(gererJeuVue);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+	public void switchToGererJeu() {
+		primaryStage.setScene(gererJeuPage.getScene());
+		primaryStage.show();
+	}
 
-    // Méthodes pour passer d'une vue à une autre
-    // Ces méthodes peuvent être appelées à partir des contrôleurs ou des boutons dans les vues
-    public void switchToAccueil() {
-        showAccueilVue();
-    }
+	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
+	public void switchToGererJeuPhysique(int idJeu) {
+		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
+		ctl.setUp(idJeu);
+		Stage stage = new Stage();
+		stage.setScene(gererJeuPhysiquePage.getScene());
+		stage.setTitle("Gérer Jeux physiques");
+		stage.show();
+	}
+	
+	public void switchToinscriptionAdherent() {
+		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
+		Stage stage = new Stage();
+		stage.setScene(inscriptionAdherentPage.getScene());
+		stage.show();
+	}
 
-    public void switchToGererAdherent() {
-        showGererAdherentVue();
-    }
+//	public void switchToconnexionPage() {
+//		// TODO Auto-generated method stub
+//		primaryStage.setScene(connexionPage.getScene());
+//		primaryStage.show();
+//		
+//	}
+	public Page getGererAdherentPage() {
+		return gererAdherentPage;
+	}
 
-    public void switchToGererJeu() {
-        showGererJeuVue();
-    }
+	
 }

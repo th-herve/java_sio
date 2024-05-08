@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -14,74 +11,90 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.InscriptionAdherentControleur">
    <children>
-      <Button layoutX="1016.0" layoutY="724.0" mnemonicParsing="false" text="Retour à la page d'accueil">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <ImageView fitHeight="151.0" fitWidth="239.0" layoutX="56.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+      <!-- Logo -->
+      <ImageView fitHeight="93.0" fitWidth="178.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-			<Image url="@../../resources/logo_bettonludotheque.png" />
+            <Image url="@../../../images/logo_bettonludotheque.png" />
          </image>
       </ImageView>
-      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <AnchorPane layoutX="361.0" layoutY="223.0" prefHeight="406.0" prefWidth="559.0">
-         <children>
-            <TextField layoutX="182.0" layoutY="264.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label layoutX="93.0" layoutY="268.0" prefHeight="30.0" prefWidth="89.0" text="E-mail" textFill="#141414">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField layoutX="182.0" layoutY="204.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label layoutX="93.0" layoutY="151.0" prefHeight="30.0" prefWidth="89.0" text="Prénom" textFill="#141414">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField layoutX="182.0" layoutY="147.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label layoutX="93.0" layoutY="89.0" prefHeight="34.0" prefWidth="89.0" text="Nom" textFill="#141414">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField layoutX="182.0" layoutY="87.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label layoutX="-18.0" layoutY="208.0" prefHeight="30.0" prefWidth="200.0" text="Numéro de téléphone" textFill="#141414">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="156.0" layoutY="347.0" prefHeight="31.0" prefWidth="243.0">
-               <children>
-                  <Button fx:id="valider" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Valider" />
-                  <Button layoutX="130.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <Label layoutX="548.0" layoutY="137.0" text="Adhérent">
+      
+      <!-- Titre -->
+      <Label layoutX="291.0" layoutY="69.0" text="Adherent">
          <font>
-            <Font size="45.0" />
+            <Font size="28.0" />
          </font>
       </Label>
+      
+      <!-- Champ Nom -->
+      <Label layoutX="225.0" layoutY="149.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nom" layoutX="284.0" layoutY="149.0" />
+      
+      <!-- Champ Prénom -->
+      <Label layoutX="218.0" layoutY="183.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="prenom" layoutX="284.0" layoutY="183.0" />
+      
+      <!-- Champ Adresse Email -->
+      <Label layoutX="222.0" layoutY="218.0" prefHeight="26.0" prefWidth="50.0" text="mail" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="284.0" layoutY="218.0" />
+      
+      <!-- Champ Adresse -->
+      <Label layoutX="218.0" layoutY="426.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="adresse" layoutX="284.0" layoutY="426.0" />
+      
+      <!-- Champ Numéro de téléphone -->
+      <Label layoutX="131.0" layoutY="472.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="N_tel" layoutX="284.0" layoutY="472.0" />
+      <Button fx:id="validerButton" layoutX="204.0" layoutY="537.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="139.0" text="Valider" />
+      <Button fx:id="retour" layoutX="273.0" layoutY="590.0" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="31.0" prefWidth="153.0" text="Retour à la page d'accueil" />
+      
+      <!-- Zone de texte supplémentaire (si nécessaire) -->
+      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
+      <TextField fx:id="numCIN" layoutX="284.0" layoutY="255.0" />
+      <TextField fx:id="remarques" layoutX="284.0" layoutY="296.0" />
+      <Label layoutX="218.0" layoutY="255.0" prefHeight="26.0" prefWidth="58.0" text="numCIN" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="202.0" layoutY="296.0" prefHeight="26.0" prefWidth="76.0" text="remarques" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="335.0" prefHeight="26.0" prefWidth="68.0" text="estactive" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="161.0" layoutY="381.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateInscription" layoutX="284.0" layoutY="381.0" prefHeight="25.0" prefWidth="149.0" />
+      <CheckBox fx:id="estactive" layoutX="329.0" layoutY="339.0" mnemonicParsing="false" text="Oui" />
+      <Button fx:id="Reset" layoutX="364.0" layoutY="537.0" mnemonicParsing="false" onAction="#ResetForm" prefHeight="31.0" prefWidth="139.0" text="Reset" />
    </children>
 </AnchorPane>
