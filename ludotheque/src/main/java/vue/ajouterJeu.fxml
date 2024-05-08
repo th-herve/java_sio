@@ -196,12 +196,12 @@
             </VBox>
             <HBox alignment="BOTTOM_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="2">
                <children>
-                  <Button fx:id="ajouterBtn" mnemonicParsing="false" style="-fx-background-color: green; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+                  <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#ajouterJeu" style="-fx-background-color: green; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: darkblue; -fx-background-radius: 10;" text="Reset" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#ResetForm" style="-fx-background-color: darkblue; -fx-background-radius: 10;" text="Reset" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

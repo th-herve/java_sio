@@ -61,7 +61,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		setUpComboAnnee();
 	}
 
-	public void validation(ActionEvent event) {
+	public void ajouterJeu(ActionEvent event) {
 
 		Window owner = ajouterBtn.getScene().getWindow();
 
@@ -75,9 +75,9 @@ public class AjouterJeuControleur extends SceneControleur {
 			if (jeuDAO.create(jeu)) {
 				showAlert(Alert.AlertType.CONFIRMATION, owner, "Création réussie!", "Nouveau jeu inséré avec succès");
 
-				// update l'affichage des jeu
-				GererAdherentControleur ad = (GererAdherentControleur) this.app.getGererAdherentPage().getControleur();
-				ad.refreshTable();
+				// update l'affichage des jeu TODO
+//				GererAdherentControleur ad = (GererAdherentControleur) this.app.getGererAdherentPage().getControleur();
+//				ad.refreshTable();
 
 				this.ResetForm();
 			} else {
