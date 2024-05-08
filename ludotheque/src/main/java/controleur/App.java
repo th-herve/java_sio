@@ -24,8 +24,8 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
-		primaryStage.setMinWidth(600);
-		primaryStage.setMinHeight(400);
+		primaryStage.setMinWidth(700);
+		primaryStage.setMinHeight(500);
 		primaryStage.setTitle("Ludo tech");
 //		primaryStage.setMaximized(true);
 
@@ -63,7 +63,7 @@ public class App extends Application {
 	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
 	public void switchToGererJeuPhysique(int idJeu) {
 		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
-		ctl.setUp(1);
+		ctl.setUp(idJeu);
 		Stage stage = new Stage();
 		stage.setScene(gererJeuPhysiquePage.getScene());
 		stage.setTitle("Gérer Jeux physiques");
