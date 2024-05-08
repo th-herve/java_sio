@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.GererJeuControleur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererJeuControleur">
    <children>
       <Button layoutX="458.0" layoutY="666.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="Vérifier jeu">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button layoutX="710.0" layoutY="666.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="Ajouter jeu">
+      <Button layoutX="710.0" layoutY="666.0" mnemonicParsing="false" onAction="#switchToAjouterJeu" prefHeight="29.0" prefWidth="120.0" text="Ajouter jeu">
          <font>
             <Font size="18.0" />
          </font></Button>

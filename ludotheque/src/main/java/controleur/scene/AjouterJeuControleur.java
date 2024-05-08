@@ -123,8 +123,8 @@ public class AjouterJeuControleur extends SceneControleur {
 		int newAnnee = annee.getValue();
 
 		return new Jeu(nom.getText(), type.getText(), descriptif.getText(), 0, // quantité
-				newNbrJoueursMini, newNbrJoueursMaxi, newAgeMini, newDureeMini, newDureeMaxi, newComplexite, newNotBGG,
-				newAnnee);
+				newNbrJoueursMini, newNbrJoueursMaxi, newAgeMini, newDureeMini, newDureeMaxi, newComplexite, newAnnee,
+				newNotBGG);
 	}
 
 	private void setUpComboAnnee() {
@@ -134,10 +134,9 @@ public class AjouterJeuControleur extends SceneControleur {
 		for (int i = currentYear; i >= 1900; i--) {
 			anneeList.add(i);
 		}
-		
+
 		annee.getItems().addAll(anneeList);
 	}
-
 
 	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 		Alert alert = new Alert(alertType);
