@@ -2,27 +2,19 @@ package modele;
 
 import java.time.LocalDateTime;
 
-public class Personnel {
+public class Personnel extends Personne {
 
-	private int id_Personne;
 	private String role;
 	private LocalDateTime dateEntree;
 	private LocalDateTime dateSortie;
 
-	public Personnel(int id_Personne, String role, LocalDateTime dateEntree, LocalDateTime dateSortie) {
-		super();
-		this.id_Personne = id_Personne;
+	public Personnel(String nom, String prenom, String email, 
+					String adresse, String tel, String role, 
+					LocalDateTime dateEntree, LocalDateTime dateSortie) {
+		super(nom, prenom, email, adresse, tel);
 		this.role = role;
 		this.dateEntree = dateEntree;
 		this.dateSortie = dateSortie;
-	}
-
-	public int getId_Personne() {
-		return id_Personne;
-	}
-
-	public void setId_Personne(int id_Personne) {
-		this.id_Personne = id_Personne;
 	}
 
 	public String getRole() {
@@ -51,7 +43,8 @@ public class Personnel {
 
 	@Override
 	public String toString() {
-		return "Personnel [id_Personne=" + id_Personne + ", role=" + role + ", dateEntree=" + dateEntree
+		return super.toString() + "\nPersonnel [id_Personne=" + this.getId() + ", role=" + role 
+				+ ", dateEntree=" + dateEntree
 				+ ", dateSortie=" + dateSortie + "]";
 	}
 }
