@@ -44,7 +44,7 @@ public class JeuDAO extends DAO<Jeu> {
 		try {
 
 			String requete = "INSERT INTO "+TABLE+" ("+NOM+","+TYPE+" , "+DESCRIPTIF+","+QUANTITE+","+NBR_JOUEURS_MINI +","+NBR_JOUEURS_MAXI+","+AGE_MINI +","+DUREE_MINI+","+DUREE_MAXI+","
-							 +COMPLEXITE+","+NOTE_BGG+ANNEE+") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							 +COMPLEXITE+","+NOTE_BGG+", "+ANNEE+") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
 			pst.setString(1, jeu.getNom());
