@@ -24,8 +24,10 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 
+		primaryStage.setMinWidth(600);
+		primaryStage.setMinHeight(400);
 		primaryStage.setTitle("Ludo tech");
-		primaryStage.setMaximized(true);
+//		primaryStage.setMaximized(true);
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
@@ -69,8 +71,10 @@ public class App extends Application {
 	}
 	
 	public void switchToinscriptionAdherent() {
-		primaryStage.setScene(inscriptionAdherentPage.getScene());
-		primaryStage.show();
+		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
+		Stage stage = new Stage();
+		stage.setScene(inscriptionAdherentPage.getScene());
+		stage.show();
 	}
 
 //	public void switchToconnexionPage() {
@@ -79,5 +83,9 @@ public class App extends Application {
 //		primaryStage.show();
 //		
 //	}
+	public Page getGererAdherentPage() {
+		return gererAdherentPage;
+	}
+
 	
 }
