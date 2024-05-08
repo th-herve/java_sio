@@ -33,6 +33,9 @@ public class GererAdherentControleur extends SceneControleur {
 	TableColumn<Adherent, String> email;
 
 	@FXML
+	TableColumn<Adherent, String> adresse;
+
+	@FXML
 	TableColumn<Adherent, String> tel;
 
 	@FXML
@@ -59,6 +62,7 @@ public class GererAdherentControleur extends SceneControleur {
 		nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
 		prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
 		email.setCellValueFactory(new PropertyValueFactory<>("email"));
+		adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
 		tel.setCellValueFactory(new PropertyValueFactory<>("tel"));
 		dateInscription.setCellValueFactory(new PropertyValueFactory<>("dateInscription"));
 		remarques.setCellValueFactory(new PropertyValueFactory<>("remarques"));
@@ -88,6 +92,13 @@ public class GererAdherentControleur extends SceneControleur {
 			final String value = event.getNewValue();
 			Adherent adherent = event.getRowValue();
 			adherent.setEmail(value);
+			adherentDAO.update(adherent);
+		});
+		adresse.setCellFactory(TextFieldTableCell.forTableColumn());
+		adresse.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setAdresse(value);
 			adherentDAO.update(adherent);
 		});
 		tel.setCellFactory(TextFieldTableCell.forTableColumn());

@@ -22,6 +22,7 @@
             <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
             <TableColumn fx:id="prenom" prefWidth="75.0" text="Prenom" />
             <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="adresse" prefWidth="75.0" text="Adresse" />
             <TableColumn fx:id="tel" prefWidth="75.0" text="Telephone" />
             <TableColumn fx:id="estActif" prefWidth="75.0" text="Est actif" />
             <TableColumn fx:id="remarques" prefWidth="75.0" text="Remarques" />
