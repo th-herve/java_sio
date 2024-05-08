@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-public class AjouterJeu extends Main{
+public class AjouterJeuControleur extends Main{
 
 	
 	public void initialize() {

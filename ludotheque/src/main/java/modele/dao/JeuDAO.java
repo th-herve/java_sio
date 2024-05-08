@@ -36,10 +36,9 @@ public class JeuDAO extends DAO<Jeu> {
 		return instance;
 	}
 
-	public JeuDAO() {
+	private JeuDAO() {
 		super();
 	}
-
 
 	public boolean create(Jeu jeu) {
 		boolean succes=true;
@@ -116,8 +115,8 @@ public class JeuDAO extends DAO<Jeu> {
 			pst.setInt(8, 		obj.getDuree_mini());
 			pst.setInt(9, 		obj.getDuree_maxi());
 			pst.setFloat(10, 	obj.getComplexite());
-			pst.setFloat(11, 	obj.getComplexite());
-			pst.setInt(12, 	obj.getAnnee());
+			pst.setInt(11, 	obj.getAnnee());
+			pst.setFloat(12, 	obj.getNote_bgg()); 
 			pst.setInt(13, 		obj.getId());
 			pst.executeUpdate();
 			donnees.put(obj.getId(), obj);

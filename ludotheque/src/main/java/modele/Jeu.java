@@ -12,8 +12,8 @@ public class Jeu {
 	private int ageMini;
 	private int duree_mini;
 	private int duree_maxi;
-	private float complexite;
 	private int annee;
+	private float complexite;
 	private float note_bgg;
 
 	public Jeu( String nom, String type, String descriptif, int quantite, int nbr_joueurs_mini, int nbr_joueurs_maxi, int ageMini, int duree_mini, 
@@ -115,6 +115,14 @@ public class Jeu {
 		this.duree_maxi = duree_maxi;
 	}
 
+	public int getAnnee() {
+		return annee;
+	}
+	
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	}
+	
 	public float getComplexite() {
 		return complexite;
 	}
@@ -123,13 +131,6 @@ public class Jeu {
 		this.complexite = complexite;
 	}
 	
-	public int getAnnee() {
-		return annee;
-	}
-
-	public void setAnnee(int annee) {
-		this.annee = annee;
-	}
 
 	public float getNote_bgg() {
 		return note_bgg;
