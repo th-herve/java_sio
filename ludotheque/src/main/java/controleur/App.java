@@ -81,5 +81,9 @@ public class App extends Application {
 //		primaryStage.show();
 //		
 //	}
+	public Page getGererAdherentPage() {
+		return gererAdherentPage;
+	}
+
 	
 }
