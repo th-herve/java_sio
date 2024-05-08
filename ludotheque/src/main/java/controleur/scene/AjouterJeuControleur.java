@@ -1,16 +1,19 @@
 package controleur.scene;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.xml.bind.ValidationException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
-import modele.Adherent;
 import modele.Jeu;
 import modele.dao.JeuDAO;
 
@@ -22,7 +25,7 @@ public class AjouterJeuControleur extends SceneControleur {
 	private TextField ageMini;
 
 	@FXML
-	private TextField annee;
+	private ComboBox<Integer> annee;
 
 	@FXML
 	private TextField complexite;
@@ -55,6 +58,7 @@ public class AjouterJeuControleur extends SceneControleur {
 	private Button ajouterBtn;
 
 	public void initialize() {
+		setUpComboAnnee();
 	}
 
 	public void validation(ActionEvent event) {
@@ -103,7 +107,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		ageMini.clear();
 		complexite.clear();
 		notBGG.clear();
-		annee.clear();
+		annee.setValue(null);
 
 	}
 
@@ -116,11 +120,24 @@ public class AjouterJeuControleur extends SceneControleur {
 		int newDureeMaxi = Integer.parseInt(dureeMaxi.getText());
 		float newComplexite = Float.parseFloat(complexite.getText());
 		float newNotBGG = Float.parseFloat(notBGG.getText());
-		int newAnnee = Integer.parseInt(annee.getText());
+		int newAnnee = annee.getValue();
 
 		return new Jeu(nom.getText(), type.getText(), descriptif.getText(), 0, // quantité
-				newNbrJoueursMini, newNbrJoueursMaxi, newAgeMini, newDureeMini, newDureeMaxi, newComplexite, newNotBGG, newAnnee);
+				newNbrJoueursMini, newNbrJoueursMaxi, newAgeMini, newDureeMini, newDureeMaxi, newComplexite, newNotBGG,
+				newAnnee);
 	}
+
+	private void setUpComboAnnee() {
+		List<Integer> anneeList = new ArrayList<Integer>();
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+		for (int i = currentYear; i >= 1900; i--) {
+			anneeList.add(i);
+		}
+		
+		annee.getItems().addAll(anneeList);
+	}
+
 
 	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 		Alert alert = new Alert(alertType);
