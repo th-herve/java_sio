@@ -28,6 +28,10 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 
+	public void switchToAjouterJeu() {
+		app.switchToAjouterJeu();
+	}
+
 	public void switchToinscriptionAdherent() {
 		app.switchToinscriptionAdherent();
 	}
