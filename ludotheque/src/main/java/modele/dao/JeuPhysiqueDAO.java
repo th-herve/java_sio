@@ -195,4 +195,3 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	}
 
 }
-
