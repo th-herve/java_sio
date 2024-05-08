@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import modele.Adherent;
@@ -48,6 +49,7 @@ public class GererAdherentControleur extends SceneControleur {
 
 	public void initialize() {
 		this.initializeColumn();
+		this.tableAdherent.setEditable(true);
 		this.refreshTable();
 
 	}
@@ -65,6 +67,50 @@ public class GererAdherentControleur extends SceneControleur {
 
 		// change l'affiche de estActif de True/False à Oui/Non
 		this.changeColumnBooleanValue(estActif);
+
+		// ajout des cell editable
+		nom.setCellFactory(TextFieldTableCell.forTableColumn());
+		nom.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setNom(value);
+			adherentDAO.update(adherent);
+		});
+		prenom.setCellFactory(TextFieldTableCell.forTableColumn());
+		prenom.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setPrenom(value);
+			adherentDAO.update(adherent);
+		});
+		email.setCellFactory(TextFieldTableCell.forTableColumn());
+		email.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setEmail(value);
+			adherentDAO.update(adherent);
+		});
+		tel.setCellFactory(TextFieldTableCell.forTableColumn());
+		tel.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setTel(value);
+			adherentDAO.update(adherent);
+		});
+		remarques.setCellFactory(TextFieldTableCell.forTableColumn());
+		remarques.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setRemarques(value);
+			adherentDAO.update(adherent);
+		});
+		numCIN.setCellFactory(TextFieldTableCell.forTableColumn());
+		numCIN.setOnEditCommit(event -> {
+			final String value = event.getNewValue();
+			Adherent adherent = event.getRowValue();
+			adherent.setNumCIN(value);
+			adherentDAO.update(adherent);
+		});
 
 	}
 
