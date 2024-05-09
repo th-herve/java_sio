@@ -1,93 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AjouterJeuControleur">
-   <children>
-      <ImageView fitHeight="93.0" fitWidth="178.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/logo_bettonludotheque.png" />
-         </image>
-      </ImageView>
-      
-      <Label layoutX="268.0" layoutY="69.0" prefHeight="40.0" prefWidth="153.0" text="NouveauJeu">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      
-      <Label layoutX="225.0" layoutY="135.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nom" layoutX="277.0" layoutY="135.0" />
-      
-      <Label layoutX="222.0" layoutY="169.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="prenom" layoutX="277.0" layoutY="169.0" />
-      
-      <Label layoutX="222.0" layoutY="204.0" prefHeight="26.0" prefWidth="50.0" text="mail" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="email" layoutX="277.0" layoutY="204.0" />
-      
-      <Label layoutX="202.0" layoutY="426.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="adresse" layoutX="284.0" layoutY="426.0" />
-      
-      <Label layoutX="121.0" layoutY="472.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="N_tel" layoutX="284.0" layoutY="472.0" />
-      
-      <Button layoutX="221.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Annuler" />
-      <Button fx:id="validerButton" layoutX="370.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Valider" />
-      <Button fx:id="retour" layoutX="268.0" layoutY="603.0" mnemonicParsing="false" text="Retour à la page d'accueil" />
-      
-      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <TextField fx:id="numCIN" layoutX="284.0" layoutY="254.0" />
-      <TextField fx:id="remarques" layoutX="277.0" layoutY="295.0" />
-      <Label layoutX="207.0" layoutY="254.0" prefHeight="26.0" prefWidth="58.0" text="numCIN" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="189.0" layoutY="295.0" prefHeight="26.0" prefWidth="76.0" text="remarques" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="197.0" layoutY="338.0" prefHeight="26.0" prefWidth="68.0" text="estactive" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="154.0" layoutY="380.0" prefHeight="26.0" prefWidth="106.0" text="dateInscription" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="dateInscription" layoutX="280.0" layoutY="380.0" />
-      <CheckBox fx:id="estactive" layoutX="281.0" layoutY="338.0" mnemonicParsing="false" text="Oui" />
-   </children>
-</AnchorPane>
+<BorderPane maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AjouterJeuControleur">
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+   <center>
+      <GridPane hgap="20.0" maxHeight="600.0" maxWidth="1000.0" minWidth="10.0" vgap="20.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" percentWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="TOP_CENTER" GridPane.columnSpan="2">
+               <children>
+                  <Label text="Ajouter jeu">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox GridPane.rowIndex="1">
+               <children>
+                  <Label text="Nom">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nom">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Type">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="type">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+               <children>
+                  <Label text="Descriptif">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="descriptif" />
+               </children>
+            </VBox>
+            <VBox GridPane.rowIndex="4">
+               <children>
+                  <Label text="Nombre de joueurs">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nbrJoueursMini" promptText="Minimum">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Label>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nbrJoueursMaxi" promptText="Maximum">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.rowIndex="5">
+               <children>
+                  <Label text="Durée d' une partie">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="dureeMini" promptText="Maximum">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Label>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="dureeMaxi" promptText="Maximum">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.rowIndex="6">
+               <children>
+                  <Label text="Complexité">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="complexite" promptText="Note sur 5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <Label text="Note BGG">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="noteBGG" promptText="Note sur 10">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.rowIndex="7">
+               <children>
+                  <Label text="Age minimum">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ageMini">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <children>
+                  <Label text="Année de sortie">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="annee" minHeight="30.0" promptText="  -  " />
+               </children>
+            </VBox>
+            <HBox alignment="BOTTOM_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="2">
+               <children>
+                  <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#ajouterJeu" style="-fx-background-color: green; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#ResetForm" style="-fx-background-color: darkblue; -fx-background-radius: 10;" text="Reset" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
+   <top>
+      <HBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

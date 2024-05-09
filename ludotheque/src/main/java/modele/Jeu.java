@@ -139,7 +139,7 @@ public class Jeu {
 	public void setNote_bgg(float note_bgg) {
 		this.note_bgg = note_bgg;
 	}
-		
+	
 	@Override
 	public String toString() {
 		return "Jeu [id=" + id + ", nom=" + nom + ", type=" + type + ", descriptif=" + descriptif + ", quantite="

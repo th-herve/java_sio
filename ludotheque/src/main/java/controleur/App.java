@@ -14,6 +14,7 @@ public class App extends Application {
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
+	private Page ajouterJeuPage;
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
@@ -39,6 +40,7 @@ public class App extends Application {
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
+		this.ajouterJeuPage = new Page(this, "ajouterJeu.fxml");
 		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
 //		this.connexionPage= new Page(this,"pageConnexion.fxml");
@@ -77,6 +79,13 @@ public class App extends Application {
 		stage.show();
 	}
 
+	public void switchToAjouterJeu() {
+		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
+		Stage stage = new Stage();
+		stage.setScene(ajouterJeuPage.getScene());
+		stage.show();
+	}
+
 //	public void switchToconnexionPage() {
 //		// TODO Auto-generated method stub
 //		primaryStage.setScene(connexionPage.getScene());
@@ -85,6 +94,10 @@ public class App extends Application {
 //	}
 	public Page getGererAdherentPage() {
 		return gererAdherentPage;
+	}
+
+	public Page getGererJeuPage() {
+		return gererJeuPage;
 	}
 
 	

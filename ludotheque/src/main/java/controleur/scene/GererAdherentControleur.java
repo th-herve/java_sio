@@ -135,6 +135,8 @@ public class GererAdherentControleur extends SceneControleur {
 	public void refreshTable() {
 		AdherentDAO adherentDAO = AdherentDAO.getInstance();
 		List<Adherent> adherentList = adherentDAO.readAll();
+		
+		tableAdherent.getItems().clear();
 
 		for (Adherent ad : adherentList) {
 			tableAdherent.getItems().add(ad);
@@ -154,5 +156,10 @@ public class GererAdherentControleur extends SceneControleur {
 			}
 		}
 	}
+	
+	public void addToTableView(Adherent adherent) {
+		tableAdherent.getItems().add(adherent);
+	}
+	
 
 }
