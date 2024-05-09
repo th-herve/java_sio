@@ -78,12 +78,10 @@ public class AjouterJeuControleur extends SceneControleur {
 
 			Jeu jeu = getNewJeu();
 
-			// appelle create method de PersonneDAO pour insert Personne object dans la base
-			// de donner
 			if (jeuDAO.create(jeu)) {
 				showAlert(Alert.AlertType.CONFIRMATION, owner, "Création réussie!", "Nouveau jeu inséré avec succès");
 
-				// update l'affichage des jeu 
+				// update l'affichage des jeu
 				GererJeuControleur ctl = (GererJeuControleur) this.app.getGererJeuPage().getControleur();
 				ctl.addToTableView(jeu);
 
@@ -98,10 +96,31 @@ public class AjouterJeuControleur extends SceneControleur {
 	}
 
 	private boolean validateForm() throws ValidationException {
+		String message = "";
+		Boolean valid = true;
+
+		// teste s'il y a un nom
 		if (nom.getText().isEmpty()) {
-			throw new ValidationException("Veuillez spécifier un nom.");
+			message += "- Veuillez spécifier un nom.";
+			valid = false;
 		}
-		return true;
+
+		// test si complexité moins de 5
+		if (getFloat(complexite) > 5) {
+			message += "\n- La note de complexité doit être inférieure ou égale à 5.";
+			valid = false;
+		}
+
+		// test si noteBGG moins de 10
+		if (getFloat(notBGG) > 10) {
+			message += "\n- La note BGG doit être inférieure ou égale à 10.";
+			valid = false;
+		}
+
+		if (!valid) {
+			throw new ValidationException(message);
+		}
+		return valid;
 	}
 
 	public void ResetForm() {
@@ -121,14 +140,14 @@ public class AjouterJeuControleur extends SceneControleur {
 
 	private Jeu getNewJeu() {
 
-		int newNbrJoueursMini = Integer.parseInt(nbrJoueursMini.getText());
-		int newNbrJoueursMaxi = Integer.parseInt(nbrJoueursMaxi.getText());
-		int newAgeMini = Integer.parseInt(ageMini.getText());
-		int newDureeMini = Integer.parseInt(dureeMini.getText());
-		int newDureeMaxi = Integer.parseInt(dureeMaxi.getText());
-		float newComplexite = Float.parseFloat(complexite.getText());
-		float newNotBGG = Float.parseFloat(notBGG.getText());
-		int newAnnee = annee.getValue();
+		int newNbrJoueursMini = getInt(nbrJoueursMini);
+		int newNbrJoueursMaxi = getInt(nbrJoueursMaxi);
+		int newAgeMini = getInt(ageMini);
+		int newDureeMini = getInt(dureeMini);
+		int newDureeMaxi = getInt(dureeMaxi);
+		float newComplexite = getFloat(complexite);
+		float newNotBGG = getFloat(notBGG);
+		int newAnnee = annee.getValue() != null ? annee.getValue() : 0;
 
 		return new Jeu(nom.getText(), type.getText(), descriptif.getText(), 0, // quantité
 				newNbrJoueursMini, newNbrJoueursMaxi, newAgeMini, newDureeMini, newDureeMaxi, newComplexite, newAnnee,
@@ -153,6 +172,26 @@ public class AjouterJeuControleur extends SceneControleur {
 		alert.setContentText(message);
 		alert.initOwner(owner);
 		alert.show();
+	}
+
+	private int getInt(TextField textField) {
+		int newValue;
+		try {
+			newValue = Integer.parseInt(textField.getText());
+		} catch (NumberFormatException e) {
+			newValue = 0;
+		}
+		return newValue;
+	}
+
+	private float getFloat(TextField textField) {
+		float newValue;
+		try {
+			newValue = Float.parseFloat(textField.getText());
+		} catch (NumberFormatException e) {
+			newValue = 0;
+		}
+		return newValue;
 	}
 
 }
