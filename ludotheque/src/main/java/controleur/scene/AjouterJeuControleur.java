@@ -49,7 +49,7 @@ public class AjouterJeuControleur extends SceneControleur {
 	private TextField nom;
 
 	@FXML
-	private TextField notBGG;
+	private TextField noteBGG;
 
 	@FXML
 	private TextField type;
@@ -65,7 +65,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		this.forceIntegerOnTextField(dureeMaxi);
 		this.forceIntegerOnTextField(nbrJoueursMini);
 		this.forceIntegerOnTextField(nbrJoueursMaxi);
-		this.forceFloatOnTextField(notBGG);
+		this.forceFloatOnTextField(noteBGG);
 		this.forceFloatOnTextField(complexite);
 	}
 
@@ -112,7 +112,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		}
 
 		// test si noteBGG moins de 10
-		if (getFloat(notBGG) > 10) {
+		if (getFloat(noteBGG) > 10) {
 			message += "\n- La note BGG doit être inférieure ou égale à 10.";
 			valid = false;
 		}
@@ -133,7 +133,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		dureeMaxi.clear();
 		ageMini.clear();
 		complexite.clear();
-		notBGG.clear();
+		noteBGG.clear();
 		annee.setValue(null);
 
 	}
@@ -146,7 +146,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		int newDureeMini = getInt(dureeMini);
 		int newDureeMaxi = getInt(dureeMaxi);
 		float newComplexite = getFloat(complexite);
-		float newNotBGG = getFloat(notBGG);
+		float newNotBGG = getFloat(noteBGG);
 		int newAnnee = annee.getValue() != null ? annee.getValue() : 0;
 
 		return new Jeu(nom.getText(), type.getText(), descriptif.getText(), 0, // quantité

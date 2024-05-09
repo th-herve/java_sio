@@ -163,7 +163,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="notBGG" promptText="Note sur 10">
+                  <TextField fx:id="noteBGG" promptText="Note sur 10">
                      <font>
                         <Font size="15.0" />
                      </font>
