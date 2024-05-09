@@ -55,23 +55,10 @@ public class GererJeuControleur extends SceneControleur{
 
 		initializeColumn();
 
-		JeuDAO jeuDAO = JeuDAO.getInstance();
-		List<Jeu> jeuxList = jeuDAO.readAll();
-
-		for (Jeu jeux : jeuxList) {
-			tableJeu.getItems().addAll(jeux);
-		}
-		tableJeu.setEditable(true);
-		tableJeu.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-		tableJeu.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.DELETE) {
-                supprimerJeuSelectionne();
-            }
-        });
+		refreshTable();
 
 	}
-	
+
     private void supprimerJeuSelectionne() {
     	Jeu selectedJeu = tableJeu.getSelectionModel().getSelectedItem();
         if (selectedJeu != null) {        	
@@ -197,6 +184,26 @@ public class GererJeuControleur extends SceneControleur{
 
 
 	}
+
+	public void refreshTable() {
+		JeuDAO jeuDAO = JeuDAO.getInstance();
+		List<Jeu> jeuxList = jeuDAO.readAll();
+		
+		tableJeu.getItems().clear();
+
+		for (Jeu jeux : jeuxList) {
+			tableJeu.getItems().addAll(jeux);
+		}
+		tableJeu.setEditable(true);
+		tableJeu.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		tableJeu.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                supprimerJeuSelectionne();
+            }
+        });
+	}
+	
 
 	//	private void handleActionFloat(CellEditEvent<Jeu, String> event) {
 	//		TableColumn<Jeu, String> column = event.getTableColumn();

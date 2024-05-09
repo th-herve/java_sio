@@ -33,7 +33,6 @@ public class App extends Application {
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
 		switchToAccueil(); // Affiche la première vue par défaut
-		switchToAjouterJeu();
 	}
 
 	private void loadViews() throws IOException {
@@ -95,6 +94,10 @@ public class App extends Application {
 //	}
 	public Page getGererAdherentPage() {
 		return gererAdherentPage;
+	}
+
+	public Page getGererJeuPage() {
+		return gererJeuPage;
 	}
 
 	
