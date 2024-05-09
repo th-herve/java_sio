@@ -65,6 +65,7 @@ public class AjouterJeuControleur extends SceneControleur {
 		this.forceIntegerOnTextField(dureeMaxi);
 		this.forceIntegerOnTextField(nbrJoueursMini);
 		this.forceIntegerOnTextField(nbrJoueursMaxi);
+		this.forceFloatOnTextField(notBGG);
 	}
 
 	public void ajouterJeu(ActionEvent event) {
@@ -81,7 +82,7 @@ public class AjouterJeuControleur extends SceneControleur {
 			if (jeuDAO.create(jeu)) {
 				showAlert(Alert.AlertType.CONFIRMATION, owner, "Création réussie!", "Nouveau jeu inséré avec succès");
 
-				// update l'affichage des jeu TODO
+				// update l'affichage des jeu 
 				GererJeuControleur ctl = (GererJeuControleur) this.app.getGererJeuPage().getControleur();
 				ctl.addToTableView(jeu);
 

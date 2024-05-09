@@ -69,9 +69,10 @@ public abstract class SceneControleur {
 
 	}
 
-
 	/**
-	 * Permet de formatter l'affichage d'une date dans une cell de tableView, avec le fromat "dd/MM/yyyy" par défaut
+	 * Permet de formatter l'affichage d'une date dans une cell de tableView, avec
+	 * le fromat "dd/MM/yyyy" par défaut
+	 * 
 	 * @param <T> classe du modèle utilisée dans le controleur (ex : Adherent)
 	 * @param col
 	 * @return cell qui sera affichée
@@ -80,9 +81,11 @@ public abstract class SceneControleur {
 			TableColumn<T, LocalDateTime> col) {
 		return formatDate(col, "dd/MM/yyyy");
 	}
+
 	/**
 	 * Permet de formatter l'affichage d'une date dans une cell de tableView
-	 * @param <T> classe du modèle utilisée dans le controleur (ex : Adherent)
+	 * 
+	 * @param <T>    classe du modèle utilisée dans le controleur (ex : Adherent)
 	 * @param col
 	 * @param format ex : "dd.MM.yyyy"
 	 * @return cell qui sera affichée
@@ -109,14 +112,26 @@ public abstract class SceneControleur {
 			}
 		};
 	}
-	
+
 	protected void forceIntegerOnTextField(TextField textField) {
-		
+
 		textField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.matches("\\d*")) {
-					textField.setText(newValue.replaceAll("[^\\d]", ""));
+					textField.setText(oldValue);
+				}
+			}
+		});
+	}
+
+	protected void forceFloatOnTextField(TextField textField) {
+		textField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*\\.?\\d*")) {
+//					newValue = newValue.replaceAll("[^\\d.]", "");
+					textField.setText(oldValue);
 				}
 			}
 		});
