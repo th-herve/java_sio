@@ -59,6 +59,12 @@ public class AjouterJeuControleur extends SceneControleur {
 
 	public void initialize() {
 		setUpComboAnnee();
+
+		this.forceIntegerOnTextField(ageMini);
+		this.forceIntegerOnTextField(dureeMini);
+		this.forceIntegerOnTextField(dureeMaxi);
+		this.forceIntegerOnTextField(nbrJoueursMini);
+		this.forceIntegerOnTextField(nbrJoueursMaxi);
 	}
 
 	public void ajouterJeu(ActionEvent event) {
