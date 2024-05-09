@@ -76,8 +76,8 @@ public class AjouterJeuControleur extends SceneControleur {
 				showAlert(Alert.AlertType.CONFIRMATION, owner, "Création réussie!", "Nouveau jeu inséré avec succès");
 
 				// update l'affichage des jeu TODO
-//				GererAdherentControleur ad = (GererAdherentControleur) this.app.getGererAdherentPage().getControleur();
-//				ad.refreshTable();
+				GererJeuControleur ctl = (GererJeuControleur) this.app.getGererJeuPage().getControleur();
+				ctl.addToTableView(jeu);
 
 				this.ResetForm();
 			} else {

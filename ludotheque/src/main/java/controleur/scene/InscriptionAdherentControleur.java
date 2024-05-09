@@ -89,7 +89,7 @@ public class InscriptionAdherentControleur extends SceneControleur {
 
 				// update l'affichage des adhérents
 				GererAdherentControleur ad = (GererAdherentControleur) this.app.getGererAdherentPage().getControleur();
-				ad.refreshTable();
+				ad.addToTableView(adherent);
 				
 				this.ResetForm();
 			} else {

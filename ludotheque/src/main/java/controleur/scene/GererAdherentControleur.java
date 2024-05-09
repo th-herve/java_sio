@@ -156,5 +156,10 @@ public class GererAdherentControleur extends SceneControleur {
 			}
 		}
 	}
+	
+	public void addToTableView(Adherent adherent) {
+		tableAdherent.getItems().add(adherent);
+	}
+	
 
 }

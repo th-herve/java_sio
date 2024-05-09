@@ -203,6 +203,10 @@ public class GererJeuControleur extends SceneControleur{
             }
         });
 	}
+
+	public void addToTableView(Jeu jeu) {
+		tableJeu.getItems().add(jeu);
+	}
 	
 
 	//	private void handleActionFloat(CellEditEvent<Jeu, String> event) {
