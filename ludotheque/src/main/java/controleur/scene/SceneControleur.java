@@ -32,6 +32,10 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 
+	public void switchToGererEmprunt() {
+		app.switchToGererEmprunt();
+	}
+
 	public void switchToAjouterJeu() {
 		app.switchToAjouterJeu();
 	}
