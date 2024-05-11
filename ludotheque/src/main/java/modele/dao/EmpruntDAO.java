@@ -205,6 +205,44 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		return listeEmprunts;
 	}
 
+	public List<Emprunt> readAll() {
+
+		List<Emprunt> empruntList = new ArrayList<Emprunt>();
+
+		try {
+
+			String requete = "SELECT * FROM "  + TABLE;
+			ResultSet rs = Connexion.executeQuery(requete);
+
+			while (rs.next()) {
+
+				LocalDateTime dateEmprunt = rs.getTimestamp(DATE_EMPRUNT).toLocalDateTime();
+
+				// pour la date de retour, comme elle peut etre null dans la bd, il faut controler
+				Timestamp timestamp = rs.getTimestamp(DATE_RETOUR);
+				LocalDateTime dateRetour = null;
+				if (timestamp != null) {
+					dateRetour = timestamp.toLocalDateTime();
+				}
+				Emprunt emprunt = new Emprunt(rs.getInt(ID_JEUPHYSIQUE), rs.getInt(ID_ADHERENT), dateEmprunt, dateRetour);
+				
+				// recupere la clef utilisee dans la hashmap donnee
+				int idEmprunt = getClefDonne(emprunt);
+
+				// si emprunt deja dans donne, on ajoute cette instance
+				if (donnees.containsKey(idEmprunt)) {
+					System.out.println("r�cup�r�");
+					emprunt = donnees.get(idEmprunt);
+				} 
+				empruntList.add(emprunt);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return empruntList;
+	}
+
 
 	public Integer getClefDonne(Emprunt emprunt) {
 
