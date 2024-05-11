@@ -31,6 +31,12 @@ public class GererEmpruntControleur extends SceneControleur {
     @FXML
     TableColumn<Emprunt, LocalDateTime> dateRetour;
 
+    @FXML
+    private TableColumn<Emprunt, String> nomAdherent;
+
+    @FXML
+    private TableColumn<Emprunt, String> nomJeuPhysique;
+
     public void initialize() {
         initializeColumn();
 
@@ -47,6 +53,8 @@ public class GererEmpruntControleur extends SceneControleur {
         idAdherent.setCellValueFactory(new PropertyValueFactory<>("idAdherent"));
         dateEmprunt.setCellValueFactory(new PropertyValueFactory<>("dateEmprunt"));
         dateRetour.setCellValueFactory(new PropertyValueFactory<>("dateRetour"));
+        nomAdherent.setCellValueFactory(new PropertyValueFactory<>("nomAdherent"));
+        nomJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("nomJeuPhysique"));
 
     }
 }

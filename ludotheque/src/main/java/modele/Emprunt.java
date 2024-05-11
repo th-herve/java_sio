@@ -3,14 +3,18 @@ package modele;
 
 import java.time.LocalDateTime;
 
+import modele.dao.AdherentDAO;
+import modele.dao.JeuPhysiqueDAO;
+
 public class Emprunt {
 
 	private int idJeuPhysique;
-	private int idAdherent; // TODO c'est en nvarchar dans la base, changer en bool et renomer estActif
+	private int idAdherent;
 	private LocalDateTime dateEmprunt;
-	private LocalDateTime dateRetour; // TODO c'est un int dans la bd, changer en str 
-	//private LocalDateTime dateInscription;
-
+	private LocalDateTime dateRetour;
+	
+	private JeuPhysique jeuPhysique;
+	private Adherent adherent;
 
 	public Emprunt(int idJeuPhysique, int idAdherent, LocalDateTime dateEmprunt, LocalDateTime dateRetour) {
 		super();
@@ -18,7 +22,9 @@ public class Emprunt {
 		this.idAdherent = idAdherent;
 		this.dateEmprunt = dateEmprunt;
 		this.dateRetour = dateRetour;
-		//this.LocalDateTimeInscription = LocalDateTimeInscription;
+		
+		this.jeuPhysique = JeuPhysiqueDAO.getInstance().read(idJeuPhysique);
+		this.adherent = AdherentDAO.getInstance().read(idAdherent);
 	}
 
 
@@ -52,6 +58,14 @@ public class Emprunt {
 
 	public void setDateRetour(LocalDateTime dateRetour) {
 		this.dateRetour = dateRetour;
+	}
+	
+	public String getNomAdherent() {
+		return this.adherent.getNom();
+	}
+
+	public String getNomJeuPhysique() {
+		return this.jeuPhysique.getJeu().getNom();
 	}
 
 
