@@ -1,20 +1,26 @@
 package controleur.scene;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.Callback;
+import javafx.scene.input.KeyCode;
 import modele.Adherent;
+import modele.Jeu;
 import modele.dao.AdherentDAO;
 
 public class GererAdherentControleur extends SceneControleur {
+	
+	public TextField recherche;
 
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
@@ -154,6 +160,35 @@ public class GererAdherentControleur extends SceneControleur {
 				tableAdherent.getItems().remove(row);
 				tableAdherent.getSelectionModel().clearSelection();
 			}
+		}
+	}
+	
+	public void searchAdherent(ActionEvent eventFilter) {
+		String requete = recherche.getText();
+		ObservableList<Adherent> data = tableAdherent.getItems(); 
+
+		ObservableList<Adherent> filtre = FXCollections.observableArrayList();
+
+		recherche.setOnKeyPressed(event-> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				filtre.clear();
+				tableAdherent.setItems(data);
+			}
+		});
+
+		for (Adherent item : data) {
+			if (item.getNom().contains(requete) || item.getNumCIN().contains(requete)) {
+				filtre.add(item);
+			}
+		}
+
+		if (filtre.isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Pas de résultat");
+			alert.setHeaderText("Aucun résultat trouvé !");
+			alert.show();
+		} else {
+			tableAdherent.setItems(filtre);
 		}
 	}
 	
