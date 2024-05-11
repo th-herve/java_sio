@@ -159,19 +159,20 @@ public class AdherentDAO extends DAO<Adherent> {
 
 				String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + idAdherent;
 				ResultSet rs = Connexion.executeQuery(requete);
-				rs.next();
 
-				Boolean estActif = rs.getBoolean(EST_ACTIF);
-				String remarque = rs.getString(REMARQUES);
-				String numCIN = rs.getString(NUM_CIN);
-				LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
+				if (rs.next()) {
+					Boolean estActif = rs.getBoolean(EST_ACTIF);
+					String remarque = rs.getString(REMARQUES);
+					String numCIN = rs.getString(NUM_CIN);
+					LocalDateTime dateInscription = rs.getTimestamp(DATE_INSCRIPTION).toLocalDateTime();
 
-				personne = personneDao.read(idAdherent);
-				adherent = new Adherent(personne.getNom(), personne.getPrenom(), personne.getEmail(),
-						personne.getAdresse(), personne.getTel(), estActif, remarque, numCIN, dateInscription);
-				adherent.setId(personne.getId());
+					personne = personneDao.read(idAdherent);
+					adherent = new Adherent(personne.getNom(), personne.getPrenom(), personne.getEmail(),
+							personne.getAdresse(), personne.getTel(), estActif, remarque, numCIN, dateInscription);
+					adherent.setId(personne.getId());
 
-				donnees.put(idAdherent, adherent);
+					donnees.put(idAdherent, adherent);
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();
