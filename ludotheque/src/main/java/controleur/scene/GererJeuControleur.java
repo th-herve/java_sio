@@ -205,7 +205,7 @@ public class GererJeuControleur extends SceneControleur{
 		}
 	}
 
-	public void rechercher(ActionEvent eventFilter) {
+	public void searchJeu(ActionEvent eventFilter) {
 		String requete = recherche.getText();
 		ObservableList<Jeu> data = tableJeu.getItems(); 
 
