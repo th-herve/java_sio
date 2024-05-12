@@ -173,11 +173,12 @@ public class GererEmpruntControleur extends SceneControleur {
 			boolean created = EmpruntDAO.getInstance().create(emprunt);
 
 			if (created) {
-				tableEmprunt.getItems().add(emprunt);
 
 				this.showAlert(AlertType.CONFIRMATION, owner, "Création réussie!", "Nouvel emprunt enregistré.");
 				newIdAdherent.clear();
 				newIdJeu.clear();
+
+				this.addToTableView(emprunt);
 			} else {
 				this.showAlert(AlertType.ERROR, owner, "Erreur",
 						"Une erreur est survenu, impossible d'enregistrer l'emprunt.");
@@ -210,6 +211,10 @@ public class GererEmpruntControleur extends SceneControleur {
 			idAdherent = Integer.parseInt(newIdAdherent.getText());
 		}
 		return idAdherent;
+	}
+
+	public void addToTableView(Emprunt emprunt) {
+		tableEmprunt.getItems().add(emprunt);
 	}
 
 }
