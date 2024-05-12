@@ -64,14 +64,8 @@ public class EmpruntDAO extends DAO<Emprunt> {
 //			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
 			pst.setObject(3, emprunt.getDateEmprunt());
 			pst.setObject(4, emprunt.getDateRetour());
-			System.out.println(requete);
 			pst.executeUpdate();
 			
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				emprunt.setIdJeuPhysique(rs.getInt(1));
-			}
 			donnees.put(this.getClefDonne(emprunt), emprunt);
 
 		} catch (SQLException e) {
