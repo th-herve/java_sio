@@ -1,18 +1,20 @@
 
 package controleur.scene;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Window;
 import modele.Adherent;
 import modele.Emprunt;
 import modele.JeuPhysique;
@@ -162,6 +164,8 @@ public class GererEmpruntControleur extends SceneControleur {
 	 */
 	public void ajouterEmprunt() {
 
+		Window owner = tableEmprunt.getScene().getWindow();
+
 		Emprunt emprunt = getNewEmprunt();
 
 		if (emprunt != null) {
@@ -170,7 +174,18 @@ public class GererEmpruntControleur extends SceneControleur {
 
 			if (created) {
 				tableEmprunt.getItems().add(emprunt);
+
+				this.showAlert(AlertType.CONFIRMATION, owner, "Création réussie!", "Nouvel emprunt enregistré.");
+				newIdAdherent.clear();
+				newIdJeu.clear();
+			} else {
+				this.showAlert(AlertType.ERROR, owner, "Erreur",
+						"Une erreur est survenu, impossible d'enregistrer l'emprunt.");
 			}
+		} else {
+
+			this.showAlert(AlertType.ERROR, owner, "Erreur",
+					"Impossible d'enregister le nouvel emprunt, vérifier les id fournis.");
 		}
 	}
 
