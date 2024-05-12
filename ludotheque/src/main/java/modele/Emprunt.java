@@ -16,6 +16,21 @@ public class Emprunt {
 	private JeuPhysique jeuPhysique;
 	private Adherent adherent;
 
+	/**
+	 * @param idJeuPhysique
+	 * @param idAdherent
+	 */
+	public Emprunt(int idJeuPhysique, int idAdherent) {
+		super();
+		this.idJeuPhysique = idJeuPhysique;
+		this.idAdherent = idAdherent;
+		this.dateEmprunt = LocalDateTime.now();
+		this.dateRetour = null;
+		
+		this.jeuPhysique = JeuPhysiqueDAO.getInstance().read(idJeuPhysique);
+		this.adherent = AdherentDAO.getInstance().read(idAdherent);
+	}
+
 	public Emprunt(int idJeuPhysique, int idAdherent, LocalDateTime dateEmprunt, LocalDateTime dateRetour) {
 		super();
 		this.idJeuPhysique = idJeuPhysique;

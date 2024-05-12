@@ -1,6 +1,7 @@
-		
+
 package controleur.scene;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,74 +22,72 @@ import modele.dao.JeuPhysiqueDAO;
 
 public class GererEmpruntControleur extends SceneControleur {
 
-    @FXML
-    TableView<Emprunt> tableEmprunt;
+	@FXML
+	TableView<Emprunt> tableEmprunt;
 
-    @FXML
-    TableColumn<Emprunt, Integer> idAdherent;
+	@FXML
+	TableColumn<Emprunt, Integer> idAdherent;
 
-    @FXML
-    TableColumn<Emprunt, Integer> idJeuPhysique;
+	@FXML
+	TableColumn<Emprunt, Integer> idJeuPhysique;
 
-    @FXML
-    TableColumn<Emprunt, LocalDateTime> dateEmprunt;
+	@FXML
+	TableColumn<Emprunt, LocalDateTime> dateEmprunt;
 
-    @FXML
-    TableColumn<Emprunt, LocalDateTime> dateRetour;
+	@FXML
+	TableColumn<Emprunt, LocalDateTime> dateRetour;
 
-    @FXML
-    private TableColumn<Emprunt, String> nomAdherent;
+	@FXML
+	private TableColumn<Emprunt, String> nomAdherent;
 
-    @FXML
-    private TableColumn<Emprunt, String> nomJeuPhysique;
+	@FXML
+	private TableColumn<Emprunt, String> nomJeuPhysique;
 
-    @FXML
-    private Label labelNewIdAdherent;
+	@FXML
+	private Label labelNewIdAdherent;
 
-    @FXML
-    private Label labelNewIdJeu;
+	@FXML
+	private Label labelNewIdJeu;
 
-    @FXML
-    private TextField newIdAdherent;
+	@FXML
+	private TextField newIdAdherent;
 
-    @FXML
-    private TextField newIdJeu;
+	@FXML
+	private TextField newIdJeu;
 
-
-    public void initialize() {
-        initializeColumn();
+	public void initialize() {
+		initializeColumn();
 
 		this.forceIntegerOnTextField(newIdJeu);
 		this.forceIntegerOnTextField(newIdAdherent);
 		searchAndDisplayJeu(newIdJeu, labelNewIdJeu);
 		searchAndDisplayAdherent(newIdAdherent, labelNewIdAdherent);
 
-
 		this.refreshTable();
-    }
+	}
 
-    private void initializeColumn() {
-        idJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("idJeuPhysique"));
-        idAdherent.setCellValueFactory(new PropertyValueFactory<>("idAdherent"));
-        dateEmprunt.setCellValueFactory(new PropertyValueFactory<>("dateEmprunt"));
-        dateRetour.setCellValueFactory(new PropertyValueFactory<>("dateRetour"));
-        nomAdherent.setCellValueFactory(new PropertyValueFactory<>("nomAdherent"));
-        nomJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("nomJeuPhysique"));
+	private void initializeColumn() {
+		idJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("idJeuPhysique"));
+		idAdherent.setCellValueFactory(new PropertyValueFactory<>("idAdherent"));
+		dateEmprunt.setCellValueFactory(new PropertyValueFactory<>("dateEmprunt"));
+		dateRetour.setCellValueFactory(new PropertyValueFactory<>("dateRetour"));
+		nomAdherent.setCellValueFactory(new PropertyValueFactory<>("nomAdherent"));
+		nomJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("nomJeuPhysique"));
 
 		// change le format de la date affichée pour date inscription
-		dateEmprunt.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>())); 
-		dateRetour.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>())); 
+		dateEmprunt.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>()));
+		dateRetour.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>()));
 
-    }
+	}
 
 	public void refreshTable() {
 
-        EmpruntDAO empruntDAO = EmpruntDAO.getInstance();
-        List<Emprunt> empruntList = empruntDAO.readAll();
+		EmpruntDAO empruntDAO = EmpruntDAO.getInstance();
+		List<Emprunt> empruntList = empruntDAO.readAll();
 
-        for (Emprunt ad : empruntList) {
-            tableEmprunt.getItems().add(ad);
-        }
+		for (Emprunt ad : empruntList) {
+			tableEmprunt.getItems().add(ad);
+		}
 	}
 
 	private void searchAndDisplayJeu(TextField textField, Label label) {
@@ -111,6 +110,7 @@ public class GererEmpruntControleur extends SceneControleur {
 			}
 		});
 	}
+
 	private void searchAndDisplayAdherent(TextField textField, Label label) {
 
 		textField.textProperty().addListener(new ChangeListener<String>() {
@@ -131,4 +131,70 @@ public class GererEmpruntControleur extends SceneControleur {
 			}
 		});
 	}
+
+	private boolean isNewEmpruntFormValid() {
+
+		int idJeu = getNewJeuId();
+		int idAdherent = getNewAdherentId();
+
+		JeuPhysique jeuP = JeuPhysiqueDAO.getInstance().read(idJeu);
+		Adherent adherent = AdherentDAO.getInstance().read(idAdherent);
+
+		return jeuP != null && adherent != null;
+
+	}
+
+	private Emprunt getNewEmprunt() {
+
+		Emprunt emprunt = null;
+
+		if (isNewEmpruntFormValid()) {
+			int idJeu = Integer.parseInt(newIdJeu.getText());
+			int idAhderent = Integer.parseInt(newIdAdherent.getText());
+			emprunt = new Emprunt(idJeu, idAhderent);
+		}
+
+		return emprunt;
+	}
+
+	/**
+	 * Appelé quand on clique sur le bouton ajouter
+	 */
+	public void ajouterEmprunt() {
+
+		Emprunt emprunt = getNewEmprunt();
+
+		if (emprunt != null) {
+
+			boolean created = EmpruntDAO.getInstance().create(emprunt);
+
+			if (created) {
+				tableEmprunt.getItems().add(emprunt);
+			}
+		}
+	}
+
+	/**
+	 * @return jeuPhysique id or -1 if invalid
+	 */
+	private int getNewJeuId() {
+		int idJeu = -1;
+		if (newIdJeu.getText() != "") {
+			idJeu = Integer.parseInt(newIdJeu.getText());
+		}
+		return idJeu;
+	}
+
+	/**
+	 * @return adherent id enter by user or -1 if invalid
+	 */
+	private int getNewAdherentId() {
+		int idAdherent = -1;
+
+		if (newIdAdherent.getText() != "") {
+			idAdherent = Integer.parseInt(newIdAdherent.getText());
+		}
+		return idAdherent;
+	}
+
 }
