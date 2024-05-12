@@ -4,6 +4,7 @@ package controleur.scene;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import exception.AdherentNotActive;
 import exception.JeuNotDisponible;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -150,7 +151,7 @@ public class GererEmpruntControleur extends SceneControleur {
 
 	}
 
-	private Emprunt getNewEmprunt() throws JeuNotDisponible {
+	private Emprunt getNewEmprunt() throws JeuNotDisponible, AdherentNotActive {
 
 		Emprunt emprunt = null;
 
@@ -172,12 +173,16 @@ public class GererEmpruntControleur extends SceneControleur {
 
 		Emprunt emprunt = null;
 		boolean jeuDispo = true;
+		boolean adherentActif = true;
 
 		try {
 			emprunt = getNewEmprunt();
 		} catch (JeuNotDisponible e) {
 			jeuDispo = false;
 			this.showAlert(AlertType.ERROR, owner, "Erreur", "Le jeu n'est pas disponible.");
+		} catch (AdherentNotActive e) {
+			adherentActif = false;
+			this.showAlert(AlertType.ERROR, owner, "Erreur", "L'adhérent n'a pas un compte actif.");
 		}
 
 		if (emprunt != null) {
@@ -195,7 +200,7 @@ public class GererEmpruntControleur extends SceneControleur {
 				this.showAlert(AlertType.ERROR, owner, "Erreur",
 						"Une erreur est survenu, impossible d'enregistrer l'emprunt.");
 			}
-		} else if (jeuDispo) {
+		} else if (jeuDispo && adherentActif) {
 
 			this.showAlert(AlertType.ERROR, owner, "Erreur",
 					"Impossible d'enregister le nouvel emprunt, vérifier les id fournis.");
