@@ -2,14 +2,15 @@ package controleur.scene;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import controleur.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.stage.Window;
 import javafx.util.Callback;
 
 public abstract class SceneControleur {
@@ -139,6 +140,15 @@ public abstract class SceneControleur {
 				}
 			}
 		});
+	}
+
+	protected void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.initOwner(owner);
+		alert.show();
 	}
 
 }
