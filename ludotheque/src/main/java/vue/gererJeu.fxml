@@ -47,7 +47,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#supprimerJeu" prefHeight="39.0" prefWidth="151.0" text="Supprimer">
+            <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="151.0" text="Supprimer">
                <font>
                   <Font size="18.0" />
                </font>

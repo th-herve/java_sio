@@ -182,7 +182,7 @@ public class GererJeuControleur extends SceneControleur{
 		tableJeu.getItems().add(jeu);
 	}
 
-	public void supprimerJeu() {
+	public void deleteJeu() {
 		JeuDAO jeuDAO = JeuDAO.getInstance();
 		int selectedJeu = tableJeu.getSelectionModel().getFocusedIndex();
 		if (selectedJeu >= 0) {        	
