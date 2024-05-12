@@ -52,7 +52,7 @@ public class GererJeuControleur extends SceneControleur{
 	public TableColumn<Jeu, Float> noteBgg;
 
 	@FXML
-	public TextField recherche;
+	public TextField searchJeu;
 	@FXML
 	private ObservableList<Jeu> originalData;
 
@@ -206,12 +206,12 @@ public class GererJeuControleur extends SceneControleur{
 	}
 
 	public void searchJeu(ActionEvent eventFilter) {
-		String requete = recherche.getText();
+		String requete = searchJeu.getText().toLowerCase(); //on convertir pour pouvoir ignorer la casse;
 		ObservableList<Jeu> data = tableJeu.getItems(); 
 
 		ObservableList<Jeu> filtre = FXCollections.observableArrayList();
 
-		recherche.setOnKeyPressed(event-> {
+		searchJeu.setOnKeyPressed(event-> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				filtre.clear();
 				tableJeu.setItems(data);
@@ -219,7 +219,7 @@ public class GererJeuControleur extends SceneControleur{
 		});
 
 		for (Jeu item : data) {
-			if (item.getNom().contains(requete) || item.getType().contains(requete)) {
+			if (item.getNom().toLowerCase().contains(requete) || item.getType().equalsIgnoreCase(requete)) {
 				filtre.add(item);
 			}
 		}

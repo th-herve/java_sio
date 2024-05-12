@@ -15,12 +15,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import modele.Adherent;
-import modele.Jeu;
 import modele.dao.AdherentDAO;
 
 public class GererAdherentControleur extends SceneControleur {
 	
-	public TextField recherche;
 
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
@@ -56,6 +54,8 @@ public class GererAdherentControleur extends SceneControleur {
 
 	@FXML
 	TableColumn<Adherent, LocalDateTime> dateInscription;
+
+	public TextField search;
 
 	public void initialize() {
 		this.initializeColumn();
@@ -163,38 +163,39 @@ public class GererAdherentControleur extends SceneControleur {
 		}
 	}
 	
-	public void searchAdherent(ActionEvent eventFilter) {
-		String requete = recherche.getText();
-		ObservableList<Adherent> data = tableAdherent.getItems(); 
-
-		ObservableList<Adherent> filtre = FXCollections.observableArrayList();
-
-		recherche.setOnKeyPressed(event-> {
-			if (event.getCode() == KeyCode.ESCAPE) {
-				filtre.clear();
-				tableAdherent.setItems(data);
-			}
-		});
-
-		for (Adherent item : data) {
-			if (item.getNom().contains(requete) || item.getNumCIN().contains(requete)) {
-				filtre.add(item);
-			}
-		}
-
-		if (filtre.isEmpty()) {
-			Alert alert = new Alert(Alert.AlertType.WARNING);
-			alert.setTitle("Pas de résultat");
-			alert.setHeaderText("Aucun résultat trouvé !");
-			alert.show();
-		} else {
-			tableAdherent.setItems(filtre);
-		}
-	}
 	
 	public void addToTableView(Adherent adherent) {
 		tableAdherent.getItems().add(adherent);
 	}
 	
+	public void searchAdherent(ActionEvent eventFilter) {
+	    String requete = search.getText().toLowerCase(); //on convertir pour pouvoir ignorer la casse
+	    ObservableList<Adherent> data = tableAdherent.getItems(); 
+	    
+	    ObservableList<Adherent> filtre = FXCollections.observableArrayList();
+	    
+	    search.setOnKeyPressed(event-> {
+	        if (event.getCode() == KeyCode.ESCAPE) {
+	            filtre.clear();
+	            tableAdherent.setItems(data);
+	        }
+	    });
+	    
+	    for (Adherent item : data) {
+	        if (item.getNom().toLowerCase().contains(requete) || item.getNumCIN().equalsIgnoreCase(requete)) {
+	            filtre.add(item);
+	        }
+	    }
+	    
+	    if (filtre.isEmpty()) {
+	        Alert alert = new Alert(Alert.AlertType.WARNING);
+	        alert.setTitle("Pas de résultat");
+	        alert.setHeaderText("Aucun résultat trouvé !");
+	        alert.show();
+	    } else {
+	        tableAdherent.setItems(filtre);
+	    }
+	}
+
 
 }
