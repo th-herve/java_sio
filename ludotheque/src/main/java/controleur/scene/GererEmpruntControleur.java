@@ -1,4 +1,4 @@
-
+		
 package controleur.scene;
 
 import java.time.LocalDateTime;
@@ -74,6 +74,10 @@ public class GererEmpruntControleur extends SceneControleur {
         dateRetour.setCellValueFactory(new PropertyValueFactory<>("dateRetour"));
         nomAdherent.setCellValueFactory(new PropertyValueFactory<>("nomAdherent"));
         nomJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("nomJeuPhysique"));
+
+		// change le format de la date affichée pour date inscription
+		dateEmprunt.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>())); 
+		dateRetour.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>())); 
 
     }
 
