@@ -47,12 +47,12 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#supprimerJeu" prefHeight="39.0" prefWidth="151.0" text="Supprimer">
+            <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="151.0" text="Supprimer">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <TextField fx:id="rechercheJeu" onAction="#searchJeu" prefHeight="29.0" prefWidth="143.0" promptText="Rechercher..." />
+            <TextField fx:id="searchJeu" onAction="#searchJeu" prefHeight="29.0" prefWidth="143.0" promptText="Rechercher..." />
          </children>
       </HBox>
       <Label layoutX="596.0" layoutY="78.0" prefHeight="66.0" prefWidth="89.0" text="Jeux">
