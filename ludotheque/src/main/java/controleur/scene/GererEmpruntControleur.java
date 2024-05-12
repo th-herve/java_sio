@@ -4,10 +4,10 @@ package controleur.scene;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import exception.JeuNotDisponible;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -92,6 +92,8 @@ public class GererEmpruntControleur extends SceneControleur {
 		}
 	}
 
+	// utilisé pour affiché le nom du jeu, selon l'id inscrit dans le formulaire
+	// d'ajout
 	private void searchAndDisplayJeu(TextField textField, Label label) {
 
 		textField.textProperty().addListener(new ChangeListener<String>() {
@@ -113,6 +115,8 @@ public class GererEmpruntControleur extends SceneControleur {
 		});
 	}
 
+	// utilisé pour affiché le nom de l'adhérent, selon l'id inscrit dans le
+	// formulaire d'ajout
 	private void searchAndDisplayAdherent(TextField textField, Label label) {
 
 		textField.textProperty().addListener(new ChangeListener<String>() {
@@ -146,7 +150,7 @@ public class GererEmpruntControleur extends SceneControleur {
 
 	}
 
-	private Emprunt getNewEmprunt() {
+	private Emprunt getNewEmprunt() throws JeuNotDisponible {
 
 		Emprunt emprunt = null;
 
@@ -166,7 +170,15 @@ public class GererEmpruntControleur extends SceneControleur {
 
 		Window owner = tableEmprunt.getScene().getWindow();
 
-		Emprunt emprunt = getNewEmprunt();
+		Emprunt emprunt = null;
+		boolean jeuDispo = true;
+
+		try {
+			emprunt = getNewEmprunt();
+		} catch (JeuNotDisponible e) {
+			jeuDispo = false;
+			this.showAlert(AlertType.ERROR, owner, "Erreur", "Le jeu n'est pas disponible.");
+		}
 
 		if (emprunt != null) {
 
@@ -183,7 +195,7 @@ public class GererEmpruntControleur extends SceneControleur {
 				this.showAlert(AlertType.ERROR, owner, "Erreur",
 						"Une erreur est survenu, impossible d'enregistrer l'emprunt.");
 			}
-		} else {
+		} else if (jeuDispo) {
 
 			this.showAlert(AlertType.ERROR, owner, "Erreur",
 					"Impossible d'enregister le nouvel emprunt, vérifier les id fournis.");
