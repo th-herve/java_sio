@@ -3,6 +3,7 @@ package modele;
 
 import java.time.LocalDateTime;
 
+import exception.JeuNotDisponible;
 import modele.dao.AdherentDAO;
 import modele.dao.JeuPhysiqueDAO;
 
@@ -20,8 +21,9 @@ public class Emprunt {
 	 * @param idJeuPhysique
 	 * @param idAdherent
 	 */
-	public Emprunt(int idJeuPhysique, int idAdherent) {
+	public Emprunt(int idJeuPhysique, int idAdherent) throws JeuNotDisponible {
 		super();
+
 		this.idJeuPhysique = idJeuPhysique;
 		this.idAdherent = idAdherent;
 		this.dateEmprunt = LocalDateTime.now();
@@ -29,6 +31,14 @@ public class Emprunt {
 		
 		this.jeuPhysique = JeuPhysiqueDAO.getInstance().read(idJeuPhysique);
 		this.adherent = AdherentDAO.getInstance().read(idAdherent);
+
+		if (!this.jeuPhysique.getEstDisponible()) {
+			throw new JeuNotDisponible("Jeu non disponible");
+		}
+		
+		this.jeuPhysique.setEstDisponible(false);
+		JeuPhysiqueDAO.getInstance().update(jeuPhysique);
+		
 	}
 
 	public Emprunt(int idJeuPhysique, int idAdherent, LocalDateTime dateEmprunt, LocalDateTime dateRetour) {
