@@ -34,6 +34,13 @@ public abstract class SceneControleur {
 		app.switchToconnexionPage();
 	}
 	
+	
+	public void switchToinscriptionPersonnel() {
+		
+		
+		app.switchToinscriptionPersonnel();
+	}
+	
 	protected<T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
 		changeColumnBooleanValue(col, "Oui", "Non");
 	}

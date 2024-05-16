@@ -11,10 +11,11 @@ public class Personne {
 	private String email;
 	private String adresse;
 	private String tel;
-	private String mdp; // pour le mot de passe 
+//	private String mdp; // pour le mot de passe 
+	
 
 	private String salt;
-	public Personne(String nom, String prenom, String email, String adresse, String tel , String mdp) {
+	public Personne(String nom, String prenom, String email, String adresse, String tel ) {
 		super();
 	
 		this.id = 0;
@@ -23,21 +24,21 @@ public class Personne {
 		this.email = email;
 		this.adresse = adresse;
 		this.tel = tel;
-		this.mdp = mdp;
+//		this.mdp = mdp;
 	}
-
-	public Personne(int id, String nom, String prenom, String email, String adresse, String tel , String mdp) {
-		super();
-	
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.adresse = adresse;
-		this.tel = tel;
-		this.mdp = mdp ;
-		
-	}
+//
+//	public Personne(int id, String nom, String prenom, String email, String adresse, String tel , String mdp) {
+//		super();
+//	
+//		this.id = id;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.email = email;
+//		this.adresse = adresse;
+//		this.tel = tel;
+//		this.mdp = mdp ;
+//		
+//	}
 
 	public int getId() {
 		return id;
@@ -88,14 +89,14 @@ public class Personne {
 	}
 	
 	
-
-	public String getMdp() {
-		return mdp;
-	}
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
+//
+//	public String getMdp() {
+//		return mdp;
+//	}
+//
+//	public void setMdp(String mdp) {
+//		this.mdp = mdp;
+//	}
 	
 	public String getSalt() {
 		return salt;
@@ -109,7 +110,7 @@ public class Personne {
 	@Override
 	public String toString() {
 		return "Personne [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", adresse="
-				+ adresse + ", tel=" + tel + ", mdp=" + mdp + "]";
+				+ adresse + ", tel=" + tel + "]";
 	}
 
 	

@@ -89,7 +89,7 @@ public class InscriptionAdherentControleur extends SceneControleur {
 				
 //			byte [] salt = personneDAO.generateSalt();
 			
-			String hachedPassword = personneDAO.hashPassword(password.getText());
+//			String hachedPassword = personneDAO.hashPassword(password.getText());
 
 			// Creation d'un Adherent object avec values depuis l'interface components
 			Adherent adherent = new Adherent(
@@ -98,7 +98,6 @@ public class InscriptionAdherentControleur extends SceneControleur {
 					email.getText(),
 					adresse.getText(),
 					N_tel.getText(),
-					hachedPassword,
 					estactive.isSelected(),
 					remarques.getText(),
 					numCIN.getText(),
