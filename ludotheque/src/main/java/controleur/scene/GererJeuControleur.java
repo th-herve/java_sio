@@ -56,7 +56,6 @@ public class GererJeuControleur extends SceneControleur{
 	@FXML
 	private ObservableList<Jeu> originalData;
 
-
 	public ActionEvent event;
 
 	public void initialize() {
@@ -233,6 +232,11 @@ public class GererJeuControleur extends SceneControleur{
 			tableJeu.setItems(filtre);
 		}
 	}
+	
+	public void openGererJeuPhysique() {
+        Jeu jeu = tableJeu.getSelectionModel().getSelectedItem();
+        this.switchToGererJeuPhysique(jeu.getId());
+    }
 
 	//	private void handleActionFloat(CellEditEvent<Jeu, String> event) {
 	//		TableColumn<Jeu, String> column = event.getTableColumn();

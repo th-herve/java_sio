@@ -31,16 +31,16 @@ public class GererEmpruntControleur extends SceneControleur {
     @FXML
     TableColumn<Emprunt, LocalDateTime> dateRetour;
 
-    public void initialize() {
-        initializeColumn();
-
-        EmpruntDAO empruntDAO = EmpruntDAO.getInstance();
-        List<Emprunt> empruntList = empruntDAO.readAll();
-
-        for (Emprunt ad : empruntList) {
-            tableEmprunt.getItems().add(ad);
-        }
-    }
+//    public void initialize() {
+//        initializeColumn();
+//
+//        EmpruntDAO empruntDAO = EmpruntDAO.getInstance();
+//        List<Emprunt> empruntList = empruntDAO.readAll();
+//
+//        for (Emprunt ad : empruntList) {
+//            tableEmprunt.getItems().add(ad);
+//        }
+//    }
 
     private void initializeColumn() {
         idJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("idJeuPhysique"));
