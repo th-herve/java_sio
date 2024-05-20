@@ -37,9 +37,11 @@ public class ConnexionPersonnel extends SceneControleur {
 	
 	private Button deconnecter;
 
-
+	private static  Personne loggedInPersonne;
     private PersonnelDAO personnelDAO;
     private PersonneDAO personneDAO;
+
+	private Personnel personnel;
 
     public ConnexionPersonnel() {
         this.personnelDAO = PersonnelDAO.getInstance();
@@ -64,12 +66,11 @@ public class ConnexionPersonnel extends SceneControleur {
         if (personne != null && hashedPassword != null) {
             // Check if the personne is an instance of Personnel
             if (personne instanceof Personnel) {
+                loggedInPersonne =  personne; // Cast personne to Personnel and assign to loggedInPersonne
                 showAlert(Alert.AlertType.INFORMATION, owner, "Succès", "Connexion réussie");
-                // identification.clear();
-                // mdp.clear();
-                // Switch to the Accueil page or perform any other logic
-                // app.switchToAccueil();
-                app.switchToinscriptionPersonnel();
+                identification.clear();
+	            
+                app.switchToAccueil();
             } else {
                 showAlert(Alert.AlertType.ERROR, owner, "Identifiant ou mot de passe incorrect", "Veuillez vérifier vos informations de connexion");
             }
@@ -77,6 +78,12 @@ public class ConnexionPersonnel extends SceneControleur {
             showAlert(Alert.AlertType.ERROR, owner, "Identifiant ou mot de passe incorrect", "Veuillez vérifier vos informations de connexion");
         }
     }
+
+//   @FXML
+//   public void loggedInPersonne() {
+//	   
+//	   this.loggedInPersonne();
+//   }
 
     @FXML
     public void Logout1(ActionEvent event) {
@@ -91,7 +98,7 @@ public class ConnexionPersonnel extends SceneControleur {
 
         // Affichez un message de confirmation de déconnexion
         showAlert(Alert.AlertType.INFORMATION, owner, "Déconnexion réussie", "Vous avez été déconnecté avec succès.");
-        System.out.println("ok");
+       
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {

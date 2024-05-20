@@ -4,11 +4,12 @@ import controleur.App;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import modele.Adherent;
+import modele.Personne;
 
 public abstract class SceneControleur {
 	
 	protected App app;
-
+	public static Personne loggedInPersonne;
 	public void setApp(App app) {
 		this.app = app;
 	}

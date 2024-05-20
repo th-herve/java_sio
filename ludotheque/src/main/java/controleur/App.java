@@ -2,8 +2,11 @@ package controleur;
 
 import java.io.IOException;
 
+import controleur.scene.AccueilControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import modele.Personne;
+import modele.Personnel;
 
 public class App extends Application {
 
@@ -28,9 +31,9 @@ public class App extends Application {
 		primaryStage.setMaximized(true);
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
-		switchToinscriptionPersonnel();
+//		switchToinscriptionPersonnel();
 //		switchToAccueil();
-//		switchToconnexionPage(); // Affiche la première vue par défaut
+		switchToconnexionPage(); // Affiche la première vue par défaut
 //		switchToGererAdherent();
 	}
 
@@ -51,6 +54,8 @@ public class App extends Application {
 	public void switchToAccueil() {
 		primaryStage.setScene(accueilPage.getScene());
 		primaryStage.show();
+		
+		
 	}
 
 	public void switchToGererAdherent() {
@@ -82,5 +87,7 @@ public class App extends Application {
 		
 	}
 	
+	
+
 	
 }

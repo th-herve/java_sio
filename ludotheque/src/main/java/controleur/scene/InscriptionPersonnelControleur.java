@@ -70,13 +70,13 @@ public class InscriptionPersonnelControleur extends SceneControleur {
         try {
             validateForm();
 
-            // Hash the password
+            // Hash  password
             String hashedPassword = personnelDAO.hashPassword(password.getText());
 
             LocalDateTime entree = (dateEntree.getValue() != null) ? dateEntree.getValue().atStartOfDay() : null;
             LocalDateTime sortie = (dateSortie.getValue() != null) ? dateSortie.getValue().atStartOfDay() : null;
 
-            // Create a new Personne object
+            // Créer un nouvel objet Personne
             Personne personne = personneDAO.readByEmail(email.getText());
 
             if (personne == null) {
@@ -88,11 +88,11 @@ public class InscriptionPersonnelControleur extends SceneControleur {
                         tel.getText()
                 );
 
-                // Add data to the Personne table
+                // Ajouter des données à la table Personne
                 personneDAO.create(personne);
             }
 
-            // Create a new Personnel object
+            // Créer un nouvel objet Personnel
             Personnel personnel = new Personnel(
                     nom.getText(),
                     prenom.getText(),
@@ -105,7 +105,7 @@ public class InscriptionPersonnelControleur extends SceneControleur {
                     sortie
             );
 
-            // Add data to the Personnel table
+            // Ajouter des données à la table Personnel
             personnelDAO.create(personnel);
 
             showAlert(Alert.AlertType.CONFIRMATION, owner, "Inscription réussie!", "Personnel inséré avec succès");
