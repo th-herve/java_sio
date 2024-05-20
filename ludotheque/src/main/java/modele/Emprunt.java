@@ -98,6 +98,11 @@ public class Emprunt {
 	public String getNomJeuPhysique() {
 		return this.jeuPhysique.getJeu().getNom();
 	}
+	
+	public void enregistrerRetour() {
+		this.dateRetour = LocalDateTime.now();
+		this.jeuPhysique.setEstDisponible(true);
+	}
 
 
 	@Override

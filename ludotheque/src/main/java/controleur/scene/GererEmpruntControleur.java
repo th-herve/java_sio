@@ -88,6 +88,7 @@ public class GererEmpruntControleur extends SceneControleur {
 		EmpruntDAO empruntDAO = EmpruntDAO.getInstance();
 		List<Emprunt> empruntList = empruntDAO.readAll();
 
+		tableEmprunt.getItems().clear();;
 		for (Emprunt ad : empruntList) {
 			tableEmprunt.getItems().add(ad);
 		}
@@ -169,6 +170,7 @@ public class GererEmpruntControleur extends SceneControleur {
 	 */
 	public void ajouterEmprunt() {
 
+
 		Window owner = tableEmprunt.getScene().getWindow();
 
 		Emprunt emprunt = null;
@@ -204,6 +206,20 @@ public class GererEmpruntControleur extends SceneControleur {
 
 			this.showAlert(AlertType.ERROR, owner, "Erreur",
 					"Impossible d'enregister le nouvel emprunt, vérifier les id fournis.");
+		}
+	}
+	
+	public void enregistrerRetour() {
+
+		Window owner = tableEmprunt.getScene().getWindow();
+
+		Emprunt emprunt = tableEmprunt.getFocusModel().getFocusedItem();
+		emprunt.enregistrerRetour();
+		if (EmpruntDAO.getInstance().create(emprunt)) {
+			this.refreshTable();
+			this.showAlert(AlertType.CONFIRMATION, owner, "", "Le retour a été enregistré avec succès.");
+		} else {
+			this.showAlert(AlertType.ERROR, owner, "Erreur", "Une erreure est survenue lors de l'enregistrement.");
 		}
 	}
 
