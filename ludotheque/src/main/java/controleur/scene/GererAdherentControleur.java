@@ -3,6 +3,7 @@ package controleur.scene;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import controleur.Page;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modele.Adherent;
 import modele.dao.AdherentDAO;
 
@@ -21,7 +24,10 @@ public class GererAdherentControleur extends SceneControleur {
 	
 	public TextField recherche;
 
-	AdherentDAO adherentDAO = AdherentDAO.getInstance();
+	private AdherentDAO adherentDAO = AdherentDAO.getInstance();
+	
+	private Stage prochePopUpStage;
+	
 
 	@FXML
 	TableView<Adherent> tableAdherent;
@@ -59,6 +65,11 @@ public class GererAdherentControleur extends SceneControleur {
 	public void initialize() {
 		this.initializeColumn();
 		this.tableAdherent.setEditable(true);
+		
+		// set up la pop up pour montrer les proches
+		this.prochePopUpStage = new Stage();
+		this.prochePopUpStage.initStyle(StageStyle.UNDECORATED);
+		
 		this.refreshTable();
 
 	}
@@ -195,5 +206,17 @@ public class GererAdherentControleur extends SceneControleur {
 		tableAdherent.getItems().add(adherent);
 	}
 	
+	public void openProche() {
+		this.openProchePopUp();
+	}
+
+	public void openProchePopUp() {
+		Page gererProchePage = this.app.getGererProchePage();
+		GererProcheControleur procheControleur = (GererProcheControleur) gererProchePage.getControleur() ; // récupère le controleur
+		Adherent adherent = tableAdherent.getFocusModel().getFocusedItem();
+		procheControleur.setUp(adherent);
+		this.prochePopUpStage.setScene(gererProchePage.getScene());
+		this.prochePopUpStage.show();
+	}
 
 }

@@ -86,6 +86,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#openProche" prefHeight="39.0" prefWidth="151.0" text="proches">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">

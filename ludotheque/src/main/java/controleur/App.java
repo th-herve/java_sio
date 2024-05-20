@@ -5,6 +5,7 @@ import java.io.IOException;
 import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import modele.dao.AdherentDAO;
 
 public class App extends Application {
 
@@ -19,6 +20,7 @@ public class App extends Application {
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
+	private Page gererProchePage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -37,14 +39,15 @@ public class App extends Application {
 	}
 
 	private void loadViews() throws IOException {
-		
+
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
 		this.ajouterJeuPage = new Page(this, "ajouterJeu.fxml");
-		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
+		this.gererJeuPhysiquePage = new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
+		this.gererProchePage = new Page(this, "popUpProche.fxml");
 //		this.connexionPage= new Page(this,"pageConnexion.fxml");
 	}
 
@@ -69,16 +72,19 @@ public class App extends Application {
 		primaryStage.show();
 	}
 
-	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
+	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les
+	// jeux physiques
 	public void switchToGererJeuPhysique(int idJeu) {
-		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
+		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère
+																											// le
+																											// controleur
 		ctl.setUp(idJeu);
 		Stage stage = new Stage();
 		stage.setScene(gererJeuPhysiquePage.getScene());
 		stage.setTitle("Gérer Jeux physiques");
 		stage.show();
 	}
-	
+
 	public void switchToinscriptionAdherent() {
 		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
 		Stage stage = new Stage();
@@ -99,13 +105,18 @@ public class App extends Application {
 //		primaryStage.show();
 //		
 //	}
+
 	public Page getGererAdherentPage() {
-		return gererAdherentPage;
+		return this.gererAdherentPage;
 	}
 
 	public Page getGererJeuPage() {
-		return gererJeuPage;
+		AdherentDAO ad = AdherentDAO.getInstance();
+		return this.gererJeuPage;
+	}
+	
+	public Page getGererProchePage() {
+		return this.gererProchePage;
 	}
 
-	
 }

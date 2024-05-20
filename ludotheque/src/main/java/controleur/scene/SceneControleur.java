@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import javafx.util.Callback;
+import modele.Adherent;
 
 public abstract class SceneControleur {
 
@@ -44,8 +45,13 @@ public abstract class SceneControleur {
 	public void switchToinscriptionAdherent() {
 		app.switchToinscriptionAdherent();
 	}
+
 	public void switchToGererJeuPhysique(int idJeu) {
 		app.switchToGererJeuPhysique(idJeu);
+	}
+
+	public void switchToPopUpProche(Adherent adherent) {
+		app.switchToPopUpProche(adherent);
 	}
 
 
