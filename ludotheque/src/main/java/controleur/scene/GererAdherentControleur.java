@@ -19,6 +19,7 @@ import modele.dao.AdherentDAO;
 
 public class GererAdherentControleur extends SceneControleur {
 	
+	public TextField recherche;
 
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
@@ -162,7 +163,6 @@ public class GererAdherentControleur extends SceneControleur {
 			}
 		}
 	}
-	
 	
 	public void addToTableView(Adherent adherent) {
 		tableAdherent.getItems().add(adherent);

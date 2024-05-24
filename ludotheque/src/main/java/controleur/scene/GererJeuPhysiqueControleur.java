@@ -68,6 +68,7 @@ public class GererJeuPhysiqueControleur extends SceneControleur {
 	 * Ajoute dans la table, les jeux physique de la bd pour l'id jeu donné
 	 */
 	public void refreshTable() {
+		tableJeuPhysique.getItems().clear();
 		List<JeuPhysique> jeuList = jeuPhysiqueDAO.readByIdJeu(this.idJeu);
 
 		for (JeuPhysique jeu : jeuList) {

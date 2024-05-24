@@ -18,6 +18,7 @@ public class App extends Application {
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
+	private Page gererEmpruntPage;
 	private Page ajouterJeuPage;
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
@@ -55,12 +56,10 @@ public class App extends Application {
 		this.ajouterJeuPage = new Page(this, "ajouterJeu.fxml");
 		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
-
 		this.connexionPage= new Page(this,"pageConnexion.fxml");
 		this.inscriptionPersonnelPage = new Page (this,"inscriptionPersonnel.fxml");
+		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
 
-		
-		
 
 	}
 
@@ -79,6 +78,11 @@ public class App extends Application {
 
 	public void switchToGererJeu() {
 		primaryStage.setScene(gererJeuPage.getScene());
+		primaryStage.show();
+	}
+
+	public void switchToGererEmprunt() {
+		primaryStage.setScene(gererEmpruntPage.getScene());
 		primaryStage.show();
 	}
 
