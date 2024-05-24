@@ -53,7 +53,7 @@ public class PersonnelDAO extends DAO<Personnel> {
             pst.setObject(4, personnel.getDateSortie());
             pst.setString(5, personnel.getPassword()); // Include password here
             pst.executeUpdate();
-            // Remaining code...
+
         } catch (SQLException e) {
             success = false;
             e.printStackTrace();
