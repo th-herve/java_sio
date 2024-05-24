@@ -230,6 +230,11 @@ public class GererJeuControleur extends SceneControleur{
         this.switchToGererJeuPhysique(jeu.getId());
     }
 
+	public void openGererJeuPhysique() {
+		Jeu jeu = tableJeu.getSelectionModel().getSelectedItem();
+		this.switchToGererJeuPhysique(jeu.getId());
+	}
+
 	//	private void handleActionFloat(CellEditEvent<Jeu, String> event) {
 	//		TableColumn<Jeu, String> column = event.getTableColumn();
 	//		Jeu jeu = event.getRowValue();

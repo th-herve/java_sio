@@ -26,8 +26,6 @@ public class Adherent extends Personne {
 		this.numCIN = numCIN;
 		this.dateInscription = dateInscription;
 
-		// rempli la liste des proches
-		this.fetchProches();
 	}
 	
 	public boolean getEstActif() {
@@ -73,6 +71,7 @@ public class Adherent extends Personne {
 	}
 	
 	public Set<String> getProches() {
+		this.fetchProches();
 		return this.proches;
 	}
 	

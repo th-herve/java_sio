@@ -2,14 +2,15 @@ package controleur.scene;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import controleur.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.stage.Window;
 import javafx.util.Callback;
 
 public abstract class SceneControleur {
@@ -32,6 +33,10 @@ public abstract class SceneControleur {
 		app.switchToGererJeu();
 	}
 
+	public void switchToGererEmprunt() {
+		app.switchToGererEmprunt();
+	}
+
 	public void switchToAjouterJeu() {
 		app.switchToAjouterJeu();
 	}
@@ -39,9 +44,9 @@ public abstract class SceneControleur {
 	public void switchToinscriptionAdherent() {
 		app.switchToinscriptionAdherent();
 	}
-	
-	public void switchToGererJeuPhysique(int id) {
-	    app.switchToGererJeuPhysique(id);
+
+	public void switchToGererJeuPhysique(int idJeu) {
+		app.switchToGererJeuPhysique(idJeu);
 	}
 
 //	public void switchToconnexionPage() {
@@ -139,6 +144,15 @@ public abstract class SceneControleur {
 				}
 			}
 		});
+	}
+
+	protected void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.initOwner(owner);
+		alert.show();
 	}
 
 }
