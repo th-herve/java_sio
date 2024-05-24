@@ -4,12 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Date;
+
 
 import modele.Personne;
 
@@ -21,9 +23,8 @@ public class PersonneDAO extends DAO<Personne> {
 	static final String EMAIL = "email";
 	private static final String ADRESSE = "Adresse";
 	private static final String TEL = "tel";
-//	private static final String MDP = "mdp";
-	
-	
+
+
 
 	private static PersonneDAO intstance = null;
 
@@ -44,8 +45,9 @@ public class PersonneDAO extends DAO<Personne> {
 		boolean succes = true;
 		try {
 
-			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE + ","
-					+ TEL + ") VALUES (?,?,?,?,?)";
+
+			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
+					+ "," + TEL + ")VALUES(?,?,?,?,?)";
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, personne.getNom());
@@ -53,7 +55,7 @@ public class PersonneDAO extends DAO<Personne> {
 			pst.setString(3, personne.getEmail());
 			pst.setString(4, personne.getAdresse());
 			pst.setString(5, personne.getTel());
-//			pst.setString(6, personne.getMdp());
+
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -137,7 +139,7 @@ public class PersonneDAO extends DAO<Personne> {
 			String email = rs.getString(EMAIL);
 			String adresse = rs.getString(ADRESSE);
 			String tel = rs.getString(TEL);
-//			String mdp = rs.getString(MDP);
+
 			personne = new Personne(nom, prenom, email, adresse, tel);
 			personne.setId(id);
 			donnees.put(id, personne);
@@ -147,49 +149,6 @@ public class PersonneDAO extends DAO<Personne> {
 		return personne;
 	}
 
-	/// moatasm
-//	@Override
-//	public Personne readByEmail(String email) {
-//		Personne personne = null;
-//		try {
-//			String requete = "SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = ?";
-//			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
-//			pst.setString(1, email);
-//			ResultSet rs = pst.executeQuery();
-//
-//			// Check if ResultSet is not null and has results
-//			if (rs != null && rs.next()) {
-//				int id = rs.getInt(CLE_PRIMAIRE);
-//				String nom = rs.getString(NOM);
-//				String prenom = rs.getString(PRENOM);
-//				String adresse = rs.getString(ADRESSE);
-//				String tel = rs.getString(TEL);
-//				personne = new Personne(nom, prenom, email, adresse, tel);
-//				donnees.put(id, personne);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return personne;
-//	}
-
-//	public String hashPassword(String password) {
-//		try {
-//			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//			byte[] hashedBytes = digest.digest(password.getBytes());
-//			return Base64.getEncoder().encodeToString(hashedBytes);
-//		} catch (NoSuchAlgorithmException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-
-//	public byte[] generateSalt() {
-//		byte[] salt = new byte[16];
-//		SecureRandom random = new SecureRandom();
-//		random.nextBytes(salt);
-//		return salt;
-//	}
 
 	public void afficheSelectEtoilePersonne() {
 		System.out.println("--- Personne non utilisé ---");

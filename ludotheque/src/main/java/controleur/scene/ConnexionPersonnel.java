@@ -37,6 +37,10 @@ public class ConnexionPersonnel extends SceneControleur {
 	
 	private Button deconnecter;
 
+
+
+
+
 	private static  Personne loggedInPersonne;
     private PersonnelDAO personnelDAO;
     private PersonneDAO personneDAO;
@@ -110,3 +114,7 @@ public class ConnexionPersonnel extends SceneControleur {
         alert.show();
     }
 }
+
+	
+
+

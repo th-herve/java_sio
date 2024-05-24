@@ -16,7 +16,7 @@ public class Personnel extends Personne {
 	        this.dateEntree = dateEntree;
 	        this.dateSortie = dateSortie;
 	    }
-	
+
 	public String getRole() {
 		return role;
 	}

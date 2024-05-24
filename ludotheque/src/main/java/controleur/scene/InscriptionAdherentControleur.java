@@ -5,8 +5,6 @@ import java.sql.Connection;
 import javax.print.event.PrintJobAttributeEvent;
 import javax.xml.bind.ValidationException;
 
-import org.bouncycastle.crypto.ec.ECNewPublicKeyTransform;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -56,8 +54,6 @@ public class InscriptionAdherentControleur extends SceneControleur {
 
 	@FXML
 	private TextField N_tel;
-	
-	
 
 	@FXML
 	private Button validerButton;
@@ -108,6 +104,12 @@ public class InscriptionAdherentControleur extends SceneControleur {
 			// appelle  create method de PersonneDAO pour insert  Personne object dans la base de donner 
 			if (adherentDAO.create(adherent)) {
 				showAlert(Alert.AlertType.CONFIRMATION, owner, "Inscription réussie!", "Adherent insérée avec succès");
+
+				// update l'affichage des adhérents
+				GererAdherentControleur ad = (GererAdherentControleur) this.app.getGererAdherentPage().getControleur();
+				ad.addToTableView(adherent);
+				
+				this.ResetForm();
 			} else {
 				showAlert(Alert.AlertType.ERROR, owner, "Database Error!", "Échec de l'insertion de Adherent");
 			}

@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -20,6 +19,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 public class Connexion {
 
 	private static Connection connect = null;
+	
+
 
 	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS04"; // Moatasm
 //	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS03"; // Jeanne
@@ -28,19 +29,18 @@ public class Connexion {
 	private static final String BASE_DE_DONNEES = "bd_Ludotheque";
 	private static final String ID = "admin";
 	private static final String MDP = "sio";
-
+	
 	private static final int COLONNE_TEXTE = 10;
 	private static final int COLONNE_ENTIER = 6;
 	private static final int COLONNE_DATE = 11;
-
+    
 	/**
 	 * Patron de conception Singleton
-	 * 
 	 * @return l'instance unique de connexion
 	 */
 	public static Connection getInstance() {
-		if (connect == null) {
-			try {
+		if (connect==null) {
+			try { 
 
 				SQLServerDataSource ds = new SQLServerDataSource();
 				ds.setUser(ID);
@@ -49,49 +49,46 @@ public class Connexion {
 				ds.setDatabaseName(BASE_DE_DONNEES);
 				connect = ds.getConnection();
 				System.out.println("connecté");
-			} catch (SQLException e) {
-				System.out.println("Echec de la tentative de connexion : " + e.getMessage() + e.getStackTrace());
+			}
+			catch (SQLException e){
+				System.out.println("Echec de la tentative de connexion : " + e.getMessage() + e.getStackTrace()) ;
 			}
 		}
 		return connect;
 	}
-
+	
 	private Connexion() {
 		super();
 	}
 
-	public static ResultSet executeQuery(String requete) {
-		Statement st = null;
+	public static ResultSet executeQuery(String requete){
+		Statement st = null ;
 		ResultSet rs = null;
-		// System.out.println("requete = "+requete);
-		try {
-			st = Connexion.getInstance().createStatement();
-			rs = st.executeQuery(requete);
-		} catch (SQLException e) {
-			System.out
-					.println("Echec de la tentative d'ex�cution de requete : " + requete + " [" + e.getMessage() + "]");
+		//System.out.println("requete = "+requete);
+		try{
+			st = Connexion.getInstance().createStatement() ;
+			rs = st.executeQuery(requete) ;
+		}catch(SQLException e){
+			System.out.println("Echec de la tentative d'ex�cution de requete : " +requete + " ["+ e.getMessage()+"]") ;
 		}
 		return rs;
 	}
 
 	/**
-	 * Une m�thode statique qui permet de faire une mise � jour d'une table (INSERT
-	 * / UPDATE / DELETE)
-	 * 
+	 * Une m�thode statique qui permet de faire une mise � jour d'une table (INSERT / UPDATE / DELETE)
 	 * @param requete
 	 * @return
 	 */
-	public static boolean executeUpdate(String requete) {
+	public static boolean executeUpdate(String requete){
 		boolean succes = true;
-		// System.out.println(requete);
-		Statement st = null;
-		try {
-			st = Connexion.getInstance().createStatement();
-			st.executeUpdate(requete);
-		} catch (SQLException e) {
+		//System.out.println(requete);
+		Statement st = null ;
+		try{
+			st = Connexion.getInstance().createStatement() ;
+			st.executeUpdate(requete) ;
+		}catch(SQLException e){
 			succes = false;
-			System.out.println(
-					"Echec de la tentative d'ex�cution de Mise � Jour : " + requete + " [" + e.getMessage() + "]");
+			System.out.println("Echec de la tentative d'ex�cution de Mise � Jour : " +requete + " ["+ e.getMessage()+"]") ;
 		}
 		return succes;
 	}
@@ -99,60 +96,64 @@ public class Connexion {
 	/**
 	 * Fermeture de la connexion au SGBD SQL ServerExpress
 	 */
-	public static void fermer() {
-		try {
+	public static void fermer()
+	{
+		try
+		{
 			getInstance().close();
 			System.out.println("deconnexion ok");
-		} catch (SQLException e) {
-			connect = null;
+		}
+		catch (SQLException e)
+		{
+			connect=null;
 			System.out.println("echec de la fermeture");
 		}
 	}
 
 	/**
-	 * Requ�te qui permet de voir le contenu d'une table Attention � ne pas perdre
-	 * la premi�re ligne en testant la table vide
-	 * 
+	 * Requ�te qui permet de voir le contenu d'une table
+	 * Attention � ne pas perdre la premi�re ligne en testant la table vide
 	 * @param table
 	 */
-	public static void afficheSelectEtoile(String table, String clauseWhere) {
-		try {
-			String requete = "SELECT * FROM " + table;
-			if (clauseWhere != null) {
-				requete += " WHERE " + clauseWhere;
+	public static void afficheSelectEtoile(String table, String clauseWhere){
+		try{
+			String requete = "SELECT * FROM "+table;
+			if (clauseWhere!=null) {
+				requete += " WHERE "+clauseWhere;
 			}
-			ResultSet res = Connexion.executeQuery(requete);
+			ResultSet res = Connexion.executeQuery(requete) ;
 			ResultSetMetaData rsmd = res.getMetaData();
 			int taille = rsmd.getColumnCount();
-			boolean hasNext = res.next();
-			if (!hasNext) {
-				System.out.println("table vide");
-			} else {
+			boolean hasNext =res.next(); 
+			if (!hasNext) {System.out.println("table vide");}
+			else {
 				// Affichage du nom des colonnes
 				System.out.print("|");
 				for (int j = 1; j <= taille; j++) {
 					String colonneNorme = extraireNomColonneNorme(rsmd, j);
-					System.out.print(colonneNorme + "|");
-				}
+					System.out.print(colonneNorme+"|");							
+				} 
 				System.out.println();
 
 				// Affichage des donn�es
-				while (hasNext) {
+				while(hasNext){
 					System.out.print("|");
 					for (int j = 1; j <= taille; j++) {
 						String valeurNormee = extraireValeurNormeeTypee(res, rsmd, j);
-						System.out.print(valeurNormee + "|");
-					}
+						System.out.print(valeurNormee+"|");							
+					} 
 					System.out.println();
 					hasNext = res.next();
 				}
 			}
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d'interrogation Select * : " + e.getMessage());
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d'interrogation Select * : " + e.getMessage()) ;
 		}
 	}
 
-	private static String extraireValeurNormeeTypee(ResultSet res, ResultSetMetaData rsmd, int j) throws SQLException {
+	private static String extraireValeurNormeeTypee(ResultSet res, ResultSetMetaData rsmd, int j)
+			throws SQLException {
 		String valeurNormee = "";
 		switch (rsmd.getColumnType(j)) {
 		case Types.VARCHAR:
@@ -168,7 +169,7 @@ public class Connexion {
 			valeurNormee = Connexion.norme(valeurNormee, Connexion.COLONNE_DATE, Alignement.Droite);
 			break;
 		case Types.INTEGER:
-			valeurNormee = res.getInt(j) + "";
+			valeurNormee = res.getInt(j)+"";
 			valeurNormee = Connexion.norme(valeurNormee, Connexion.COLONNE_ENTIER, Alignement.Droite);
 			break;
 		default:
@@ -177,7 +178,8 @@ public class Connexion {
 		return valeurNormee;
 	}
 
-	private static String extraireNomColonneNorme(ResultSetMetaData rsmd, int j) throws SQLException {
+	private static String extraireNomColonneNorme(ResultSetMetaData rsmd, int j)
+			throws SQLException {
 		String nomColonneNorme = rsmd.getColumnName(j);
 		switch (rsmd.getColumnType(j)) {
 		case Types.VARCHAR:
@@ -198,20 +200,21 @@ public class Connexion {
 		return nomColonneNorme;
 	}
 
-	/**
-	 * Le seul alignement pris en compte est � droite.
+	
+	/** Le seul alignement pris en compte est � droite.
 	 * 
 	 * @param valeurNormee la chaine de texte � normaliser
-	 * @param colonneTexte la largeur maximale de la colonne
-	 * @param aligne       gauche / droite / centr�
+	 * @param colonneTexte  la largeur maximale de la colonne
+	 * @param aligne  gauche / droite / centr�
 	 * @return la chaine de caract�re normalis� pour affichage de tableau.
 	 */
 	private static String norme(String valeurNormee, int colonneTexte, Alignement aligne) {
 		String rep = "";
-		int tailleEffective = valeurNormee.length();
-		if (tailleEffective >= colonneTexte) {
+		int tailleEffective =valeurNormee.length(); 
+		if (tailleEffective>=colonneTexte) {
 			rep = valeurNormee.substring(0, colonneTexte);
-		} else {
+		}
+		else {
 			rep = valeurNormee;
 			for (int i = tailleEffective; i < colonneTexte; i++) {
 				rep += " ";
@@ -221,17 +224,16 @@ public class Connexion {
 	}
 
 	/**
-	 * Requ�te qui permet de r�cup�rer le plus grand id de la table, a priori celui
-	 * qui vient d'�tre affect� � une ligne cr��e via identity.
-	 * 
+	 * Requ�te qui permet de r�cup�rer le plus grand id de la table, a priori celui qui vient d'�tre affect�
+	 * � une ligne cr��e via identity.
 	 * @param cle
 	 * @param table
 	 * @return
 	 */
 	public static int getMaxId(String cle, String table) {
-		String requete = "SELECT MAX(" + cle + ")as max FROM " + table;
+		String requete = "SELECT MAX("+cle+")as max FROM "+table;
 		ResultSet rs = Connexion.executeQuery(requete);
-		int id = -1;
+		int id= -1;
 		try {
 			rs.next();
 			id = rs.getInt("max");
@@ -242,103 +244,44 @@ public class Connexion {
 	}
 
 	public static List<Integer> getLesIds(String attribut, String table, String clauseWhere) {
-		String requete = "SELECT DISTINCT " + attribut + " FROM " + table;
-		if (clauseWhere != null) {
-			requete += " WHERE " + clauseWhere;
-		}
+		String requete = "SELECT DISTINCT "+attribut+" FROM "+table;
+		if (clauseWhere!=null) {
+			requete += " WHERE "+clauseWhere;
+		}		
 		ResultSet rs = Connexion.executeQuery(requete);
 		List<Integer> liste = new ArrayList<Integer>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt(attribut);
-				liste.add(id);
+			int id = rs.getInt(attribut);
+			liste.add(id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return liste;
-
+		
 	}
-
-	// verfier si user ou pas dans le table Personne
-	public static boolean userExists(String email) {
-		boolean exists = false;
-		String query = "SELECT COUNT(*) AS count FROM Personne WHERE email = ?";
-		try (PreparedStatement statement = Connexion.getInstance().prepareStatement(query)) {
-			statement.setString(1, email);
-			try (ResultSet resultSet = statement.executeQuery()) {
-				if (resultSet.next()) {
-					int count = resultSet.getInt("count");
-					exists = count > 0;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return exists;
-	}
-	
-	
-//    public static boolean verifyPassword(String email, String password) {
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        ResultSet resultSet = null;
-//
-//        try {
-//            // Get a connection to the database
-//            connection = getInstance();
-//
-//            // Hash the provided password
-//            String hashedPassword = hashPassword(password);
-//
-//            // Prepare the SQL statement to retrieve the stored password for the given email
-//            String sql = "SELECT password FROM Personne WHERE email = ?";
-//            statement = connection.prepareStatement(sql);
-//            statement.setString(1, email);
-//
-//            // Execute the query
-//            resultSet = statement.executeQuery();
-//
-//            // If a result is found, compare the stored password with the provided password
-//            if (resultSet.next()) {
-//                String storedPassword = resultSet.getString("password");
-//                return hashedPassword.equals(storedPassword);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            // Close the database resources
-//            close(connection, statement, resultSet);
-//        }
-//
-//        // If no match is found or an error occurs, return false
-//        return false;
-//    }
-	
-	
-	 
-	
 
 	public static void main(String[] args) {
-
-		/**
-		 * décommenter pour afficher la table adherent
+		
+		/** décommenter pour afficher la table adherent 
 		 */
 //		Connexion.getInstance();
 //		AdherentDAO adherentDAO = AdherentDAO.getInstance();
 //		adherentDAO.afficheSelectEtoileAdherent();
 
-		/**
-		 * pour afficher les tables Personne et Personnel
-		 */
+
+		
+        /**
+         pour afficher les tables Personne et Personnel 
+         */
 		PersonneDAO personneDAO = PersonneDAO.getInstance();
+
 		personneDAO.afficheSelectEtoilePersonne();
 		PersonnelDAO personnelDAO = PersonnelDAO.getInstance();
 		personnelDAO.afficheSelectEtoilePersonnel();
 
 	}
-
-	
 
 //	public static void main(String[] args) {
 //		Connexion.getInstance();
@@ -368,10 +311,13 @@ public class Connexion {
 //				    afficheSelectEtoile(tableName,null);
 //		        fermer();
 //		    }
-
+		
+		  
 //		    
 //		    // Don't forget to close the connection when you're done
 //		    fermer();
 //	}
 
+	
 }
+

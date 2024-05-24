@@ -8,7 +8,9 @@ import javafx.scene.control.Label;
 import modele.Personne;
 import modele.Personnel;
 
+
 public class AccueilControleur extends SceneControleur {
+
 
 	@FXML
 	private Label labelPrincipale;
@@ -55,7 +57,10 @@ public class AccueilControleur extends SceneControleur {
     
 
 	
-	
-	
+
+	public void initialize() {
+
+	}
+
 	
 }

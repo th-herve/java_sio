@@ -168,7 +168,9 @@ public class AdherentDAO extends DAO<Adherent> {
 
 				personne = personneDao.read(idAdherent);
 				adherent = new Adherent(personne.getNom(), personne.getPrenom(), personne.getEmail(),
-						personne.getAdresse(), personne.getTel() ,estActif, remarque, numCIN, dateInscription);
+
+						personne.getAdresse(), personne.getTel(), estActif, remarque, numCIN, dateInscription);
+
 				adherent.setId(personne.getId());
 
 				donnees.put(idAdherent, adherent);

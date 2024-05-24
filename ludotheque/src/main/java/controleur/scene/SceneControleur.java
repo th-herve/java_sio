@@ -1,19 +1,30 @@
 package controleur.scene;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import controleur.App;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+
 import modele.Adherent;
 import modele.Personne;
 
+import javafx.scene.control.TextField;
+import javafx.util.Callback;
+
+
 public abstract class SceneControleur {
-	
+
 	protected App app;
 	public static Personne loggedInPersonne;
 	public void setApp(App app) {
 		this.app = app;
 	}
-	
+
 	public void switchToAccueil() {
 		app.switchToAccueil();
 	}
@@ -25,24 +36,32 @@ public abstract class SceneControleur {
 	public void switchToGererJeu() {
 		app.switchToGererJeu();
 	}
-	
+
+	public void switchToAjouterJeu() {
+		app.switchToAjouterJeu();
+	}
+
 	public void switchToinscriptionAdherent() {
 		app.switchToinscriptionAdherent();
 	}
 	
-	public void switchToconnexionPage() {
-		
-		app.switchToconnexionPage();
+	public void switchToGererJeuPhysique(int id) {
+	    app.switchToGererJeuPhysique(id);
 	}
-	
-	
+
 	public void switchToinscriptionPersonnel() {
 		
 		
 		app.switchToinscriptionPersonnel();
 	}
 	
-	protected<T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
+	public void switchToconnexionPage() {
+		
+		app.switchToconnexionPage();
+	}
+
+	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
+
 		changeColumnBooleanValue(col, "Oui", "Non");
 	}
 
@@ -55,7 +74,7 @@ public abstract class SceneControleur {
 					// ne change pas les valeurs null
 					if (empty || item == null) {
 						setText(null);
-					// update les true/false
+						// update les true/false
 					} else {
 						// Set text based on the boolean value
 						setText(item ? valTrue : valFalse);
@@ -63,8 +82,75 @@ public abstract class SceneControleur {
 				}
 			};
 		});
-	
+
 	}
 
+	/**
+	 * Permet de formatter l'affichage d'une date dans une cell de tableView, avec
+	 * le fromat "dd/MM/yyyy" par défaut
+	 * 
+	 * @param <T> classe du modèle utilisée dans le controleur (ex : Adherent)
+	 * @param col
+	 * @return cell qui sera affichée
+	 */
+	protected <T> Callback<TableColumn<T, LocalDateTime>, TableCell<T, LocalDateTime>> formatDate(
+			TableColumn<T, LocalDateTime> col) {
+		return formatDate(col, "dd/MM/yyyy");
+	}
+
+	/**
+	 * Permet de formatter l'affichage d'une date dans une cell de tableView
+	 * 
+	 * @param <T>    classe du modèle utilisée dans le controleur (ex : Adherent)
+	 * @param col
+	 * @param format ex : "dd.MM.yyyy"
+	 * @return cell qui sera affichée
+	 */
+	protected <T> Callback<TableColumn<T, LocalDateTime>, TableCell<T, LocalDateTime>> formatDate(
+			TableColumn<T, LocalDateTime> col, String format) {
+
+		return new Callback<TableColumn<T, LocalDateTime>, TableCell<T, LocalDateTime>>() {
+			@Override
+			public TableCell<T, LocalDateTime> call(TableColumn<T, LocalDateTime> param) {
+				return new TableCell<T, LocalDateTime>() {
+					private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+					@Override
+					protected void updateItem(LocalDateTime item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty || item == null) {
+							setText(null);
+						} else {
+							setText(formatter.format(item));
+						}
+					}
+				};
+			}
+		};
+	}
+
+	protected void forceIntegerOnTextField(TextField textField) {
+
+		textField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					textField.setText(oldValue);
+				}
+			}
+		});
+	}
+
+	protected void forceFloatOnTextField(TextField textField) {
+		textField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*\\.?\\d*")) {
+//					newValue = newValue.replaceAll("[^\\d.]", "");
+					textField.setText(oldValue);
+				}
+			}
+		});
+	}
 
 }

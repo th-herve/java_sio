@@ -179,7 +179,6 @@ public class PersonnelDAO extends DAO<Personnel> {
 	 }
 
 
-	 
 	 public String hashPassword(String password) {
 			try {
 				MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -190,6 +189,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 				return null;
 			}
 		}
+		
 
 	public void afficheSelectEtoilePersonnel() {
 //		System.out.println("--- Personnel non utilisé ---");
