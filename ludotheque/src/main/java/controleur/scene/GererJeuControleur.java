@@ -207,15 +207,7 @@ public class GererJeuControleur extends SceneControleur{
 	public void searchJeu(ActionEvent eventFilter) {
 		String requete = searchJeu.getText().toLowerCase(); //on convertir pour pouvoir ignorer la casse;
 		ObservableList<Jeu> data = tableJeu.getItems(); 
-
 		ObservableList<Jeu> filtre = FXCollections.observableArrayList();
-
-		searchJeu.setOnKeyPressed(event-> {
-			if (event.getCode() == KeyCode.ESCAPE) {
-				filtre.clear();
-				tableJeu.setItems(data);
-			}
-		});
 
 		for (Jeu item : data) {
 			if (item.getNom().toLowerCase().contains(requete) || item.getType().equalsIgnoreCase(requete)) {
@@ -232,7 +224,7 @@ public class GererJeuControleur extends SceneControleur{
 			tableJeu.setItems(filtre);
 		}
 	}
-	
+		
 	public void openGererJeuPhysique() {
         Jeu jeu = tableJeu.getSelectionModel().getSelectedItem();
         this.switchToGererJeuPhysique(jeu.getId());
