@@ -1,5 +1,8 @@
 package controleur.scene;
 
+import java.sql.Connection;
+
+import javax.print.event.PrintJobAttributeEvent;
 import javax.xml.bind.ValidationException;
 
 import javafx.event.ActionEvent;
@@ -12,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import modele.Adherent;
 import modele.dao.AdherentDAO;
+import modele.dao.Connexion;
+import modele.dao.PersonneDAO;
 
 
 public class InscriptionAdherentControleur extends SceneControleur {
@@ -21,6 +26,10 @@ public class InscriptionAdherentControleur extends SceneControleur {
 
 	@FXML
 	private TextField prenom;
+	
+	@FXML 
+	
+	private TextField password;
 
 	@FXML
 	private TextField email;
@@ -56,11 +65,15 @@ public class InscriptionAdherentControleur extends SceneControleur {
 	private Button retour;
 
 	private AdherentDAO adherentDAO;
-
-	// ici la création de inctance de class PersonneDAO
+	private PersonneDAO personneDAO;
+	// ici la création de inctance de class AdherentDAO
 	public InscriptionAdherentControleur() {
 		//        
 		this.adherentDAO = AdherentDAO.getInstance();
+		this.personneDAO = PersonneDAO.getInstance();
+		
+	
+		
 	}
 	// création d'un event qui permet  button de faire certain choses comme aleret et create dans la base de donner 
 	@FXML
@@ -69,7 +82,10 @@ public class InscriptionAdherentControleur extends SceneControleur {
 
 		try {
 			validateForm() ;
-
+				
+//			byte [] salt = personneDAO.generateSalt();
+			
+//			String hachedPassword = personneDAO.hashPassword(password.getText());
 
 			// Creation d'un Adherent object avec values depuis l'interface components
 			Adherent adherent = new Adherent(
@@ -82,6 +98,8 @@ public class InscriptionAdherentControleur extends SceneControleur {
 					remarques.getText(),
 					numCIN.getText(),
 					dateInscription.getValue() != null ? dateInscription.getValue().atStartOfDay() : null
+					
+
 					);
 			// appelle  create method de PersonneDAO pour insert  Personne object dans la base de donner 
 			if (adherentDAO.create(adherent)) {
@@ -102,9 +120,9 @@ public class InscriptionAdherentControleur extends SceneControleur {
 	}
 	private boolean validateForm() throws ValidationException{
 		if(nom.getText().isEmpty() || prenom.getText().isEmpty() || email.getText().isEmpty() ||
-				adresse.getText().isEmpty() || N_tel.getText().isEmpty() || remarques.getText().isEmpty() || numCIN.getText().isEmpty()) {
+				adresse.getText().isEmpty() || N_tel.getText().isEmpty() || password.getText().isEmpty() || remarques.getText().isEmpty() || numCIN.getText().isEmpty()) {
 
-			throw new ValidationException("Please fill in all fields");
+			throw new ValidationException("Merci de remplir tous les champs");
 		}
 		return true;
 	}
@@ -115,6 +133,7 @@ public class InscriptionAdherentControleur extends SceneControleur {
 		email.clear();
 		adresse.clear();
 		N_tel.clear();
+		password.clear();
 		remarques.clear();
 		numCIN.clear();
 		estactive.setSelected(false);
