@@ -40,7 +40,6 @@ public class ConnexionPersonnel extends SceneControleur {
 
 
 
-
 	private static  Personne loggedInPersonne;
     private PersonnelDAO personnelDAO;
     private PersonneDAO personneDAO;
@@ -73,6 +72,7 @@ public class ConnexionPersonnel extends SceneControleur {
                 loggedInPersonne =  personne; // Cast personne to Personnel and assign to loggedInPersonne
                 showAlert(Alert.AlertType.INFORMATION, owner, "Succès", "Connexion réussie");
                 identification.clear();
+                mdp.clear();
 	            
                 app.switchToAccueil();
             } else {
