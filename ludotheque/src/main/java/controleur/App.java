@@ -1,10 +1,14 @@
 package controleur;
 
-import java.io.IOException;
+import java.io.IOException; 
+
+import controleur.scene.AccueilControleur;
 
 import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import modele.Personne;
+import modele.Personnel;
 
 public class App extends Application {
 
@@ -19,6 +23,10 @@ public class App extends Application {
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
 
+	private Page inscriptionPersonnelPage;
+//	private Page logoutPage;
+
+
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
 	// créé automatiquement)
@@ -32,7 +40,11 @@ public class App extends Application {
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
-		switchToAccueil(); // Affiche la première vue par défaut
+		switchToconnexionPage(); // Affiche la première vue par défaut
+//		switchToGererAdherent();
+
+//		switchToAccueil(); // Affiche la première vue par défaut
+
 	}
 
 	private void loadViews() throws IOException {
@@ -43,13 +55,21 @@ public class App extends Application {
 		this.ajouterJeuPage = new Page(this, "ajouterJeu.fxml");
 		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
-//		this.connexionPage= new Page(this,"pageConnexion.fxml");
+
+		this.connexionPage= new Page(this,"pageConnexion.fxml");
+		this.inscriptionPersonnelPage = new Page (this,"inscriptionPersonnel.fxml");
+
+		
+		
+
 	}
 
 	// Méthodes pour passer d'une vue à une autre
 	public void switchToAccueil() {
 		primaryStage.setScene(accueilPage.getScene());
 		primaryStage.show();
+		
+		
 	}
 
 	public void switchToGererAdherent() {
@@ -86,12 +106,12 @@ public class App extends Application {
 		stage.show();
 	}
 
-//	public void switchToconnexionPage() {
-//		// TODO Auto-generated method stub
-//		primaryStage.setScene(connexionPage.getScene());
-//		primaryStage.show();
-//		
-//	}
+	public void switchToconnexionPage() {
+		
+		primaryStage.setScene(connexionPage.getScene());
+		primaryStage.show();
+		
+	}
 	public Page getGererAdherentPage() {
 		return gererAdherentPage;
 	}
@@ -101,4 +121,15 @@ public class App extends Application {
 	}
 
 	
+
+	public void switchToinscriptionPersonnel() {
+		
+		primaryStage.setScene(inscriptionPersonnelPage.getScene());
+		primaryStage.show();
+		
+	}
+	
 }
+
+
+

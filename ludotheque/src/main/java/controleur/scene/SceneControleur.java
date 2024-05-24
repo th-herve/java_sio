@@ -9,13 +9,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+
+import modele.Adherent;
+import modele.Personne;
+
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
+
 
 public abstract class SceneControleur {
 
 	protected App app;
-
+	public static Personne loggedInPersonne;
 	public void setApp(App app) {
 		this.app = app;
 	}
@@ -44,12 +49,19 @@ public abstract class SceneControleur {
 	    app.switchToGererJeuPhysique(id);
 	}
 
-//	public void switchToconnexionPage() {
-//		
-//		app.switchToconnexionPage();
-//	}
+	public void switchToinscriptionPersonnel() {
+		
+		
+		app.switchToinscriptionPersonnel();
+	}
+	
+	public void switchToconnexionPage() {
+		
+		app.switchToconnexionPage();
+	}
 
 	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
+
 		changeColumnBooleanValue(col, "Oui", "Non");
 	}
 

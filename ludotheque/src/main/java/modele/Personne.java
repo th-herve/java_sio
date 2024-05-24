@@ -12,7 +12,12 @@ public class Personne {
 	private String adresse;
 	private String tel;
 
-	public Personne(String nom, String prenom, String email, String adresse, String tel) {
+//	private String mdp; // pour le mot de passe 
+	
+
+
+	public Personne(String nom, String prenom, String email, String adresse, String tel ) {
+
 		super();
 	
 		this.id = 0;
@@ -21,7 +26,10 @@ public class Personne {
 		this.email = email;
 		this.adresse = adresse;
 		this.tel = tel;
+
+
 	}
+
 
 	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
 		super();
@@ -33,6 +41,7 @@ public class Personne {
 		this.adresse = adresse;
 		this.tel = tel;
 	}
+
 
 	public int getId() {
 		return id;
@@ -81,6 +90,7 @@ public class Personne {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+
 
 	@Override
 	public String toString() {
