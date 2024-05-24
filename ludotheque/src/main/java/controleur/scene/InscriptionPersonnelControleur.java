@@ -138,7 +138,7 @@ public class InscriptionPersonnelControleur extends SceneControleur {
     }
 
 
-	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+	public void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
 		alert.setHeaderText(null);
