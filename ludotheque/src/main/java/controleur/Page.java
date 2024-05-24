@@ -39,8 +39,13 @@ public class Page {
 		return scene;
 	}
 
+	public SceneControleur getControleur() {
+		return this.controleur;
+	}
+
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
+
 
 }
