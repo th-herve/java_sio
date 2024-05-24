@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="679.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererAdherentControleur">
+<BorderPane prefHeight="679.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererAdherentControleur">
    <center>
       <TableView fx:id="tableAdherent" prefHeight="499.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <columns>
@@ -86,6 +87,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <TextField fx:id="search" onAction="#searchAdherent" promptText="Rechercher..." />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">

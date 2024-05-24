@@ -2,6 +2,7 @@ package controleur.scene;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -49,6 +51,11 @@ public class GererJeuControleur extends SceneControleur{
 	@FXML
 	public TableColumn<Jeu, Float> noteBgg;
 
+	@FXML
+	public TextField searchJeu;
+	@FXML
+	private ObservableList<Jeu> originalData;
+
 	public ActionEvent event;
 
 	public void initialize() {
@@ -58,30 +65,6 @@ public class GererJeuControleur extends SceneControleur{
 		refreshTable();
 
 	}
-
-    private void supprimerJeuSelectionne() {
-    	Jeu selectedJeu = tableJeu.getSelectionModel().getSelectedItem();
-        if (selectedJeu != null) {        	
-            JeuDAO.getInstance().delete(selectedJeu);
-            
-            //suppression définitive donc on demande la confirmation de l'utilisateur 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation de suppression");
-            alert.setHeaderText("Êtes-vous sûr de vouloir définitivement supprimer ce jeu ?");
-            
-            ButtonType buttonTypeOui = new ButtonType("Oui");
-            ButtonType buttonTypeNon = new ButtonType("Non");
-            alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
-            
-            //si l'utilisateur confirme on enlève de la liste et dans l'initialize on supprime de la bdd
-            alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == buttonTypeOui) {
-                    ObservableList<Jeu> items = tableJeu.getItems();
-                    items.remove(selectedJeu);
-                }
-            });
-        }
-    }
 
 	public void initializeColumn() {
 
@@ -180,15 +163,10 @@ public class GererJeuControleur extends SceneControleur{
 		jeuDAO.update(jeu);	
 	}
 
-	private void deleteString(CellEditEvent<Jeu, String> event) {
-
-
-	}
-
 	public void refreshTable() {
 		JeuDAO jeuDAO = JeuDAO.getInstance();
 		List<Jeu> jeuxList = jeuDAO.readAll();
-		
+
 		tableJeu.getItems().clear();
 
 		for (Jeu jeux : jeuxList) {
@@ -197,17 +175,68 @@ public class GererJeuControleur extends SceneControleur{
 		tableJeu.setEditable(true);
 		tableJeu.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		tableJeu.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.DELETE) {
-                supprimerJeuSelectionne();
-            }
-        });
 	}
 
 	public void addToTableView(Jeu jeu) {
 		tableJeu.getItems().add(jeu);
 	}
+
+	public void deleteJeu() {
+		JeuDAO jeuDAO = JeuDAO.getInstance();
+		int selectedJeu = tableJeu.getSelectionModel().getFocusedIndex();
+		if (selectedJeu >= 0) {        	
+			Jeu	jeu = tableJeu.getItems().get(selectedJeu);
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation de suppression");
+			alert.setHeaderText("Êtes-vous sûr de vouloir définitivement supprimer ce jeu ?");
+
+			ButtonType buttonTypeOui = new ButtonType("Oui");
+			ButtonType buttonTypeNon = new ButtonType("Non");
+			alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
+			alert.showAndWait().ifPresent(buttonType -> {
+				if (buttonType == buttonTypeOui) {
+					ObservableList<Jeu> items = tableJeu.getItems();
+					items.remove(selectedJeu);
+					jeuDAO.delete(jeu);
+
+				}
+			});
+		}
+	}
+
+	public void searchJeu(ActionEvent eventFilter) {
+		String requete = searchJeu.getText().toLowerCase(); //on convertir pour pouvoir ignorer la casse;
+		ObservableList<Jeu> data = tableJeu.getItems(); 
+
+		ObservableList<Jeu> filtre = FXCollections.observableArrayList();
+
+		searchJeu.setOnKeyPressed(event-> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				filtre.clear();
+				tableJeu.setItems(data);
+			}
+		});
+
+		for (Jeu item : data) {
+			if (item.getNom().toLowerCase().contains(requete) || item.getType().equalsIgnoreCase(requete)) {
+				filtre.add(item);
+			}
+		}
+
+		if (filtre.isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Pas de résultat");
+			alert.setHeaderText("Aucun résultat trouvé !");
+			alert.show();
+		} else {
+			tableJeu.setItems(filtre);
+		}
+	}
 	
+	public void openGererJeuPhysique() {
+        Jeu jeu = tableJeu.getSelectionModel().getSelectedItem();
+        this.switchToGererJeuPhysique(jeu.getId());
+    }
 
 	public void openGererJeuPhysique() {
 		Jeu jeu = tableJeu.getSelectionModel().getSelectedItem();
@@ -230,14 +259,5 @@ public class GererJeuControleur extends SceneControleur{
 	//		JeuDAO jeuDAO = JeuDAO.getInstance();
 	//		jeuDAO.update(jeu);	
 	//	}
-
-
-	//    tableJeu.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	//    public void handle(KeyEvent event) {
-	//        if (event.getCode() == KeyCode.ENTER) {
-	//            System.out.println("La touche Enter a été pressée !");
-	//        }
-	//    }
-	//})
 
 }

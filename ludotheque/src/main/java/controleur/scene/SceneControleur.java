@@ -44,10 +44,10 @@ public abstract class SceneControleur {
 	public void switchToinscriptionAdherent() {
 		app.switchToinscriptionAdherent();
 	}
+
 	public void switchToGererJeuPhysique(int idJeu) {
 		app.switchToGererJeuPhysique(idJeu);
 	}
-
 
 //	public void switchToconnexionPage() {
 //		

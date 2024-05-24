@@ -131,11 +131,9 @@ public class JeuDAO extends DAO<Jeu> {
 	public Jeu read(int id) {
 		Jeu jeu = null;
 		if (donnees.containsKey(id)) {
-			System.out.println("récupéré");
 			jeu=donnees.get(id);
 		}
 		else {
-			System.out.println("recherché dans la BD");
 			try {
 
 				String requete = "SELECT * FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = "+id;
@@ -180,7 +178,6 @@ public class JeuDAO extends DAO<Jeu> {
 				int idJeu = res.getInt(CLE_PRIMAIRE);
 				//on vérifie si l'id existe dans les données
 				if(donnees.containsKey(idJeu)) {
-					System.out.println("récupéré");
 					jeu = donnees.get(idJeu);
 				} else {
 					//sinon on lis
