@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import exception.AdherentNotActive;
 import exception.JeuNotDisponible;
 import modele.dao.AdherentDAO;
+import modele.dao.EmpruntDAO;
 import modele.dao.JeuPhysiqueDAO;
 
 public class Emprunt {
@@ -99,9 +100,18 @@ public class Emprunt {
 		return this.jeuPhysique.getJeu().getNom();
 	}
 	
-	public void enregistrerRetour() {
+	public boolean enregistrerRetour() {
+
+		boolean succes = true;
+
 		this.dateRetour = LocalDateTime.now();
 		this.jeuPhysique.setEstDisponible(true);
+		if (EmpruntDAO.getInstance().update(this)) {
+			JeuPhysiqueDAO.getInstance().update(jeuPhysique);
+		} else {
+			succes = false;
+		}
+		return succes;
 	}
 
 

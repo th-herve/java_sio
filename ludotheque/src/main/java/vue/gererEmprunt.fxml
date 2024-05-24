@@ -86,7 +86,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Supprimer">
+            <Button mnemonicParsing="false" onAction="#supprimerRetour" text="Supprimer">
                <font>
                   <Font size="18.0" />
                </font>

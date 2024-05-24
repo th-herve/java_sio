@@ -214,12 +214,25 @@ public class GererEmpruntControleur extends SceneControleur {
 		Window owner = tableEmprunt.getScene().getWindow();
 
 		Emprunt emprunt = tableEmprunt.getFocusModel().getFocusedItem();
-		emprunt.enregistrerRetour();
-		if (EmpruntDAO.getInstance().create(emprunt)) {
-			this.refreshTable();
+		if (emprunt.enregistrerRetour()) {
+			tableEmprunt.getItems().set(tableEmprunt.getFocusModel().getFocusedIndex(), emprunt);
 			this.showAlert(AlertType.CONFIRMATION, owner, "", "Le retour a été enregistré avec succès.");
 		} else {
-			this.showAlert(AlertType.ERROR, owner, "Erreur", "Une erreure est survenue lors de l'enregistrement.");
+			this.showAlert(AlertType.ERROR, owner, "Erreur", "Une erreur est survenue lors de l'enregistrement.");
+		}
+	}
+	
+	public void supprimerRetour() {
+		Window owner = tableEmprunt.getScene().getWindow();
+
+		Emprunt emprunt = tableEmprunt.getFocusModel().getFocusedItem();
+		
+		if (EmpruntDAO.getInstance().delete(emprunt)) {
+			int itemId = this.tableEmprunt.getFocusModel().getFocusedIndex();
+			this.tableEmprunt.getItems().remove(itemId);
+			this.showAlert(AlertType.CONFIRMATION, owner, "", "Emprunt supprimé.");
+		} else {
+			this.showAlert(AlertType.ERROR, owner, "Erreur", "Une erreur est survenue lors de la suppression.");
 		}
 	}
 
