@@ -243,7 +243,7 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	 * @return timestamp
 	 */
 	private Timestamp convertDate(LocalDateTime date) {
-		return Timestamp.valueOf(date.truncatedTo(ChronoUnit.MINUTES));
+		return Timestamp.valueOf(date.truncatedTo(ChronoUnit.SECONDS));
 	}
 
 	public void afficheSelectEtoileAdherent() {
