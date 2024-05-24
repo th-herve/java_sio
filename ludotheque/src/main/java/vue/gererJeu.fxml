@@ -51,7 +51,7 @@
          <children>
             <ImageView fx:id="img" fitHeight="105.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../java_sio/ludotheque/src/images/logo_bettonludotheque.png" />
+                  <Image url="@../../../images/logo_bettonludotheque.png../../../images/logo_bettonludotheque.png" />
                </image>
             </ImageView>
             <Label alignment="TOP_CENTER" prefHeight="84.0" prefWidth="220.0" text="Jeu" GridPane.columnIndex="1">
@@ -79,17 +79,22 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="151.0" style="-fx-background-color: red;" text="Supprimer" textFill="#fffdfd">
+                  <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="181.0" style="-fx-background-color: red;" text="Supprimer" textFill="#fffdfd">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#openGererJeuPhysique" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: blue;" text="Jeu physique" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#openGererJeuPhysique" prefHeight="39.0" prefWidth="183.0" style="-fx-background-color: blue;" text="Jeu physique" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="searchJeu" onAction="#searchJeu" prefWidth="153.0" promptText="Rechercher..." />
+                  <TextField fx:id="searchJeu" onAction="#searchJeu" prefHeight="29.0" prefWidth="124.0" promptText="Rechercher..." />
+                  <Button  mnemonicParsing="false" onAction="#refreshTable" prefHeight="39.0" prefWidth="33.0" text="x">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
