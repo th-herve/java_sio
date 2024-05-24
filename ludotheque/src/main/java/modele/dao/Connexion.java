@@ -1,5 +1,8 @@
 package modele.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -8,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import modele.dao.*;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
@@ -21,6 +25,7 @@ public class Connexion {
 //	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS04"; // Moatasm
 //	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS03"; // Jeanne
 	private static final String SQL_SERVER = "DESKTOP-7O2DRQE\\SQLEXPRESS"; // Thibault
+
 
 	private static final String BASE_DE_DONNEES = "bd_Ludotheque";
 	private static final String ID = "admin";
@@ -257,6 +262,7 @@ public class Connexion {
 		return liste;
 		
 	}
+
 	public static void main(String[] args) {
 		
 		/** décommenter pour afficher la table adherent 
@@ -264,11 +270,14 @@ public class Connexion {
 //		Connexion.getInstance();
 //		AdherentDAO adherentDAO = AdherentDAO.getInstance();
 //		adherentDAO.afficheSelectEtoileAdherent();
+
+
 		
         /**
          pour afficher les tables Personne et Personnel 
          */
-		PersonneDAO personneDAO = PersonneDAO.getIntstance();
+		PersonneDAO personneDAO = PersonneDAO.getInstance();
+
 		personneDAO.afficheSelectEtoilePersonne();
 		PersonnelDAO personnelDAO = PersonnelDAO.getInstance();
 		personnelDAO.afficheSelectEtoilePersonnel();

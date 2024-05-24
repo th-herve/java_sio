@@ -5,29 +5,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import modele.Personne;
+import java.time.LocalDateTime;
+import java.util.Base64;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.sql.Date;
 
+
+import modele.Personne;
 
 public class PersonneDAO extends DAO<Personne> {
 	private static final String TABLE = "Personne";
-	private static final String CLE_PRIMAIRE = "id";
+	static final String CLE_PRIMAIRE = "id";
 	private static final String NOM = "nom";
 	private static final String PRENOM = "prenom";
-	private static final String EMAIL = "email";
+	static final String EMAIL = "email";
 	private static final String ADRESSE = "Adresse";
 	private static final String TEL = "tel";
 
+
+
 	private static PersonneDAO intstance = null;
 
-	public static PersonneDAO getIntstance() {
+	public static PersonneDAO getInstance() {
 		if (intstance == null) {
 			intstance = new PersonneDAO();
 		}
 		return intstance;
 
 	}
-   
-   
+
 	private PersonneDAO() {
 		super();
 	}
@@ -40,12 +48,14 @@ public class PersonneDAO extends DAO<Personne> {
 
 			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
 					+ "," + TEL + ")VALUES(?,?,?,?,?)";
+
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, personne.getNom());
 			pst.setString(2, personne.getPrenom());
 			pst.setString(3, personne.getEmail());
 			pst.setString(4, personne.getAdresse());
 			pst.setString(5, personne.getTel());
+
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -94,7 +104,8 @@ public class PersonneDAO extends DAO<Personne> {
 		int id = personne.getId();
 
 		try {
-			String requete = "UPDATE " + TABLE + " SET "+NOM+ " =?, " +PRENOM+ " =?," +EMAIL+ " =?, " +ADRESSE+ " =?, " +TEL+ " =? WHERE " + CLE_PRIMAIRE + " = ?";
+			String requete = "UPDATE " + TABLE + " SET " + NOM + " =?, " + PRENOM + " =?," + EMAIL + " =?, " + ADRESSE
+					+ " =?, " + TEL + " =? WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setString(1, nom);
 			pst.setString(2, prenom);
@@ -128,6 +139,7 @@ public class PersonneDAO extends DAO<Personne> {
 			String email = rs.getString(EMAIL);
 			String adresse = rs.getString(ADRESSE);
 			String tel = rs.getString(TEL);
+
 			personne = new Personne(nom, prenom, email, adresse, tel);
 			personne.setId(id);
 			donnees.put(id, personne);
@@ -137,9 +149,10 @@ public class PersonneDAO extends DAO<Personne> {
 		return personne;
 	}
 
+
 	public void afficheSelectEtoilePersonne() {
 		System.out.println("--- Personne non utilisé ---");
-		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From "+ TABLE + ")";
+		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";
 		Connexion.afficheSelectEtoile("Personne", clauseWhere);
 
 		System.out.println("--- Personne contraint par id --- ");

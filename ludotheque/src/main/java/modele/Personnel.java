@@ -7,20 +7,26 @@ public class Personnel extends Personne {
 	private String role;
 	private LocalDateTime dateEntree;
 	private LocalDateTime dateSortie;
-
-	public Personnel(String nom, String prenom, String email, 
-					String adresse, String tel, String role, 
-					LocalDateTime dateEntree, LocalDateTime dateSortie) {
-		super(nom, prenom, email, adresse, tel);
-		this.role = role;
-		this.dateEntree = dateEntree;
-		this.dateSortie = dateSortie;
-	}
+	private String password;
+	
+	 public Personnel(String nom, String prenom, String email, String adresse, String tel, String password, String role, LocalDateTime dateEntree, LocalDateTime dateSortie) {
+	        super(nom, prenom, email, adresse, tel);
+	        this.password = password; // Set password attribute
+	        this.role = role;
+	        this.dateEntree = dateEntree;
+	        this.dateSortie = dateSortie;
+	    }
 
 	public String getRole() {
 		return role;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public void setRole(String role) {
 		this.role = role;
 	}
