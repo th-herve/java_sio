@@ -42,8 +42,6 @@ public class App extends Application {
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
 		switchToconnexionPage(); // Affiche la première vue par défaut
-//		switchToGererAdherent();
-
 //		switchToAccueil(); // Affiche la première vue par défaut
 
 	}
