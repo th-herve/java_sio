@@ -1,8 +1,5 @@
 package controleur.scene;
 
-import java.sql.Connection;
-
-import javax.print.event.PrintJobAttributeEvent;
 import javax.xml.bind.ValidationException;
 
 import javafx.event.ActionEvent;
@@ -15,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import modele.Adherent;
 import modele.dao.AdherentDAO;
-import modele.dao.Connexion;
 import modele.dao.PersonneDAO;
 
 
@@ -27,10 +23,6 @@ public class InscriptionAdherentControleur extends SceneControleur {
 	@FXML
 	private TextField prenom;
 	
-	@FXML 
-	
-	private TextField password;
-
 	@FXML
 	private TextField email;
 
@@ -120,7 +112,7 @@ public class InscriptionAdherentControleur extends SceneControleur {
 	}
 	private boolean validateForm() throws ValidationException{
 		if(nom.getText().isEmpty() || prenom.getText().isEmpty() || email.getText().isEmpty() ||
-				adresse.getText().isEmpty() || N_tel.getText().isEmpty() || password.getText().isEmpty() || remarques.getText().isEmpty() || numCIN.getText().isEmpty()) {
+				adresse.getText().isEmpty() || N_tel.getText().isEmpty() || remarques.getText().isEmpty() || numCIN.getText().isEmpty()) {
 
 			throw new ValidationException("Merci de remplir tous les champs");
 		}
@@ -133,7 +125,6 @@ public class InscriptionAdherentControleur extends SceneControleur {
 		email.clear();
 		adresse.clear();
 		N_tel.clear();
-		password.clear();
 		remarques.clear();
 		numCIN.clear();
 		estactive.setSelected(false);
