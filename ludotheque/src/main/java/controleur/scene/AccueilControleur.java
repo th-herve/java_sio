@@ -20,47 +20,43 @@ public class AccueilControleur extends SceneControleur {
 
 	@FXML
 	private Button btnGererAdherent;
-	
-	@FXML
-    private Label userNameLabel;
 
-   
-//	@FXML
-//    public void Logout(ActionEvent event) {
-//        ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
-//        connexionPersonnel.Logout1(event);
-//    }
-	
-//    @FXML
-//    public void loadUserData() {
-//        // Access the logged-in user's information
-//    	ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
-//        if (loggedInPersonne != null) {
-//            String nom = loggedInPersonne.getNom();
-//            String prenom = loggedInPersonne.getPrenom();
-//            userNameLabel.setText(nom + " " + prenom);
-//        } else {
-//            userNameLabel.setText("User information not available");
-//        }
-//    }
-//    @FXML
-//    public void initialize() {
-//        loadUserData();
-//    }
-	
 	@FXML
-    public void Logout(ActionEvent event) {
-        ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
-        connexionPersonnel.Logout1(event);
-//		app.switchToconnexionPage();
+	private Label userNameLabel;
+
+
+	//	@FXML
+	//    public void Logout(ActionEvent event) {
+	//        ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
+	//        connexionPersonnel.Logout1(event);
+	//    }
+
+	@FXML
+	public void loadUserData() {
+		// Access the logged-in user's information
+		System.out.println("dns accueil loaduserdata");
+		if (ConnexionPersonnel.loggedInPersonne != null) {
+			String nom = ConnexionPersonnel.loggedInPersonne.getNom();
+			String prenom = ConnexionPersonnel.loggedInPersonne.getPrenom();
+			userNameLabel.setText(nom + " " + prenom);
+		} else {
+			userNameLabel.setText("Les informations utilisateur ne sont pas disponibles");
+		}
 	}
-    
-
-	
-
+	@FXML
 	public void initialize() {
+		loadUserData();    }
 
+	@FXML
+	public void Logout(ActionEvent event) {
+		ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
+		connexionPersonnel.Logout1(event);
+		//		app.switchToconnexionPage();
 	}
 
-	
+
+
+
+
+
 }

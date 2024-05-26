@@ -21,7 +21,6 @@ import javafx.util.Callback;
 public abstract class SceneControleur {
 
 	protected App app;
-	public static Personne loggedInPersonne;
 	public void setApp(App app) {
 		this.app = app;
 	}
@@ -55,15 +54,16 @@ public abstract class SceneControleur {
 	}
 
 	public void switchToinscriptionPersonnel() {
-		
-		
+
+
 		app.switchToinscriptionPersonnel();
 	}
-	
+
 	public void switchToconnexionPage() {
-		
+
 		app.switchToconnexionPage();
 	}
+
 
 	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
 
@@ -151,7 +151,7 @@ public abstract class SceneControleur {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.matches("\\d*\\.?\\d*")) {
-//					newValue = newValue.replaceAll("[^\\d.]", "");
+					//					newValue = newValue.replaceAll("[^\\d.]", "");
 					textField.setText(oldValue);
 				}
 			}

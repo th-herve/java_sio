@@ -20,9 +20,14 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="351.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <VBox alignment="TOP_CENTER" prefHeight="292.0" prefWidth="408.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="userNameLabel" prefHeight="25.0" prefWidth="397.0" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             <Label fx:id="labelPrincipale" text="Accueil">
                <font>
                   <Font size="28.0" />
@@ -43,9 +48,12 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="deconnecter" mnemonicParsing="false" onAction="#switchToconnexionPage" prefHeight="40.0" prefWidth="105.0" text="déconnecter" />
-            <Label fx:id="userNameLabel" prefHeight="30.0" prefWidth="216.0" />
+            <Button fx:id="deconnecter" mnemonicParsing="false" onAction="#switchToconnexionPage" prefHeight="24.0" prefWidth="150.0" text="déconnecter">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
-   </center>
+   </bottom>
 </BorderPane>

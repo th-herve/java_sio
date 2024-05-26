@@ -13,8 +13,8 @@ import modele.Personnel;
 public class App extends Application {
 
 	// fenêtre principale de l'application
-	private Stage primaryStage;
 
+	private Stage primaryStage;
 	private Page accueilPage;
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
@@ -25,7 +25,7 @@ public class App extends Application {
 	private Page connexionPage;
 
 	private Page inscriptionPersonnelPage;
-//	private Page logoutPage;
+	//	private Page logoutPage;
 
 
 	@Override
@@ -37,19 +37,19 @@ public class App extends Application {
 		primaryStage.setMinWidth(700);
 		primaryStage.setMinHeight(500);
 		primaryStage.setTitle("Ludo tech");
-//		primaryStage.setMaximized(true);
+		//		primaryStage.setMaximized(true);
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
-		switchToconnexionPage(); // Affiche la première vue par défaut
-//		switchToGererAdherent();
-
-//		switchToAccueil(); // Affiche la première vue par défaut
+		//		switchToconnexionPage(); // Affiche la première vue par défaut
+		//		switchToGererAdherent();
+		switchToinscriptionPersonnel();
+		//		switchToAccueil(); // Affiche la première vue par défaut
 
 	}
 
 	private void loadViews() throws IOException {
-		
+
 		this.accueilPage = new Page(this, "accueil.fxml");
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
@@ -65,13 +65,16 @@ public class App extends Application {
 
 	// Méthodes pour passer d'une vue à une autre
 	public void switchToAccueil() {
+
+		((AccueilControleur) accueilPage.getControleur()).loadUserData();
 		primaryStage.setScene(accueilPage.getScene());
 		primaryStage.show();
-		
-		
+
+
 	}
 
 	public void switchToGererAdherent() {
+
 		primaryStage.setScene(gererAdherentPage.getScene());
 		primaryStage.show();
 	}
@@ -95,7 +98,7 @@ public class App extends Application {
 		stage.setTitle("Gérer Jeux physiques");
 		stage.show();
 	}
-	
+
 	public void switchToinscriptionAdherent() {
 		// Crée un new stage pour ouvrir la vue dans une nouvelle fenêtre
 		Stage stage = new Stage();
@@ -111,10 +114,10 @@ public class App extends Application {
 	}
 
 	public void switchToconnexionPage() {
-		
+
 		primaryStage.setScene(connexionPage.getScene());
 		primaryStage.show();
-		
+
 	}
 	public Page getGererAdherentPage() {
 		return gererAdherentPage;
@@ -124,15 +127,16 @@ public class App extends Application {
 		return gererJeuPage;
 	}
 
-	
-
 	public void switchToinscriptionPersonnel() {
-		
+
 		primaryStage.setScene(inscriptionPersonnelPage.getScene());
 		primaryStage.show();
-		
+
 	}
-	
+
+
+
+
 }
 
 

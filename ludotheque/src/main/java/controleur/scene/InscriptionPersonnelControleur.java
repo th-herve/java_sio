@@ -34,14 +34,12 @@ public class InscriptionPersonnelControleur extends SceneControleur {
 
     @FXML
     private TextField tel;
-
+    	
+    @FXML
+    private TextField role;
+    
     @FXML
     private TextField password;
-
-//    @FXML
-//    private CheckBox estActive;
-	@FXML
-	private TextField estactif;
 
     @FXML
     private DatePicker dateEntree;
@@ -72,7 +70,7 @@ public class InscriptionPersonnelControleur extends SceneControleur {
 
             // Hash  password
             String hashedPassword = personnelDAO.hashPassword(password.getText());
-
+            
             LocalDateTime entree = (dateEntree.getValue() != null) ? dateEntree.getValue().atStartOfDay() : null;
             LocalDateTime sortie = (dateSortie.getValue() != null) ? dateSortie.getValue().atStartOfDay() : null;
 
@@ -89,7 +87,7 @@ public class InscriptionPersonnelControleur extends SceneControleur {
                 );
 
                 // Ajouter des données à la table Personne
-                personneDAO.create(personne);
+//                personneDAO.create(personne);
             }
 
             // Créer un nouvel objet Personnel
@@ -99,10 +97,11 @@ public class InscriptionPersonnelControleur extends SceneControleur {
                     email.getText(),
                     adresse.getText(),
                     tel.getText(),
-                    hashedPassword,
-                    estactif.getText(),
+                    role.getText(),
+                    sortie,
                     entree,
-                    sortie
+                    hashedPassword
+                      
             );
 
             // Ajouter des données à la table Personnel
@@ -132,7 +131,6 @@ public class InscriptionPersonnelControleur extends SceneControleur {
         adresse.clear();
         tel.clear();
         password.clear();
-        estactif.clear();
         dateEntree.setValue(null);
         dateSortie.setValue(null);
     }

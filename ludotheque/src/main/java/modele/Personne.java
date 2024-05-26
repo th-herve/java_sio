@@ -12,14 +12,14 @@ public class Personne {
 	private String adresse;
 	private String tel;
 
-//	private String mdp; // pour le mot de passe 
-	
+
+
 
 
 	public Personne(String nom, String prenom, String email, String adresse, String tel ) {
 
 		super();
-	
+
 		this.id = 0;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -31,16 +31,16 @@ public class Personne {
 	}
 
 
-	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
-		super();
-	
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.adresse = adresse;
-		this.tel = tel;
-	}
+//	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
+//		super();
+//
+//		this.id = id;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.email = email;
+//		this.adresse = adresse;
+//		this.tel = tel;
+//	}
 
 
 	public int getId() {

@@ -52,20 +52,20 @@
       <TextField fx:id="password" layoutX="284.0" layoutY="255.0" />
     
       
-      <DatePicker fx:id="dateEntree" layoutX="284.0" layoutY="422.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="dateSortie" layoutX="284.0" layoutY="467.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="adresse" layoutX="284.0" layoutY="513.0" />
-      <TextField fx:id="tel" layoutX="284.0" layoutY="560.0" />
+      <DatePicker fx:id="dateEntree" layoutX="290.0" layoutY="355.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="dateSortie" layoutX="290.0" layoutY="406.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="adresse" layoutX="289.0" layoutY="457.0" />
+      <TextField fx:id="tel" layoutX="289.0" layoutY="523.0" />
       
       <!-- Champ Adresse -->
-      <Label layoutX="211.0" layoutY="513.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+      <Label layoutX="211.0" layoutY="457.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
       
       <!-- Champ Numéro de téléphone -->
-      <Label layoutX="131.0" layoutY="560.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
+      <Label layoutX="131.0" layoutY="523.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
@@ -76,12 +76,12 @@
       
       <!-- Zone de texte supplémentaire (si nécessaire) -->
       <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <Label layoutX="213.0" layoutY="376.0" prefHeight="26.0" prefWidth="68.0" text="estactive" textFill="#141414">
+      <Label layoutX="206.0" layoutY="309.0" prefHeight="26.0" prefWidth="68.0" text="Role " textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="161.0" layoutY="422.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
+      <Label layoutX="165.0" layoutY="355.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
          <font>
             <Font size="15.0" />
          </font>
@@ -94,6 +94,11 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="estactif" layoutX="283.0" layoutY="376.0" />
+      <Label layoutX="187.0" layoutY="406.0" prefHeight="26.0" prefWidth="85.0" text="date_sortie" textFill="#141414">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="role" layoutX="284.0" layoutY="309.0" />
    </children>
 </AnchorPane>
