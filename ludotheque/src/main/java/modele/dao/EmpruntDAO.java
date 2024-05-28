@@ -1,17 +1,20 @@
 
 package modele.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import microsoft.sql.Types;
 import modele.Emprunt;
+
+// !! utiliser la fonction convertDate() avant d'insérer ou utiliser une date dans la bd
 
 /**
  * @clef_composé idAdherent + idJeuPhysique + dateEmprunt 
@@ -45,25 +48,24 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	}
 
 
-	// TODO adapter 
 	@Override
 	public boolean create(Emprunt emprunt) {
 		boolean succes=true;
 		try {
 			
-			// commentaires de Charles :
-			// j'ai éjà les infos sur les tables JeuPhysique et Adherent, 
-			// donc je les mets juste en brut, attention, c'est des clés étrangères,
-			// classe à finir !!! 
 			String requete = "INSERT INTO "+TABLE+" ("+ID_ADHERENT+", "+ID_JEUPHYSIQUE+", "+DATE_EMPRUNT+", "+DATE_RETOUR+") VALUES (?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
+			
 			// on ex�cute la mise � jour
 			pst.setInt(1, emprunt.getIdAdherent());
 			pst.setInt(2, emprunt.getIdJeuPhysique());
-//			Date dateRetour = Date.valueOf(emprunt.getDateRetour().toLocalDate());
-//			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
-			pst.setObject(3, emprunt.getDateEmprunt());
-			pst.setObject(4, emprunt.getDateRetour());
+			pst.setTimestamp(3, this.convertDate(emprunt.getDateEmprunt()));
+
+			if (emprunt.getDateRetour() != null) {
+				pst.setTimestamp(4, this.convertDate(emprunt.getDateRetour()));
+			} else {
+				pst.setNull(4, Types.DATETIME);
+			}
 			pst.executeUpdate();
 			
 			donnees.put(this.getClefDonne(emprunt), emprunt);
@@ -76,22 +78,17 @@ public class EmpruntDAO extends DAO<Emprunt> {
 		return succes;
 	}
 
-	// commentaires de Charles : 
-// en dessous c'est la partie que j'ai copié du code de Thibault, 
-// important de modifier pour que ça colle à mon code à moi, je boss sur es clés étrangères,
-// Thibault a bossé sur une clé primaire, donc bien différent
 	@Override
 	public boolean delete(Emprunt emprunt) {
 		boolean succes = true;
 		try {
 			int idAdherent = emprunt.getIdAdherent();
 			int idJeu = emprunt.getIdJeuPhysique();
-			Date dateEmprunt = Date.valueOf(emprunt.getDateEmprunt().toLocalDate());
 			String requete = "DELETE FROM "+TABLE+ " " + WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, idAdherent);
 			pst.setInt(2, idJeu);
-			pst.setDate(3, dateEmprunt);
+			pst.setTimestamp(3, this.convertDate(emprunt.getDateEmprunt()));
 
 			pst.executeUpdate();
 			donnees.remove(this.getClefDonne(emprunt));
@@ -131,16 +128,13 @@ public class EmpruntDAO extends DAO<Emprunt> {
 			String requete = "UPDATE "+TABLE+" SET "+ DATE_RETOUR +" = ? " + WHERE_CLEF_PRIMAIRE;
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			// fonction différente donc refaire les pst
-			pst.setObject(1, emprunt.getDateRetour()); 
+			pst.setTimestamp(1, this.convertDate(emprunt.getDateRetour()));
 
-			pst.setObject(2, emprunt.getIdAdherent()); 
-			pst.setObject(3, emprunt.getIdJeuPhysique()); 
-			pst.setObject(4, emprunt.getDateEmprunt()); 
+			pst.setInt(2, emprunt.getIdAdherent()); 
+			pst.setInt(3, emprunt.getIdJeuPhysique()); 
+			pst.setTimestamp(4, this.convertDate(emprunt.getDateEmprunt()));
 
 			pst.executeUpdate();
-
-			donnees.put(this.getClefDonne(emprunt), emprunt);
 
 		} catch (SQLException e) {
 			succes = false;
@@ -162,7 +156,7 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	public List<Emprunt> readByAdherent(int idAdherent) {
 		
 		List<Emprunt> listeEmprunts = new ArrayList<Emprunt>();
-		System.out.println("recherch� dans la BD");
+
 		try {
 
 			String requete = "SELECT * FROM "+TABLE+" WHERE " + ID_ADHERENT + " = ?";
@@ -225,7 +219,6 @@ public class EmpruntDAO extends DAO<Emprunt> {
 
 				// si emprunt deja dans donne, on ajoute cette instance
 				if (donnees.containsKey(idEmprunt)) {
-					System.out.println("r�cup�r�");
 					emprunt = donnees.get(idEmprunt);
 				} 
 				empruntList.add(emprunt);
@@ -241,6 +234,16 @@ public class EmpruntDAO extends DAO<Emprunt> {
 	public Integer getClefDonne(Emprunt emprunt) {
 
 		return (emprunt.getIdAdherent() + emprunt.getIdJeuPhysique() +"" + emprunt.getDateEmprunt()).hashCode();
+	}
+	
+
+	/**
+	 * Converti une localdatetime dans le bon format pour la bd
+	 * @param date
+	 * @return timestamp
+	 */
+	private Timestamp convertDate(LocalDateTime date) {
+		return Timestamp.valueOf(date.truncatedTo(ChronoUnit.SECONDS));
 	}
 
 	public void afficheSelectEtoileAdherent() {

@@ -124,6 +124,7 @@ public class ConnexionPersonnel extends SceneControleur {
 	}
 
 
+
 	@FXML
 	public void Logout1(ActionEvent event) {
 		Window owner = deconnecter.getScene().getWindow();
@@ -148,6 +149,7 @@ public class ConnexionPersonnel extends SceneControleur {
 		alert.initOwner(owner);
 		alert.show();
 	}
+
 }
 
 
