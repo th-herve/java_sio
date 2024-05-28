@@ -86,47 +86,50 @@ public class PersonnelDAO extends DAO<Personnel> {
 		return success;
 	}
 
-	@Override
-	public boolean update(Personnel personnel) {
-		boolean success = true;
-		try {
-			String query = "UPDATE " + TABLE + " SET " + ROLE + " = ?, " + DATE_ENTREE + " = ?, " + DATE_SORTIE
-					+ " = ?, " + MDP + " = ? WHERE " + CLE_PRIMAIRE + " = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
-			pst.setString(1, personnel.getRole());
-			pst.setObject(2, personnel.getDateEntree());
-			pst.setObject(3, personnel.getDateSortie());
-			pst.setString(4, personnel.getMdp()); // Include password here
-			pst.setInt(5, personnel.getId());
-			pst.executeUpdate();
-			// Remaining code...
-		} catch (SQLException e) {
-			success = false;
-			e.printStackTrace();
-		}
-		return success;
-	}
-	@Override
-	public boolean delete(Personnel personnel) {
-		boolean success = true;
-		try {
-			int id = personnel.getId();
+	  @Override
+	    public boolean update(Personnel personnel) {
+	        boolean success = true;
+	        try {
+	            String query = "UPDATE " + TABLE + " SET " + ROLE + " = ?, " + DATE_ENTREE + " = ?, " + DATE_SORTIE
+	                    + " = ?, " + MDP + " = ? WHERE " + CLE_PRIMAIRE + " = ?";
+	            PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
+	            pst.setString(1, personnel.getRole());
+	            pst.setObject(2, personnel.getDateEntree());
+	            pst.setObject(3, personnel.getDateSortie());
+	            pst.setString(4, personnel.getMdp());
+	            pst.setInt(5, personnel.getId());
+	            pst.executeUpdate();
+	            // Update the cache
+	            donnees.put(personnel.getId(), personnel);
+	        } catch (SQLException e) {
+	            success = false;
+	            e.printStackTrace();
+	        }
+	        return success;
+	    }
 
-			String query = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
-			pst.setInt(1, id);
-			pst.executeUpdate();
+	    @Override
+	    public boolean delete(Personnel personnel) {
+	        boolean success = true;
+	        try {
+	            if (personnel != null) {
+	                int id = personnel.getId();
 
-			donnees.remove(id);
+	                String query = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
+	                PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
+	                pst.setInt(1, id);
+	                pst.executeUpdate();
 
-			// No need to delete associated personne record as there is no association
-		} catch (SQLException e) {
-			success = false;
-			e.printStackTrace();
-		}
-		return success;
-	}
-
+	                donnees.remove(id);
+	            } else {
+	                success = false;
+	            }
+	        } catch (SQLException e) {
+	            success = false;
+	            e.printStackTrace();
+	        }
+	        return success;
+	    }
 
 
 	@Override

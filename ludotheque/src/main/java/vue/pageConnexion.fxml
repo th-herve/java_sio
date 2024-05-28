@@ -6,16 +6,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane accessibleText="status" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.ConnexionPersonnel">
-   <children>
-      <Button fx:id="connecter" layoutX="541.0" layoutY="503.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="197.0" text="Connecter" />
-      <ImageView fitHeight="165.0" fitWidth="153.0" layoutX="550.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/logo_bettonludotheque.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="identification" layoutX="541.0" layoutY="365.0" prefHeight="41.0" prefWidth="197.0" promptText="identifiant" />
-      <PasswordField fx:id="mdp" layoutX="541.0" layoutY="438.0" prefHeight="40.0" prefWidth="197.0" promptText="Mot de pass" />
-   </children>
-</AnchorPane>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.ConnexionPersonnel">
+   <top>
+      <AnchorPane accessibleText="status" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="670.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="connecter" layoutX="238.0" layoutY="367.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="197.0" text="Connecter" />
+            <ImageView fitHeight="144.0" fitWidth="110.0" layoutX="247.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo_bettonludotheque.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="identification" layoutX="238.0" layoutY="229.0" prefHeight="41.0" prefWidth="197.0" promptText="identifiant" />
+            <PasswordField fx:id="mdp" layoutX="238.0" layoutY="302.0" prefHeight="40.0" prefWidth="197.0" promptText="Mot de pass" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

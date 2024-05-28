@@ -7,98 +7,99 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.InscriptionPersonnelControleur">
-   <children>
-      <!-- Logo -->
-      <ImageView fitHeight="93.0" fitWidth="178.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/logo_bettonludotheque.png" />
-         </image>
-      </ImageView>
-      
-      <!-- Titre -->
-      <Label layoutX="291.0" layoutY="69.0" text="Personnel">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      
-      <!-- Champ Nom -->
-      <Label layoutX="225.0" layoutY="149.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nom" layoutX="284.0" layoutY="149.0" />
-      
-      <!-- Champ Prénom -->
-      <Label layoutX="218.0" layoutY="183.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="prenom" layoutX="284.0" layoutY="183.0" />
-      
-      <!-- Champ Adresse Email -->
-      <Label layoutX="222.0" layoutY="218.0" prefHeight="26.0" prefWidth="50.0" text="mail" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="email" layoutX="284.0" layoutY="218.0" />
-      <TextField fx:id="password" layoutX="284.0" layoutY="255.0" />
-    
-      
-      <DatePicker fx:id="dateEntree" layoutX="290.0" layoutY="355.0" prefHeight="25.0" prefWidth="149.0" />
-      <DatePicker fx:id="dateSortie" layoutX="290.0" layoutY="406.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="adresse" layoutX="289.0" layoutY="457.0" />
-      <TextField fx:id="tel" layoutX="289.0" layoutY="523.0" />
-      
-      <!-- Champ Adresse -->
-      <Label layoutX="211.0" layoutY="457.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      
-      <!-- Champ Numéro de téléphone -->
-      <Label layoutX="131.0" layoutY="523.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-     
-      <Button fx:id="validerButton" layoutX="204.0" layoutY="625.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="139.0" text="Valider" />
-      <Button fx:id="retour" layoutX="273.0" layoutY="678.0" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="31.0" prefWidth="153.0" text="Retour à la page d'accueil" />
-      
-      <!-- Zone de texte supplémentaire (si nécessaire) -->
-      <TextFlow layoutX="207.0" layoutY="44.0" prefHeight="31.0" prefWidth="200.0" />
-      <Label layoutX="206.0" layoutY="309.0" prefHeight="26.0" prefWidth="68.0" text="Role " textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="165.0" layoutY="355.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      
-      <Button fx:id="Reset" layoutX="364.0" layoutY="625.0" mnemonicParsing="false" onAction="#resetForm" prefHeight="31.0" prefWidth="139.0" text="Reset" />
-      
-      <Label layoutX="187.0" layoutY="255.0" prefHeight="26.0" prefWidth="85.0" text="mot de pass" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="187.0" layoutY="406.0" prefHeight="26.0" prefWidth="85.0" text="date_sortie" textFill="#141414">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="role" layoutX="284.0" layoutY="309.0" />
-   </children>
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.InscriptionPersonnelControleur">
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
+         <children>
+            <!-- Logo -->
+            <ImageView fitHeight="93.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo_bettonludotheque.png" />
+               </image>
+            </ImageView>
+            
+                        <!-- Titre -->
+            <Label layoutX="359.0" layoutY="36.0" text="Personnel">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            
+                  <!-- Champ Nom -->
+            <Label layoutX="285.0" layoutY="95.0" prefHeight="26.0" prefWidth="44.0" text="Nom" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nom" layoutX="344.0" layoutY="95.0" />
+            
+                  <!-- Champ Prénom -->
+            <Label layoutX="278.0" layoutY="129.0" prefHeight="26.0" prefWidth="58.0" text="Prénom" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="prenom" layoutX="344.0" layoutY="129.0" />
+            
+                  <!-- Champ Adresse Email -->
+            <Label layoutX="282.0" layoutY="164.0" prefHeight="26.0" prefWidth="50.0" text="mail" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" layoutX="344.0" layoutY="164.0" />
+            <TextField fx:id="password" layoutX="344.0" layoutY="201.0" />
+          
+                  
+            <DatePicker fx:id="dateEntree" layoutX="348.0" layoutY="288.0" prefHeight="25.0" prefWidth="149.0" />
+            <DatePicker fx:id="dateSortie" layoutX="348.0" layoutY="339.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="adresse" layoutX="347.0" layoutY="390.0" />
+            <TextField fx:id="tel" layoutX="344.0" layoutY="443.0" />
+            
+                  <!-- Champ Adresse -->
+            <Label layoutX="269.0" layoutY="390.0" prefHeight="26.0" prefWidth="58.0" text="Adresse" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            
+                  <!-- Champ Numéro de téléphone -->
+            <Label layoutX="188.0" layoutY="443.0" prefHeight="26.0" prefWidth="153.0" text="Numéro de téléphone" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+           
+                  <Button fx:id="validerButton" layoutX="247.0" layoutY="506.0" mnemonicParsing="false" onAction="#validation" prefHeight="31.0" prefWidth="139.0" text="Valider" />
+            <Button fx:id="retour" layoutX="563.0" layoutY="555.0" mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="31.0" prefWidth="200.0" text="Retour à la page d'accueil" />
+            <Label layoutX="264.0" layoutY="242.0" prefHeight="26.0" prefWidth="68.0" text="Role " textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="223.0" layoutY="288.0" prefHeight="26.0" prefWidth="115.0" text="date_Inscriptions" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            
+                  <Button fx:id="Reset" layoutX="430.0" layoutY="506.0" mnemonicParsing="false" onAction="#resetForm" prefHeight="31.0" prefWidth="139.0" text="Reset" />
+            
+                  <Label layoutX="247.0" layoutY="201.0" prefHeight="26.0" prefWidth="85.0" text="mot de pass" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="245.0" layoutY="339.0" prefHeight="26.0" prefWidth="85.0" text="date_sortie" textFill="#141414">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="role" layoutX="342.0" layoutY="242.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
