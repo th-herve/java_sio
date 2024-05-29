@@ -24,37 +24,37 @@ public class GererAdherentControleur extends SceneControleur {
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
 	@FXML
-	TableView<Adherent> tableAdherent;
+	private TableView<Adherent> tableAdherent;
 
 	@FXML
-	TableColumn<Adherent, Integer> id;
+	private TableColumn<Adherent, Integer> id;
 
 	@FXML
-	TableColumn<Adherent, String> nom;
+	private TableColumn<Adherent, String> nom;
 
 	@FXML
-	TableColumn<Adherent, String> prenom;
+	private TableColumn<Adherent, String> prenom;
 
 	@FXML
-	TableColumn<Adherent, String> email;
+	private TableColumn<Adherent, String> email;
 
 	@FXML
-	TableColumn<Adherent, String> adresse;
+	private TableColumn<Adherent, String> adresse;
 
 	@FXML
-	TableColumn<Adherent, String> tel;
+	private TableColumn<Adherent, String> tel;
 
 	@FXML
-	TableColumn<Adherent, Boolean> estActif;
+	private TableColumn<Adherent, Boolean> estActif;
 
 	@FXML
-	TableColumn<Adherent, String> remarques;
+	private TableColumn<Adherent, String> remarques;
 
 	@FXML
-	TableColumn<Adherent, String> numCIN;
+	private TableColumn<Adherent, String> numCIN;
 
 	@FXML
-	TableColumn<Adherent, LocalDateTime> dateInscription;
+	private TableColumn<Adherent, LocalDateTime> dateInscription;
 
 	public TextField search;
 
