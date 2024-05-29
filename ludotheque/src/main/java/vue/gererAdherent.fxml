@@ -87,7 +87,12 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="search" onAction="#searchAdherent" promptText="Rechercher..." />
+                  <TextField fx:id="search" onAction="#searchAdherent" prefWidth="149.0" promptText="Rechercher..." />
+                  <Button mnemonicParsing="false" onAction="#refreshTable" prefHeight="39.0" prefWidth="33.0" text="x">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" styleClass="accent" text="Retour à la page d'accueil" GridPane.columnIndex="1">
