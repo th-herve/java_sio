@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererEmpruntControleur">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererEmpruntControleur">
    <center>
-      <TableView fx:id="tableEmprunt" styleClass="stripped">
+      <TableView fx:id="tableEmprunt" prefWidth="509.0" styleClass="stripped">
         <columns>
           <TableColumn fx:id="idJeuPhysique" prefWidth="69.0" text="Id jeu" />
             <TableColumn fx:id="nomJeuPhysique" prefWidth="155.0" text="Nom jeu" />
@@ -45,7 +45,7 @@
    <right>
       <VBox spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefWidth="296.0" spacing="10.0" style="-fx-border-color: lightGray; -fx-border-radius: 10;">
+            <VBox prefHeight="119.0" prefWidth="289.0" spacing="10.0" style="-fx-border-color: lightGray; -fx-border-radius: 10;">
                <children>
                   <Label text="Ajouter :">
                      <font>
@@ -58,13 +58,13 @@
                            <children>
                               <HBox spacing="20.0">
                                  <children>
-                                    <TextField fx:id="newIdJeu" promptText="Id jeu" />
+                                    <TextField fx:id="newIdJeu" prefHeight="25.0" prefWidth="82.0" promptText="Id jeu" />
                                     <Label fx:id="labelNewIdJeu" />
                                  </children>
                               </HBox>
                               <HBox spacing="20.0">
                                  <children>
-                                    <TextField fx:id="newIdAdherent" minWidth="80.0" promptText="Id adhérent" />
+                                    <TextField fx:id="newIdAdherent" minWidth="80.0" prefHeight="25.0" prefWidth="93.0" promptText="Id adhérent" />
                                     <Label fx:id="labelNewIdAdherent" />
                                  </children>
                               </HBox>
