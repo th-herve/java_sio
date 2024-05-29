@@ -41,6 +41,8 @@ public class App extends Application {
 		switchToconnexionPage(); // Affiche la première vue par défaut
 //		switchToinscriptionPersonnel();
 //		switchToAccueil(); // Affiche la première vue par défaut
+		
+		// Set le theme
 		Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
 
 	}
