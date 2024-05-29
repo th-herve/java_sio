@@ -1,14 +1,11 @@
 package controleur;
 
-import java.io.IOException; 
+import java.io.IOException;
 
 import controleur.scene.AccueilControleur;
-
 import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import modele.Personne;
-import modele.Personnel;
 
 public class App extends Application {
 
@@ -25,8 +22,7 @@ public class App extends Application {
 	private Page connexionPage;
 
 	private Page inscriptionPersonnelPage;
-	//	private Page logoutPage;
-
+	// private Page logoutPage;
 
 	@Override
 	// méthode appelée automatiquement au lancement de l'app (l'arg primaryStage est
@@ -37,14 +33,13 @@ public class App extends Application {
 		primaryStage.setMinWidth(700);
 		primaryStage.setMinHeight(500);
 		primaryStage.setTitle("Ludo tech");
-		//		primaryStage.setMaximized(true);
+		// primaryStage.setMaximized(true);
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
-		//		switchToconnexionPage(); // Affiche la première vue par défaut
-		//		switchToGererAdherent();
-		switchToinscriptionPersonnel();
-		//		switchToAccueil(); // Affiche la première vue par défaut
+		switchToconnexionPage(); // Affiche la première vue par défaut
+//		switchToinscriptionPersonnel();
+		// switchToAccueil(); // Affiche la première vue par défaut
 
 	}
 
@@ -54,12 +49,11 @@ public class App extends Application {
 		this.gererAdherentPage = new Page(this, "gererAdherent.fxml");
 		this.gererJeuPage = new Page(this, "gererJeu.fxml");
 		this.ajouterJeuPage = new Page(this, "ajouterJeu.fxml");
-		this.gererJeuPhysiquePage 	= new Page(this, "gererJeuPhysique.fxml");
+		this.gererJeuPhysiquePage = new Page(this, "gererJeuPhysique.fxml");
 		this.inscriptionAdherentPage = new Page(this, "inscriptionAdherent.fxml");
-		this.connexionPage= new Page(this,"pageConnexion.fxml");
-		this.inscriptionPersonnelPage = new Page (this,"inscriptionPersonnel.fxml");
+		this.connexionPage = new Page(this, "pageConnexion.fxml");
+		this.inscriptionPersonnelPage = new Page(this, "inscriptionPersonnel.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
-
 
 	}
 
@@ -69,7 +63,6 @@ public class App extends Application {
 		((AccueilControleur) accueilPage.getControleur()).loadUserData();
 		primaryStage.setScene(accueilPage.getScene());
 		primaryStage.show();
-
 
 	}
 
@@ -89,9 +82,12 @@ public class App extends Application {
 		primaryStage.show();
 	}
 
-	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
+	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les
+	// jeux physiques
 	public void switchToGererJeuPhysique(int idJeu) {
-		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère le controleur
+		GererJeuPhysiqueControleur ctl = (GererJeuPhysiqueControleur) gererJeuPhysiquePage.getControleur(); // récupère
+																											// le
+																											// controleur
 		ctl.setUp(idJeu);
 		Stage stage = new Stage();
 		stage.setScene(gererJeuPhysiquePage.getScene());
@@ -119,6 +115,7 @@ public class App extends Application {
 		primaryStage.show();
 
 	}
+
 	public Page getGererAdherentPage() {
 		return gererAdherentPage;
 	}
@@ -134,10 +131,4 @@ public class App extends Application {
 
 	}
 
-
-
-
 }
-
-
-

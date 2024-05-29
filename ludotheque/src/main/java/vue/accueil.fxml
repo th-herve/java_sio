@@ -20,8 +20,7 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-
-   <bottom>
+   <center>
       <VBox alignment="TOP_CENTER" prefHeight="292.0" prefWidth="408.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="userNameLabel" prefHeight="25.0" prefWidth="397.0" textAlignment="CENTER">
@@ -44,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToGererJeu" prefWidth="150.0" text="Gérer jeux">
+            <Button fx:id="btnGererJeu" mnemonicParsing="false" onAction="#switchToGererJeu" prefWidth="150.0" text="Gérer jeux">
                <font>
                   <Font size="18.0" />
                </font>
@@ -55,8 +54,13 @@
                   <Font size="17.0" />
                </font>
             </Button>
+            <Button fx:id="btnGererJeu1" layoutX="230.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToGererJeu" prefWidth="150.0" text="Gérer jeux">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
-   </bottom>
+   </center>
 
 </BorderPane>

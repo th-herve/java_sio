@@ -8,9 +8,7 @@ import javafx.scene.control.Label;
 import modele.Personne;
 import modele.Personnel;
 
-
 public class AccueilControleur extends SceneControleur {
-
 
 	@FXML
 	private Label labelPrincipale;
@@ -24,39 +22,34 @@ public class AccueilControleur extends SceneControleur {
 	@FXML
 	private Label userNameLabel;
 
-
-	//	@FXML
-	//    public void Logout(ActionEvent event) {
-	//        ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
-	//        connexionPersonnel.Logout1(event);
-	//    }
-
 	@FXML
 	public void loadUserData() {
-		// Access the logged-in user's information
-		System.out.println("dns accueil loaduserdata");
+
 		if (ConnexionPersonnel.loggedInPersonne != null) {
 			String nom = ConnexionPersonnel.loggedInPersonne.getNom();
 			String prenom = ConnexionPersonnel.loggedInPersonne.getPrenom();
 			userNameLabel.setText(nom + " " + prenom);
 		} else {
-			userNameLabel.setText("Les informations utilisateur ne sont pas disponibles");
+			userNameLabel.setText("Les informations de l'utilisateur ne sont pas disponibles");
 		}
 	}
+	
+	// exemple pour enlever le bouton gerer jeu si personne connectée n'est pas admin
+//	public void setPermission() {
+//		if (!ConnexionPersonnel.loggedInPersonne.estAdmin()) {
+//			this.btnGererJeu.setVisible(false);
+//		}
+//	}
+
 	@FXML
 	public void initialize() {
-		loadUserData();    }
+	}
 
 	@FXML
 	public void Logout(ActionEvent event) {
 		ConnexionPersonnel connexionPersonnel = new ConnexionPersonnel();
-		connexionPersonnel.Logout1(event);
-		//		app.switchToconnexionPage();
+		connexionPersonnel.logout(event);
+		// app.switchToconnexionPage();
 	}
-
-
-
-
-
 
 }

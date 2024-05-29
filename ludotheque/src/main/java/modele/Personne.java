@@ -1,6 +1,6 @@
 package modele;
 
-
+import modele.dao.PersonneDAO;
 
 // éviter d'instancier cette classe, utiliser Adherent ou Personnel à la place
 public class Personne {
@@ -11,9 +11,6 @@ public class Personne {
 	private String email;
 	private String adresse;
 	private String tel;
-
-
-
 
 
 	public Personne(String nom, String prenom, String email, String adresse, String tel ) {
@@ -27,21 +24,21 @@ public class Personne {
 		this.adresse = adresse;
 		this.tel = tel;
 
-
 	}
 
-
-//	public Personne(int id, String nom, String prenom, String email, String adresse, String tel) {
-//		super();
-//
-//		this.id = id;
-//		this.nom = nom;
-//		this.prenom = prenom;
-//		this.email = email;
-//		this.adresse = adresse;
-//		this.tel = tel;
-//	}
-
+	
+	public boolean estAdmin() {
+		boolean res = false;
+		if (this.estPersonnel()) {
+			res = ((Personnel) this).getRole().equalsIgnoreCase("admin");
+		}
+		
+		return res;
+	}
+	
+	public boolean estPersonnel() {
+		return PersonneDAO.getInstance().read(this.id) == null;
+	}
 
 	public int getId() {
 		return id;
