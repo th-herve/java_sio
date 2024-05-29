@@ -42,6 +42,11 @@ public abstract class SceneControleur {
 		app.switchToGererEmprunt();
 	}
 
+	public void switchToHistoriqueEmprunt() {
+
+		app.switchToHistoriqueEmprunt();
+	}
+
 	public void switchToAjouterJeu() {
 		app.switchToAjouterJeu();
 	}
@@ -55,15 +60,19 @@ public abstract class SceneControleur {
 	}
 
 	public void switchToinscriptionPersonnel() {
-		
-		
+
+
 		app.switchToinscriptionPersonnel();
 	}
-	
+
 	public void switchToconnexionPage() {
-		
+
 		app.switchToconnexionPage();
 	}
+
+
+
+
 
 	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {
 
@@ -151,7 +160,7 @@ public abstract class SceneControleur {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.matches("\\d*\\.?\\d*")) {
-//					newValue = newValue.replaceAll("[^\\d.]", "");
+					//					newValue = newValue.replaceAll("[^\\d.]", "");
 					textField.setText(oldValue);
 				}
 			}

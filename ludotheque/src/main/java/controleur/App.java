@@ -35,7 +35,6 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		
-		Application.setUserAgentStylesheet(STYLESHEET_CUPERTINO);
 
 		primaryStage.setMinWidth(700);
 		primaryStage.setMinHeight(500);
@@ -60,7 +59,7 @@ public class App extends Application {
 		this.connexionPage= new Page(this,"pageConnexion.fxml");
 		this.inscriptionPersonnelPage = new Page (this,"inscriptionPersonnel.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
-		this.historiqueEmpruntPage = new Page(this, "historiqueEmprint.fxml");
+		this.historiqueEmpruntPage = new Page(this, "historiqueEmprunt.fxml");
 
 	}
 
@@ -68,8 +67,6 @@ public class App extends Application {
 	public void switchToAccueil() {
 		primaryStage.setScene(accueilPage.getScene());
 		primaryStage.show();
-		
-		
 	}
 
 	public void switchToGererAdherent() {
@@ -138,9 +135,6 @@ public class App extends Application {
 		primaryStage.show();
 		
 	}
-	
-	public static final String STYLESHEET_PRIMER = "PRIMER";
-	public static final String STYLESHEET_CUPERTINO = "CUPERTINO";
 	
 }
 

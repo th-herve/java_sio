@@ -26,19 +26,19 @@ import modele.dao.JeuPhysiqueDAO;
 public class GererEmpruntControleur extends SceneControleur {
 
 	@FXML
-	TableView<Emprunt> tableEmprunt;
+	private TableView<Emprunt> tableEmprunt;
 
 	@FXML
-	TableColumn<Emprunt, Integer> idAdherent;
+	private TableColumn<Emprunt, Integer> idAdherent;
 
 	@FXML
-	TableColumn<Emprunt, Integer> idJeuPhysique;
+	private TableColumn<Emprunt, Integer> idJeuPhysique;
 
 	@FXML
-	TableColumn<Emprunt, LocalDateTime> dateEmprunt;
+	private TableColumn<Emprunt, LocalDateTime> dateEmprunt;
 
 	@FXML
-	TableColumn<Emprunt, LocalDateTime> dateRetour;
+	private TableColumn<Emprunt, LocalDateTime> dateRetour;
 
 	@FXML
 	private TableColumn<Emprunt, String> nomAdherent;
