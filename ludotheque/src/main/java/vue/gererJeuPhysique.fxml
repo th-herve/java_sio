@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererJeuPhysiqueControleur">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererJeuPhysiqueControleur">
    <center>
-      <TableView fx:id="tableJeuPhysique" prefHeight="436.0" prefWidth="741.0">
+      <TableView fx:id="tableJeuPhysique" prefHeight="436.0" prefWidth="741.0" styleClass="striped">
         <columns>
           <TableColumn fx:id="id" prefWidth="133.0" text="id" />
           <TableColumn fx:id="etat" prefWidth="504.0" text="État" />
@@ -32,7 +31,7 @@
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="mainLabel" prefHeight="66.0" prefWidth="556.0" text="Jeux">
+            <Label fx:id="mainLabel" prefHeight="66.0" prefWidth="556.0" text="Jeux Physiques">
                <font>
                   <Font size="45.0" />
                </font>
@@ -70,7 +69,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <Button fx:id="supprimer" mnemonicParsing="false" onAction="#deleteJeuPhysique" prefHeight="39.0" prefWidth="111.0" text="Supprimer">
+            <Button fx:id="supprimer" mnemonicParsing="false" onAction="#deleteJeuPhysique" prefHeight="39.0" prefWidth="111.0" styleClass="danger" text="Supprimer">
                <font>
                   <Font size="18.0" />
                </font>
