@@ -157,12 +157,12 @@
             </VBox>
             <HBox alignment="BOTTOM_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.rowSpan="2">
                <children>
-                  <Button fx:id="validerButton" mnemonicParsing="false" onAction="#validation" style="-fx-background-color: green; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+                  <Button fx:id="validerButton" mnemonicParsing="false" onAction="#validation" styleClass="success" text="Ajouter" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Reset" mnemonicParsing="false" onAction="#ResetForm" style="-fx-background-color: darkblue; -fx-background-radius: 10;" text="Reset" textFill="WHITE">
+                  <Button fx:id="Reset" mnemonicParsing="false" onAction="#ResetForm" styleClass="accent" text="Reset" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
