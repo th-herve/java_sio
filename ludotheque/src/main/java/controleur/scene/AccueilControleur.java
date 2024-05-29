@@ -28,7 +28,7 @@ public class AccueilControleur extends SceneControleur {
 		if (ConnexionPersonnel.loggedInPersonne != null) {
 			String nom = ConnexionPersonnel.loggedInPersonne.getNom();
 			String prenom = ConnexionPersonnel.loggedInPersonne.getPrenom();
-			userNameLabel.setText(nom + " " + prenom);
+			userNameLabel.setText("Utilisateur : " + nom + " " + prenom);
 		} else {
 			userNameLabel.setText("Les informations de l'utilisateur ne sont pas disponibles");
 		}
