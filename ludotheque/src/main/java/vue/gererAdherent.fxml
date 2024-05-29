@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -87,12 +88,20 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="search" onAction="#searchAdherent" prefWidth="149.0" promptText="Rechercher..." />
-                  <Button mnemonicParsing="false" onAction="#refreshTable" prefHeight="39.0" prefWidth="33.0" text="x">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="search" onAction="#searchAdherent" prefWidth="149.0" promptText="Rechercher..." />
+                        <Button mnemonicParsing="false" onAction="#refreshTable" text="🔄">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="accent" />
+                              <String fx:value="button-outlined" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" styleClass="accent" text="Retour à la page d'accueil" GridPane.columnIndex="1">
