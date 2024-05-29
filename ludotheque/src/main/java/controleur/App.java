@@ -31,7 +31,7 @@ public class App extends Application {
 		this.primaryStage = primaryStage;
 
 		primaryStage.setMinWidth(700);
-		primaryStage.setMinHeight(500);
+		primaryStage.setMinHeight(600);
 		primaryStage.setTitle("Ludo tech");
 		// primaryStage.setMaximized(true);
 

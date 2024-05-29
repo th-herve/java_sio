@@ -11,23 +11,27 @@
 
 <BorderPane prefHeight="442.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AccueilControleur">
    <top>
-      <ImageView fitHeight="106.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_LEFT">
-         <image>
-            <Image url="@../../../images/logo_bettonludotheque.png" />
-         </image>
-      </ImageView>
-   </top>
-   <padding>
-      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-   </padding>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="292.0" prefWidth="408.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="97.0" prefWidth="561.0" BorderPane.alignment="BOTTOM_LEFT">
          <children>
+            <ImageView fitHeight="106.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logo_bettonludotheque.png" />
+               </image>
+            </ImageView>
             <Label fx:id="userNameLabel" prefHeight="25.0" prefWidth="397.0" textAlignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+         </children>
+      </VBox>
+   </top>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="282.0" prefWidth="589.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
             <Label fx:id="labelPrincipale" text="Accueil">
                <font>
                   <Font size="28.0" />
@@ -38,7 +42,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="150.0" text="Gérer emprunts">
+            <Button mnemonicParsing="false" onAction="#switchToGererEmprunt" prefWidth="150.0" text="Gérer emprunts">
                <font>
                   <Font size="18.0" />
                </font>
@@ -49,14 +53,9 @@
                </font>
             </Button>
 
-            <Button fx:id="deconnecter" mnemonicParsing="false" onAction="#switchToconnexionPage" prefHeight="24.0" prefWidth="150.0" text="déconnecter">
+            <Button fx:id="deconnecter" mnemonicParsing="false" onAction="#switchToconnexionPage" prefHeight="30.0" prefWidth="107.0" text="Déconnexion">
                <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnGererJeu1" layoutX="230.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToGererJeu" prefWidth="150.0" text="Gérer jeux">
-               <font>
-                  <Font size="18.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
          </children>
