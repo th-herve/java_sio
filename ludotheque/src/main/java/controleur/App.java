@@ -19,6 +19,7 @@ public class App extends Application {
 	private Page gererAdherentPage;
 	private Page gererJeuPage;
 	private Page gererEmpruntPage;
+	private Page historiqueEmpruntPage;
 	private Page ajouterJeuPage;
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
@@ -59,7 +60,7 @@ public class App extends Application {
 		this.connexionPage= new Page(this,"pageConnexion.fxml");
 		this.inscriptionPersonnelPage = new Page (this,"inscriptionPersonnel.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
-
+		this.historiqueEmpruntPage = new Page(this, "historiqueEmprint.fxml");
 
 	}
 
@@ -83,6 +84,11 @@ public class App extends Application {
 
 	public void switchToGererEmprunt() {
 		primaryStage.setScene(gererEmpruntPage.getScene());
+		primaryStage.show();
+	}
+	
+	public void switchToHistoriqueEmprunt() {
+		primaryStage.setScene(historiqueEmpruntPage.getScene());
 		primaryStage.show();
 	}
 
