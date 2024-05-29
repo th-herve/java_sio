@@ -33,6 +33,8 @@ public class App extends Application {
 	// créé automatiquement)
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
+		
+		Application.setUserAgentStylesheet(STYLESHEET_CUPERTINO);
 
 		primaryStage.setMinWidth(700);
 		primaryStage.setMinHeight(500);
@@ -130,6 +132,9 @@ public class App extends Application {
 		primaryStage.show();
 		
 	}
+	
+	public static final String STYLESHEET_PRIMER = "PRIMER";
+	public static final String STYLESHEET_CUPERTINO = "CUPERTINO";
 	
 }
 
