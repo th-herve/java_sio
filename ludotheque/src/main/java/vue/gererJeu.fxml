@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -17,7 +18,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererJeuControleur">
    <center>
-      <TableView fx:id="tableJeu" prefHeight="436.0" prefWidth="1155.0">
+      <TableView fx:id="tableJeu" prefHeight="436.0" prefWidth="1155.0" styleClass="striped">
         <columns>
           <TableColumn fx:id="id" prefWidth="27.0" text="id" />
           <TableColumn fx:id="nom" prefWidth="150.0" text="Nom" />
@@ -74,30 +75,34 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="271.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#switchToAjouterJeu" prefHeight="39.0" prefWidth="140.0" style="-fx-background-color: green;" text="Ajouter" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#switchToAjouterJeu" prefHeight="39.0" prefWidth="140.0" styleClass="success" text="Ajouter" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="181.0" style="-fx-background-color: red;" text="Supprimer" textFill="#fffdfd">
+                  <Button mnemonicParsing="false" onAction="#deleteJeu" prefHeight="39.0" prefWidth="181.0" styleClass="danger" text="Supprimer" textFill="#fffdfd">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#openGererJeuPhysique" prefHeight="39.0" prefWidth="183.0" style="-fx-background-color: blue;" text="Jeu physique" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#openGererJeuPhysique" prefHeight="39.0" prefWidth="183.0" text="Jeu physique">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button-outlined" />
+                        <String fx:value="accent" />
+                     </styleClass>
                   </Button>
                   <TextField fx:id="searchJeu" onAction="#searchJeu" prefHeight="29.0" prefWidth="124.0" promptText="Rechercher..." />
-                  <Button  mnemonicParsing="false" onAction="#refreshTable" prefHeight="39.0" prefWidth="33.0" text="x">
+                  <Button mnemonicParsing="false" onAction="#refreshTable" prefHeight="39.0" prefWidth="33.0" text="x">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" styleClass="accent" text="Retour à la page d'accueil" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>

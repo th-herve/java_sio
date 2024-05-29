@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="442.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AccueilControleur">
+<BorderPane prefHeight="442.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AccueilControleur">
    <top>
       <VBox prefHeight="97.0" prefWidth="561.0" BorderPane.alignment="BOTTOM_LEFT">
          <children>
@@ -57,6 +58,10 @@
                <font>
                   <Font size="14.0" />
                </font>
+               <styleClass>
+                  <String fx:value="button-outlined" />
+                  <String fx:value="danger" />
+               </styleClass>
             </Button>
          </children>
       </VBox>

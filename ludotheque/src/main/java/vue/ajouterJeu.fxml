@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AjouterJeuControleur">
+<BorderPane maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.AjouterJeuControleur">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
@@ -196,14 +196,14 @@
             </VBox>
             <HBox alignment="BOTTOM_LEFT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="2">
                <children>
-                  <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#ajouterJeu" style="-fx-background-color: green; -fx-background-radius: 10;" text="Ajouter" textFill="WHITE">
+                  <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#ajouterJeu" styleClass="success" text="Ajouter" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#ResetForm" style="-fx-background-color: darkblue; -fx-background-radius: 10;" text="Reset" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#ResetForm" styleClass="accent" text="Reset" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
                </children>
