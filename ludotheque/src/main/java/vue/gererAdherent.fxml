@@ -17,7 +17,7 @@
 
 <BorderPane prefHeight="679.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.scene.GererAdherentControleur">
    <center>
-      <TableView fx:id="tableAdherent" prefHeight="499.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableAdherent" prefHeight="499.0" prefWidth="1030.0" styleClass="striped" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
             <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
@@ -77,7 +77,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="271.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#switchToinscriptionAdherent" prefHeight="39.0" prefWidth="140.0" styleClass="accent" text="Ajouter">
+                  <Button mnemonicParsing="false" onAction="#switchToinscriptionAdherent" prefHeight="39.0" prefWidth="140.0" styleClass="success" text="Ajouter">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -90,7 +90,7 @@
                   <TextField fx:id="search" onAction="#searchAdherent" promptText="Rechercher..." />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" text="Retour à la page d'accueil" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#switchToAccueil" prefHeight="39.0" prefWidth="234.0" styleClass="accent" text="Retour à la page d'accueil" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
