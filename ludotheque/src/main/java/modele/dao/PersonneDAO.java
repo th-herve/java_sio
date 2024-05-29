@@ -12,7 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Date;
 
-
 import modele.Personne;
 
 public class PersonneDAO extends DAO<Personne> {
@@ -23,8 +22,6 @@ public class PersonneDAO extends DAO<Personne> {
 	static final String EMAIL = "email";
 	private static final String ADRESSE = "Adresse";
 	private static final String TEL = "tel";
-
-
 
 	private static PersonneDAO intstance = null;
 
@@ -45,9 +42,8 @@ public class PersonneDAO extends DAO<Personne> {
 		boolean succes = true;
 		try {
 
-
-			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE
-					+ "," + TEL + ")VALUES(?,?,?,?,?)";
+			String requete = "INSERT INTO " + TABLE + " (" + NOM + "," + PRENOM + "," + EMAIL + "," + ADRESSE + ","
+					+ TEL + ")VALUES(?,?,?,?,?)";
 
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, personne.getNom());
@@ -55,7 +51,6 @@ public class PersonneDAO extends DAO<Personne> {
 			pst.setString(3, personne.getEmail());
 			pst.setString(4, personne.getAdresse());
 			pst.setString(5, personne.getTel());
-
 
 			// on exécute la mise à jour
 			pst.executeUpdate();
@@ -133,22 +128,23 @@ public class PersonneDAO extends DAO<Personne> {
 
 			String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
 			ResultSet rs = Connexion.executeQuery(requete);
-			rs.next();
-			String nom = rs.getString(NOM);
-			String prenom = rs.getString(PRENOM);
-			String email = rs.getString(EMAIL);
-			String adresse = rs.getString(ADRESSE);
-			String tel = rs.getString(TEL);
+			if (rs.next()) {
+				String nom = rs.getString(NOM);
+				String prenom = rs.getString(PRENOM);
+				String email = rs.getString(EMAIL);
+				String adresse = rs.getString(ADRESSE);
+				String tel = rs.getString(TEL);
 
-			personne = new Personne(nom, prenom, email, adresse, tel);
-			personne.setId(id);
-			donnees.put(id, personne);
+				personne = new Personne(nom, prenom, email, adresse, tel);
+				personne.setId(id);
+				donnees.put(id, personne);
+
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return personne;
 	}
-
 
 	public Personne readByEmail(String email) {
 		Personne personne = null;
@@ -159,16 +155,18 @@ public class PersonneDAO extends DAO<Personne> {
 			pst.setString(1, email);
 			ResultSet rs = pst.executeQuery();
 
-			rs.next();
-			int id = rs.getInt(CLE_PRIMAIRE);
-			String nom = rs.getString(NOM);
-			String prenom = rs.getString(PRENOM);
-			String adresse = rs.getString(ADRESSE);
-			String tel = rs.getString(TEL);
+			if (rs.next()) {
+				int id = rs.getInt(CLE_PRIMAIRE);
+				String nom = rs.getString(NOM);
+				String prenom = rs.getString(PRENOM);
+				String adresse = rs.getString(ADRESSE);
+				String tel = rs.getString(TEL);
 
-			personne = new Personne(nom, prenom, email, adresse, tel);
-			personne.setId(id);
-			donnees.put(id, personne);
+				personne = new Personne(nom, prenom, email, adresse, tel);
+				personne.setId(id);
+				donnees.put(id, personne);
+
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

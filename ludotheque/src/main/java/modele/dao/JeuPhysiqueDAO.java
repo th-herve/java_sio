@@ -17,16 +17,17 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	private static final String CLE_PRIMAIRE = "id";
 	private static final String ETAT = "etat";
 
-	private static final String EST_DISPONIBLE = "estDisponible"; 
-	private static final String ID_JEU = "idJeu";  
-	
-	/** Patron de conception Singleton
+	private static final String EST_DISPONIBLE = "estDisponible";
+	private static final String ID_JEU = "idJeu";
+
+	/**
+	 * Patron de conception Singleton
 	 * 
 	 */
-	private static JeuPhysiqueDAO instance=null;
+	private static JeuPhysiqueDAO instance = null;
 
-	public static JeuPhysiqueDAO getInstance(){
-		if (instance==null){
+	public static JeuPhysiqueDAO getInstance() {
+		if (instance == null) {
 			instance = new JeuPhysiqueDAO();
 		}
 		return instance;
@@ -36,14 +37,14 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		super();
 	}
 
-
-	// TODO adapter 
+	// TODO adapter
 	@Override
 	public boolean create(JeuPhysique jeuPhysique) {
-		boolean succes=true;
+		boolean succes = true;
 		try {
-			
-			String requete = "INSERT INTO "+TABLE+" ("+ETAT+", "+EST_DISPONIBLE+", "+ID_JEU+") VALUES (?, ?, ?)";
+
+			String requete = "INSERT INTO " + TABLE + " (" + ETAT + ", " + EST_DISPONIBLE + ", " + ID_JEU
+					+ ") VALUES (?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, jeuPhysique.getEtat());
 			pst.setBoolean(2, jeuPhysique.getEstDisponible());
@@ -52,16 +53,16 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			// on ex�cute la mise � jour
 			pst.executeUpdate();
 
-			//R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
+			// R�cup�rer la cl� qui a �t� g�n�r�e et la pousser dans l'objet initial
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs.next()) {
 				jeuPhysique.setId(rs.getInt(1));
 			}
 			donnees.put(jeuPhysique.getId(), jeuPhysique);
 
-		} catch (SQLException e) { 
-			succes=false;
-			e.printStackTrace(); 
+		} catch (SQLException e) {
+			succes = false;
+			e.printStackTrace();
 		}
 
 		return succes;
@@ -76,13 +77,13 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		boolean succes = true;
 		try {
 			int id = jeuPhysique.getId();
-			String requete = "DELETE FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = ?";
+			String requete = "DELETE FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, id);
 			pst.executeUpdate();
 			donnees.remove(id);
 		} catch (SQLException e) {
-			succes=false;
+			succes = false;
 			e.printStackTrace();
 		}
 		return succes;
@@ -90,14 +91,14 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 
 	@Override
 	public boolean update(JeuPhysique jeuPhysique) {
-		boolean succes=true;
+		boolean succes = true;
 
 		try {
-			String requete = "UPDATE "+TABLE+" SET "+ ETAT+" = ?, "
-						+EST_DISPONIBLE+" = ?, "+ ID_JEU +" = ? WHERE "+CLE_PRIMAIRE+" = ?";
+			String requete = "UPDATE " + TABLE + " SET " + ETAT + " = ?, " + EST_DISPONIBLE + " = ?, " + ID_JEU
+					+ " = ? WHERE " + CLE_PRIMAIRE + " = ?";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 
-			pst.setString(1, jeuPhysique.getEtat()); 
+			pst.setString(1, jeuPhysique.getEtat());
 			pst.setBoolean(2, jeuPhysique.getEstDisponible());
 			pst.setInt(3, jeuPhysique.getIdJeu());
 			pst.setInt(4, jeuPhysique.getId());
@@ -109,44 +110,44 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 		} catch (SQLException e) {
 			succes = false;
 			e.printStackTrace();
-		} 
-		return succes;	
-	}  
-  
+		}
+		return succes;
+	}
+
 	@Override
 	public JeuPhysique read(int id) {
 		JeuPhysique jeuPhysique = null;
 		if (donnees.containsKey(id)) {
 			System.out.println("r�cup�r�");
 			jeuPhysique = donnees.get(id);
-		}
-		else {
+		} else {
 			System.out.println("recherch� dans la BD");
 			try {
 
-				String requete = "SELECT * FROM "+TABLE+" WHERE "+CLE_PRIMAIRE+" = "+ id;
+				String requete = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + id;
 				ResultSet rs = Connexion.executeQuery(requete);
-				rs.next();
 
-				int idNew = rs.getInt(CLE_PRIMAIRE);
-				String etat = rs.getString(ETAT);
-				Boolean disponible = rs.getBoolean(EST_DISPONIBLE);
-				int idJeu = rs.getInt(ID_JEU);
+				if (rs.next()) {
+					int idNew = rs.getInt(CLE_PRIMAIRE);
+					String etat = rs.getString(ETAT);
+					Boolean disponible = rs.getBoolean(EST_DISPONIBLE);
+					int idJeu = rs.getInt(ID_JEU);
 
-				JeuDAO jDao = JeuDAO.getInstance();
-				Jeu jeu = jDao.read(idJeu);
-				jeuPhysique = new JeuPhysique (jeu, etat, disponible);
-				jeuPhysique.setId(idNew);
+					JeuDAO jDao = JeuDAO.getInstance();
+					Jeu jeu = jDao.read(idJeu);
+					jeuPhysique = new JeuPhysique(jeu, etat, disponible);
+					jeuPhysique.setId(idNew);
 
-				donnees.put(idNew, jeuPhysique);
+					donnees.put(idNew, jeuPhysique);
+				}
 
 			} catch (SQLException e) {
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 		return jeuPhysique;
 	}
-	
+
 	public List<JeuPhysique> readByIdJeu(int idJeu) {
 
 		List<JeuPhysique> jeuList = new ArrayList<JeuPhysique>();
@@ -158,14 +159,13 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
 			pst.setInt(1, idJeu);
 
-			ResultSet rs = pst.executeQuery(); 
+			ResultSet rs = pst.executeQuery();
 
 			System.out.println(idJeu);
 			while (rs.next()) {
 
 				JeuPhysique jeuPhysique;
 				int idJeuPhysique = rs.getInt(CLE_PRIMAIRE);
-				
 
 				if (donnees.containsKey(idJeuPhysique)) {
 					System.out.println("r�cup�r�");
@@ -184,12 +184,12 @@ public class JeuPhysiqueDAO extends DAO<JeuPhysique> {
 	}
 
 	public void afficheSelectEtoileAdherent() {
-		System.out.println("--- "+ TABLE +" non utilis� ---");
-		String clauseWhere = CLE_PRIMAIRE+" NOT IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
+		System.out.println("--- " + TABLE + " non utilis� ---");
+		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
-		System.out.println("--- "+ TABLE +" contraint par adherent --- ");
-		clauseWhere = CLE_PRIMAIRE+" IN (SELECT "+CLE_PRIMAIRE+" From "+ TABLE +")";
+		System.out.println("--- " + TABLE + " contraint par adherent --- ");
+		clauseWhere = CLE_PRIMAIRE + " IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";
 		Connexion.afficheSelectEtoile(TABLE, clauseWhere);
 
 	}

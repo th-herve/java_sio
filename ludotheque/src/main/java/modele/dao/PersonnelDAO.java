@@ -55,7 +55,7 @@ public class PersonnelDAO extends DAO<Personnel> {
 			}
 
 			String requete = "INSERT INTO " + TABLE + " (" + CLE_PRIMAIRE + ", " + ROLE + ", " + DATE_ENTREE + ", "
-					+ DATE_SORTIE + " " + MDP + ") VALUES (?, ?, ?, ?, ?)";
+					+ DATE_SORTIE + ", " + MDP + ") VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
 			pst.setInt(1, personnel.getId());
@@ -140,26 +140,28 @@ public class PersonnelDAO extends DAO<Personnel> {
 			try {
 				String query = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + idPersonne;
 				ResultSet rs = Connexion.executeQuery(query);
-				rs.next();
 
-				String role = rs.getString(ROLE);
-				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
+				if (rs.next()) {
+					String role = rs.getString(ROLE);
+					LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
 
-				// pour la date de sortie, comme elle peut etre null dans la bd, il faut
-				// controler
-				Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
-				LocalDateTime dateSortie = null;
-				if (timestamp != null) {
-					dateSortie = timestamp.toLocalDateTime();
+					// pour la date de sortie, comme elle peut etre null dans la bd, il faut
+					// controler
+					Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
+					LocalDateTime dateSortie = null;
+					if (timestamp != null) {
+						dateSortie = timestamp.toLocalDateTime();
+					}
+					String mdp = rs.getString(MDP);
+
+					personne = personneDao.read(idPersonne);
+					personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(),
+							personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie, mdp);
+					personnel.setId(personne.getId());
+
+					donnees.put(idPersonne, personnel);
+
 				}
-				String mdp = rs.getString(MDP);
-
-				personne = personneDao.read(idPersonne);
-				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(),
-						personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie, mdp);
-				personnel.setId(personne.getId());
-
-				donnees.put(idPersonne, personnel);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
