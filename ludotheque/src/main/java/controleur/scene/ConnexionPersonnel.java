@@ -99,12 +99,13 @@ public class ConnexionPersonnel extends SceneControleur {
 		if (personnel != null  ) {
 
 			// hachage le mot de passe depuis le table personnel 
-			String hashedPasswordFromDB = personnelDAO.hashPassword(personnel.getMdp()); 
-			//            System.out.println("from BD " + hashedPasswordFromDB);
+			String hashedPasswordFromDB = personnel.getMdp(); 
+			System.out.println(personnel.toString());
+			            System.out.println("from BD " + hashedPasswordFromDB);
 
 			//hachage le mot de passe entrée
 			String hashedEnteredPassword = personnelDAO.hashPassword(password); 
-			//            System.out.println(hashedEnteredPassword );
+			            System.out.println("from form " +hashedEnteredPassword );
 
 			if (hashedEnteredPassword.equals(hashedPasswordFromDB)) {
 				// Passwords match, login  avec succès

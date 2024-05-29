@@ -150,6 +150,31 @@ public class PersonneDAO extends DAO<Personne> {
 	}
 
 
+	public Personne readByEmail(String email) {
+		Personne personne = null;
+		try {
+
+			String requete = "SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = ?";
+			PreparedStatement pst = Connexion.getInstance().prepareStatement(requete);
+			pst.setString(1, email);
+			ResultSet rs = pst.executeQuery();
+
+			rs.next();
+			int id = rs.getInt(CLE_PRIMAIRE);
+			String nom = rs.getString(NOM);
+			String prenom = rs.getString(PRENOM);
+			String adresse = rs.getString(ADRESSE);
+			String tel = rs.getString(TEL);
+
+			personne = new Personne(nom, prenom, email, adresse, tel);
+			personne.setId(id);
+			donnees.put(id, personne);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return personne;
+	}
+
 	public void afficheSelectEtoilePersonne() {
 		System.out.println("--- Personne non utilisé ---");
 		String clauseWhere = CLE_PRIMAIRE + " NOT IN (SELECT " + CLE_PRIMAIRE + " From " + TABLE + ")";

@@ -132,80 +132,59 @@ public class PersonnelDAO extends DAO<Personnel> {
 	    }
 
 
+
 	@Override
 	public Personnel read(int idPersonne) {
+
 		Personnel personnel = null;
+		Personne personne = null;
+
 		if (donnees.containsKey(idPersonne)) {
 			personnel = donnees.get(idPersonne);
 		} else {
 			try {
-				String query = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = ?";
-				PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
-				pst.setInt(1, idPersonne);
-				ResultSet rs = pst.executeQuery();
-				if (rs.next()) {
-					String role = rs.getString(ROLE);
-					LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
-					// Read password from ResultSet
-					String password = rs.getString(MDP);
+				String query = "SELECT * FROM " + TABLE + " WHERE " + CLE_PRIMAIRE + " = " + idPersonne;
+				ResultSet rs = Connexion.executeQuery(query);
+				rs.next();
 
-					// Handle null dateSortie
-					LocalDateTime dateSortie = null;
-					Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
-					if (timestamp != null) {
-						dateSortie = timestamp.toLocalDateTime();
-					}
+				String role = rs.getString(ROLE);
+				LocalDateTime dateEntree = rs.getTimestamp(DATE_ENTREE).toLocalDateTime();
 
-					personnel = new Personnel(
-							rs.getString("nom"),
-							rs.getString("prenom"),
-							rs.getString("email"),
-							rs.getString("adresse"),
-							rs.getString("tel"),
-							password, //  password
-							dateSortie,
-							dateEntree,
-							role
-							);
-					personnel.setId(idPersonne);
-					donnees.put(idPersonne, personnel);
+				// pour la date de sortie, comme elle peut etre null dans la bd, il faut controler
+				Timestamp timestamp = rs.getTimestamp(DATE_SORTIE);
+				LocalDateTime dateSortie = null;
+				if (timestamp != null) {
+					dateSortie = timestamp.toLocalDateTime();
 				}
+				String mdp = rs.getString(MDP);
+
+				personne = personneDao.read(idPersonne);
+				personnel = new Personnel(personne.getNom(), personne.getPrenom(), personne.getEmail(), personne.getAdresse(), personne.getTel(), role, dateEntree, dateSortie, mdp);
+				personnel.setId(personne.getId());
+
+
+				donnees.put(idPersonne, personnel);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return personnel;
-	}
-	@Override
-	public Personne readByEmail(String email) {
+	}	
+	
+	public Personnel readByEmail(String email) {
 		Personnel personnel = null;
+		Personne personne = null;
 
-		String TABLE_PERSONNE = "Personne";
-		PersonneDAO personneDAO = PersonneDAO.getInstance(); // Get instance of PersonneDAO
-		try {
-			String query = "SELECT * FROM " + TABLE_PERSONNE + " WHERE " + PersonneDAO.EMAIL + " = ?";
-			PreparedStatement pst = Connexion.getInstance().prepareStatement(query);
-			pst.setString(1, email);
-			ResultSet rs = pst.executeQuery();
-
-			if (rs != null && rs.next()) {
-				int id = rs.getInt(PersonneDAO.CLE_PRIMAIRE);
-				String nom = rs.getString("nom"); // Retrieve nom from ResultSet
-				String prenom = rs.getString("prenom"); // Retrieve prenom from ResultSet
-				String adresse = rs.getString("adresse"); // Retrieve adresse from ResultSet
-				String tel = rs.getString("tel"); // Retrieve tel from ResultSet
-				
-				personnel = new Personnel(nom, prenom, email, adresse, tel, tel, null, null, tel);
-				personnel.setId(id);
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		personne = PersonneDAO.getInstance().readByEmail(email);
+		
+		if (personne != null) {
+			personnel = this.read(personne.getId());
 		}
+
 		return personnel;
 	}
 	
-	@Override
+	
 	public Personnel passwordCheck(String password) {
 		
 		Personnel personnel = null;

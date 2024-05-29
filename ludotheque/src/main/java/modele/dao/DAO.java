@@ -44,15 +44,4 @@ public abstract class DAO<T> {
 	 */
 	public abstract T read(int id);
 
-	public Personne readByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Personnel passwordCheck(String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 }
