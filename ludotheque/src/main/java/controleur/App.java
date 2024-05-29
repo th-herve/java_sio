@@ -39,7 +39,7 @@ public class App extends Application {
 
 		switchToconnexionPage(); // Affiche la première vue par défaut
 //		switchToinscriptionPersonnel();
-		// switchToAccueil(); // Affiche la première vue par défaut
+//		switchToAccueil(); // Affiche la première vue par défaut
 
 	}
 
