@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 
+import atlantafx.base.theme.PrimerLight;
 import controleur.scene.AccueilControleur;
 import controleur.scene.GererJeuPhysiqueControleur;
 import javafx.application.Application;
@@ -40,6 +41,7 @@ public class App extends Application {
 		switchToconnexionPage(); // Affiche la première vue par défaut
 //		switchToinscriptionPersonnel();
 //		switchToAccueil(); // Affiche la première vue par défaut
+		Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
 
 	}
 
