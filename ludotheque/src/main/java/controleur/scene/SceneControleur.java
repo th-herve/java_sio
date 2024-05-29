@@ -29,6 +29,10 @@ public abstract class SceneControleur {
 		app.switchToAccueil();
 	}
 
+	public void switchToGererEvenement() {
+		app.switchToGererEvenement();
+	}
+
 	public void switchToGererAdherent() {
 		app.switchToGererAdherent();
 	}

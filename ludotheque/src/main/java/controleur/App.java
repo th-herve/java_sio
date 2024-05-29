@@ -21,6 +21,7 @@ public class App extends Application {
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
+	private Page gererEvenementPage;
 
 	private Page inscriptionPersonnelPage;
 	// private Page logoutPage;
@@ -38,9 +39,9 @@ public class App extends Application {
 
 		loadViews(); // Charge les vues, loader et controleur depuis les fichiers FXML
 
-		switchToconnexionPage(); // Affiche la première vue par défaut
+//		switchToconnexionPage(); // Affiche la première vue par défaut
 //		switchToinscriptionPersonnel();
-//		switchToAccueil(); // Affiche la première vue par défaut
+		switchToAccueil(); // Affiche la première vue par défaut
 		
 		// Set le theme
 		Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
@@ -58,7 +59,14 @@ public class App extends Application {
 		this.connexionPage = new Page(this, "pageConnexion.fxml");
 		this.inscriptionPersonnelPage = new Page(this, "inscriptionPersonnel.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
+		this.gererEvenementPage = new Page(this, "gererEvenement.fxml");
 
+	}
+
+	public void switchToGererEvenement() {
+
+		primaryStage.setScene(gererEvenementPage.getScene());
+		primaryStage.show();
 	}
 
 	// Méthodes pour passer d'une vue à une autre
