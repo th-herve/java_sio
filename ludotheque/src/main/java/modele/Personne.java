@@ -1,6 +1,6 @@
 package modele;
 
-import modele.dao.PersonneDAO;
+import modele.dao.PersonnelDAO;
 
 // éviter d'instancier cette classe, utiliser Adherent ou Personnel à la place
 public class Personne {
@@ -37,7 +37,7 @@ public class Personne {
 	}
 	
 	public boolean estPersonnel() {
-		return PersonneDAO.getInstance().read(this.id) == null;
+		return PersonnelDAO.getInstance().read(this.id) != null;
 	}
 
 	public int getId() {
