@@ -29,6 +29,10 @@ public abstract class SceneControleur {
 		app.switchToAccueil();
 	}
 
+	public void switchToGererReservation() {
+		app.switchToGererReservation();
+	}
+
 	public void switchToGererAdherent() {
 		app.switchToGererAdherent();
 	}

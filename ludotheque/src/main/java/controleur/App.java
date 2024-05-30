@@ -21,6 +21,7 @@ public class App extends Application {
 	private Page gererJeuPhysiquePage;
 	private Page inscriptionAdherentPage;
 	private Page connexionPage;
+	private Page gererReservationPage;
 
 	private Page inscriptionPersonnelPage;
 	// private Page logoutPage;
@@ -58,6 +59,7 @@ public class App extends Application {
 		this.connexionPage = new Page(this, "pageConnexion.fxml");
 		this.inscriptionPersonnelPage = new Page(this, "inscriptionPersonnel.fxml");
 		this.gererEmpruntPage = new Page(this, "gererEmprunt.fxml");
+		this.gererReservationPage = new Page(this, "gererReservation.fxml");
 
 	}
 
@@ -65,7 +67,14 @@ public class App extends Application {
 	public void switchToAccueil() {
 
 		((AccueilControleur) accueilPage.getControleur()).loadUserData();
+		((AccueilControleur) accueilPage.getControleur()).setPermission();
 		primaryStage.setScene(accueilPage.getScene());
+		primaryStage.show();
+
+	}
+
+	public void switchToGererReservation() {
+		primaryStage.setScene(gererReservationPage.getScene());
 		primaryStage.show();
 
 	}

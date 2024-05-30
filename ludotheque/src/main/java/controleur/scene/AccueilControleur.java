@@ -18,6 +18,8 @@ public class AccueilControleur extends SceneControleur {
 
 	@FXML
 	private Button btnGererAdherent;
+	@FXML
+	private Button btnGererReservation;
 
 	@FXML
 	private Label userNameLabel;
@@ -35,11 +37,12 @@ public class AccueilControleur extends SceneControleur {
 	}
 	
 	// exemple pour enlever le bouton gerer jeu si personne connectée n'est pas admin
-//	public void setPermission() {
-//		if (!ConnexionPersonnel.loggedInPersonne.estAdmin()) {
-//			this.btnGererJeu.setVisible(false);
-//		}
-//	}
+	public void setPermission() {
+		System.out.println( ((Personnel)ConnexionPersonnel.loggedInPersonne).toString());
+		if (!ConnexionPersonnel.loggedInPersonne.estAdmin()) {
+			this.btnGererReservation.setVisible(false);
+		}
+	}
 
 	@FXML
 	public void initialize() {
