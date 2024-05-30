@@ -8,18 +8,24 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import modele.Adherent;
+import modele.Emprunt;
 import modele.dao.AdherentDAO;
+import modele.dao.EmpruntDAO;
 
 public class GererAdherentControleur extends SceneControleur {
 	
 	public TextField recherche;
+	
+
 
 	AdherentDAO adherentDAO = AdherentDAO.getInstance();
 
@@ -57,6 +63,8 @@ public class GererAdherentControleur extends SceneControleur {
 	TableColumn<Adherent, LocalDateTime> dateInscription;
 
 	public TextField search;
+	
+
 
 	public void initialize() {
 		this.initializeColumn();
@@ -195,6 +203,11 @@ public class GererAdherentControleur extends SceneControleur {
 	    } else {
 	        tableAdherent.setItems(filtre);
 	    }
+	}
+	
+	public void openHistoriqueEmprunt() {
+		Adherent adherent = tableAdherent.getSelectionModel().getSelectedItem();
+		this.switchToHistoriqueEmprunt(adherent.getId());
 	}
 
 

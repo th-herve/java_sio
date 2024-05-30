@@ -91,11 +91,6 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToHistoriqueEmprunt" text="Historique">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
             <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
                <children>
                   <Button mnemonicParsing="false" onAction="#switchToAccueil" text="Retour à la page d'accueil">

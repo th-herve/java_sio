@@ -42,9 +42,8 @@ public abstract class SceneControleur {
 		app.switchToGererEmprunt();
 	}
 
-	public void switchToHistoriqueEmprunt() {
-
-		app.switchToHistoriqueEmprunt();
+	public void switchToHistoriqueEmprunt(int idAdherent) {
+		app.switchToHistoriqueEmprunt(idAdherent);
 	}
 
 	public void switchToAjouterJeu() {
@@ -69,9 +68,6 @@ public abstract class SceneControleur {
 
 		app.switchToconnexionPage();
 	}
-
-
-
 
 
 	protected <T> void changeColumnBooleanValue(TableColumn<T, Boolean> col) {

@@ -77,7 +77,7 @@ public class GererEmpruntControleur extends SceneControleur {
 		nomAdherent.setCellValueFactory(new PropertyValueFactory<>("nomAdherent"));
 		nomJeuPhysique.setCellValueFactory(new PropertyValueFactory<>("nomJeuPhysique"));
 
-		// change le format de la date affichée pour date inscription
+		// change le format de la date affichée pour les dates
 		dateEmprunt.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>()));
 		dateRetour.setCellFactory(this.formatDate(new TableColumn<Emprunt, LocalDateTime>()));
 
@@ -89,9 +89,12 @@ public class GererEmpruntControleur extends SceneControleur {
 		List<Emprunt> empruntList = empruntDAO.readAll();
 
 		tableEmprunt.getItems().clear();;
-		for (Emprunt ad : empruntList) {
-			tableEmprunt.getItems().add(ad);
-		}
+	    for (Emprunt emprunt : empruntList) {
+	        if (emprunt.getDateRetour() == null) {
+	        	System.out.println(emprunt);
+	            tableEmprunt.getItems().add(emprunt);
+	        }
+	    }
 	}
 
 	// utilisé pour affiché le nom du jeu, selon l'id inscrit dans le formulaire

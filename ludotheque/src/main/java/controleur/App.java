@@ -5,6 +5,7 @@ import java.io.IOException;
 import controleur.scene.AccueilControleur;
 
 import controleur.scene.GererJeuPhysiqueControleur;
+import controleur.scene.HistoriqueEmpruntControleur;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Personne;
@@ -84,9 +85,14 @@ public class App extends Application {
 		primaryStage.show();
 	}
 	
-	public void switchToHistoriqueEmprunt() {
-		primaryStage.setScene(historiqueEmpruntPage.getScene());
-		primaryStage.show();
+	public void switchToHistoriqueEmprunt(int idAdherent) {
+		HistoriqueEmpruntControleur ctl = ( HistoriqueEmpruntControleur) historiqueEmpruntPage.getControleur();
+		ctl.setUp(idAdherent);
+		Stage stage = new Stage();
+		stage.setScene(historiqueEmpruntPage.getScene());
+		stage.setTitle("Historique");
+		stage.show();
+
 	}
 
 	// il faut spécifier l'id du jeu (non physique) pour lequel on veut afficher les jeux physiques
